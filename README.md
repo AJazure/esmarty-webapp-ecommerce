@@ -35,10 +35,6 @@ En este proyecto colaboraron bajo las metodologías ágiles:
 ** Diego Leyton
 ** Nicolás Juárez
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
 ## Licencia
 
 El proyecto de Ecore Admin de Esmarty es open-source software licenciado bajo [MIT license](https://opensource.org/licenses/MIT). Sin embargo puede usarse para propósitos de aprendizaje o estudio.

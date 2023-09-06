@@ -21,7 +21,7 @@ Esta información continuará expandiendose...
 
 [completar...]
 
-### En qué consiste Ecore Admin
+## En qué consiste Ecore Admin
 
 [completar...]
 

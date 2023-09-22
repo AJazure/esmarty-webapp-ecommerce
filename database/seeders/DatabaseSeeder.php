@@ -21,5 +21,12 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call(RolesSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(MetodosDePagoSeeder::class);
+        $this->call(CategoriaSeeder::class);
+        $this->call(MarcaSeeder::class);
+        $this->call(ProveedorSeeder::class);
+
+        // Crearemos 20 productos
+        Producto::factory(20)->create();
     }
 }

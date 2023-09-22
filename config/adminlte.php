@@ -312,11 +312,34 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
+            'text'        => 'Lista de usuarios',
+            'url'         => '#',
+            'icon'        => 'fas fa-users',
+            'can'         => 'lista_usuarios' //permiso de admin
+        ],
+        [
+            'text'        => 'Lista de Productos',
+            'url'         => '#',
+            'icon'        => 'fas fa-users',
+            'can'         => 'lista_productos' //permiso de vendedor
+        ],
+        [
+            'text'        => 'Gestión de Almacén',
+            'url'         => '#',
+            'icon'        => 'fas fa-users',
+            'can'         => 'lista_almacen' //permiso de operario de almacén
+        ],
+        [
+            'text'        => 'Acceso a Caja',
+            'url'         => '#',
+            'icon'        => 'fas fa-users',
+            'can'         => 'lista_caja' //permiso de cajero
+        ],
+        [
+            'text'        => 'Mis Compras',
+            'url'         => '#',
+            'icon'        => 'fas fa-users',
+            'can'         => 'lista_compras' //permiso de clientes
         ],
         ['header' => 'account_settings'],
         [

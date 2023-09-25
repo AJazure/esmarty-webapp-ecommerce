@@ -27,7 +27,8 @@ class Producto extends Model
     }
     // INNER JOIN con la tabla Marcas por medio de la FK id_marca
     public function marca() {
-    return $this->belongsTo(User::class, 'id_marca');
+    return $this->belongsTo(Marca::class, 'id_marca');
     }
+
     
 }

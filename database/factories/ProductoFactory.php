@@ -21,6 +21,7 @@ class ProductoFactory extends Factory
         /* $proveedor = Proveedor::inRandomOrder()->first(); */
         return [
         'codigo_producto' => $this->faker->numberBetween(1,10), // Una linea aleatoria
+        'nombre' => $this->faker->sentence(), // Una linea aleatorio
         'descripcion' => $this->faker->paragraph(), // Un párrafo aleatorio
         'precio' => $this->faker->randomFloat(2, 2000, 100000), // Numero Flotante aleatorio en el rango [2000; 100000] con 2 decimales
         'stock_disponible' => $this->faker->numberBetween(1,10),

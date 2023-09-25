@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_categoria'); // BIGINT(20)
             $table->unsignedBigInteger('id_marca'); // BIGINT(20)
             $table->integer('codigo_producto');
+            $table->string('nombre');
             $table->string('descripcion');
             $table->integer('precio');
             $table->integer('stock_disponible');
@@ -25,6 +26,12 @@ return new class extends Migration
             $table->string('url_imagen');
             $table->tinyInteger('activo')->default('1');
             $table->timestamps();
+
+            // $table->foreign('id_proveedor')->references('id')->on('proveedores');
+            // Creamos la FK "id_categoria“ que hace referencia al "id" de la tabla "categorias"
+            $table->foreign('id_categoria')->references('id')->on('categorias');
+            // Creamos la FK "id_marca“ que hace referencia al "id" de la tabla "marcas"
+            $table->foreign('id_marca')->references('id')->on('marcas');
         });
     }
 

@@ -306,6 +306,7 @@ return [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
         ],
+            
         [
             'text' => 'blog',
             'url'  => 'admin/blog',

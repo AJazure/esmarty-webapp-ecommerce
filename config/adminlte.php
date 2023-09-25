@@ -312,9 +312,15 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'Lista de usuarios',
+            'text'        => 'Lista de Usuarios',
             'url'         => '#',
             'icon'        => 'fas fa-users',
+            'can'         => 'lista_usuarios' //permiso de admin
+        ],
+        [
+            'text'        => 'Lista de Proveedores',
+            'url'         => '#',
+            'icon'        => 'fas fa-store',
             'can'         => 'lista_usuarios' //permiso de admin
         ],
         [

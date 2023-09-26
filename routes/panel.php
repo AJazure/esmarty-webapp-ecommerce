@@ -10,4 +10,3 @@ Route::get('/', function () {
 
 Route::resource('/productos', ProductoController::class)->names('producto');
 Route::resource('/marcas', MarcaController::class)->names('marca');
-Route::resource('/proveedores', ProveedorController::class)->names('proveedor'); //como es un controlador tipo resource usaré solo esta línea

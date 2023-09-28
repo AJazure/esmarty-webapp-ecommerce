@@ -40,4 +40,5 @@ let configurationDataTable = {
 $(function() {
     table = $('#tabla-productos').DataTable(configurationDataTable);
     table = $('#tabla-marcas').DataTable(configurationDataTable);
+	table = $('#tabla-categorias').DataTable(configurationDataTable);
 });

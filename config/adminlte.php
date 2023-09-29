@@ -322,7 +322,7 @@ return [
         [
             'text'        => 'Proveedores',
             /* 'url'         => '#', */
-            'route' => 'proveedore.index',
+            'route' => 'proveedor.index',
             'icon'        => 'fas fa-users',
             'can'         => 'lista_usuarios' //permiso de admin
         ],

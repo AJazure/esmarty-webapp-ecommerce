@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Proveedore;
+use App\Models\Proveedor;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Echo_;
 
@@ -14,7 +14,7 @@ class ProveedorController extends Controller
     public function index()
     {
         //
-        $proveedores = Proveedore::latest()->get();
+        $proveedores = Proveedor::latest()->get();
         // Retornamos una vista y enviamos la variable "productos"
         return view('panel.administrador.lista_proveedores.index', compact('proveedores'));
       
@@ -26,6 +26,8 @@ class ProveedorController extends Controller
     public function create()
     {
         //
+        $proveedor = new Proveedor();
+        return view('panel.administrador.lista_proveedores.create', compact('proveedor'));
     }
 
     /**
@@ -34,6 +36,22 @@ class ProveedorController extends Controller
     public function store(Request $request)
     {
         //
+        $proveedor = new Proveedor();
+        $proveedor->descripcion = $request->get('descripcion');
+        $proveedor->cuit = $request->get('cuit');
+        $proveedor->razon_social = $request->get('razon_social');
+        $proveedor->direccion = $request->get('direccion');
+        $proveedor->telefono = $request->get('telefono');
+        $proveedor->correo = $request->get('correo');
+        $proveedor->activo = $request->get('activo');
+
+
+        // Almacena la info del producto en la BD
+        $proveedor->save();
+        return redirect()
+            ->route('proveedor.index')
+            ->with('alert', 'Proveedor "' . $proveedor->descripcion . '" agregado exitosamente.');
+
     }
 
     /**
@@ -41,26 +59,62 @@ class ProveedorController extends Controller
      */
     public function show($id)
     {
-       $proveedor = Proveedore::find($id);
+        $proveedor = Proveedor::find($id);
         return view('panel.administrador.lista_proveedores.show', compact('proveedor'));  
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
         //
+        $proveedor = Proveedor::find($id);
+        return view('panel.administrador.lista_proveedores.edit', compact('proveedor'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         //
+
+        $proveedor = Proveedor::find($id);
+
+        $proveedor->descripcion = $request->get('descripcion');
+        $proveedor->cuit = $request->get('cuit');
+        $proveedor->razon_social = $request->get('razon_social');
+        $proveedor->direccion = $request->get('direccion');
+        $proveedor->telefono = $request->get('telefono');
+        $proveedor->correo = $request->get('correo');
+        $proveedor->activo = $request->get('activo');
+
+
+        //Actualiza la info del producto en la BD
+        $proveedor->update();
+
+        return redirect()
+            ->route('proveedor.index')
+            ->with('alert', 'Proveedor "' . $proveedor->descripcion . '" actualizado exitosamente.');
     }
 
+    /**
+     * ACTIVA O DESACTIVA UNA CATEGORIA
+     */
+    public function cambiarEstado(Request $request)
+    {
+        $proveedor = Proveedor::find($request->_id);
+
+        if (!$proveedor) {
+            return response()->json(['error' => 'Categoría no encontrada'], 404);
+        }
+
+        $proveedor->activo = !$proveedor->activo; // Cambia el estado
+        $proveedor->save();
+
+        return response()->json(['message' => 'Estado de categoría cambiado con éxito']);
+    }
     /**
      * Remove the specified resource from storage.
      */

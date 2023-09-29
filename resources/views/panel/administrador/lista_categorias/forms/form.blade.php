@@ -29,7 +29,7 @@
             </div>
 
             <div class="mb-3 row">
-                <label for="nombre" class="col-sm-4 col-form-label"> * Estado </label>
+                <label for="estado" class="col-sm-4 col-form-label"> * Estado </label>
                 <div class="col-sm-8">
                     <select class="form-control @error('activo') is-invalid @enderror" name="activo" id="activo" value="{{ old('activo', optional($categoria)->activo) }}">
                         <option value="1" @if ($categoria->activo) {{"selected"}} @endif>Activado</option>
@@ -65,21 +65,4 @@
 </div>
 
 @push('js')
-    <script>
-        document.addEventListener("DOMContentLoaded", function(event) {
-            const image = document.getElementById('imagen');
-
-            image.addEventListener('change', (e) => {
-
-                const input = e.target;
-                const imagePreview = document.querySelector('#image_preview');
-
-                if (!input.files.length) return
-
-                file = input.files[0];
-                objectURL = URL.createObjectURL(file);
-                imagePreview.src = objectURL;
-            });
-        });
-    </script>
 @endpush

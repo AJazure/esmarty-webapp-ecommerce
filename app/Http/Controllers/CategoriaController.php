@@ -53,8 +53,7 @@ class CategoriaController extends Controller
     public function show(Categoria $categoria)
     {
         //
-        return $categoria;
-        /* return view('panel.administrador.lista_categorias.show', compact('categoria')); */
+        return view('panel.administrador.lista_categorias.show', compact('categoria')); 
     }
 
     /**
@@ -63,7 +62,7 @@ class CategoriaController extends Controller
     public function edit(Categoria $categoria)
     {
         //
-        // $marcas = Marca::get();
+        // 
         return view('panel.administrador.lista_categorias.edit', compact('categoria'));
     }
 
@@ -75,11 +74,7 @@ class CategoriaController extends Controller
         //
         $categoria->descripcion = $request->get('descripcion');
         $categoria->activo = $request->get('activo');
-        /* if ($request->hasFile('url_imagen')) {
-            // Subida de la imagen nueva al servidor
-            $url_imagen = $request->file('url_imagen')->store('public/categoria');
-            $categoria->url_imagen = asset(str_replace('public', 'storage', $url_imagen));
-        } */
+
         // Actualiza la info del producto en la BD
         $categoria->update();
 

@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-12 mb-3">
             
-            <a href="{{ route('producto.create') }}" class="btn btn-success text-uppercase">
+            <a href="{{ route('proveedor.create') }}" class="btn btn-success text-uppercase">
                 Nuevo Proveedor 
             </a>
         </div>
@@ -58,7 +58,7 @@
                             <td>{{ $proveedor->direccion }}</td>
                             <td>{{ $proveedor->telefono }}</td>
                             <td>{{ $proveedor->correo }}</td>
-                            <td>
+                            <td class="d-flex justify-content-center">
                                 <form action="{{ route('producto.destroy', $proveedor) }}" method="POST">
                                     @csrf 
                                     @method('DELETE')
@@ -67,20 +67,18 @@
                                     </button> --}}
                                     <div>
                                         <label class="switch">
-                                            <input type="checkbox" class="miInterruptor" id="miInterruptor" value="{{ $proveedor->activo }}">
+                                            <input type="checkbox" class="miInterruptor" id="miInterruptor" value="{{ $proveedor->activo }}" data-change-id="{{ $proveedor->id }}">
                                             <span class="slider"><p class="estadop" style="visibility: hidden">{{ $proveedor->activo }}</p></span>
                                         </label>
                                     </div>
                                 </form>
                             </td>
-                            <td>
-                                {{$id = $proveedor->id;}}
-                                @csrf 
+                            <td> 
                                 <div class="d-flex">
-                                    <a href="{{route('proveedore.show', $id)}}" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
+                                    <a href="{{route('proveedor.show', $proveedor)}}" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
                                         Ver
                                     </a>
-                                    <a href="{{route('proveedore.edit', $proveedor)}}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
+                                    <a href="{{route('proveedor.edit', $proveedor)}}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
                                         Editar
                                     </a>
                                     {{-- <form action="{{ route('producto.destroy', $producto) }}" method="POST">
@@ -113,6 +111,11 @@
 
     {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
     <script src="{{ asset('js/productos.js') }}"></script>
+
+    <script>
+        var cambiarEstadoUrl = '{{ route('cambiar.estado.proveedor') }}';
+        var token = '{{ csrf_token() }}';
+    </script>
 
     <script src="{{ asset('js/button_switch.js') }}"></script>
 @stop

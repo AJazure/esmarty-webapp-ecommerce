@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-12 mb-3">
             <h1>Datos del Proveedor "{{ $proveedor->descripcion }}"</h1>
-            <a href="{{ route('proveedore.index') }}" class="btn btn-sm btn-secondary text-uppercase">
+            <a href="{{ route('proveedor.index') }}" class="btn btn-sm btn-secondary text-uppercase">
                 Volver Atras
             </a>
         </div>
@@ -37,7 +37,7 @@
                         <h5><strong>Correo:</strong> {{ $proveedor->correo }}</h5>
                     </div>
                     <div class="mb-3">
-                        <h5><strong>Estado:</strong> {{ $proveedor->activo }}</h5>
+                        <h5><strong>Estado:</strong> @if ($proveedor->activo){{"Activado"}} @else {{"Desactivado"}}@endif </h5>
                     </div>
                    
                     

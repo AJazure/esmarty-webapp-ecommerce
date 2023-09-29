@@ -14,9 +14,8 @@ class CategoriaController extends Controller
     {
         //
         $categorias = Categoria::latest()->get();
-        // Retornamos una vista y enviamos la variable "productos"
+        // Retornamos una vista y enviamos la variable "categorias"
         return view('panel.administrador.lista_categorias.index', compact('categorias'));
-      
     }
 
     /**
@@ -27,7 +26,7 @@ class CategoriaController extends Controller
         //
         $categoria = new Categoria();
         return view('panel.administrador.lista_categorias.create', compact('categoria')); //compact(mismo nombre de la variable)
-        
+
     }
 
     /**
@@ -41,12 +40,11 @@ class CategoriaController extends Controller
         $categoria->activo = $request->get('activo');
 
 
-            // Almacena la info del producto en la BD
+        // Almacena la info del producto en la BD
         $categoria->save();
         return redirect()
-        ->route('categoria.index')
-        ->with('alert', 'Categoria "' . $categoria->descripcion . '" agregada exitosamente.');
-      
+            ->route('categoria.index')
+            ->with('alert', 'Categoria "' . $categoria->descripcion . '" agregada exitosamente.');
     }
 
     /**
@@ -55,8 +53,8 @@ class CategoriaController extends Controller
     public function show(Categoria $categoria)
     {
         //
-        return view('panel.administrador.lista_categorias.show', compact('categoria'));
-
+        return $categoria;
+        /* return view('panel.administrador.lista_categorias.show', compact('categoria')); */
     }
 
     /**
@@ -67,7 +65,6 @@ class CategoriaController extends Controller
         //
         // $marcas = Marca::get();
         return view('panel.administrador.lista_categorias.edit', compact('categoria'));
-        
     }
 
     /**
@@ -85,11 +82,10 @@ class CategoriaController extends Controller
         } */
         // Actualiza la info del producto en la BD
         $categoria->update();
-        
+
         return redirect()
             ->route('categoria.index')
-            ->with('alert', 'Categoria "' .$categoria->descripcion. '" actualizada exitosamente.');
-
+            ->with('alert', 'Categoria "' . $categoria->descripcion . '" actualizada exitosamente.');
     }
 
     /**
@@ -102,10 +98,10 @@ class CategoriaController extends Controller
         if (!$categoria) {
             return response()->json(['error' => 'Categoría no encontrada'], 404);
         }
-    
+
         $categoria->activo = !$categoria->activo; // Cambia el estado
         $categoria->save();
-    
+
         return response()->json(['message' => 'Estado de categoría cambiado con éxito']);
     }
 }

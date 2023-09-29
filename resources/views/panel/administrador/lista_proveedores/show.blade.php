@@ -10,51 +10,39 @@
 <div class="container">
     <div class="row">
         <div class="col-12 mb-3">
-            <h1>Datos del Producto "{{ $producto->nombre }}"</h1>
-            <a href="{{ route('producto.index') }}" class="btn btn-sm btn-secondary text-uppercase">
+            <h1>Datos del Proveedor "{{ $proveedor->descripcion }}"</h1>
+            <a href="{{ route('proveedore.index') }}" class="btn btn-sm btn-secondary text-uppercase">
                 Volver Atras
             </a>
         </div>
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <div class="mb-3">
-                        <img src="{{ $producto->url_imagen }}" alt="{{ $producto->nombre }}" id="image_preview" class="img-fluid" style="object-fit: cover; object-position: center; height: 420px; width: 100%;">
+                    <div class="mb-3">    
+                        <h5><strong>Nombre:</strong> {{ $proveedor->descripcion }}</h5>
                     </div>
                     <div class="mb-3">    
-                        <h5><strong>Codigo:</strong> {{ $producto->codigo_producto }}</h5>
-                    </div>
-                    <div class="mb-3">    
-                        <h5><strong>Nombre:</strong> {{ $producto->nombre }}</h5>
-                    </div>
-                    <div class="mb-3">    
-                        <h5><strong>Proveedor:</strong> Proveedor 1</h5>
+                        <h5><strong>CUIT:</strong> {{$proveedor->cuit}}</h5>
                     </div>
                     <div class="mb-3">
-                        <h5><strong>Categoria:</strong> {{ $producto->categoria->descripcion }}</h5>
+                        <h5><strong>Razon Social:</strong> {{ $proveedor->razon_social }}</h5>
                     </div>
                     <div class="mb-3">
-                        <h5><strong>Marca:</strong> {{ $producto->marca->descripcion }}</h5>
+                        <h5><strong>Dirección:</strong> {{ $proveedor->direccion }}</h5>
                     </div>
                     <div class="mb-3">
-                        <h5><strong>Precio:</strong> {{ $producto->precio }}</h5>
+                        <h5><strong>Telefono:</strong> {{ $proveedor->telefono }}</h5>
                     </div>
                     <div class="mb-3">
-                        <h5><strong>Descripción:</strong> {{ $producto->descripcion }}</h5>
+                        <h5><strong>Correo:</strong> {{ $proveedor->correo }}</h5>
                     </div>
                     <div class="mb-3">
-                        <h5><strong>Stock Disponible:</strong> {{ $producto->stock_disponible }}</h5>
-                    </div>
-                    <div class="mb-3">
-                        <h5><strong>Stock Deseado:</strong> {{ $producto->stock_deseado }}</h5>
-                    </div>
-                    <div class="mb-3">
-                        <h5><strong>Stock Minimo:</strong> {{ $producto->stock_minimo }}</h5>
+                        <h5><strong>Estado:</strong> {{ $proveedor->activo }}</h5>
                     </div>
                    
                     
                     {{-- <div class="mb-3">
-                        <p>Creado por {{ $producto->vendedor->name }}.</p>
+                        <p>Creado por {{ $proveedor->vendedor->name }}.</p>
                     </div> --}}
                 </div>
             </div>

@@ -2,7 +2,7 @@
 const interruptores = document.querySelectorAll('.miInterruptor');
   // Cambia el estado del interruptor dependiendo de su estado
   interruptores.forEach(interruptor => {
-    const p = interruptor.parentNode.querySelector(".slider").querySelector(".estadop");
+    /* const p = interruptor.parentNode.querySelector(".slider").querySelector(".estadop"); */
     if (interruptor.value == 1) {
         interruptor.checked = true;
     } else {

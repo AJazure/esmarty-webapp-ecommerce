@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Proveedor;
+use App\Models\Proveedore;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Echo_;
 
 class ProveedorController extends Controller
 {
@@ -13,6 +14,10 @@ class ProveedorController extends Controller
     public function index()
     {
         //
+        $proveedores = Proveedore::latest()->get();
+        // Retornamos una vista y enviamos la variable "productos"
+        return view('panel.administrador.lista_proveedores.index', compact('proveedores'));
+      
     }
 
     /**
@@ -34,15 +39,16 @@ class ProveedorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Proveedor $proveedor)
+    public function show($id)
     {
-        //
+       $proveedor = Proveedore::find($id);
+        return view('panel.administrador.lista_proveedores.show', compact('proveedor'));  
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Proveedor $proveedor)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +56,7 @@ class ProveedorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Proveedor $proveedor)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +64,7 @@ class ProveedorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Proveedor $proveedor)
+    public function destroy(string $id)
     {
         //
     }

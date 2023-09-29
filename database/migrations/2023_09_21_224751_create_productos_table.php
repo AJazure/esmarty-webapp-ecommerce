@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
-            /* $table->unsignedBigInteger('id_proveedor'); // BIGINT(20) */
+            $table->unsignedBigInteger('id_proveedor'); // BIGINT(20) */
             $table->unsignedBigInteger('id_categoria'); // BIGINT(20)
             $table->unsignedBigInteger('id_marca'); // BIGINT(20)
             $table->integer('codigo_producto');
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('stock_minimo');
             $table->integer('stock_deseado');
             $table->string('url_imagen');
-            $table->tinyInteger('activo')->default('1');
+            $table->tinyInteger('activo')->default(1);
             $table->timestamps();
 
             // $table->foreign('id_proveedor')->references('id')->on('proveedores');

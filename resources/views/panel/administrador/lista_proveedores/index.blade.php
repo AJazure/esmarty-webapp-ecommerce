@@ -9,7 +9,7 @@
 
 {{-- Titulo en el contenido de la Pagina --}}
 @section('content_header')
-    <h1>&nbsp;<strong>MARCAS</strong></h1>
+    <h1>&nbsp;<strong>PROVEEDORES</strong></h1>
 @stop
 
 {{-- Contenido de la Pagina --}}
@@ -19,7 +19,7 @@
         <div class="col-12 mb-3">
             
             <a href="{{ route('producto.create') }}" class="btn btn-success text-uppercase">
-                Nueva Marca 
+                Nuevo Proveedor 
             </a>
         </div>
         
@@ -38,11 +38,10 @@
                 <table id="tabla-productos" class="table table-striped table-hover w-100">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col" class="text-uppercase">Nombre</th>
-                            {{-- <th scope="col" class="text-uppercase">Descripción</th> --}}
                             <th scope="col" class="text-uppercase">CUIT</th>
                             <th scope="col" class="text-uppercase">Razon Social</th>
+                            <th scope="col" class="text-uppercase">Dirección</th>
                             <th scope="col" class="text-uppercase">Telefono</th>
                             <th scope="col" class="text-uppercase">Email</th>
                             <th scope="col" class="text-uppercase">Activo</th>
@@ -51,21 +50,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($productos as $producto)
+                        @foreach ($proveedores as $proveedor)
                         <tr>
-                            <td>{{ $producto->codigo_producto }}</td>
-                            <td>{{ $producto->nombre }}</td>
-                            <td>{{ $producto->categoria->descripcion }}</td>
-                            {{-- <td>{{ $producto->marca->descripcion}}</td> --}}
-                            <td>{{ $producto->marca ? $producto->marca->descripcion : 'N/A'}}</td>
-                            <td>{{ $producto->precio }}</td>
-                            <td>{{ $producto->stock_disponible }}</td>
-                            {{-- <td>{{ Str::limit($producto->descripcion, 80) }}</td> --}}
+                            <td>{{ $proveedor->descripcion }}</td>
+                            <td>{{ $proveedor->cuit }}</td>
+                            <td>{{ $proveedor->razon_social }}</td>
+                            <td>{{ $proveedor->direccion }}</td>
+                            <td>{{ $proveedor->telefono }}</td>
+                            <td>{{ $proveedor->correo }}</td>
                             <td>
-                                <img src="{{ $producto->url_imagen }}" alt="{{ $producto->nombre }}" class="img-fluid" style="width: 150px;">
-                            </td>
-                            <td>
-                                <form action="{{ route('producto.destroy', $producto) }}" method="POST">
+                                <form action="{{ route('producto.destroy', $proveedor) }}" method="POST">
                                     @csrf 
                                     @method('DELETE')
                                     {{-- <button type="submit" class="btn btn-sm btn-danger text-uppercase">
@@ -73,18 +67,20 @@
                                     </button> --}}
                                     <div>
                                         <label class="switch">
-                                            <input type="checkbox" id="miInterruptor">
-                                            <span class="slider"></span>
+                                            <input type="checkbox" class="miInterruptor" id="miInterruptor" value="{{ $proveedor->activo }}">
+                                            <span class="slider"><p class="estadop" style="visibility: hidden">{{ $proveedor->activo }}</p></span>
                                         </label>
                                     </div>
                                 </form>
                             </td>
                             <td>
+                                {{$id = $proveedor->id;}}
+                                @csrf 
                                 <div class="d-flex">
-                                    <a href="{{ route('producto.show', $producto) }}" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
+                                    <a href="{{route('proveedore.show', $id)}}" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
                                         Ver
                                     </a>
-                                    <a href="{{ route('producto.edit', $producto) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
+                                    <a href="{{route('proveedore.edit', $proveedor)}}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
                                         Editar
                                     </a>
                                     {{-- <form action="{{ route('producto.destroy', $producto) }}" method="POST">
@@ -117,4 +113,6 @@
 
     {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
     <script src="{{ asset('js/productos.js') }}"></script>
+
+    <script src="{{ asset('js/button_switch.js') }}"></script>
 @stop

@@ -336,7 +336,7 @@ return [
         [
             'text'        => ' Categorias',
             'url'         => '#',
-            // 'route' => 'proveedor.index',
+            // 'route' => 'categoria.index',
             'icon'        => 'fas fa-project-diagram',
             'can'         => 'lista_usuarios' //permiso de admin<i class="far fa-project-diagram"></i>
         ],

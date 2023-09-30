@@ -29,13 +29,17 @@
             </div>
 
             <div class="mb-3 row">
-                <label for="nombre" class="col-sm-4 col-form-label"> * Activo </label>
+                <label for="nombre" class="col-sm-4 col-form-label"> * Estado </label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control @error('activo') is-invalid @enderror" id="activo"
+                    <select class="form-control @error('activo') is-invalid @enderror" name="activo" id="activo" value="{{ old('activo', optional($marca)->activo) }}">
+                        <option value="1" @if ($marca->activo) {{"selected"}} @endif>Activado</option>
+                        <option value="0" @if (isset($marca->activo) and !$marca->activo) {{"selected"}} @endif>Desactivado</option>
+                    </select>
+                    {{-- <input type="text" class="form-control @error('activo') is-invalid @enderror" id="activo"
                         name="activo" value="{{ old('activo', optional($marca)->activo) }}">
                     @error('descripcion')
                         <div class="invalid-feedback"> {{ $message }} </div>
-                    @enderror
+                    @enderror --}}
                 </div>
             </div>
 

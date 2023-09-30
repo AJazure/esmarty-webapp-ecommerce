@@ -35,6 +35,15 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
+                <div class="float-right ml-5">
+
+                    <label for="filtroSelect">Filtrar por estado:</label>
+                    <select id="filtroSelect">
+                        <option value="">Mostrar todos</option>
+                        <option value="1">Activado</option>
+                        <option value="0">Desactivado</option>
+                    </select>
+                </div>  
                 <table id="tabla-productos" class="table table-striped table-hover w-100">
                     <thead>
                         <tr>
@@ -43,7 +52,6 @@
                             <th scope="col" class="text-uppercase">Categoría</th>
                             <th scope="col" class="text-uppercase">Marca</th>
                             <th scope="col" class="text-uppercase">Precio</th>
-                            {{-- <th scope="col" class="text-uppercase">Descripción</th> --}}
                             <th scope="col" class="text-uppercase">Stock</th>
                             <th scope="col" class="text-uppercase">Imagen</th>
                             <th scope="col" class="text-uppercase">Activo</th>
@@ -74,8 +82,9 @@
                                     </button> --}}
                                     <div>
                                         <label class="switch">
-                                            <input type="checkbox" id="miInterruptor">
-                                            <span class="slider"></span>
+                                            <input type="checkbox" disabled class="miInterruptor" value="{{ $producto->activo }}">
+                                            <span class="slider"> <p class="estadop" style="visibility: hidden">{{ $producto->activo }}</p></span>
+                                          
                                         </label>
                                     </div>
                                 </form>

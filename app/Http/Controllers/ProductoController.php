@@ -99,6 +99,7 @@ class ProductoController extends Controller
         //
         $producto->codigo_producto = $request->get('codigo_producto');
         $producto->nombre = $request->get('nombre');
+        $producto->activo = $request->get('activo');
         // $producto->proveedor = $request->get('proveedor_id');
         $producto->precio = $request->get('precio');
         $producto->descripcion = $request->get('descripcion');

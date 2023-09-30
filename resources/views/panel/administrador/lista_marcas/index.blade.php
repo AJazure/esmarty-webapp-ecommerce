@@ -5,7 +5,7 @@
 @section('plugins.Datatables', true)
 
 {{-- Titulo en las tabulaciones del Navegador --}}
-@section('title', 'Proveedores')
+@section('title', 'Marcas')
 
 {{-- Titulo en el contenido de la Pagina --}}
 @section('content_header')
@@ -35,6 +35,17 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
+
+                <div class="float-right ml-5">
+
+                    <label for="filtroSelect">Filtrar por estado:</label>
+                    <select id="filtroSelect">
+                        <option value="">Mostrar todos</option>
+                        <option value="1">Activado</option>
+                        <option value="0">Desactivado</option>
+                    </select>
+                </div>
+
                 <table id="tabla-marcas" class="table table-striped table-hover w-100">
                     <thead>
                         <tr>
@@ -52,13 +63,12 @@
                                 <form action="{{ route('marca.destroy', $marca) }}" method="POST">
                                     @csrf 
                                     @method('DELETE')
-                                    {{-- <button type="submit" class="btn btn-sm btn-danger text-uppercase">
-                                        Eliminar
-                                    </button> --}}
+                                  
                                     <div>
                                         <label class="switch">
-                                            <input type="checkbox" id="miInterruptor">
-                                            <span class="slider"></span>
+                                            <input type="checkbox" disabled class="miInterruptor" value="{{ $marca->activo }}">
+                                            <span class="slider"> <p class="estadop" style="visibility: hidden">{{ $marca->activo }}</p></span>
+                                          
                                         </label>
                                     </div>
                                 </form>
@@ -71,13 +81,6 @@
                                     <a href="{{ route('marca.edit', $marca) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
                                         Editar
                                     </a>
-                                    {{-- <form action="{{ route('producto.destroy', $producto) }}" method="POST">
-                                        @csrf 
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger text-uppercase">
-                                            Eliminar
-                                        </button>
-                                    </form> --}}
                                 </div>
                             </td>
                         </tr>
@@ -101,5 +104,5 @@
 @section('js')
 
     {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
-    <script src="{{ asset('js/productos.js') }}"></script>
+    <script src="{{ asset('js/marcas.js') }}"></script>
 @stop

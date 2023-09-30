@@ -25,7 +25,7 @@
                             <h5><strong>Descripcion:</strong> {{ $marca->descripcion }}</h5>
                         </div>
                         <div class="mb-3">
-                            <h5><strong>Activo:</strong>{{ $marca->activo }}</h5>
+                            <h5><strong>Estado: </strong>@if ($marca->activo){{"Activado"}} @else {{"Desactivado"}}@endif </h5>
                         </div>
                         {{-- <div class="mb-3">
                         <p>Creado por {{ $producto->vendedor->name }}.</p>

@@ -108,7 +108,7 @@
 
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
-    {{-- <script src="{{ asset('js/button_switch.js') }}"></script> --}}
+    <script src="{{ asset('js/button_switch.js') }}"></script>
 
 </body>
 

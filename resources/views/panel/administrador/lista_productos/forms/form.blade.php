@@ -153,13 +153,22 @@
             </div>
 
             <div class="mb-3 row">
-                <label for="imagen" class="col-sm-4 col-form-label"> * Imagen </label>
+                <label for="url_imagen" class="col-sm-4 col-form-label"> * Imagen </label>
                 <div class="col-sm-8">
-                    <input class="form-control @error('imagen') is-invalid @enderror" type="file" id="imagen"
-                        name="imagen" accept="image/*">
+                    <input class="form-control @error('imagen') is-invalid @enderror" type="file" id="url_imagen"
+                        name="url_imagen" accept="image/*">
                     @error('imagen')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="nombre" class="col-sm-4 col-form-label"> * Estado </label>
+                <div class="col-sm-8">
+                    <select class="form-control @error('activo') is-invalid @enderror" name="activo" id="activo" value="{{ old('activo', optional($producto)->activo) }}">
+                        <option value="1" @if ($producto->activo) {{"selected"}} @endif>Activado</option>
+                        <option value="0" @if (isset($producto->activo) and !$producto->activo) {{"selected"}} @endif>Desactivado</option>
+                    </select>
                 </div>
             </div>
 
@@ -173,13 +182,12 @@
             </button>
         </div>
     </form>
-
 </div>
 
 @push('js')
     <script>
         document.addEventListener("DOMContentLoaded", function(event) {
-            const image = document.getElementById('imagen');
+            const image = document.getElementById('url_imagen');
 
             image.addEventListener('change', (e) => {
 

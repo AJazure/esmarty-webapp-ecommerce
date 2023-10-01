@@ -321,8 +321,8 @@ return [
         ],
         [
             'text'        => 'Proveedores',
-            'url'         => '#',
-            // 'route' => 'proveedor.index',
+            /* 'url'         => '#', */
+            'route' => 'proveedor.index',
             'icon'        => 'fas fa-users',
             'can'         => 'lista_usuarios' //permiso de admin
         ],
@@ -335,8 +335,8 @@ return [
         ],
         [
             'text'        => ' Categorias',
-            'url'         => '#',
-            // 'route' => 'categoria.index',
+            'route'       => 'categoria.index',
+            // 'route' => 'proveedor.index',
             'icon'        => 'fas fa-project-diagram',
             'can'         => 'lista_usuarios' //permiso de admin<i class="far fa-project-diagram"></i>
         ],

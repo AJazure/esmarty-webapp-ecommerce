@@ -49,5 +49,6 @@ $(document).ready(function() {
 
         table.column(7).search(filtro).draw();
     });
+	table = $('#tabla-categorias').DataTable(configurationDataTable);
 });
 

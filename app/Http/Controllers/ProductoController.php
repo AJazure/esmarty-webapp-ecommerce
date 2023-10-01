@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\Proveedor;
 use App\Models\Marca;
 use App\Models\Producto;
 use Illuminate\Http\Request;
@@ -35,9 +36,10 @@ class ProductoController extends Controller
         //Recuperamos todas las categorias de la BD
         $categorias=Categoria::get();//Recordar importar el modelo Categoria
         $marcas=Marca::get();//Recordar importar el modelo Categoria
+        $proveedores=Proveedor::get();
 
         //Retornamos la vista de creacion de productos, enviamos al producto y las categorias
-        return view('panel.administrador.lista_productos.create', compact('producto','categorias','marcas')); //compact(mismo nombre de la variable)
+        return view('panel.administrador.lista_productos.create', compact('producto','categorias','marcas','proveedores')); //compact(mismo nombre de la variable)
     }
 
     /**
@@ -55,8 +57,9 @@ class ProductoController extends Controller
         $producto->stock_deseado = $request->get('stock_deseado');
         $producto->stock_minimo = $request->get('stock_minimo');
         $producto->id_categoria = $request->get('id_categoria');
+        $producto->id_proveedor = $request->get('id_proveedor');
         $producto->id_marca = $request->get('id_marca');
-        // $producto->vendedor_id = auth()->user()->id;
+        /* $producto->vendedor_id = auth()->user()->id; */
         if ($request->hasFile('url_imagen')) {
         // Subida de imagen al servidor (public > storage)
         $url_imagen = $request->file('url_imagen')->store('public/producto');
@@ -76,8 +79,8 @@ class ProductoController extends Controller
      */
     public function show(Producto $producto)
     {
-        //
-        return view('panel.administrador.lista_productos.show', compact('producto'));
+        $proveedor = Proveedor::find($producto->proveedor->id);
+        return view('panel.administrador.lista_productos.show', compact('producto','proveedor'));
     }
 
     /**
@@ -88,7 +91,8 @@ class ProductoController extends Controller
         //
         $categorias = Categoria::get();
         $marcas = Marca::get();
-        return view('panel.administrador.lista_productos.edit', compact('producto', 'categorias','marcas'));
+        $proveedores=Proveedor::get();
+        return view('panel.administrador.lista_productos.edit', compact('producto', 'categorias','marcas','proveedores'));
     }
 
     /**
@@ -100,12 +104,12 @@ class ProductoController extends Controller
         $producto->codigo_producto = $request->get('codigo_producto');
         $producto->nombre = $request->get('nombre');
         $producto->activo = $request->get('activo');
-        // $producto->proveedor = $request->get('proveedor_id');
         $producto->precio = $request->get('precio');
         $producto->descripcion = $request->get('descripcion');
         $producto->stock_disponible = $request->get('stock_disponible');
         $producto->stock_deseado = $request->get('stock_deseado');
         $producto->stock_minimo = $request->get('stock_minimo');
+        $producto->id_proveedor = $request->get('id_proveedor');
         $producto->id_categoria = $request->get('id_categoria');
         $producto->id_marca = $request->get('id_marca');
 
@@ -128,10 +132,24 @@ class ProductoController extends Controller
     public function destroy(Producto $producto)
     {
         //
-        $producto->delete();
+        /* $producto->delete();
 
         return redirect()
         ->route('producto.index')
-        ->with('alert', 'Producto eliminado exitosamente');
+        ->with('alert', 'Producto eliminado exitosamente'); */
+    }
+
+    public function cambiarEstado(Request $request)
+    {
+        $producto = Producto::find($request->_id);
+
+        if (!$producto) {
+            return response()->json(['error' => 'Categoría no encontrada'], 404);
+        }
+
+        $producto->activo = !$producto->activo; // Cambia el estado
+        $producto->save();
+
+        return response()->json(['message' => 'Estado de categoría cambiado con éxito']);
     }
 }

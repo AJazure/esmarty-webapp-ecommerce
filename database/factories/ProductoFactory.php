@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Categoria;
 use App\Models\Marca;
-use App\Models\Proveedore;
+use App\Models\Proveedor;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Producto>
@@ -18,7 +18,7 @@ class ProductoFactory extends Factory
         // Traemos una categoria de manera aleatoria de la BD y lo convertimos en un objeto de PHP.
         $categoria = Categoria::inRandomOrder()->first();
         // Traemos un Proveedor de manera aleatoria de la BD y lo convertimos en un objeto de PHP.
-        $proveedor = Proveedore::inRandomOrder()->first(); 
+        $proveedor = Proveedor::inRandomOrder()->first(); 
         return [
         'codigo_producto' => $this->faker->numberBetween(1,10), // Una linea aleatoria
         'nombre' => $this->faker->sentence(), // Una linea aleatorio

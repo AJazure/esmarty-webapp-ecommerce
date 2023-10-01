@@ -27,7 +27,7 @@ return new class extends Migration
             $table->tinyInteger('activo')->default(1);
             $table->timestamps();
 
-            // $table->foreign('id_proveedor')->references('id')->on('proveedores');
+            $table->foreign('id_proveedor')->references('id')->on('proveedores');
             // Creamos la FK "id_categoria“ que hace referencia al "id" de la tabla "categorias"
             $table->foreign('id_categoria')->references('id')->on('categorias');
             // Creamos la FK "id_marca“ que hace referencia al "id" de la tabla "marcas"

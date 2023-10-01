@@ -34,16 +34,17 @@
 
     <div class="col-12">
         <div class="card">
-            <div class="card-body">
-                <div class="float-right ml-5">
-
+            <div class="card-body"> 
+                <div class="float-right ml-5 ">
+                    
                     <label for="filtroSelect">Filtrar por estado:</label>
-                    <select id="filtroSelect">
+                    <select id="filtroSelect" class="form-select" >
                         <option value="">Mostrar todos</option>
                         <option value="1">Activado</option>
                         <option value="0">Desactivado</option>
                     </select>
-                </div>  
+                    
+                </div> 
                 <table id="tabla-productos" class="table table-striped table-hover w-100">
                     <thead>
                         <tr>
@@ -82,7 +83,7 @@
                                     </button> --}}
                                     <div>
                                         <label class="switch">
-                                            <input type="checkbox" disabled class="miInterruptor" value="{{ $producto->activo }}">
+                                            <input type="checkbox" class="miInterruptor" value="{{ $producto->activo }}" data-change-id="{{ $producto->id }}">
                                             <span class="slider"> <p class="estadop" style="visibility: hidden">{{ $producto->activo }}</p></span>
                                           
                                         </label>
@@ -124,7 +125,12 @@
 
 {{-- Importacion de Archivos JS --}}
 @section('js')
+    <script>
+    var cambiarEstadoUrl = '{{ route('cambiar.estado.producto') }}';
+    var token = '{{ csrf_token() }}';
+    </script>
 
+    <script src="{{ asset('js/button_switch.js') }}"></script>
     {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
     <script src="{{ asset('js/productos.js') }}"></script>
 @stop

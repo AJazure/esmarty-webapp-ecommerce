@@ -44,15 +44,12 @@
             <div class="mb-3 row">
                 <label for="proveedor" class="col-sm-4 col-form-label"> * Proveedor </label>
                 <div class="col-sm-8">
-                    <select id="proveedor_id" name="proveedor_id" class="form-control">
-                        {{-- @foreach ($categorias as $categoria)
-                            <option {{ $producto->categoria_id && $producto->categoria_id == $categoria->id ? 'selected': ''}} value="{{ $categoria->id }}"> 
-                                {{ $categoria->nombre }}
+                    <select id="id_proveedor" name="id_proveedor" class="form-control">
+                         @foreach ($proveedores as $proveedor)
+                            <option {{ $producto->proveedor_id && $producto->proveedor_id == $proveedor->id ? 'selected': ''}} value="{{ $proveedor->id }}"> 
+                                {{ $proveedor->descripcion }}
                             </option>
-                        @endforeach --}}
-                        <option value="Proveedor1">Proveedor 1</option>
-                        <option value="Proveedor2">Proveedor 2</option>
-                        <option value="Proveedor3">Proveedor 3</option>
+                        @endforeach 
                     </select>
                     {{--                     @error('categoria')
                         <div class="invalid-feedback"> {{ $message }} </div>

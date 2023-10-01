@@ -5,11 +5,11 @@
 @section('plugins.Datatables', true)
 
 {{-- Titulo en las tabulaciones del Navegador --}}
-@section('title', 'Categorias')
+@section('title', 'Proveedores')
 
 {{-- Titulo en el contenido de la Pagina --}}
 @section('content_header')
-    <h1>&nbsp;<strong>CATEGORIAS</strong></h1>
+    <h1>&nbsp;<strong>PROVEEDORES</strong></h1>
 @stop
 
 {{-- Contenido de la Pagina --}}
@@ -18,8 +18,8 @@
     <div class="row">
         <div class="col-12 mb-3">
             
-            <a href="{{ route('categoria.create') }}" class="btn btn-success text-uppercase">
-                Nueva Categoria 
+            <a href="{{ route('proveedor.create') }}" class="btn btn-success text-uppercase">
+                Nuevo Proveedor 
             </a>
         </div>
         
@@ -45,21 +45,31 @@
                     </select>
                     
                 </div> 
-                <table id="tabla-categorias" class="table table-striped table-hover w-100">
+                <table id="tabla-proveedores" class="table table-striped table-hover w-100">
                     <thead>
                         <tr>
                             <th scope="col" class="text-uppercase">Nombre</th>
+                            <th scope="col" class="text-uppercase">CUIT</th>
+                            <th scope="col" class="text-uppercase">Razon Social</th>
+                            <th scope="col" class="text-uppercase">Dirección</th>
+                            <th scope="col" class="text-uppercase">Telefono</th>
+                            <th scope="col" class="text-uppercase">Email</th>
                             <th scope="col" class="text-uppercase">Activo</th>
                             <th scope="col" class="text-uppercase">Acciones</th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($categorias as $categoria)
+                        @foreach ($proveedores as $proveedor)
                         <tr>
-                            <td>{{ $categoria->descripcion }}</td>
+                            <td>{{ $proveedor->descripcion }}</td>
+                            <td>{{ $proveedor->cuit }}</td>
+                            <td>{{ $proveedor->razon_social }}</td>
+                            <td>{{ $proveedor->direccion }}</td>
+                            <td>{{ $proveedor->telefono }}</td>
+                            <td>{{ $proveedor->correo }}</td>
                             <td class="d-flex justify-content-center">
-                                <form action="{{ route('marca.destroy', $categoria) }}" method="POST">
+                                <form action="{{ route('producto.destroy', $proveedor) }}" method="POST">
                                     @csrf 
                                     @method('DELETE')
                                     {{-- <button type="submit" class="btn btn-sm btn-danger text-uppercase">
@@ -67,18 +77,18 @@
                                     </button> --}}
                                     <div>
                                         <label class="switch">
-                                            <input type="checkbox" id="miInterruptor" data-change-id="{{ $categoria->id }}" class="miInterruptor" value="{{ $categoria->activo }}">
-                                            <span class="slider"> <p class="estadop" style="visibility: hidden">{{ $categoria->activo }}</p></span>
+                                            <input type="checkbox" class="miInterruptor" id="miInterruptor" value="{{ $proveedor->activo }}" data-change-id="{{ $proveedor->id }}">
+                                            <span class="slider"><p class="estadop" style="visibility: hidden">{{ $proveedor->activo }}</p></span>
                                         </label>
                                     </div>
                                 </form>
                             </td>
-                            <td>
-                                <div class="d-flex justify-content-center">
-                                    <a href="{{ route('categoria.show', $categoria) }}" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
+                            <td> 
+                                <div class="d-flex">
+                                    <a href="{{route('proveedor.show', $proveedor)}}" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
                                         Ver
                                     </a>
-                                    <a href="{{ route('categoria.edit', $categoria) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
+                                    <a href="{{route('proveedor.edit', $proveedor)}}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
                                         Editar
                                     </a>
                                     {{-- <form action="{{ route('producto.destroy', $producto) }}" method="POST">
@@ -92,7 +102,6 @@
                             </td>
                         </tr>
                         @endforeach
-
                     </tbody>
                 </table>
             </div>
@@ -111,10 +120,12 @@
 @section('js')
 
     {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
-    <script src="{{ asset('js/categorias.js') }}"></script>
+    <script src="{{ asset('js/proveedores.js') }}"></script>
+
     <script>
-        var cambiarEstadoUrl = '{{ route('cambiar.estado.categoria') }}';
+        var cambiarEstadoUrl = '{{ route('cambiar.estado.proveedor') }}';
         var token = '{{ csrf_token() }}';
     </script>
+
     <script src="{{ asset('js/button_switch.js') }}"></script>
 @stop

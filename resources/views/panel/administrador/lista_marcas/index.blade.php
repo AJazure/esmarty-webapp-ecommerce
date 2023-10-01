@@ -39,7 +39,7 @@
                         <div class="float-right ml-5">
 
                             <label for="filtroSelect">Filtrar por estado:</label>
-                            <select id="filtroSelect">
+                            <select id="filtroSelect" class="form-select">
                                 <option value="">Mostrar todos</option>
                                 <option value="1">Activado</option>
                                 <option value="0">Desactivado</option>

@@ -44,9 +44,10 @@
             <div class="mb-3 row">
                 <label for="proveedor" class="col-sm-4 col-form-label"> * Proveedor </label>
                 <div class="col-sm-8">
+                    
                     <select id="id_proveedor" name="id_proveedor" class="form-control">
                          @foreach ($proveedores as $proveedor)
-                            <option {{ $producto->proveedor_id && $producto->proveedor_id == $proveedor->id ? 'selected': ''}} value="{{ $proveedor->id }}"> 
+                            <option {{ $producto->id_proveedor && $producto->id_proveedor == $proveedor->id ? 'selected': ''}} value="{{ $proveedor->id }}"> 
                                 {{ $proveedor->descripcion }}
                             </option>
                         @endforeach 
@@ -63,7 +64,7 @@
                     <select id="id_categoria" name="id_categoria" class="form-control">
                         @foreach ($categorias as $categoria)
                             <option
-                                {{ $producto->categoria_id && $producto->categoria_id == $categoria->id ? 'selected' : '' }}
+                                {{ $producto->id_categoria && $producto->id_categoria == $categoria->id ? 'selected' : '' }}
                                 value="{{ $categoria->id }}">
                                 {{ $categoria->descripcion }}
                             </option>
@@ -80,7 +81,7 @@
                 <div class="col-sm-8">
                     <select id="id_marca" name="id_marca" class="form-control">
                         @foreach ($marcas as $marca)
-                            <option {{ $producto->marca_id && $producto->marca_id == $marca->id ? 'selected' : '' }}
+                            <option {{ $producto->id_marca && $producto->id_marca == $marca->id ? 'selected' : '' }}
                                 value="{{ $marca->id }}">
                                 {{ $marca->descripcion }}
                             </option>

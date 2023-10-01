@@ -39,8 +39,11 @@ let configurationDataTable = {
 
 $(function() {
     table = $('#tabla-productos').DataTable(configurationDataTable);
-
+	table = $('#tabla-marcas').DataTable(configurationDataTable);
+	table = $('#tabla-categorias').DataTable(configurationDataTable);
+	table = $('#tabla-proveedores').DataTable(configurationDataTable);
 });
+
 
 
 $(document).ready(function() {

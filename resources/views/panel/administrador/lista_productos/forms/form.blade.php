@@ -46,10 +46,12 @@
                 <div class="col-sm-8">
                     
                     <select id="id_proveedor" name="id_proveedor" class="form-control">
-                         @foreach ($proveedores as $proveedor)
-                            <option {{ $producto->id_proveedor && $producto->id_proveedor == $proveedor->id ? 'selected': ''}} value="{{ $proveedor->id }}"> 
+                        @foreach ($proveedores as $proveedor)
+                        @if($proveedor->activo == 1)
+                            <option {{$producto->id_proveedor && $producto->id_proveedor == $proveedor->id ? 'selected': ''}} value="{{ $proveedor->id }}"> 
                                 {{ $proveedor->descripcion }}
                             </option>
+                        @endif    
                         @endforeach 
                     </select>
                     {{--                     @error('categoria')
@@ -63,11 +65,13 @@
                 <div class="col-sm-8">
                     <select id="id_categoria" name="id_categoria" class="form-control">
                         @foreach ($categorias as $categoria)
+                        @if($categoria->activo == 1)
                             <option
                                 {{ $producto->id_categoria && $producto->id_categoria == $categoria->id ? 'selected' : '' }}
                                 value="{{ $categoria->id }}">
                                 {{ $categoria->descripcion }}
                             </option>
+                        @endif
                         @endforeach
                     </select>
                     {{--                     @error('categoria')
@@ -81,10 +85,12 @@
                 <div class="col-sm-8">
                     <select id="id_marca" name="id_marca" class="form-control">
                         @foreach ($marcas as $marca)
-                            <option {{ $producto->id_marca && $producto->id_marca == $marca->id ? 'selected' : '' }}
+                        @if($marca->activo == 1)
+                            <option {{$producto->id_marca && $producto->id_marca == $marca->id ? 'selected' : '' }}
                                 value="{{ $marca->id }}">
                                 {{ $marca->descripcion }}
                             </option>
+                        @endif
                         @endforeach
                     </select>
                     @error('marca')

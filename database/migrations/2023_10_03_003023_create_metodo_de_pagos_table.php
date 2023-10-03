@@ -6,10 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('metodos_de_pago', function (Blueprint $table) {
+        Schema::create('metodo_de_pagos', function (Blueprint $table) {
             $table->id();
             $table->string("descripcion");
             $table->tinyInteger("activo")->default(1);
@@ -17,9 +19,11 @@ return new class extends Migration
         });
     }
 
-    
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::dropIfExists('metodos_de_pagos');
+        Schema::dropIfExists('metodo_de_pagos');
     }
 };

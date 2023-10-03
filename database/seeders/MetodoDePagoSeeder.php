@@ -1,25 +1,27 @@
 <?php
 
 namespace Database\Seeders;
-use App\Models\metodos_de_pago;
+use App\Models\MetodoDePago;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class MetodosDePagoSeeder extends Seeder
+class MetodoDePagoSeeder extends Seeder
 {
-    
+    /**
+     * Run the database seeds.
+     */
     public function run(): void
     {
-        metodos_de_pago::create([
+        MetodoDePago::create([
             "descripcion" => "Debito"
         ]);
-        metodos_de_pago::create([
+        MetodoDePago::create([
             "descripcion" => "Credito"
         ]);
-        metodos_de_pago::create([
+        MetodoDePago::create([
             "descripcion" => "Efectivo"
         ]);
-        metodos_de_pago::create([
+        MetodoDePago::create([
             "descripcion" => "Transferencia"
         ]);
     }

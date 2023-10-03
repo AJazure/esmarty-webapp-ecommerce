@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Esmarty',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
+    'logo' => '<b>ESMARTY</b>',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -291,32 +291,57 @@ return [
 
     'menu' => [
         // Navbar items:
-        [
-            'type'         => 'navbar-search',
-            'text'         => 'search',
-            'topnav_right' => true,
-        ],
-        [
-            'type'         => 'fullscreen-widget',
-            'topnav_right' => true,
-        ],
+        // [
+        //     'type'         => 'navbar-search',
+        //     'text'         => 'search',
+        //     'topnav_right' => true,
+        // ],
+        // [
+        //     'type'         => 'fullscreen-widget',
+        //     'topnav_right' => true,
+        // ],
 
         // Sidebar items:
         [
             'type' => 'sidebar-menu-search',
-            'text' => 'search',
+            'text' => 'Buscar',
         ],
+            
         [
             'text' => 'blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'Lista de usuarios',
-            'url'         => '#',
+            'text'        => ' Productos',
+            // 'url'         => '#',
+            'route' => 'producto.index',
+            'icon'        => 'fas fa-shopping-cart',
+            'can'         => 'lista_usuarios' //permiso de admin
+        ],
+        [
+            'text'        => 'Proveedores',
+            /* 'url'         => '#', */
+            'route' => 'proveedor.index',
             'icon'        => 'fas fa-users',
             'can'         => 'lista_usuarios' //permiso de admin
         ],
+        [
+            'text'        => ' Marcas',
+            // 'url'         => '#',
+            'route' => 'marca.index',
+            'icon'        => 'fas fa-clipboard-list',
+            'can'         => 'lista_usuarios' //permiso de admin<i class="fas fa-clipboard-list"></i>
+        ],
+        [
+            'text'        => ' Categorias',
+            'route'       => 'categoria.index',
+            // 'route' => 'proveedor.index',
+            'icon'        => 'fas fa-project-diagram',
+            'can'         => 'lista_usuarios' //permiso de admin<i class="far fa-project-diagram"></i>
+        ],
+
+        
         [
             'text'        => 'Lista de Productos',
             'url'         => '#',
@@ -341,71 +366,71 @@ return [
             'icon'        => 'fas fa-users',
             'can'         => 'lista_compras' //permiso de clientes
         ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
-        ],
+        // ['header' => 'account_settings'],
+        // [
+        //     'text' => 'profile',
+        //     'url'  => 'admin/settings',
+        //     'icon' => 'fas fa-fw fa-user',
+        // ],
+        // [
+        //     'text' => 'change_password',
+        //     'url'  => 'admin/settings',
+        //     'icon' => 'fas fa-fw fa-lock',
+        // ],
+        // [
+        //     'text'    => 'multilevel',
+        //     'icon'    => 'fas fa-fw fa-share',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text'    => 'level_one',
+        //             'url'     => '#',
+        //             'submenu' => [
+        //                 [
+        //                     'text' => 'level_two',
+        //                     'url'  => '#',
+        //                 ],
+        //                 [
+        //                     'text'    => 'level_two',
+        //                     'url'     => '#',
+        //                     'submenu' => [
+        //                         [
+        //                             'text' => 'level_three',
+        //                             'url'  => '#',
+        //                         ],
+        //                         [
+        //                             'text' => 'level_three',
+        //                             'url'  => '#',
+        //                         ],
+        //                     ],
+        //                 ],
+        //             ],
+        //         ],
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
+        //     ],
+        // ],
+        // ['header' => 'labels'],
+        // [
+        //     'text'       => 'important',
+        //     'icon_color' => 'red',
+        //     'url'        => '#',
+        // ],
+        // [
+        //     'text'       => 'warning',
+        //     'icon_color' => 'yellow',
+        //     'url'        => '#',
+        // ],
+        // [
+        //     'text'       => 'information',
+        //     'icon_color' => 'cyan',
+        //     'url'        => '#',
+        // ],
     ],
 
     /*

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Crear Producto')
+@section('title', 'Crear Nuevo Usuario')
 
 @section('content_header')
     
@@ -10,14 +10,14 @@
 <div class="container">
     <div class="row">
         <div class="col-12 mb-3">
-            <h1>Creación de un nuevo Producto</h1>
-            <a href="{{ route('producto.index') }}" class="btn btn-sm btn-secondary text-uppercase">
+            <h1>Alta de Nuevo Usuario</h1>
+            <a href="{{ route('user.index') }}" class="btn btn-sm btn-secondary text-uppercase">
                 Volver Atras
             </a>
         </div>
 
         <div class="col-12">
-            @include('panel.administrador.lista_productos.forms.form')
+            @include('panel.administrador.lista_usuarios.forms.form_new')
         </div>
 
     </div>

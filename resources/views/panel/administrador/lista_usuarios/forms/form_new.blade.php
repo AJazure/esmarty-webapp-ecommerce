@@ -30,6 +30,17 @@
             </div>
 
             <div class="mb-3 row">
+                <label for="dni" class="col-sm-4 col-form-label"> * DNI </label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control @error('dni') is-invalid @enderror" id="dni"
+                        name="dni" value="{{ old('dni', optional($user)->dni) }}">
+                    @error('dni')
+                        <div class="invalid-feedback"> {{ $message }} </div>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="mb-3 row">
                 <label for="email" class="col-sm-4 col-form-label"> * E-mail </label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control @error('email') is-invalid @enderror" id="email"
@@ -43,7 +54,7 @@
             <div class="mb-3 row">
                 <label for="telefono" class="col-sm-4 col-form-label"> * Teléfono </label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control @error('telefono') is-invalid @enderror" id="telefono"
+                    <input type="number" class="form-control @error('telefono') is-invalid @enderror" id="telefono"
                         name="telefono" value="{{ old('telefono', optional($user)->telefono) }}">
                     @error('telefono')
                         <div class="invalid-feedback"> {{ $message }} </div>
@@ -74,7 +85,7 @@
             </div>
 
             <div class="mb-3 row">
-                <label for="rol_id" class="col-sm-4 col-form-label"> * Rol </label>
+                <label for="rol" class="col-sm-4 col-form-label"> * Rol </label>
                 <div class="col-sm-8">
                     <select id="rol_id" name="rol_id" class="form-control">
                         @foreach ($all_roles as $rol)

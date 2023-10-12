@@ -32,7 +32,7 @@
             <div class="mb-3 row">
                 <label for="email" class="col-sm-4 col-form-label"> * E-mail </label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control @error('email') is-invalid @enderror" id="email"
+                    <input type="mail" class="form-control @error('email') is-invalid @enderror" id="email"
                         name="email" value="{{ old('email', optional($user)->email) }}">
                     @error('email')
                         <div class="invalid-feedback"> {{ $message }} </div>
@@ -76,13 +76,17 @@
             <div class="mb-3 row">
                 <label for="rol_id" class="col-sm-4 col-form-label"> * Rol </label>
                 <div class="col-sm-8">
-                    <select id="rol_id" name="rol_id" class="form-control">
+                    <select id="rol_id" name="rol_id" class="form-control @error('rol_id') is-invalid @enderror">
+                        <option disabled selected>Seleccione un rol</option>
                         @foreach ($all_roles as $rol)
                             <option {{ $user_role->contains($rol) ? 'selected': '' }} value="{{ $rol }}"> 
                                 {{ $rol }}
                             </option>
                         @endforeach
                     </select>
+                    @error('rol_id')
+                    <div class="invalid-feedback"> {{ $message }} </div>
+                    @enderror
                 </div>
             </div>
 

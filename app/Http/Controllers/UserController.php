@@ -47,10 +47,14 @@ class UserController extends Controller
         $user = new User();
 
         $reglas = [
-            'password' => 'nullable|min:6|regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&*()_+-])[A-Za-z\d@#$%^&*()_+-]+$/|confirmed', //regex indica que almenos contenga un valor de ellos
+            //'password' => 'required|min:6|regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&*()_+-])[A-Za-z\d@#$%^&*()_+-]+$/|confirmed', //regex indica que almenos contenga un valor de ellos
             'email'	=> 'required|email|unique:users,email', //reglas de correos únicos
             'dni' => 'required|unique:users,dni', //reglas de numeros de dni
-        ];
+            'rol_id' => 'required', //es obligatorio que seleccionen una opción que no sea  "seleccione un rol"
+            'name' => 'required',
+            'apellido' => 'required',
+            'telefono' => 'required',
+       ];
 
         // Definir mensajes de error personalizados
         $messages = [
@@ -62,6 +66,10 @@ class UserController extends Controller
             'email.unique' => 'Este correo electrónico ya está en uso.',
             'dni.required' => 'Ingresar un DNI válido es obligatorio.',
             'dni.unique' => 'Este número de DNI ya está en uso.',
+            'rol_id.required' => 'Por favor seleccione un rol para el usuario.',
+            'name.required' => 'Debe ingresar los nombres del usuario.',
+            'apellido.required' => 'Debe ingresar el apellido del usuario',
+            'telefono.required' => 'El campo de teléfono es obligatorio.',
         ];
 
         // Realizar la validación
@@ -126,7 +134,10 @@ class UserController extends Controller
 
         $reglas = [
             'password' => 'nullable|min:6|regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&*()_+-])[A-Za-z\d@#$%^&*()_+-]+$/|confirmed', //regex indica que almenos contenga un valor de ellos
-
+            'rol_id' => 'required', //es obligatorio que seleccionen una opción que no sea  "seleccione un rol"
+            'name' => 'required',
+            'apellido' => 'required',
+            'telefono' => 'required',
         ];
 
         // Definir mensajes de error personalizados
@@ -137,6 +148,10 @@ class UserController extends Controller
             'email.required' => 'El campo de correo electrónico es obligatorio para continuiar.',
             'email.email' => 'El correo ingresado no es válido o no es un correo.',
             'email.unique' => 'Este correo electrónico ya está en uso.',
+            'rol_id.required' => 'Por favor seleccione un rol para el usuario.',
+            'name.required' => 'Debe ingresar los nombres del usuario.',
+            'apellido.required' => 'Debe ingresar el apellido del usuario',
+            'telefono.required' => 'El campo de teléfono es obligatorio.',
         ];
 
         //Si se modificó la contraseña en el input, se agrega una nueva regla que verifica que sea único el correo
@@ -165,6 +180,7 @@ class UserController extends Controller
         $user->telefono = $request->get('telefono');
         $user->direccion = $request->get('direccion');
         $user->email = $request->get('email');
+        $nuevaPassword = $request->get('password'); //no se asigna directamente al obj $user
 
         // Verifica si se rellenó el campo de contraseña para encriptarla
         if (!empty($nuevaPassword)) {

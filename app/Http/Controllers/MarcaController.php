@@ -36,6 +36,11 @@ class MarcaController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'descripcion' => 'required|min:3',
+            'activo' => 'required|boolean'
+        ]);
+
         $marca = new Marca();
         $marca->descripcion = $request->get('descripcion');
         $marca->activo = $request->get('activo');
@@ -65,6 +70,7 @@ class MarcaController extends Controller
     public function edit(Marca $marca)
     {
         //
+        
         // $marcas = Marca::get();
         return view('panel.administrador.lista_marcas.edit', compact('marca'));
         

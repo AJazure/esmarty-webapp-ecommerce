@@ -36,10 +36,10 @@
                         <option value="0" @if (isset($marca->activo) and !$marca->activo) {{"selected"}} @endif>Desactivado</option>
                     </select>
                     {{-- <input type="text" class="form-control @error('activo') is-invalid @enderror" id="activo"
-                        name="activo" value="{{ old('activo', optional($marca)->activo) }}">
-                    @error('descripcion')
+                        name="activo" value="{{ old('activo', optional($marca)->activo) }}">--}}
+                    @error('activo')
                         <div class="invalid-feedback"> {{ $message }} </div>
-                    @enderror --}}
+                    @enderror 
                 </div>
             </div>
 

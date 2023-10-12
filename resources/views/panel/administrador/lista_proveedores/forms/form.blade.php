@@ -42,7 +42,7 @@
             <div class="mb-3 row">
                 <label for="razon_social" class="col-sm-4 col-form-label"> * Razón Social </label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control @error('descripcion') is-invalid @enderror"
+                    <input type="text" class="form-control @error('razon_social') is-invalid @enderror"
                         id="razon_social" name="razon_social"
                         value="{{ old('razon_social', optional($proveedor)->razon_social) }}">
                     @error('razon_social')
@@ -54,7 +54,7 @@
             <div class="mb-3 row">
                 <label for="direccion" class="col-sm-4 col-form-label"> * Dirección </label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control @error('descripcion') is-invalid @enderror"
+                    <input type="text" class="form-control @error('direccion') is-invalid @enderror"
                         id="direccion" name="direccion"
                         value="{{ old('direccion', optional($proveedor)->direccion) }}">
                     @error('direccion')
@@ -77,7 +77,7 @@
             <div class="mb-3 row">
                 <label for="correo" class="col-sm-4 col-form-label"> * Correo </label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control @error('descripcion') is-invalid @enderror"
+                    <input type="text" class="form-control @error('correo') is-invalid @enderror"
                         id="correo" name="correo"
                         value="{{ old('correo', optional($proveedor)->correo) }}">
                     @error('correo')
@@ -96,7 +96,7 @@
 
                     {{-- <input type="text" class="form-control @error('activo') is-invalid @enderror" id="activo"
                         name="activo" value="{{ old('activo', optional($proveedor)->activo) }}"> --}}
-                    @error('descripcion')
+                    @error('activo')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
                 </div>

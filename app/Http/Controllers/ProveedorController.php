@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProveedor;
+use App\Http\Requests\UpdateProveedor;
 use App\Models\Proveedor;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Echo_;
@@ -33,7 +35,7 @@ class ProveedorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProveedor $request)
     {
         //
         $proveedor = new Proveedor();
@@ -76,7 +78,7 @@ class ProveedorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProveedor $request, $id)
     {
         //
 

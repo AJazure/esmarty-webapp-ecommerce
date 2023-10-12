@@ -10,8 +10,8 @@
     <div class="container">
         <div class="row">
             <div class="col-12 mb-3">
-                <h1>Datos de la Marca "{{ $marca->descripcion }}"</h1>
-                <a href="{{ route('marca.index') }}" class="btn btn-sm btn-secondary text-uppercase">
+                <h1>Datos de la Categoria "{{ $categoria->descripcion }}"</h1>
+                <a href="{{ route('categoria.index') }}" class="btn btn-sm btn-secondary text-uppercase">
                     Volver Atras
                 </a>
             </div>
@@ -22,14 +22,11 @@
                             {{-- <img src="{{ $producto->url_imagen }}" alt="{{ $producto->nombre }}" id="image_preview" class="img-fluid" style="object-fit: cover; object-position: center; height: 420px; width: 100%;"> --}}
                         </div>
                         <div class="mb-3">
-                            <h5><strong>Descripcion:</strong> {{ $marca->descripcion }}</h5>
+                            <h5><strong>Nombre:</strong> {{ $categoria->descripcion }}</h5>
                         </div>
                         <div class="mb-3">
-                            <h5><strong>Estado: </strong>@if ($marca->activo){{"Activado"}} @else {{"Desactivado"}}@endif </h5>
+                            <h5><strong>Estado:</strong> @if ($categoria->activo){{"Activado"}} @else {{"Desactivado"}}@endif </h5>
                         </div>
-                        {{-- <div class="mb-3">
-                        <p>Creado por {{ $producto->vendedor->name }}.</p>
-                    </div> --}}
                     </div>
                 </div>
             </div>

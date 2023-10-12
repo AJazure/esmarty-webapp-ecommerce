@@ -44,15 +44,15 @@
             <div class="mb-3 row">
                 <label for="proveedor" class="col-sm-4 col-form-label"> * Proveedor </label>
                 <div class="col-sm-8">
-                    <select id="proveedor_id" name="proveedor_id" class="form-control">
-                        {{-- @foreach ($categorias as $categoria)
-                            <option {{ $producto->categoria_id && $producto->categoria_id == $categoria->id ? 'selected': ''}} value="{{ $categoria->id }}"> 
-                                {{ $categoria->nombre }}
+                    
+                    <select id="id_proveedor" name="id_proveedor" class="form-control">
+                        @foreach ($proveedores as $proveedor)
+                        @if($proveedor->activo == 1)
+                            <option {{$producto->id_proveedor && $producto->id_proveedor == $proveedor->id ? 'selected': ''}} value="{{ $proveedor->id }}"> 
+                                {{ $proveedor->descripcion }}
                             </option>
-                        @endforeach --}}
-                        <option value="Proveedor1">Proveedor 1</option>
-                        <option value="Proveedor2">Proveedor 2</option>
-                        <option value="Proveedor3">Proveedor 3</option>
+                        @endif    
+                        @endforeach 
                     </select>
                     {{--                     @error('categoria')
                         <div class="invalid-feedback"> {{ $message }} </div>
@@ -65,11 +65,13 @@
                 <div class="col-sm-8">
                     <select id="id_categoria" name="id_categoria" class="form-control">
                         @foreach ($categorias as $categoria)
+                        @if($categoria->activo == 1)
                             <option
-                                {{ $producto->categoria_id && $producto->categoria_id == $categoria->id ? 'selected' : '' }}
+                                {{ $producto->id_categoria && $producto->id_categoria == $categoria->id ? 'selected' : '' }}
                                 value="{{ $categoria->id }}">
                                 {{ $categoria->descripcion }}
                             </option>
+                        @endif
                         @endforeach
                     </select>
                     {{--                     @error('categoria')
@@ -83,10 +85,12 @@
                 <div class="col-sm-8">
                     <select id="id_marca" name="id_marca" class="form-control">
                         @foreach ($marcas as $marca)
-                            <option {{ $producto->marca_id && $producto->marca_id == $marca->id ? 'selected' : '' }}
+                        @if($marca->activo == 1)
+                            <option {{$producto->id_marca && $producto->id_marca == $marca->id ? 'selected' : '' }}
                                 value="{{ $marca->id }}">
                                 {{ $marca->descripcion }}
                             </option>
+                        @endif
                         @endforeach
                     </select>
                     @error('marca')
@@ -153,13 +157,22 @@
             </div>
 
             <div class="mb-3 row">
-                <label for="imagen" class="col-sm-4 col-form-label"> * Imagen </label>
+                <label for="url_imagen" class="col-sm-4 col-form-label"> * Imagen </label>
                 <div class="col-sm-8">
-                    <input class="form-control @error('imagen') is-invalid @enderror" type="file" id="imagen"
-                        name="imagen" accept="image/*">
+                    <input class="form-control @error('imagen') is-invalid @enderror" type="file" id="url_imagen"
+                        name="url_imagen" accept="image/*">
                     @error('imagen')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="nombre" class="col-sm-4 col-form-label"> * Estado </label>
+                <div class="col-sm-8">
+                    <select class="form-control @error('activo') is-invalid @enderror" name="activo" id="activo" value="{{ old('activo', optional($producto)->activo) }}">
+                        <option value="1" @if ($producto->activo) {{"selected"}} @endif>Activado</option>
+                        <option value="0" @if (isset($producto->activo) and !$producto->activo) {{"selected"}} @endif>Desactivado</option>
+                    </select>
                 </div>
             </div>
 
@@ -173,13 +186,12 @@
             </button>
         </div>
     </form>
-
 </div>
 
 @push('js')
     <script>
         document.addEventListener("DOMContentLoaded", function(event) {
-            const image = document.getElementById('imagen');
+            const image = document.getElementById('url_imagen');
 
             image.addEventListener('change', (e) => {
 

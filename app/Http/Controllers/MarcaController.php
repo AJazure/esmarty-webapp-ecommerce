@@ -100,4 +100,18 @@ class MarcaController extends Controller
         //
         
     }
+
+    public function cambiarEstado(Request $request)
+    {
+        $marca = Marca::find($request->_id);
+
+        if (!$marca) {
+            return response()->json(['error' => 'Categoría no encontrada'], 404);
+        }
+
+        $marca->activo = !$marca->activo; // Cambia el estado
+        $marca->save();
+
+        return response()->json(['message' => 'Estado de categoría cambiado con éxito']);
+    }
 }

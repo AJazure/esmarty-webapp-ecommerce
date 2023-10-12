@@ -12,12 +12,13 @@ class Categoria extends Model
     protected $table = 'categorias';
     // Nombres de las columnas que son modificables
     protected $fillable = [
-    'description', 'activo'
+        'description', 'activo'
     ];
-    
+
     // INNER JOIN con la tabla Productos
     // por medio de la FK id_categoria
-    public function productos() {
-    return $this->hasMany(Producto::class, 'id_categoria'); 
-    } 
+    public function productos()
+    {
+        return $this->hasMany(Producto::class, 'id_categoria');
+    }
 }

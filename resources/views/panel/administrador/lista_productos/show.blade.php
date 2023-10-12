@@ -28,7 +28,7 @@
                         <h5><strong>Nombre:</strong> {{ $producto->nombre }}</h5>
                     </div>
                     <div class="mb-3">    
-                        <h5><strong>Proveedor:</strong> Proveedor 1</h5>
+                        <h5><strong>Proveedor:</strong> {{ $proveedor->descripcion }}</h5>
                     </div>
                     <div class="mb-3">
                         <h5><strong>Categoria:</strong> {{ $producto->categoria->descripcion }}</h5>

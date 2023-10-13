@@ -10,8 +10,8 @@
 <div class="container">
     <div class="row">
         <div class="col-12 mb-3">
-            <h1>Editar Datos de la Marca "{{ $marca->descripcion }}"</h1>
-            <a href="{{ route('MetodoDePago.index') }}" class="btn btn-sm btn-secondary text-uppercase">
+            <h1>Editar Datos del Metodo de pago "{{ $mdp->descripcion }}"</h1>
+            <a href="{{ route('metodosdepago.index') }}" class="btn btn-sm btn-secondary text-uppercase">
                 Volver Atras
             </a>
         </div>

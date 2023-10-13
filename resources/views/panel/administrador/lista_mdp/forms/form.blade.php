@@ -1,5 +1,5 @@
 <div class="card mb-5">
-    <form action="{{ $mdp->id ? route('mdp.update', $mdp) : route('marca.store') }}" method="POST"
+    <form action="{{ $mdp->id ? route('metodosdepago.update', $mdp) : route('metodosdepago.store') }}" method="POST"
         enctype="multipart/form-data">
         @csrf
         @if ($mdp->id)

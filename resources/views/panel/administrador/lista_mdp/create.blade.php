@@ -11,13 +11,13 @@
     <div class="row">
         <div class="col-12 mb-3">
             <h1>Creación de nuevo metodo de pago</h1>
-            <a href="{{ route('lista_mdp.index') }}" class="btn btn-sm btn-secondary text-uppercase">
+            <a href="{{ route('metodosdepago.index') }}" class="btn btn-sm btn-secondary text-uppercase">
                 Volver Atras
             </a>
         </div>
 
         <div class="col-12">
-            @include('panel.administrador.lista_marcas.forms.form')
+            @include('panel.administrador.lista_mdp.forms.form')
         </div>
 
     </div>

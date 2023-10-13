@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-12 mb-3">
 
-                <a href="{{ route('mdp.create') }}" class="btn btn-success text-uppercase">
+                <a href="{{ route('metodosdepago.create') }}" class="btn btn-success text-uppercase">
                     Nuevo metodo de pago
                 </a>
             </div>
@@ -56,11 +56,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($metodosDePago as $metodosDePago)
+                                @foreach ($metodosDePago as $mdp)
                                     <tr>
                                         <td>{{ $mdp->descripcion }}</td>
                                         <td>
-                                            <form action="{{ route('mdp.destroy', $mdp) }}" method="POST">
+                                            <form action="{{ route('metodosdepago.destroy', $mdp) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
 
@@ -79,11 +79,11 @@
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-center">
-                                                <a href="{{ route('mdp.show', $mdp) }}"
+                                                <a href="{{ route('metodosdepago.show', $mdp) }}"
                                                     class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
                                                     Ver
                                                 </a>
-                                                <a href="{{ route('mdp.edit', $mdp) }}"
+                                                <a href="{{ route('metodosdepago.edit', $mdp) }}"
                                                     class="btn btn-sm btn-warning text-white text-uppercase me-1">
                                                     Editar
                                                 </a>
@@ -109,8 +109,8 @@
     {{-- Importacion de Archivos JS --}}
     @section('js')
         <script>
-            //var cambiarEstadoUrl = '{{ route('cambiar.estado.marcas') }}';
-            //var token = '{{ csrf_token() }}';
+            var cambiarEstadoUrl = '{{ route('cambiar.estado.metodosdepago') }}';
+            var token = '{{ csrf_token() }}';
         </script>
 
         <script src="{{ asset('js/button_switch.js') }}"></script>

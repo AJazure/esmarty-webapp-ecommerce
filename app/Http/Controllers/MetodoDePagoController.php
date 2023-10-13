@@ -23,7 +23,7 @@ class MetodoDePagoController extends Controller
     {
         //
         $mdp = new MetodoDePago();
-        return view('panel.administrador.lista_mdp.create', compact('mdp ')); //compact(mismo nombre de la variable)
+        return view('panel.administrador.lista_mdp.create', compact('mdp')); //compact(mismo nombre de la variable)
         
     }
 
@@ -41,7 +41,7 @@ class MetodoDePagoController extends Controller
             // Almacena la info del producto en la BD
         $mdp ->save();
         return redirect()
-        ->route('MetodoDePago.index')
+        ->route('metodosdepago.index')
         ->with('alert', 'MetodoDePago "' . $mdp ->descripcion . '" agregada exitosamente.');
       
     }
@@ -49,42 +49,40 @@ class MetodoDePagoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(MetodoDePago $mdp )
+    public function show($id)
     {
         //
-        return view('panel.administrador.lista_mdp.show', compact('mdp '));
+        $mdp = MetodoDePago::find($id);
+        return view('panel.administrador.lista_mdp.show', compact('mdp'));
 
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MetodoDePago $mdp )
+    public function edit($id)
     {
         //
-        // $mdp  = MetodoDePago::get();
-        return view('panel.administrador.lista_mdp.edit', compact('mdp '));
+        $mdp  = MetodoDePago::find($id);
+        return view('panel.administrador.lista_mdp.edit', compact('mdp'));
         
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MetodoDePago $mdp )
+    public function update(Request $request, $id )
     {
+        $mdp  = MetodoDePago::find($id);
         //
         $mdp ->descripcion = $request->get('descripcion');
         $mdp ->activo = $request->get('activo');
-        if ($request->hasFile('url_imagen')) {
-            // Subida de la imagen nueva al servidor
-            $url_imagen = $request->file('url_imagen')->store('public/mdp');
-            $mdp ->url_imagen = asset(str_replace('public', 'storage', $url_imagen));
-        }
+        
         // Actualiza la info del producto en la BD
         $mdp ->update();
         
         return redirect()
-            ->route('MetodoDePago.index')
+            ->route('metodosdepago.index')
             ->with('alert', 'MetodoDePago "' .$mdp ->descripcion. '" actualizada exitosamente.');
 
     }
@@ -103,7 +101,7 @@ class MetodoDePagoController extends Controller
         $mdp  = MetodoDePago::find($request->_id);
 
         if (!$mdp ) {
-            return response()->json(['error' => 'metodo no encontrada'], 404);
+            return response()->json(['error' => 'metodo no encontrado'], 404);
         }
 
         $mdp ->activo = !$mdp ->activo; // Cambia el estado

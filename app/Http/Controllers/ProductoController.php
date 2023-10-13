@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductoRequest;
 use App\Models\Categoria;
 use App\Models\Proveedor;
 use App\Models\Marca;
@@ -45,7 +46,7 @@ class ProductoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductoRequest $request)
     {
         //
         $producto = new Producto();
@@ -98,7 +99,7 @@ class ProductoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Producto $producto)
+    public function update(ProductoRequest $request, Producto $producto)
     {
         //
         $producto->codigo_producto = $request->get('codigo_producto');

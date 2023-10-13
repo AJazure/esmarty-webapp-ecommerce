@@ -96,10 +96,9 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
-
         $user->name = $request->get('name');
         $user->apellido = $request->get('apellido');
-        $user->dni = $request->get('dni');
+        /*$user->dni = $request->get('dni'); */
         $user->telefono = $request->get('telefono');
         $user->direccion = $request->get('direccion');
         $user->email = $request->get('email');

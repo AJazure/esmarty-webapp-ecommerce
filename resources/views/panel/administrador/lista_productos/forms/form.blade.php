@@ -21,10 +21,10 @@
             <div class="mb-3 row">
                 <label for="codigo_producto" class="col-sm-4 col-form-label"> * Codigo </label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control @error('codigo') is-invalid @enderror"
+                    <input type="number" class="form-control @error('codigo_producto') is-invalid @enderror"
                         id="codigo_producto" name="codigo_producto"
                         value="{{ old('codigo_producto', optional($producto)->codigo_producto) }}">
-                    @error('codigo')
+                    @error('codigo_producto')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
                 </div>
@@ -93,9 +93,6 @@
                         @endif
                         @endforeach
                     </select>
-                    @error('marca')
-                        <div class="invalid-feedback"> {{ $message }} </div>
-                    @enderror
                 </div>
             </div>
 
@@ -113,8 +110,8 @@
             <div class="mb-3 row">
                 <label for="descripcion" class="col-sm-4 col-form-label"> * Descripción </label>
                 <div class="col-sm-8">
-                    <textarea class="form-control @error('body') is-invalid @enderror" id="descripcion" name="descripcion" rows="10">{{ old('descripcion', optional($producto)->descripcion) }}</textarea>
-                    @error('body')
+                    <textarea class="form-control @error('descripcio') is-invalid @enderror" id="descripcion" name="descripcion" rows="10">{{ old('descripcion', optional($producto)->descripcion) }}</textarea>
+                    @error('descripcio')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
                 </div>
@@ -159,20 +156,23 @@
             <div class="mb-3 row">
                 <label for="url_imagen" class="col-sm-4 col-form-label"> * Imagen </label>
                 <div class="col-sm-8">
-                    <input class="form-control @error('imagen') is-invalid @enderror" type="file" id="url_imagen"
+                    <input class="form-control @error('url_imagen') is-invalid @enderror" type="file" id="url_imagen"
                         name="url_imagen" accept="image/*">
-                    @error('imagen')
+                    @error('url_imagen')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
                 </div>
             </div>
             <div class="mb-3 row">
-                <label for="nombre" class="col-sm-4 col-form-label"> * Estado </label>
+                <label for="activo" class="col-sm-4 col-form-label"> * Estado </label>
                 <div class="col-sm-8">
                     <select class="form-control @error('activo') is-invalid @enderror" name="activo" id="activo" value="{{ old('activo', optional($producto)->activo) }}">
                         <option value="1" @if ($producto->activo) {{"selected"}} @endif>Activado</option>
                         <option value="0" @if (isset($producto->activo) and !$producto->activo) {{"selected"}} @endif>Desactivado</option>
                     </select>
+                    @error('activo')
+                        <div class="invalid-feedback"> {{ $message }} </div>
+                    @enderror
                 </div>
             </div>
 

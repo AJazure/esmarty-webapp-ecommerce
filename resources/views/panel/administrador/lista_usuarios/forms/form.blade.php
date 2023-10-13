@@ -29,10 +29,22 @@
                 </div>
             </div>
 
+            @if (!$user->id) 
+            <div class="mb-3 row">
+                <label for="dni" class="col-sm-4 col-form-label"> * DNI </label>
+                <div class="col-sm-8">
+                    <input type="number" class="form-control @error('dni') is-invalid @enderror" id="dni"
+                        name="dni" placeholder="sin guiones" value="{{ old('dni', optional($user)->dni) }}">
+                    @error('dni')
+                        <div class="invalid-feedback"> {{ $message }} </div>
+                    @enderror
+                </div>
+            </div>
+            @endif
             <div class="mb-3 row">
                 <label for="email" class="col-sm-4 col-form-label"> * E-mail </label>
                 <div class="col-sm-8">
-                    <input type="mail" class="form-control @error('email') is-invalid @enderror" id="email"
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
                         name="email" value="{{ old('email', optional($user)->email) }}">
                     @error('email')
                         <div class="invalid-feedback"> {{ $message }} </div>
@@ -44,7 +56,7 @@
                 <label for="telefono" class="col-sm-4 col-form-label"> * Teléfono </label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control @error('telefono') is-invalid @enderror" id="telefono"
-                        name="telefono" value="{{ old('telefono', optional($user)->telefono) }}">
+                        name="telefono" placeholder="sin guiónes ni espacios" value="{{ old('telefono', optional($user)->telefono) }}">
                     @error('telefono')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
@@ -79,13 +91,13 @@
                     <select id="rol_id" name="rol_id" class="form-control @error('rol_id') is-invalid @enderror">
                         <option disabled selected>Seleccione un rol</option>
                         @foreach ($all_roles as $rol)
-                            <option {{ $user_role->contains($rol) ? 'selected': '' }} value="{{ $rol }}"> 
-                                {{ $rol }}
-                            </option>
+                        <option {{ $user_role->contains($rol) ? 'selected': '' }} value="{{ $rol }}"> 
+                            {{ ucfirst($rol) }}
+                        </option>
                         @endforeach
                     </select>
                     @error('rol_id')
-                    <div class="invalid-feedback"> {{ $message }} </div>
+                        <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
                 </div>
             </div>

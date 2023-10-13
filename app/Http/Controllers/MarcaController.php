@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreMarca;
-use App\Http\Requests\UpdateMarca;
+use App\Http\Requests\MarcaRequest;
 use App\Models\Marca;
 use Illuminate\Http\Request;
 
@@ -35,7 +34,7 @@ class MarcaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMarca $request)
+    public function store(MarcaRequest $request)
     {
         //
         $marca = new Marca();
@@ -76,7 +75,7 @@ class MarcaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateMarca $request, Marca $marca)
+    public function update(MarcaRequest $request, Marca $marca)
     {
         //
         $marca->descripcion = $request->get('descripcion');

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
-
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UserRequest extends FormRequest
@@ -21,6 +21,8 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
+
+
         $rules = [
             'name' => 'required|string|regex:/^[^0-9\W]+$/',
             'apellido' => 'required|string|regex:/^[^0-9\W]+$/',
@@ -33,7 +35,13 @@ class UserRequest extends FormRequest
             $rules['email'] = 'required|email|regex:/@.*\./|unique:users,email';
             $rules['password'] = 'required|min:6|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@#$%^&*()_+-]{6,}$/|confirmed';
         } else if ($this->isMethod('put')) { //para el método update
-            $rules['email'] = 'required|email|regex:/@.*\./|unique:users,email,' . $this->route('user');
+            $userId = $this->route('user');
+            $rules['email'] = [
+                'required',
+                'email',
+                'regex:/@.*\./',
+                Rule::unique('users')->ignore($userId),
+            ];
             $rules['password'] = 'nullable|min:6|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@#$%^&*()_+-]{6,}$/|confirmed';
         }
 

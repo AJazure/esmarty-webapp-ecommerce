@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateMarca extends FormRequest
+class MarcaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,12 +21,25 @@ class UpdateMarca extends FormRequest
      */
     public function rules(): array
     {
-        return [//Aqui van las validaciones: 
+
+        $rules = [
             'descripcion' => 'required|min:3|unique:marcas',
             'activo' => 'required|boolean'
+        ];
+
+        if ($this->isMethod('post')) { //para el método store
+        } else if ($this->isMethod('put')) { //para el método update
+        }
+        return $rules;
+    }
+    public function messages(): array
+    {
+        // Definir mensajes de error personalizados
+        return [
+            
         ];
     }
 }
 
-// Comando para crear este request: php artisan make:request UpdateMarca
-// Luego en el controlador al request, instanciarlo como una clase de UpdateMarca
+// Comando para crear este request: php artisan make:request StoreMarca
+// Luego en el controlador al request, instanciarlo como una clase de StoreMarca

@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCategoria;
-use App\Http\Requests\UpdateCategoria;
+use App\Http\Requests\CategoriaRequest;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
 
@@ -34,7 +33,7 @@ class CategoriaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCategoria $request)
+    public function store(CategoriaRequest $request)
     {
         //
         $categoria = new Categoria();
@@ -71,7 +70,7 @@ class CategoriaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoria $request, Categoria $categoria)
+    public function update(CategoriaRequest $request, Categoria $categoria)
     {
         //
         $categoria->descripcion = $request->get('descripcion');

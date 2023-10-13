@@ -15,10 +15,10 @@ return new class extends Migration
         Schema::create('proveedores', function (Blueprint $table) {
             $table->id(); // Autoincremental?
             $table->string('descripcion', 40);
-            $table->bigInteger('cuit', 20)->nullable();
+            $table->bigInteger('cuit')->nullable();
             $table->string('razon_social', 30)->nullable();
             $table->string('direccion', 40)->nullable();
-            $table->bigInteger('telefono', 20)->nullable();
+            $table->bigInteger('telefono')->nullable();
             $table->string('correo', 30)->nullable();
             $table->boolean('activo')->default(1);
             $table->timestamps(); // Agrega automáticamente las columnas created_at y updated_at

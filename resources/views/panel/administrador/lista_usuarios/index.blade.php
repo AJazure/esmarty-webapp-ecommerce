@@ -59,7 +59,7 @@
                        <!--  <td>{{ $user->dni }}</td> -->
                         <!-- <td>{{ $user->telefono }}</td> -->
                         <td>@foreach($user->getRoleNames() as $role)
-                        {{ $role }}
+                        {{ ucfirst($role) }}
                         @endforeach</td>
                         <td>{{ $user->activo }}</td>
                         <td>

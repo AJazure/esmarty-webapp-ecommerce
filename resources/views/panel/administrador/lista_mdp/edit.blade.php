@@ -11,12 +11,12 @@
     <div class="row">
         <div class="col-12 mb-3">
             <h1>Editar Datos de la Marca "{{ $marca->descripcion }}"</h1>
-            <a href="{{ route('marca.index') }}" class="btn btn-sm btn-secondary text-uppercase">
+            <a href="{{ route('MetodoDePago.index') }}" class="btn btn-sm btn-secondary text-uppercase">
                 Volver Atras
             </a>
         </div>
         <div class="col-12">
-            @include('panel.administrador.lista_marcas.forms.form')
+            @include('panel.administrador.lista_mdp.forms.form')
         </div>
     </div>
 </div>

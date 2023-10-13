@@ -18,8 +18,8 @@
         <div class="row">
             <div class="col-12 mb-3">
 
-                <a href="{{ route('metodosdepago.create') }}" class="btn btn-success text-uppercase">
-                    Nueva Marca
+                <a href="{{ route('mdp.create') }}" class="btn btn-success text-uppercase">
+                    Nuevo metodo de pago
                 </a>
             </div>
 
@@ -46,7 +46,7 @@
                             </select>
                         </div>
 
-                        <table id="tabla-marcas" class="table table-striped table-hover w-100">
+                        <table id="tabla-metododepago" class="table table-striped table-hover w-100">
                             <thead>
                                 <tr>
                                     <th scope="col" class="text-uppercase">Descripcion</th>
@@ -56,21 +56,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($metodosDePago as $marca)
+                                @foreach ($metodosDePago as $metodosDePago)
                                     <tr>
-                                        <td>{{ $marca->descripcion }}</td>
+                                        <td>{{ $mdp->descripcion }}</td>
                                         <td>
-                                            <form action="{{ route('marca.destroy', $marca) }}" method="POST">
+                                            <form action="{{ route('mdp.destroy', $mdp) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
 
                                                 <div>
                                                     <label class="switch">
                                                         <input type="checkbox" class="miInterruptor"
-                                                            value="{{ $marca->activo }}" data-change-id="{{ $marca->id }}">
+                                                            value="{{ $mdp->activo }}" data-change-id="{{ $mdp->id }}">
                                                         <span class="slider">
                                                             <p class="estadop" style="visibility: hidden">
-                                                                {{ $marca->activo }}</p>
+                                                                {{ $mdp->activo }}</p>
                                                         </span>
 
                                                     </label>
@@ -79,11 +79,11 @@
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-center">
-                                                <a href="{{ route('marca.show', $marca) }}"
+                                                <a href="{{ route('mdp.show', $mdp) }}"
                                                     class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
                                                     Ver
                                                 </a>
-                                                <a href="{{ route('marca.edit', $marca) }}"
+                                                <a href="{{ route('mdp.edit', $mdp) }}"
                                                     class="btn btn-sm btn-warning text-white text-uppercase me-1">
                                                     Editar
                                                 </a>

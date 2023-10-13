@@ -22,8 +22,8 @@ class MetodoDePagoController extends Controller
     public function create()
     {
         //
-        $marca = new MetodoDePago();
-        return view('panel.administrador.lista_mdp.create', compact('marca')); //compact(mismo nombre de la variable)
+        $mdp = new MetodoDePago();
+        return view('panel.administrador.lista_mdp.create', compact('mdp ')); //compact(mismo nombre de la variable)
         
     }
 
@@ -33,82 +33,82 @@ class MetodoDePagoController extends Controller
     public function store(Request $request)
     {
         //
-        $marca = new MetodoDePago();
-        $marca->descripcion = $request->get('descripcion');
-        $marca->activo = $request->get('activo');
+        $mdp  = new MetodoDePago();
+        $mdp ->descripcion = $request->get('descripcion');
+        $mdp ->activo = $request->get('activo');
 
 
             // Almacena la info del producto en la BD
-        $marca->save();
+        $mdp ->save();
         return redirect()
-        ->route('marca.index')
-        ->with('alert', 'Marca "' . $marca->descripcion . '" agregada exitosamente.');
+        ->route('MetodoDePago.index')
+        ->with('alert', 'MetodoDePago "' . $mdp ->descripcion . '" agregada exitosamente.');
       
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(MetodoDePago $marca)
+    public function show(MetodoDePago $mdp )
     {
         //
-        return view('panel.administrador.lista_marcas.show', compact('marca'));
+        return view('panel.administrador.lista_mdp.show', compact('mdp '));
 
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MetodoDePago $marca)
+    public function edit(MetodoDePago $mdp )
     {
         //
-        // $marcas = Marca::get();
-        return view('panel.administrador.lista_marcas.edit', compact('marca'));
+        // $mdp  = MetodoDePago::get();
+        return view('panel.administrador.lista_mdp.edit', compact('mdp '));
         
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MetodoDePago $marca)
+    public function update(Request $request, MetodoDePago $mdp )
     {
         //
-        $marca->descripcion = $request->get('descripcion');
-        $marca->activo = $request->get('activo');
+        $mdp ->descripcion = $request->get('descripcion');
+        $mdp ->activo = $request->get('activo');
         if ($request->hasFile('url_imagen')) {
             // Subida de la imagen nueva al servidor
-            $url_imagen = $request->file('url_imagen')->store('public/marca');
-            $marca->url_imagen = asset(str_replace('public', 'storage', $url_imagen));
+            $url_imagen = $request->file('url_imagen')->store('public/mdp');
+            $mdp ->url_imagen = asset(str_replace('public', 'storage', $url_imagen));
         }
         // Actualiza la info del producto en la BD
-        $marca->update();
+        $mdp ->update();
         
         return redirect()
-            ->route('marca.index')
-            ->with('alert', 'Marca "' .$marca->descripcion. '" actualizada exitosamente.');
+            ->route('MetodoDePago.index')
+            ->with('alert', 'MetodoDePago "' .$mdp ->descripcion. '" actualizada exitosamente.');
 
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MetodoDePago $marca)
+    public function destroy(MetodoDePago $mdp )
     {
-        //
+        //-
         
     }
 
     public function cambiarEstado(Request $request)
     {
-        $marca = MetodoDePago::find($request->_id);
+        $mdp  = MetodoDePago::find($request->_id);
 
-        if (!$marca) {
-            return response()->json(['error' => 'Categoría no encontrada'], 404);
+        if (!$mdp ) {
+            return response()->json(['error' => 'metodo no encontrada'], 404);
         }
 
-        $marca->activo = !$marca->activo; // Cambia el estado
-        $marca->save();
+        $mdp ->activo = !$mdp ->activo; // Cambia el estado
+        $mdp ->save();
 
-        return response()->json(['message' => 'Estado de categoría cambiado con éxito']);
+        return response()->json(['message' => 'Estado de metodo cambiado con éxito']);
     }
 }

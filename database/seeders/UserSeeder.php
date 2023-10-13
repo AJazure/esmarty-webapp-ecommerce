@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
         //creación de usuarios para roles de prueba
         User::create([
             'name'=>'admin',
+            'apellido' => '',
             'email'=>'admin@esmarty.com',
             'password'=> Hash::make('12345'),
         ])->assignRole('admin');

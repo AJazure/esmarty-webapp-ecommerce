@@ -313,6 +313,13 @@ return [
             'can'  => 'manage-blog',
         ],
         [
+            'text'        => 'Administrar Usuarios',
+            //'url'         => '#',
+            'route' => 'user.index',
+            'icon'        => 'fas fa-user',
+            'can'         => 'lista_usuarios' //permiso de admin
+        ],
+        [
             'text'        => ' Productos',
             // 'url'         => '#',
             'route' => 'producto.index',

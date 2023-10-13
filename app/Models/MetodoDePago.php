@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class metodos_de_pago extends Model
+class MetodoDePago extends Model
 {
     use HasFactory;
 
@@ -17,7 +17,7 @@ class metodos_de_pago extends Model
     ];
 
     //INNER JOIN con la tabla Pedidos
-    public function productos(){
+    public function pedidos(){
         return $this->hasMany(Pedidos::class, "id_metodo_de_pago");
     }
 }

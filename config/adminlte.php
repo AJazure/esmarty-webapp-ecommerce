@@ -348,6 +348,13 @@ return [
             'can'         => 'lista_usuarios' //permiso de admin<i class="far fa-project-diagram"></i>
         ],
 
+        [
+            'text'        => 'Metodos de Pago',
+            'route'       => 'metodosdepago.index',
+            // 'route' => 'proveedor.index',
+            'icon'        => 'fas fa-dollar',
+            'can'         => 'lista_usuarios' //permiso de admin<i class="far fa-project-diagram"></i>
+        ],
         
         [
             'text'        => 'Lista de Productos',

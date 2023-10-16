@@ -61,7 +61,21 @@
                         <td>@foreach($user->getRoleNames() as $role)
                         {{ ucfirst($role) }}
                         @endforeach</td>
-                        <td>{{ $user->activo }}</td>
+                        <td>
+                            <form action="{{ route('producto.destroy', $user) }}" method="POST">
+                                @csrf 
+                                @method('DELETE')
+                                {{-- <button type="submit" class="btn btn-sm btn-danger text-uppercase">
+                                    Eliminar
+                                </button> --}}
+                                <div>
+                                    <label class="switch">
+                                        <input type="checkbox" class="miInterruptor" value="{{ $user->enabled }}" data-change-id="{{ $user->id }}">
+                                        <span class="slider"> <p class="estadop" style="visibility: hidden">{{ $user->enabled }}</p></span>
+                                    </label>
+                                </div>
+                            </form>
+                        </td>
                         <td>
                             <div class="d-flex">
                                 <a href="{{ route('user.show', $user) }}" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
@@ -97,7 +111,11 @@
 
 {{-- Importacion de Archivos JS --}}
 @section('js')
-
+    <script>
+    var cambiarEstadoUrl = '{{ route('cambiar.estado.users') }}';
+    var token = '{{ csrf_token() }}';
+    </script>
+    <script src="{{ asset('js/button_switch.js') }}"></script>
     {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
     <script src="{{ asset('js/usuarios.js') }}"></script>
 @stop

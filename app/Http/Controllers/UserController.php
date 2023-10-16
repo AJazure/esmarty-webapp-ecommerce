@@ -124,6 +124,20 @@ class UserController extends Controller
             ->with('alert', 'User "' .$user->name. " " .$user->apellido. '" actualizado exitosamente.');
     }
 
+    public function cambiarEstado(Request $request)
+    {
+        $user = User::find($request->_id);
+
+        if (!$user) {
+            return response()->json(['error' => 'Usuario no encontrada'], 404);
+        }
+
+        $user->enabled = !$user->enabled; // Cambia el estado
+        $user->save();
+
+        return response()->json(['message' => 'Estado de Usuario cambiado con éxito']);
+    }
+
     /**
      * Remove the specified resource from storage.
      */

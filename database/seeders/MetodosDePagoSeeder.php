@@ -17,9 +17,6 @@ class MetodosDePagoSeeder extends Seeder
             "descripcion" => "Credito"
         ]);
         metodos_de_pago::create([
-            "descripcion" => "Efectivo"
-        ]);
-        metodos_de_pago::create([
             "descripcion" => "Transferencia"
         ]);
     }

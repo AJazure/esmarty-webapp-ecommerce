@@ -25,9 +25,9 @@ class ProveedorRequest extends FormRequest
     {
     
         $rules = [
-            'razon_social' => 'max:30',
-            'direccion' => 'max:40',
-            'telefono' => 'max:20',
+            'razon_social' => 'min:3|max:30',
+            'direccion' => 'min:3|max:40',
+            'telefono' => 'min:3|max:20',
             'activo' => 'required|boolean'
         ];
     

@@ -46,7 +46,7 @@
                             </select>
                         </div>
 
-                        <table id="tabla-metododepago" class="table table-striped table-hover w-100">
+                        <table id="tabla-marcas" class="table table-striped table-hover w-100">
                             <thead>
                                 <tr>
                                     <th scope="col" class="text-uppercase">Descripcion</th>

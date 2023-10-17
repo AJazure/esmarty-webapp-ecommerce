@@ -23,7 +23,7 @@ class CategoriaRequest extends FormRequest
     {
 
         $rules = [
-            'descripcion' => 'required|min:3|unique:marcas',
+            'descripcion' => 'required|min:3|max:20|unique:marcas',
             'activo' => 'required|boolean'
         ];
 

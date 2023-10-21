@@ -375,9 +375,16 @@ return [
             'can'         => 'lista_caja' //permiso de cajero
         ],
         [
+            'text'        => 'Mis Datos',
+            /* 'url'         => '#', */
+            'route'       => 'cliente.editar',
+            'icon'        => 'fas fa-user',
+            'can'         => 'lista_compras' //permiso de clientes
+        ],
+        [
             'text'        => 'Mis Compras',
             'url'         => '#',
-            'icon'        => 'fas fa-users',
+            'icon'        => 'fas fa-shopping-cart',
             'can'         => 'lista_compras' //permiso de clientes
         ],
         // ['header' => 'account_settings'],

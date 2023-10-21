@@ -96,6 +96,7 @@ class UserController extends Controller
      */
     public function update(UserRequest $request, User $user)
     {
+        
         $user->name = $request->get('name');
         $user->apellido = $request->get('apellido');
         /*$user->dni = $request->get('dni'); */
@@ -150,4 +151,6 @@ class UserController extends Controller
         ->route('user.index')
         ->with('alert', 'User eliminado exitosamente');
     }
+
+
 }

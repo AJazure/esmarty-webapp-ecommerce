@@ -35,7 +35,6 @@ class ClienteRequest extends FormRequest
                 'numeric',
                 Rule::unique('users')->ignore($userId),
             ];
-            $rules['password'] = 'required|min:6|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@#$%^&*()_+-]{6,}$/|confirmed';
             
             $rules['email'] = [
                 'required',
@@ -43,8 +42,8 @@ class ClienteRequest extends FormRequest
                 'regex:/@.*\./',
                 Rule::unique('users')->ignore($userId),
             ];
-            $rules['password'] = 'nullable|min:6|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@#$%^&*()_+-]{6,}$/|confirmed';
-        
+            
+            $rules['password'] = 'nullable|string|min:6|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@#$%^&*()_+-]{6,}$/|confirmed';
 
         return $rules;
 

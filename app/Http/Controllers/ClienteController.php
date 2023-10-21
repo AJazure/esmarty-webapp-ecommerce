@@ -18,10 +18,12 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
         $user_id = Auth::id();
+        $cliente = User::with('roles')->role(['cliente'])->where('id', $user_id)->first();
+        return view('panel.index', compact('cliente'));  
+        /* $user_id = Auth::id();
         $clientes = User::with('roles')->role(['cliente'])->where('id', $user_id)->get();
-        return view('panel.cliente.lista_usuarios.index', compact('clientes')); 
+        return view('panel.cliente.lista_usuarios.index', compact('clientes')); */ 
     }
 
     /**
@@ -67,6 +69,8 @@ class ClienteController extends Controller
      */
     public function actualizar(ClienteRequest $request, $user_id)
     {
+
+
         $user = User::with('roles')->role(['cliente'])->where('id', $user_id)->first();
         $user->name = $request->get('name');
         $user->apellido = $request->get('apellido');
@@ -75,12 +79,23 @@ class ClienteController extends Controller
         $user->direccion = $request->get('direccion');
         $user->email = $request->get('email');
         $nuevaPassword = $request->get('password'); //no se asigna directamente al obj $user
-
         // Verifica si se rellenó el campo de contraseña para encriptarla
+
         if (!empty($nuevaPassword)) {
             $user->password = Hash::make($nuevaPassword);    
         }
         
+        if (!empty($nuevaPassword) && !empty($request->get('current_password'))){ //si escribio una contraseña anterior, verifica que sea correcta, si no lo es, no va a actualizar nada
+            if (!Hash::check($request->get('current_password'), Auth::user()->password)) {
+            return redirect()
+            ->route('cliente.editar')
+            ->with('alert', 'Contraseña actual incorrecta!');
+            }
+        } else if(!empty($nuevaPassword) && empty($request->get('current_password'))){//si escribe una nueva contraseña, debe escribir si o si la actual
+            return redirect()
+            ->route('cliente.editar')
+            ->with('alert', 'Debe ingresar la contraseña actual!');
+        }
         // Actualiza la info del user en la BD
         $user->update();
         

@@ -27,12 +27,15 @@ class ClienteRequest extends FormRequest
         $rules = [
             'name' => 'required|string|min:3|max:30',
             'apellido' => 'required|string|min:3|max:30',
-            'telefono' => 'numeric',   
+            'telefono' => 'numeric|min:0|max:9999999999',   
+            'direccion' => 'nullable|string|min:3|max:200'
         ];
             $userId = Auth::id();
             $rules['dni'] = [
                 'required',
                 'numeric',
+                'min:0',
+                'max:9999999999',
                 Rule::unique('users')->ignore($userId),
             ];
             

@@ -35,7 +35,7 @@
                 <label for="dni" class="col-sm-4 col-form-label"> * DNI: </label>
                 <div class="col-sm-8">
                     <input type="number" class="form-control @error('dni') is-invalid @enderror" id="dni"
-                        name="dni" placeholder="sin guiones" value="{{ old('dni', optional($cliente)->dni) }}">
+                        name="dni" placeholder="Sin puntos" value="{{ old('dni', optional($cliente)->dni) }}">
                     @error('dni')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
@@ -57,14 +57,23 @@
                 <label for="telefono" class="col-sm-4 col-form-label"> * Teléfono: </label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control @error('telefono') is-invalid @enderror" id="telefono"
-                        name="telefono" placeholder="sin guiónes ni espacios" value="{{ old('telefono', optional($cliente)->telefono) }}">
+                        name="telefono" placeholder="Solo números" value="{{ old('telefono', optional($cliente)->telefono) }}">
                     @error('telefono')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
                 </div>
             </div>
             
-            
+            <div class="mb-3 row">
+                <label for="direccion" class="col-sm-4 col-form-label"> * Dirección: </label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control @error('direccion') is-invalid @enderror" id="direccion"
+                        name="direccion" placeholder="" value="{{ old('direccion', optional($cliente)->direccion) }}">
+                    @error('direccion')
+                        <div class="invalid-feedback"> {{ $message }} </div>
+                    @enderror
+                </div>
+            </div>
             
                 <h5>Cambiar contraseña:</h5>
                 <div class="mb-3 row">

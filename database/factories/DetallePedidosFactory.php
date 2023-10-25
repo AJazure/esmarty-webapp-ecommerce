@@ -27,7 +27,7 @@ class DetallePedidosFactory extends Factory
         'cant_producto' => $this->faker->numberBetween(1,10),
         
         'id_cliente' => $user->id, // FK de la categoria extraida anteriormente
-        'id_pedido' => $pedido->id, // FK del marca extraido anteriormente
+        'id_pedido' => $pedido->id ?? null, // FK del marca extraido anteriormente
         'id_producto' => $producto->id, // FK del proveedor extraido anteriormente 
         ];
     }

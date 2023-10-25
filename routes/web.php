@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\DetallePedidos;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,3 +33,7 @@ Route::post('/marcas/cambiarEstado', [App\Http\Controllers\MarcaController::clas
 Route::post('/metodosdepago/cambiarEstado', [App\Http\Controllers\MetodoDePagoController::class, 'cambiarEstado'])->name('cambiar.estado.metodosdepago');
 
 Route::post('/users/cambiarEstado', [App\Http\Controllers\UserController::class, 'cambiarEstado'])->name('cambiar.estado.users');
+
+Route::get('/carrito', function () {
+    return view('frontend.pages.cart');
+});

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\DetallePedidos;
+use App\Models\Pedido;
 use Illuminate\Database\Seeder;
 use App\Models\Producto;
 
@@ -25,5 +26,6 @@ class DatabaseSeeder extends Seeder
         // Crearemos 20 productos
         Producto::factory(20)->create();
         DetallePedidos::factory(2)->create();
+        Pedido::factory(3)->create();
     }
 }

@@ -22,8 +22,13 @@ class PedidoFactory extends Factory
 
         return [
         'total' => $this->faker->randomFloat(2, 2000, 100000), // Numero Flotante aleatorio en el rango [2000; 100000] con 2 decimales
-        'cant_producto' => $this->faker->numberBetween(1,10),
-        
+        'fecha_hora' => $this->faker->date('Y-m-d'),
+        'num_pedido' => $this->faker->randomNumber(),
+        'num_seguimiento' => $this->faker->randomNumber(),
+        'pagado' => false,
+        'en_preparacion'=>false,
+        'cancelado'=> false,
+        'enviado'=> false,
         'id_cliente' => $user->id, 
         'id_metodo_de_pago' => $mdp->id, 
         ];

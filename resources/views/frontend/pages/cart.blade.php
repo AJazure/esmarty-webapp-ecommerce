@@ -11,8 +11,8 @@
 				<div class="col-12 ">
 					<!-- Shopping Summery -->
                     <h4 class="p-4">Carrito de compras</h4>
-					<table class="table shopping-summery ">
-						<thead>
+					<table id="tabla_carrito" class="table shopping-summery table-striped" style="width: 100%;">
+						<thead class="table-dark">
 							<tr class="main-hading">
 								<th class="text-center">Imagen</th>
 								<th class="text-center">Producto</th>
@@ -23,12 +23,12 @@
 							</tr>
 						</thead>
 						<tbody id="cart_item_list">
-							<td class="text-center">Imagen</td>
+							{{-- <td class="text-center">Imagen</td>
 							<td class="text-center">Producto</td>
 							<td class="text-center">Precio</td>
 							<td class="text-center">Cantidad</td>
 							<td class="text-center">Total</td>
-							<td class="text-center">Quitar</td>
+							<td class="text-center">Quitar</td> --}}
 						</tbody>
 					</table>
 					<!--/ End Shopping Summery -->
@@ -56,7 +56,7 @@
 	<!--/ End Shopping Cart -->
 
 @endsection
-@push('styles')
+@section('styles')
 	<style>
 		li.shipping{
 			display: inline-flex;
@@ -98,8 +98,17 @@
 			top: 14px;
 		}
 	</style>
-@endpush
-@push('scripts')
-	
+@endsection
 
-@endpush
+
+@section('js')
+        <script>
+			let base_url = '{{ route('carrito.miCarrito') }}'
+            var token = '{{ csrf_token() }}';
+        </script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+		<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script src="{{asset('js/tabla_carrito.js')}}"></script>
+    @stop

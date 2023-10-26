@@ -34,6 +34,10 @@ Route::post('/metodosdepago/cambiarEstado', [App\Http\Controllers\MetodoDePagoCo
 
 Route::post('/users/cambiarEstado', [App\Http\Controllers\UserController::class, 'cambiarEstado'])->name('cambiar.estado.users');
 
+Route::resource('/carrito', DetallePedidos::class)->names('carrito');
+
 Route::get('/carrito', function () {
     return view('frontend.pages.cart');
 });
+
+Route::get('/miCarrito', [App\Http\Controllers\DetallePedidosController::class, 'miCarrito'])->name('carrito.miCarrito');

@@ -38,7 +38,6 @@ let configurationDataTable = {
 }
 
 $(function() {
-
     table= $('#tabla-marcas').DataTable(configurationDataTable);
 });
 

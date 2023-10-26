@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\detalle_pedidos;
+use App\Models\DetallePedidos;
 use Illuminate\Http\Request;
 
 class DetallePedidosController extends Controller
@@ -34,7 +34,7 @@ class DetallePedidosController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(detalle_pedidos $detalle_pedidos)
+    public function show(DetallePedidos $DetallePedidos)
     {
         //
     }
@@ -42,7 +42,7 @@ class DetallePedidosController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(detalle_pedidos $detalle_pedidos)
+    public function edit(DetallePedidos $DetallePedidos)
     {
         //
     }
@@ -50,7 +50,7 @@ class DetallePedidosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, detalle_pedidos $detalle_pedidos)
+    public function update(Request $request, DetallePedidos $DetallePedidos)
     {
         //
     }
@@ -58,8 +58,13 @@ class DetallePedidosController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(detalle_pedidos $detalle_pedidos)
+    public function destroy(DetallePedidos $DetallePedidos)
     {
         //
+    }
+
+    public function miCarrito() {
+        $detallePedidos = DetallePedidos::latest()->get();
+        return response()->json($detallePedidos);
     }
 }

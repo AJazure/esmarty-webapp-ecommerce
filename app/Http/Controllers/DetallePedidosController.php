@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Producto;
 use App\Models\DetallePedidos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DetallePedidosController extends Controller
 {
@@ -58,13 +60,24 @@ class DetallePedidosController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DetallePedidos $DetallePedidos)
+    public function quitarItem(Request $id)
     {
-        //
+
+        $item = DetallePedidos::find($id->_id);
+
+        if (!$item) {
+            return response()->json(['error' => 'Producto no encontrado'], 404);
+        }
+
+        $item->delete();
+        return response()->json(['message' => 'Producto eliminado correctamente']);
     }
 
-    public function miCarrito() {
-        $detallePedidos = DetallePedidos::latest()->get();
+
+    public function miCarrito()
+    {
+        $user_id = Auth::id();
+        $detallePedidos = DetallePedidos::latest()->where('id_cliente', $user_id)->with('productos')->get();
         return response()->json($detallePedidos);
     }
 }

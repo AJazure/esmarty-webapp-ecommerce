@@ -40,7 +40,7 @@
 					<!-- Total Amount -->
                     
 					<div class="total-amount border p-2">
-						<span><strong>Total:</strong></span> $9999.99
+						<span><strong>Total:</strong></span> $<span id="valorTotal"></span>
 					</div>
 					<!--/ End Total Amount -->
 				</div>
@@ -103,7 +103,8 @@
 
 @section('js')
         <script>
-			let base_url = '{{ route('carrito.miCarrito') }}'
+			let rutaParaEliminar = '{{ route('carrito.quitarItem' , '') }}';
+			let base_url = '{{ route('carrito.miCarrito') }}';
             var token = '{{ csrf_token() }}';
         </script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

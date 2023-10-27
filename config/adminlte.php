@@ -383,7 +383,7 @@ return [
         ],
         [
             'text'        => 'Mis Compras',
-            'url'         => '#',
+            'route'         => 'pedidos.index',
             'icon'        => 'fas fa-shopping-cart',
             'can'         => 'lista_compras' //permiso de clientes
         ],

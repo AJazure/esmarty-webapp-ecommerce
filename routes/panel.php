@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MetodoDePagoController;
+use App\Http\Controllers\PedidoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,3 +24,4 @@ Route::resource('/cliente', ClienteController::class)->names('cliente');
 Route::resource('/metodosdepago', MetodoDePagoController::class)->names('metodosdepago');
 Route::get('exportar-productos-excel', [ProductoController::class, 'exportarProductosExcel'])->name('exportar-productos-excel');
 Route::get('exportar-productos-pdf', [ProductoController::class, 'exportarProductosPDF'])->name('exportar-productos-pdf');
+Route::resource('/pedidos', PedidoController::class)->names('pedidos'); 

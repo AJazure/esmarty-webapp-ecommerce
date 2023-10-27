@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pedido;
+use App\Models\DetallePedidos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PedidoController extends Controller
 {
@@ -11,8 +13,11 @@ class PedidoController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
+    {   
+        $id_cliente = Auth::id();
+        $pedidos = Pedido::where('id_cliente', $id_cliente)->get();
+        // Retornamos una vista y enviamos la variable "productos"
+        return view('panel.cliente.lista_usuarios.misCompras', compact('pedidos'));
     }
 
     /**

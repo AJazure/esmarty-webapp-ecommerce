@@ -40,4 +40,7 @@ Route::get('/carrito', function () {
 });
 
 Route::get('/miCarrito', [App\Http\Controllers\DetallePedidosController::class, 'miCarrito'])->name('carrito.miCarrito');
+Route::get('/agregarProductos', [App\Http\Controllers\DetallePedidosController::class, 'index'])->name('carrito.agregarProductos');
 Route::post('/miCarrito/quitarItem', [App\Http\Controllers\DetallePedidosController::class, 'quitarItem'])->name('carrito.quitarItem');
+Route::post('/miCarrito/actualizarCantidad', [App\Http\Controllers\DetallePedidosController::class, 'actualizarCantidad'])->name('carrito.actualizarCantidad');
+Route::post('/miCarrito/agregarAlCarrito', [App\Http\Controllers\DetallePedidosController::class, 'agregarAlCarrito'])->name('carrito.agregarAlCarrito');

@@ -27,7 +27,6 @@ return new class extends Migration
             $table->float('total');
 
             $table->foreign('id_metodo_de_pago')->references('id')->on('metodos_de_pago');
-           /*  $table->foreign('id_pedido')->references('id')->on('pedidos'); */
             $table->foreign('id_cliente')->references('id')->on('users');
 
             $table->timestamps();

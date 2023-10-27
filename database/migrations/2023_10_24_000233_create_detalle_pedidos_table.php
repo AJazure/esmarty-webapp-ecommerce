@@ -20,7 +20,7 @@ return new class extends Migration
             $table->float('subtotal');
 
             $table->foreign('id_cliente')->references('id')->on('users');
-           /*  $table->foreign('id_pedido')->references('id')->on('pedidos'); */
+            $table->foreign('id_pedido')->references('id')->on('pedidos'); 
             $table->foreign('id_producto')->references('id')->on('productos');
 
             $table->timestamps(); // Agrega automáticamente las columnas created_at y updated_at

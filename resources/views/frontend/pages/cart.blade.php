@@ -23,12 +23,6 @@
 							</tr>
 						</thead>
 						<tbody id="cart_item_list">
-							{{-- <td class="text-center">Imagen</td>
-							<td class="text-center">Producto</td>
-							<td class="text-center">Precio</td>
-							<td class="text-center">Cantidad</td>
-							<td class="text-center">Total</td>
-							<td class="text-center">Quitar</td> --}}
 						</tbody>
 					</table>
 					<!--/ End Shopping Summery -->
@@ -58,44 +52,32 @@
 @endsection
 @section('styles')
 	<style>
-		li.shipping{
-			display: inline-flex;
-			width: 100%;
-			font-size: 14px;
+		.cantidades {
+			padding: 5px;
 		}
-		li.shipping .input-group-icon {
-			width: 100%;
-			margin-left: 10px;
+
+		.columnaCantidad {
+			display: flex;
+			flex-wrap: nowrap;
 		}
-		.input-group-icon .icon {
-			position: absolute;
-			left: 20px;
-			top: 0;
-			line-height: 40px;
-			z-index: 3;
+		.btn-warning {
+			color: #fff;
+			font-weight: bold;
+			scale: 75%;
 		}
-		.form-select {
-			height: 30px;
-			width: 100%;
+
+		.btn-warning:hover {
+			color: #fff;
+			font-weight: bold;
 		}
-		.form-select .nice-select {
-			border: none;
-			border-radius: 0px;
-			height: 40px;
-			background: #f6f6f6 !important;
-			padding-left: 45px;
-			padding-right: 40px;
-			width: 100%;
+
+		.btn-warning:active {
+			color: #fff!important;
+			font-weight: bold;
 		}
-		.list li{
-			margin-bottom:0 !important;
-		}
-		.list li:hover{
-			background:#F7941D !important;
-			color:white !important;
-		}
-		.form-select .nice-select::after {
-			top: 14px;
+		.btn-warning:focus {
+			color: #fff;
+			font-weight: bold;
 		}
 	</style>
 @endsection
@@ -105,11 +87,12 @@
         <script>
 			let rutaParaEliminar = '{{ route('carrito.quitarItem' , '') }}';
 			let base_url = '{{ route('carrito.miCarrito') }}';
+			let rutaParaActualizarCantidad = '{{ route('carrito.actualizarCantidad') }}';
             var token = '{{ csrf_token() }}';
         </script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 		<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-		<script src="{{asset('js/tabla_carrito.js')}}"></script>
+		<script src="{{asset('js/carrito/tabla_carrito.js')}}"></script>
     @stop

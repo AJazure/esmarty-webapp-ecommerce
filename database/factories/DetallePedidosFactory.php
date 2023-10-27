@@ -24,7 +24,7 @@ class DetallePedidosFactory extends Factory
 
         return [
         'subtotal' => $producto->precio,
-        'cant_producto' => $this->faker->numberBetween(1,10),
+        'cant_producto' => $producto->stock_disponible,
         
         'id_cliente' => 5, // FK de la categoria extraida anteriormente
         'id_pedido' => $pedido->id ?? null, // FK del marca extraido anteriormente

@@ -44,3 +44,8 @@ Route::get('/agregarProductos', [App\Http\Controllers\DetallePedidosController::
 Route::post('/miCarrito/quitarItem', [App\Http\Controllers\DetallePedidosController::class, 'quitarItem'])->name('carrito.quitarItem');
 Route::post('/miCarrito/actualizarCantidad', [App\Http\Controllers\DetallePedidosController::class, 'actualizarCantidad'])->name('carrito.actualizarCantidad');
 Route::post('/miCarrito/agregarAlCarrito', [App\Http\Controllers\DetallePedidosController::class, 'agregarAlCarrito'])->name('carrito.agregarAlCarrito');
+
+//Pedido rutas
+Route::post('/carrito/checkout', [App\Http\Controllers\PedidoController::class, 'checkout'])->name('carrito.checkout');
+Route::get('/carrito/checkout', [App\Http\Controllers\PedidoController::class, 'create'])->name('carrito.create');
+Route::post('/carrito/guardar', [App\Http\Controllers\PedidoController::class, 'store'])->name('pedido.store');

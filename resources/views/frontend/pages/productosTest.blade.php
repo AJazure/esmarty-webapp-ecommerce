@@ -6,12 +6,21 @@
 
 	<!-- Shopping Cart -->
 	<div class="shopping-cart section ">
+		@if (session('alert'))
+            <div class="col-12">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('alert') }}
+                </div>
+            </div>
+        @endif
 		<div class="container border p-2">
 			<div class="row ">
 				<div class="col-12 ">
 					<!-- Shopping Summery -->
                     <h4 class="p-4">Agregar algun producto de la base de datos al carrito</h4>
+					<a href="{{ url('carrito') }}" class="btn btn-warning" style="float: right">Ir al carrito</a>
                     <table id="tabla-productos" class="table table-striped table-hover w-100">
+						
                         <thead>
                             <tr>
                                 <th scope="col" class="text-uppercase">Nombre</th>
@@ -60,7 +69,6 @@
 		.btn-warning {
 			color: #fff;
 			font-weight: bold;
-			scale: 75%;
 		}
 
 		.btn-warning:hover {

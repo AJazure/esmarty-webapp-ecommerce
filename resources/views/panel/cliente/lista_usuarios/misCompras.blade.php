@@ -37,26 +37,30 @@
                         <tr>
                             <!-- <th scope="col">#</th> -->
                             <th scope="col" class="text-uppercase">N° de Pedido</th>
+                            <th scope="col" class="text-uppercase">Fecha de Pedido</th>
+                            <th scope="col" class="text-uppercase">Costo Total</th>
                             <th scope="col" class="text-uppercase">N° de Seguimiento</th>
                             <th scope="col" class="text-uppercase">Pagado</th>
                             <th scope="col" class="text-uppercase">En Preparacion</th>
                             <th scope="col" class="text-uppercase">Cancelado</th>
                             <th scope="col" class="text-uppercase">Enviado</th>
-                            <th scope="col" class="text-uppercase">Total</th>
-                            <th scope="col" class="text-uppercase">Fecha de Pedido</th>
+                            
+                            
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($pedidos as $pedido)
                         <tr>
                         <td>{{ $pedido->num_pedido }}</td>
+                        <td>{{ $pedido->created_at }}</td>
+                        <td>{{ $pedido->total }}</td>
                         <td>{{ $pedido->num_seguimiento}}</td>
                         <td>{{ $pedido->pagado }}</td>
                         <td>{{ $pedido->en_preparacion }}</td>
                         <td>{{ $pedido->cancelado }}</td>
                         <td>{{ $pedido->enviado }}</td>
-                        <td>{{ $pedido->total }}</td>
-                        <td>{{ $pedido->created_at }}</td>
+                        
+                        
                         </tr>
                         @endforeach
                     </tbody>

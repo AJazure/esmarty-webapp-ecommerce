@@ -11,7 +11,7 @@
 				<div class="col-12 ">
 					<!-- Shopping Summery -->
                     <h4 class="p-4">Carrito de compras</h4>
-					<table id="tabla_carrito" class="table shopping-summery table-striped" style="width: 100%;">
+					<table id="tabla_carrito" class="table shopping-summery table-striped text-center" style="width: 100%;">
 						<thead class="table-dark">
 							<tr class="main-hading">
 								<th class="text-center">Imagen</th>
@@ -41,8 +41,8 @@
 			</div>
             <div class="row pt-3">
                 <div class="col-12 d-flex justify-content-between">
-                <a href="#" class="btn btn-secondary"><- Seguir comprando</a>
-                <a href="#" class="btn btn-primary">Ir a pagar</a>
+                <a href="{{ route('carrito.agregarProductos') }}" class="btn btn-secondary"><- Seguir comprando</a>
+                <a href="{{ route('carrito.create') }}" class="btn btn-primary" id="btn-checkout">Checkout</a>
                 </div>
             </div>
 		</div>

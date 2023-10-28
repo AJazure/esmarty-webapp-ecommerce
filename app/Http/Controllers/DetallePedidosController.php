@@ -34,9 +34,15 @@ class DetallePedidosController extends Controller
 
         if ($itemViejo) { //Si ya existe ese producto en el carrito, solo aumenta la cantidad en +1
             // El registro fue encontrado, puedes acceder a sus propiedades
-             $itemViejo->cant_producto += 1;
-             $itemViejo->save();
-             return response()->json(['message' => '+1 agregado al carrito correctamente']);
+             if ($producto->stock_disponible > $itemViejo->cant_producto) {
+                # code...
+                $itemViejo->cant_producto += 1;
+                $itemViejo->save();
+                return response()->json(['message' => '+1 agregado al carrito correctamente']);
+             } else {
+                return response()->json(['message' => 'No hay mas stock del producto']);
+             }
+
         } else { //Si no existe, entonces lo agrega
             // El registro no fue encontrado
             $nuevoItem = new DetallePedidos();
@@ -66,13 +72,19 @@ class DetallePedidosController extends Controller
         $item = DetallePedidos::find($request->_id);
 
         if (!$item) {
-            return response()->json(['error' => 'Producto no encontrado'], 404);
+            return response()->json(['error' => 'Item no encontrado'], 404);
         }
 
-        $item->cant_producto = $request->cantidad;
+        $producto = Producto::find($item->id_producto);
 
-        $item->update();
-        return response()->json(['message' => 'Producto actualizado correctamente']);
+        if ($producto->stock_disponible >= $request->cantidad) {
+            $item->cant_producto = $request->cantidad;
+            $item->update();
+            return response()->json(['message' => 'Producto actualizado correctamente']);
+        } else {
+            return response()->json(['message' => 'No hay mas stock del producto']);
+        }
+        
     }
 
 

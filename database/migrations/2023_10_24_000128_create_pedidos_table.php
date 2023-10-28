@@ -13,20 +13,29 @@ return new class extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_metodo_de_pago'); // BIGINT(20) */
+            /* $table->unsignedBigInteger('id_metodo_de_pago'); // BIGINT(20) */ 
             $table->unsignedBigInteger('id_cliente'); // BIGINT(20)
-            $table->dateTime('fecha_hora'); // BIGINT(20)
+            /* $table->dateTime('fecha_hora');  */// BIGINT(20)
 
-            $table->bigInteger('num_pedido');
-            $table->bigInteger('num_seguimiento');
+            $table->string('nombre', 40);
+            $table->string('apellido', 40);
+            $table->string('correo', 40);
+            $table->unsignedBigInteger('telefono');
+            $table->unsignedBigInteger('dni');
 
-            $table->boolean('pagado');
-            $table->boolean('en_preparacion');
-            $table->boolean('cancelado');
-            $table->boolean('enviado');
-            $table->float('total');
+            $table->bigInteger('num_pedido')->unique();
+            $table->bigInteger('num_seguimiento')->nullable()->unique();
 
-            $table->foreign('id_metodo_de_pago')->references('id')->on('metodos_de_pago');
+            $table->string('direccion', 80);
+            $table->string('codigo_postal', 20);
+
+            $table->boolean('pagado')->default(0);
+            $table->boolean('en_preparacion')->default(0);
+            $table->boolean('cancelado')->default(0);
+            $table->boolean('enviado')->default(0);
+            $table->float('total')->default(0);
+
+            /* $table->foreign('id_metodo_de_pago')->references('id')->on('metodos_de_pago'); */
             $table->foreign('id_cliente')->references('id')->on('users');
 
             $table->timestamps();

@@ -68,6 +68,13 @@ function sumarTotales(data) {
 	var totalSuma = data.reduce((total, item) => total + item.subtotal * item.cant_producto, 0);
 	console.log('Total de los totales:', totalSuma);
 	valorTotal.textContent = totalSuma;
+
+	const btnCheckout = document.getElementById('btn-checkout');
+	if (totalSuma == 0) {
+		btnCheckout.classList.add("disabled");
+	}else{
+		btnCheckout.classList.remove("disabled");
+	}
 }
 
 async function mostrarTabla() {
@@ -90,13 +97,19 @@ $('#tabla_carrito').on('click', '.eliminar-btn', function () {
 	var datosFila = fila.data(); // Obtener los datos de la fila
 	var rowId = fila.id(); // Obtener el ID de la fila
 
-	console.log("ID de la fila:", rowId);
-	console.log("Datos de la fila:", datosFila);
+	/* console.log("ID de la fila:", rowId);
+	console.log("Datos de la fila:", datosFila); */
 
 	//Recalcular el total del carrito
 	var totalMenos = datosFila.subtotal * datosFila.cant_producto;
 	valorTotal.textContent -= totalMenos;
 	console.log('Total de los totales nuevo:', valorTotal.textContent);
+	const btnCheckout = document.getElementById('btn-checkout');
+	if (valorTotal.textContent == 0) {
+		btnCheckout.classList.add("disabled");
+	}else{
+		btnCheckout.classList.remove("disabled");
+	}
 	table.row($(this).parents('tr')).remove().draw(); // Eliminar la fila
 
 
@@ -132,7 +145,7 @@ $('#tabla_carrito').on('click', '.disminuir-cantidad', function () {
 
 	if (rowData.cant_producto > 1) {
 		rowData.cant_producto--;
-		console.log(rowData.productos)
+		/* console.log(rowData.productos) */
 		// Actualiza la interfaz
 		row.find('td:eq(4)').text(rowData.subtotal * rowData.cant_producto);
 		row.find('.cantidades').text(rowData.cant_producto);
@@ -156,7 +169,7 @@ $('#tabla_carrito').on('click', '.aumentar-cantidad', function () {
 	if (rowData.cant_producto < rowData.productos.stock_disponible) {
 
 		rowData.cant_producto++;
-		console.log(rowData.productos)
+		/* console.log(rowData.productos) */
 		// Actualiza la interfaz
 		row.find('td:eq(4)').text(rowData.subtotal * rowData.cant_producto);
 		row.find('.cantidades').text(rowData.cant_producto);
@@ -191,3 +204,8 @@ function actualizarCantidadEnBackend(id, nuevaCantidad) {
 		}
 	});
 }
+
+
+(function() {
+    
+})();

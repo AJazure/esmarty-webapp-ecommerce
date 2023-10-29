@@ -78,9 +78,10 @@
                         </td>
                         <td>
                             <div class="d-flex">
-                                <a href="{{ route('user.show', $user) }}" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
+                                <a href="{{ route('user.show', $user) }}" data-toggle="modal" data-target="#userModal{{ $user->id }}"  class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
                                     Ver
                                 </a>
+                                @include('panel.administrador.lista_usuarios.show')
                                 <a href="{{ route('user.edit', $user) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
                                     Editar
                                 </a>

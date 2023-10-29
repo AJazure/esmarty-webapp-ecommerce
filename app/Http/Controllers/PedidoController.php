@@ -18,7 +18,7 @@ class PedidoController extends Controller
     {   
         $id_cliente = Auth::id();
         $pedidos = Pedido::where('id_cliente', $id_cliente)->get();
-        // Retornamos una vista y enviamos la variable "productos"
+        // Retornamos una vista y enviamos las variables
         return view('panel.cliente.lista_usuarios.misCompras', compact('pedidos'));
     }
 
@@ -60,7 +60,7 @@ class PedidoController extends Controller
         $pedido->codigo_postal = $request->get('codigo_postal');
 
         $ultimoNumPedido = Pedido::max('num_pedido');
-        $nuevoNumPedido = $ultimoNumPedido ? $ultimoNumPedido + 1 : 1; // Trae el último número de pedido de la DB y lo aumenta en 1
+        $nuevoNumPedido = $ultimoNumPedido ? $ultimoNumPedido + 1 : 100; // Trae el último número de pedido de la DB y lo aumenta en 1
         $pedido->num_pedido = $nuevoNumPedido;
 
         $pedido->pagado = true; 
@@ -82,11 +82,17 @@ class PedidoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pedido $pedido)
-    {
-        //
-    }
+   
+     public function show(Pedido $pedido)
+     {
+         //
+     }
 
+
+    public function itemsPedido($id) {
+        $detallesPedido = DetallePedidos::latest()->where('id_pedido', $id)->with('productos')->get();
+        return response()->json($detallesPedido);
+    }
     /**
      * Show the form for editing the specified resource.
      */

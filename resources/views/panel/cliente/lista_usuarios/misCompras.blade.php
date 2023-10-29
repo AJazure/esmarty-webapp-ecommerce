@@ -32,7 +32,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <table id="tabla-productos" class="table table-striped table-hover w-100">
+                <table id="tabla-productos" class="table table-striped table-hover w-100 text-center">
                     <thead>
                         <tr>
                             <!-- <th scope="col">#</th> -->
@@ -44,7 +44,7 @@
                             <th scope="col" class="text-uppercase">En Preparacion</th>
                             <th scope="col" class="text-uppercase">Cancelado</th>
                             <th scope="col" class="text-uppercase">Enviado</th>
-                            
+                            <th scope="col" class="text-uppercase">Ver Detalle</th>
                             
                         </tr>
                     </thead>
@@ -59,8 +59,21 @@
                         <td>{{ $pedido->en_preparacion }}</td>
                         <td>{{ $pedido->cancelado }}</td>
                         <td>{{ $pedido->enviado }}</td>
-                        
-                        
+                        <td><a href="#" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2 cargarItems"
+                            data-toggle="modal" data-target="#showDetallePedidoModal"
+                            data-idpedido="{{ $pedido->id }}"
+                            data-num-pedido="{{ $pedido->num_pedido }}"
+                            data-nombre="{{ $pedido->nombre }}"
+                            data-apellido="{{ $pedido->apellido }}"
+                            data-email="{{ $pedido->correo }}"
+                            data-dni="{{ $pedido->dni }}"
+                            data-direccion="{{ $pedido->direccion }}"
+                            data-codigopostal="{{ $pedido->codigo_postal }}"
+                            data-telefono="{{ $pedido->telefono }}"
+                            data-total="{{ $pedido->total }}">
+                             Detalles
+                         </a>
+                        </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -69,6 +82,8 @@
         </div>
     </div>
 </div>
+
+@include('panel.cliente.lista_usuarios.showDetallePedido')
 @stop
 
 {{-- Importacion de Archivos CSS --}}
@@ -80,8 +95,37 @@
 {{-- Importacion de Archivos JS --}}
 @section('js')
     <script>
-    var token = '{{ csrf_token() }}'; 
+
+
+
+    $('#showDetallePedidoModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        var numPedido = button.data('num-pedido');
+        var email = button.data('email');
+        var dni = button.data('dni');
+        var telefono = button.data('telefono');
+        var nombre = button.data('nombre');
+        var apellido = button.data('apellido');
+        var direccion = button.data('direccion');
+        var codigopostal = button.data('codigopostal');
+        var total = button.data('total');
+
+        $('#modal-nombre').text(nombre);
+        $('#modal-apellido').text(apellido);
+        $('#modal-num-pedido').text(numPedido);
+        $('#modal-email').text(email);
+        $('#modal-dni').text(dni);
+        $('#modal-telefono').text(telefono);
+        $('#modal-direccion').text(direccion);
+        $('#modal-codigopostal').text(codigopostal);
+        $('#modal-total').text(total);
+
+        var idPedido = button.data('idpedido');
+        $('#modal-idPedido').text(idPedido);
+        
+    });
+            let rutaParaConsulta = '{{ route('pedidos.itemsPedido' , '') }}';
+            var token = '{{ csrf_token() }}';
     </script>
-    {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
-    <script src="{{ asset('js/usuarios.js') }}"></script>
+    <script src="{{asset('js/carrito/detalle_de_pedido.js')}}"></script>
 @stop

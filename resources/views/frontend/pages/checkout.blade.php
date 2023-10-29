@@ -128,8 +128,11 @@
               </div>
       
               
-              <hr class="mb-4">
-              <button class="btn btn-primary btn-lg btn-block" type="submit">Ir a Pagar</button>
+              <hr class="">
+              <div class="d-flex align-items-end">
+                <button class="btn btn-primary btn-lg btn-block m-1" type="submit">Guardar Pedido</button>
+                <a class="btn btn-success btn-lg btn-block m-1" type="submit">Ir a Pagar</a>
+              </div>
             </form>
           </div>
         </div>

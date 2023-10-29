@@ -14,7 +14,7 @@ class DetallePedidosController extends Controller
      */
     public function index()
     {
-        $productos = Producto::latest()->get();
+        $productos = Producto::where('activo', true)->get();
         // Retornamos una vista y enviamos la variable "productos"
         return view('frontend.pages.productosTest', compact('productos'));
     }

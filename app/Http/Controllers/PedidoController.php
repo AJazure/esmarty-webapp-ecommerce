@@ -8,14 +8,20 @@ use App\Models\Pedido;
 use App\Models\DetallePedidos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Services\MercadoPagoService;
+use Illuminate\Support\Facades\Http;
 
 class PedidoController extends Controller
 {
+    public function __construct(
+        private MercadoPagoService $mercadoPagoService
+    ) {
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
-    {   
+    {
         $id_cliente = Auth::id();
         $pedidos = Pedido::where('id_cliente', $id_cliente)->get();
         // Retornamos una vista y enviamos las variables
@@ -31,7 +37,7 @@ class PedidoController extends Controller
         $user_id = Auth::id();
         $cliente = User::find($user_id);
         $carrito = DetallePedidos::latest()->where('id_cliente', $user_id)->whereNull('id_pedido')->with('productos')->get();
-        
+
         $pedido->nombre = $cliente->name;
         $pedido->apellido = $cliente->apellido;
         $pedido->dni = $cliente->dni;
@@ -39,7 +45,7 @@ class PedidoController extends Controller
         $pedido->telefono = $cliente->telefono;
         $pedido->direccion = $cliente->direccion;
 
-        return view('frontend.pages.checkout', compact('pedido','carrito'));
+        return view('frontend.pages.checkout', compact('pedido', 'carrito'));
     }
 
     /**
@@ -47,7 +53,7 @@ class PedidoController extends Controller
      */
     public function store(PedidoRequest $request)
     {
-
+        
         $pedido = new Pedido();
 
         $pedido->id_cliente = Auth::id();
@@ -63,33 +69,42 @@ class PedidoController extends Controller
         $nuevoNumPedido = $ultimoNumPedido ? $ultimoNumPedido + 1 : 100; // Trae el último número de pedido de la DB y lo aumenta en 1
         $pedido->num_pedido = $nuevoNumPedido;
 
-        $pedido->pagado = true; 
-        $carrito = DetallePedidos::latest()->where('id_cliente', $pedido->id_cliente)->whereNull('id_pedido')->with('productos')->get();
+
+        $carrito = DetallePedidos::latest()->where('id_cliente', Auth::id())->whereNull('id_pedido')->with('productos')->get();
         foreach ($carrito as $item) {
             $pedido->total += $item->subtotal * $item->cant_producto;
         }
-
+        
         $pedido->save();
+            //Le agrego este ID de pedido a los items que estaban en el carrito: 
+            DetallePedidos::whereNull('id_pedido')->where('id_cliente', $pedido->id_cliente)->update(['id_pedido' => $pedido->id]);
+            $preferencia = $this->mercadoPagoService->crearPreferencia($carrito, $pedido->id);
+            return redirect()
+            ->route('carrito.agregarProductos')
+            ->with('alert', 'Pedido de "' . $pedido->nombre . " " . $pedido->apellido . '" agregado exitosamente. Con N°' . $pedido->num_pedido . '. Redirigiendo...')
+            ->with('redirectUrl', $preferencia->init_point);
+        
+        
 
-        //Le agrego este ID de pedido a los items que estaban en el carrito: 
-        DetallePedidos::whereNull('id_pedido')->where('id_cliente', $pedido->id_cliente)->update(['id_pedido' => $pedido->id]);
+    }
 
-        return redirect()
-        ->route('carrito.agregarProductos')
-        ->with('alert', 'Pedido de "' . $pedido->nombre. " " .$pedido->apellido . '" agregado exitosamente. Con N°' .$pedido->num_pedido);
+    public function update(Request $requestURL = null, Pedido $pedido)
+    {
+
     }
 
     /**
      * Display the specified resource.
      */
-   
-     public function show(Pedido $pedido)
-     {
-         //
-     }
+
+    public function show(Pedido $pedido)
+    {
+        //
+    }
 
 
-    public function itemsPedido($id) {
+    public function itemsPedido($id)
+    {
         $detallesPedido = DetallePedidos::latest()->where('id_pedido', $id)->with('productos')->get();
         return response()->json($detallesPedido);
     }
@@ -104,10 +119,6 @@ class PedidoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pedido $pedido)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.

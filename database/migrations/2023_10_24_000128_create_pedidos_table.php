@@ -33,7 +33,7 @@ return new class extends Migration
             $table->boolean('en_preparacion')->default(0);
             $table->boolean('cancelado')->default(0);
             $table->boolean('enviado')->default(0);
-            $table->float('total')->default(0);
+            $table->bigInteger('total')->default(0);
 
             /* $table->foreign('id_metodo_de_pago')->references('id')->on('metodos_de_pago'); */
             $table->foreign('id_cliente')->references('id')->on('users');

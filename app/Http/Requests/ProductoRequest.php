@@ -23,8 +23,8 @@ class ProductoRequest extends FormRequest
     {
     
         $rules = [
-            'codigo_producto' => 'numeric|nullable|max:20',
-            'nombre' => 'required|min:3|max:40|unique:productos',
+            'codigo_producto' => 'numeric|nullable|max:999999999999999999999',
+            'nombre' => 'required|string|min:3|max:40|unique:productos',
             'descripcion' => 'nullable|string',
             'precio' => 'required|numeric|min:0',
             'stock_disponible' => 'nullable|numeric|min:0',

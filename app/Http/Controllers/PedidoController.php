@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\ProductoController;
 use App\Http\Requests\PedidoRequest;
 use App\Models\User;
@@ -54,7 +55,7 @@ class PedidoController extends Controller
      */
     public function store(PedidoRequest $request)
     {
-    
+
 
         $pedido = new Pedido();
 
@@ -76,33 +77,30 @@ class PedidoController extends Controller
         foreach ($carrito as $item) {
             $pedido->total += $item->subtotal * $item->cant_producto;
         }
-        
         $pedido->save();
-            //Le agrego este ID de pedido a los items que estaban en el carrito: 
-            DetallePedidos::whereNull('id_pedido')->where('id_cliente', $pedido->id_cliente)->update(['id_pedido' => $pedido->id]);
-            $preferencia = $this->mercadoPagoService->crearPreferencia($carrito, $pedido->id);
+        //Le agrego este ID de pedido a los items que estaban en el carrito: 
+        DetallePedidos::whereNull('id_pedido')->where('id_cliente', $pedido->id_cliente)->update(['id_pedido' => $pedido->id]);
+        $preferencia = $this->mercadoPagoService->crearPreferencia($carrito, $pedido->id);
 
-            $productoController = app(ProductoController::class);
+        $productoController = app(ProductoController::class);
 
-            foreach ($carrito as $item) {
-                $idProducto = $item->id_producto;
-                $cant_vendida = $item->cant_producto;
-                $productoController->restarStock($idProducto,$cant_vendida);
-            }
-            
+        foreach ($carrito as $item) {
+            $idProducto = $item->id_producto;
+            $cant_vendida = $item->cant_producto;
+            $productoController->restarStock($idProducto, $cant_vendida);
+        }
 
-            return redirect()
+        $pedido->linkDePago = $preferencia->init_point;
+        $pedido->save();
+
+        return redirect()
             ->route('carrito.agregarProductos')
-            ->with('alert', 'Pedido de "' . $pedido->nombre . " " . $pedido->apellido . '" agregado exitosamente. Con N°' . $pedido->num_pedido . '. Redirigiendo...')
+            ->with('alert', 'Pedido de "' . $pedido->nombre . " " . $pedido->apellido . '" agregado exitosamente. Con N°' . $pedido->num_pedido . '. Abriendo link de pago...')
             ->with('redirectUrl', $preferencia->init_point);
-        
-        
-
     }
 
     public function update(Request $requestURL = null, Pedido $pedido)
     {
-
     }
 
     /**

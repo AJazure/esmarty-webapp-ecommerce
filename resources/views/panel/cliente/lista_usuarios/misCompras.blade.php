@@ -44,7 +44,7 @@
                             <th scope="col" class="text-uppercase">En Preparacion</th>
                             <th scope="col" class="text-uppercase">Cancelado</th>
                             <th scope="col" class="text-uppercase">Enviado</th>
-                            <th scope="col" class="text-uppercase">Ver Detalle</th>
+                            <th scope="col" class="text-uppercase">Acciones</th>
                             
                         </tr>
                     </thead>
@@ -71,7 +71,10 @@
                             data-codigopostal="{{ $pedido->codigo_postal }}"
                             data-telefono="{{ $pedido->telefono }}"
                             data-total="{{ $pedido->total }}">
-                             Detalles
+                             Ver pedido
+                         </a>
+                         <a href="{{$pedido->linkDePago}}" class="btn btn-sm btn-success text-white text-uppercase me-1 mr-2 btnPagar" id="btnPagar" target="_blank">
+                            Pagar
                          </a>
                         </td>
                         </tr>

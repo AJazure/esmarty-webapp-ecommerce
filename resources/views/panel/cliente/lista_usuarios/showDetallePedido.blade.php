@@ -38,7 +38,7 @@
                     </tr>
                 </thead>
                 <tbody id="cart_item_list">
-                        
+                    <td colspan="5" class="text-center">Cargando...</td>
                 </tbody>
             </table>
             </div>

@@ -97,8 +97,7 @@
 
                 if (redirectUrl) {
                     // Redirigir al usuario a la URL adicional
-					
-                    window.location.href = redirectUrl;
+                    window.open(redirectUrl, '_blank');
                 }
 
                 let rutaParaAgregar = '{{ route('carrito.agregarAlCarrito') }}';

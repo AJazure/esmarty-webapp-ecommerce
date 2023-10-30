@@ -129,9 +129,9 @@
       
               
               <hr class="">
-              <div class="d-flex align-items-end">
-                <button class="btn btn-primary btn-lg btn-block m-1" type="submit">Guardar Pedido</button>
-                <a class="btn btn-success btn-lg btn-block m-1" type="submit">Ir a Pagar</a>
+              <div class="">
+                <button class="btn btn-primary btn-lg btn-block m-1" type="submit">Confirmar Pedido</button>
+                <div class="text-info"> <br>*Al confirmar el pedido, se te abrira una pestaña donde podrás realizar el pago, tambien puedes acceder al link de pago en cualquier momento desde tu panel en la opcion "Mis compras"</div>
               </div>
             </form>
           </div>

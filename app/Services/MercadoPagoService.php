@@ -32,7 +32,7 @@ class MercadoPagoService {
         }
         
         $preference->back_urls = [
-            'success' => route('pedido.store'),
+            'success' => route('carrito.agregarProductos'),
         ];
 
         $preference->external_reference = $id_pedido;

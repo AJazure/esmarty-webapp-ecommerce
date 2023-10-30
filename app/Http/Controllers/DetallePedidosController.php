@@ -14,8 +14,10 @@ class DetallePedidosController extends Controller
      */
     public function index()
     {
-        $productos = Producto::where('activo', true)->get();
-        // Retornamos una vista y enviamos la variable "productos"
+        $productos = Producto::where('activo', true)->get(); //Trae todos los productos "Activos"
+        /* $productos = Producto::where('activo', true)
+                    ->where('stock_disponible', '>', 0)
+                    ->get(); //Trae todos los productos activos y con stock disponible */ 
         return view('frontend.pages.productosTest', compact('productos'));
     }
 
@@ -33,7 +35,6 @@ class DetallePedidosController extends Controller
         $itemViejo = DetallePedidos::where('id_producto', $producto->id)->whereNull('id_pedido')->first(); //Se fija si ya hay un producto igual cargado en el carrito
 
         if ($itemViejo) { //Si ya existe ese producto en el carrito, solo aumenta la cantidad en +1
-            // El registro fue encontrado, puedes acceder a sus propiedades
              if ($producto->stock_disponible > $itemViejo->cant_producto) {
                 # code...
                 $itemViejo->cant_producto += 1;
@@ -43,8 +44,7 @@ class DetallePedidosController extends Controller
                 return response()->json(['message' => 'No hay mas stock del producto']);
              }
 
-        } else { //Si no existe, entonces lo agrega
-            // El registro no fue encontrado
+        } else if ($producto->stock_disponible > 0) { //Si no existe ya en el carrito, verifica que haya stock disponible, y entonces lo agrega
             $nuevoItem = new DetallePedidos();
             $nuevoItem->id_cliente = Auth::id();
             $nuevoItem->id_pedido = null;
@@ -54,6 +54,8 @@ class DetallePedidosController extends Controller
 
             $nuevoItem->save();
             return response()->json(['message' => 'Producto agregado al carrito correctamente']);
+        } else {
+            return response()->json(['message' => 'No hay mas stock del producto']);
         }
         
     }

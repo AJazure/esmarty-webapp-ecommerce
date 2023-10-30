@@ -133,14 +133,9 @@ class ProductoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Producto $producto)
+    public function destroy(Request $id)
     {
-        //
-        /* $producto->delete();
-
-        return redirect()
-        ->route('producto.index')
-        ->with('alert', 'Producto eliminado exitosamente'); */
+        
     }
 
     public function cambiarEstado(Request $request)
@@ -155,6 +150,15 @@ class ProductoController extends Controller
         $producto->save();
 
         return response()->json(['message' => 'Estado de categoría cambiado con éxito']);
+    }
+
+    public function restarStock($idProducto,$cant_vendida)
+    {
+        $producto = Producto::find($idProducto);
+
+        $producto->stock_disponible -= $cant_vendida; // Merma el stock
+        $producto->save();
+
     }
 
     public function exportarProductosExcel() {

@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\ProductoController;
 use App\Http\Requests\PedidoRequest;
 use App\Models\User;
 use App\Models\Pedido;
 use App\Models\DetallePedidos;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\MercadoPagoService;
@@ -53,7 +54,8 @@ class PedidoController extends Controller
      */
     public function store(PedidoRequest $request)
     {
-        
+    
+
         $pedido = new Pedido();
 
         $pedido->id_cliente = Auth::id();
@@ -79,6 +81,16 @@ class PedidoController extends Controller
             //Le agrego este ID de pedido a los items que estaban en el carrito: 
             DetallePedidos::whereNull('id_pedido')->where('id_cliente', $pedido->id_cliente)->update(['id_pedido' => $pedido->id]);
             $preferencia = $this->mercadoPagoService->crearPreferencia($carrito, $pedido->id);
+
+            $productoController = app(ProductoController::class);
+
+            foreach ($carrito as $item) {
+                $idProducto = $item->id_producto;
+                $cant_vendida = $item->cant_producto;
+                $productoController->restarStock($idProducto,$cant_vendida);
+            }
+            
+
             return redirect()
             ->route('carrito.agregarProductos')
             ->with('alert', 'Pedido de "' . $pedido->nombre . " " . $pedido->apellido . '" agregado exitosamente. Con N°' . $pedido->num_pedido . '. Redirigiendo...')

@@ -66,13 +66,12 @@
                             <td>{{ $producto->codigo_producto }}</td>
                             <td>{{ $producto->nombre }}</td>
                             <td>{{ $producto->categoria->descripcion }}</td>
-                            {{-- <td>{{ $producto->marca->descripcion}}</td> --}}
                             <td>{{ $producto->marca ? $producto->marca->descripcion : 'N/A'}}</td>
                             <td>{{ $producto->precio }}</td>
                             <td>{{ $producto->stock_disponible }}</td>
                             {{-- <td>{{ Str::limit($producto->descripcion, 80) }}</td> --}}
                             <td>
-                                <img src="{{ $producto->url_imagen }}" alt="{{ $producto->nombre }}" class="img-fluid" style="width: 150px;">
+                                <img src="{{ $producto->url_imagen }}" alt="{{ $producto->nombre }}" class="img-fluid" width= "150">
                             </td>
                             <td>
                                 <form action="{{ route('producto.destroy', $producto) }}" method="POST">

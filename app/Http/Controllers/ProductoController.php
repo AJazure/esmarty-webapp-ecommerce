@@ -153,4 +153,21 @@ class ProductoController extends Controller
 
         return response()->json(['message' => 'Estado de categoría cambiado con éxito']);
     }
-}
+
+    
+    // public function MandarDatosProductosPagina()
+    // {
+    //     $productos = Producto::latest()->get();
+    //     // Retornamos una vista y enviamos la variable "categorias"
+    //     return view('frontend.index', compact('productos'));
+    // }
+
+//     public function detalle($id)
+//     {
+//         // Recupera el producto específico según el ID
+//         $producto = Producto::find($id);
+
+//         // Pasa los datos del producto a la vista de detalle
+//         return view('producto.detalle')->with('producto', $producto);
+//     }
+ }

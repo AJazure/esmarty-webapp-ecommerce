@@ -1,0 +1,22 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+footer{
+    color: white;
+}
+
+
+.contact ul a{
+    color: white;
+}
+.contact ul a:hover{
+    color: Blue;
+}
+.contact ul li{
+    list-style: none;
+}
+.contact ul{
+    padding-left: 0;
+}

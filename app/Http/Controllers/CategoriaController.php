@@ -100,4 +100,10 @@ class CategoriaController extends Controller
 
         return response()->json(['message' => 'Estado de categoría cambiado con éxito']);
     }
+    // public function MandarDatosCategoriasPagina()
+    // {
+    //     $categorias = Categoria::latest()->get();
+    //     // Retornamos una vista y enviamos la variable "categorias"
+    //     return view('frontend.index', compact('categorias'));
+    // }
 }

@@ -131,7 +131,7 @@
               <hr class="">
               <div class="">
                 <button class="btn btn-primary btn-lg btn-block m-1" type="submit">Confirmar Pedido</button>
-                <div class="text-info"> <br>*Al confirmar el pedido, se te abrira una pestaña donde podrás realizar el pago, tambien puedes acceder al link de pago en cualquier momento desde tu panel en la opcion "Mis compras"</div>
+                <div class="text-info"> <br>*Al confirmar el pedido, se te redirigira a realizar el pago inmediatamente, si el pago falla puedes acceder al link de pago en cualquier momento desde tu panel en la opcion "Mis compras"</div>
               </div>
             </form>
           </div>

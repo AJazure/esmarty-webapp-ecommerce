@@ -121,6 +121,26 @@ class PedidoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+
+     public function pago(Request $request)
+     {
+        //Funcion para consultar si un pedido ya fue pagado
+        $payment_id = $request->payment_id; //Id del pago, se ve en el comprobante
+        $token = config('mercadopago.access_token');
+        $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=$token");
+        $response = json_decode($response);
+        $pedido_id = $request->external_reference; //Trae el ID del pedido, que mandamos por external_reference al crear la preferencia de mercado pago
+
+        
+        dump($response);
+
+        $status = $response->status;
+    
+        if ($status == "approved") {
+            
+        }
+    }
+
     public function edit(Pedido $pedido)
     {
         //

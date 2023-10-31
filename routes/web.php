@@ -49,3 +49,4 @@ Route::post('/miCarrito/agregarAlCarrito', [App\Http\Controllers\DetallePedidosC
 Route::post('/carrito/checkout', [App\Http\Controllers\PedidoController::class, 'checkout'])->name('carrito.checkout');
 Route::get('/carrito/checkout', [App\Http\Controllers\PedidoController::class, 'create'])->name('carrito.create');
 Route::any('/carrito/guardar', [App\Http\Controllers\PedidoController::class, 'store'])->name('pedido.store');
+Route::any('/pedido/pago', [App\Http\Controllers\PedidoController::class, 'pago'])->name('pedido.pago');

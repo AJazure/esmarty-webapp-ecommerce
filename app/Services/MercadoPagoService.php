@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Pedido;
 use GrahamCampbell\ResultType\Success;
+use Illuminate\Support\Arr;
 use MercadoPago\Item;
 use MercadoPago\Preference;
 use MercadoPago\SDK;
@@ -18,7 +19,7 @@ class MercadoPagoService {
 
         // Crea un objeto de preferencia
         $preference = new Preference();
-
+        
         // Creo los items de la preferencia
         $items = [];
         foreach($carrito as $productoCompra) {
@@ -32,17 +33,20 @@ class MercadoPagoService {
         }
         
         $preference->back_urls = [
-            'success' => route('carrito.agregarProductos'),
+            'success' => route('pedido.pago'),
+            'pending' => route('pedido.pago'),
+            'failure' => route('pedido.pago')
         ];
 
         $preference->external_reference = $id_pedido;
 
-        $preference->auto_return = "approved";
+        $preference->auto_return = "all";
         
         $preference->items = $items;
+
         /* $preference->external_reference = $compra->id; */
         $preference->save();
-
+        
         return $preference;
     }
 

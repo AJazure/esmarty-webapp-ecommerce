@@ -93,12 +93,13 @@
         @section('js')
             <script>
                 // Verificar si hay una URL de redirección adicional
-                var redirectUrl = '{{ session('redirectUrl') }}';
+                 var redirectUrl = '{{ session('redirectUrl') }}';
 
                 if (redirectUrl) {
                     // Redirigir al usuario a la URL adicional
-                    window.open(redirectUrl, '_blank');
-                }
+                    window.location.href = redirectUrl;
+                    //window.open(redirectUrl, '_blank'); Por si quiero abrirlo en otra pestaña
+                } 
 
                 let rutaParaAgregar = '{{ route('carrito.agregarAlCarrito') }}';
                 var token = '{{ csrf_token() }}';

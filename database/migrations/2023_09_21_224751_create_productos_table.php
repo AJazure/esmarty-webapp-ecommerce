@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('stock_disponible')->nullable();
             $table->integer('stock_minimo')->nullable();
             $table->integer('stock_deseado')->nullable();
-            $table->string('url_imagen')->nullable();
+            $table->string('url_imagen')->default("https://via.placeholder.com/640x480.png/1d1d1d?text=ITEM%20GENERICO");
             $table->tinyInteger('activo')->default(1);
             $table->timestamps();
 

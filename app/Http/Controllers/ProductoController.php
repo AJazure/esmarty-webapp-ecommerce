@@ -64,12 +64,13 @@ class ProductoController extends Controller
         $producto->id_proveedor = $request->get('id_proveedor');
         $producto->id_marca = $request->get('id_marca');
         /* $producto->vendedor_id = auth()->user()->id; */
+        
         if ($request->hasFile('url_imagen')) {
         // Subida de imagen al servidor (public > storage)
         $url_imagen = $request->file('url_imagen')->store('public/producto');
         $producto->url_imagen = asset(str_replace('public', 'storage', $url_imagen));
         } else {
-        $producto->url_imagen = '';
+        $producto->url_imagen = 'https://via.placeholder.com/640x480.png/1d1d1d?text=ITEM%20GENERICO';
         }
         // Almacena la info del producto en la BD
         $producto->save();
@@ -116,6 +117,7 @@ class ProductoController extends Controller
         $producto->id_proveedor = $request->get('id_proveedor');
         $producto->id_categoria = $request->get('id_categoria');
         $producto->id_marca = $request->get('id_marca');
+        
 
         if ($request->hasFile('url_imagen')) {
             // Subida de la imagen nueva al servidor

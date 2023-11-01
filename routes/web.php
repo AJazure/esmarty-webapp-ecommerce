@@ -1,6 +1,8 @@
 <?php
 
+use App\Mail\RegisterMailable;
 use App\Models\DetallePedidos;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,3 +52,19 @@ Route::post('/carrito/checkout', [App\Http\Controllers\PedidoController::class, 
 Route::get('/carrito/checkout', [App\Http\Controllers\PedidoController::class, 'create'])->name('carrito.create');
 Route::any('/carrito/guardar', [App\Http\Controllers\PedidoController::class, 'store'])->name('pedido.store');
 Route::any('/pedido/pago', [App\Http\Controllers\PedidoController::class, 'pago'])->name('pedido.pago');
+
+
+//Mail rutas
+
+Route::get('mail', function() {
+    // Datos de Simulación de Registro
+    $data = [
+    'name' => 'Emanuel Hoyos',
+    'email' => 'leytoncristian96@gmail.com', // Correo del Destinatario
+    'password' => '12345678'
+    ];
+    // Envio de mail
+    Mail::to($data['email'])->send(new RegisterMailable($data));
+    return "Mensaje enviado";
+   });
+

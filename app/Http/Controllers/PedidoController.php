@@ -147,7 +147,7 @@ class PedidoController extends Controller
             $pedido = Pedido::find($pedido_id);
             return redirect()
             ->route('pedidos.index')
-            ->with('error', 'Pedido °' .$pedido->num_pedido . ' no se pudo completar el pago. Con N° operación' . $response->id );
+            ->with('error', 'Pedido °' .$pedido->num_pedido . ' no se pudo completar el pago. Con N° operación: ' . $response->id );
         }
 
     }

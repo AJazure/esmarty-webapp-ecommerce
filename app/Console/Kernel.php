@@ -9,10 +9,15 @@ class Kernel extends ConsoleKernel
 {
     /**
      * Define the application's command schedule.
+    Frecuencias de actualizacion
+    https://laravel.com/docs/10.x/scheduling#schedule-frequency-options
      */
+    
+
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $idPedido = 2;
+        $schedule->command('auto-cancelar-pedidos')->everyFifteenSeconds();
     }
 
     /**

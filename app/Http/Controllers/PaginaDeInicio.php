@@ -31,4 +31,20 @@ class PaginaDeInicio extends Controller
     return view('frontend.paginas.productosLista', compact('productos', 'categorias', 'perPage'));
 }
 
+    public function MandarDatosCategoriaEspecifica(Request $request, $variable)
+{
+    $categorias = Categoria::latest()->get();
+
+    $perPage = $request->input('perPage', 10);
+
+    $productos = Producto::latest()
+        ->simplePaginate($perPage)
+        ->withQueryString(); 
+
+    
+    $productos_especificos=Producto::where('id_categoria', $variable)->get();
+
+    return view('frontend.paginas.productosListaEspecifica', compact('productos', 'categorias', 'perPage', 'productos_especificos'));
+}
+
 }

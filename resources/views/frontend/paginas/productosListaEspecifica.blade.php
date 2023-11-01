@@ -21,7 +21,7 @@
                 <ul class="categoria-lista">
                     @if ($categorias)
                         @foreach ($categorias as $categoria)
-                            <li><a href="{{route('MandarDatosCategoriaEspecifica', $categoria->id)}}">{{ $categoria->descripcion }}</a></li>
+                        <li><a href="{{route('MandarDatosCategoriaEspecifica', $categoria->id)}}">{{ $categoria->descripcion }}</a></li>
                         @endforeach
                     @endif
                 </ul>
@@ -76,8 +76,8 @@
                 </div>
                 <div class="row">
                     {{-- Mostrar los productos --}}
-                    @if (count($productos) > 0)
-                        @foreach ($productos as $product)
+                    @if (count($productos_especificos) > 0)
+                        @foreach ($productos_especificos->where('activo', 1) as $product)
                             <div class="col-lg-4 col-md-6 col-11">
                                 <div class="single-product">
                                     <div class="product-img">

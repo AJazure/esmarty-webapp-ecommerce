@@ -18,7 +18,8 @@ use App\Http\Controllers\PaginaDeInicio;
 
 Route::get('/', [PaginaDeInicio::class, 'MandarDatosPaginaInicio'])->name('MandarDatosPaginaInicio');
 
-Route::get('/productos', [PaginaDeInicio::class, 'MandarDatosLista'])->name('productos');
+Route::get('productos', [PaginaDeInicio::class, 'MandarDatosLista'])->name('productos');
+Route::get('productos/categoria/{categoria}', [PaginaDeInicio::class, 'MandarDatosCategoriaEspecifica'])->name('MandarDatosCategoriaEspecifica');
 
 
 

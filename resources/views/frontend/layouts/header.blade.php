@@ -31,7 +31,7 @@
                     <ul class="dropdown-menu">
                         @foreach ($categorias as $cat)
                             
-                        <li><a class="dropdown-item" href="#">{{$cat->descripcion }}</a></li>
+                        <li><a class="dropdown-item" href="{{route('MandarDatosCategoriaEspecifica', $cat->id)}}">{{$cat->descripcion }}</a></li>
                         @endforeach
                     </ul>
                 </li>

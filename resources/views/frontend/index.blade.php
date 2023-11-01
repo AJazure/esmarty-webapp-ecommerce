@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 @if ($categorias)
-                    @foreach ($categorias as $categoria)
+                    @foreach ($categorias->where('activo', 1) as $categoria)
                         <div class="col-lg-4 col-md-6 col-12">
                             <div class="single-banner text-center">
                                 @if ($categoria->activo)

@@ -1,3 +1,56 @@
+//Esto manda datos del boton al modal
+$('#showDetallePedidoModal').on('show.bs.modal', function(event) {
+	var button = $(event.relatedTarget);
+	var numPedido = button.data('num-pedido');
+	var email = button.data('email');
+	var dni = button.data('dni');
+	var telefono = button.data('telefono');
+	var nombre = button.data('nombre');
+	var apellido = button.data('apellido');
+	var direccion = button.data('direccion');
+	var codigopostal = button.data('codigopostal');
+	var total = button.data('total');
+	var cancelado = button.data('cancelado');
+	var pagado = button.data('pagado');
+	var enviado = button.data('enviado');
+	var enpreparacion = button.data('enpreparacion');
+
+	$('#modal-nombre').text(nombre);
+	$('#modal-apellido').text(apellido);
+	$('#modal-num-pedido').text(numPedido);
+	$('#modal-email').text(email);
+	$('#modal-dni').text(dni);
+	$('#modal-telefono').text(telefono);
+	$('#modal-direccion').text(direccion);
+	$('#modal-codigopostal').text(codigopostal);
+	$('#modal-total').text(total);
+
+	var idPedido = button.data('idpedido');
+	$('#modal-idPedido').text(idPedido);
+	
+	var estado;
+
+
+	if (cancelado) {
+		estado = '<span class="badge badge-danger">Cancelado</span>';
+	} else {
+		if (pagado) {
+			estado = '<span class="badge badge-success">Pagado</span>';
+			if (enviado) {
+				estado = '<span class="badge badge-primary">Enviado</span>';
+			}
+			if (enpreparacion) {
+				estado = '<span class="badge badge-info">En preparacion</span>';
+			}
+		} else {
+			estado = '<span class="badge badge-warning text-white">Impago</span>'
+		}
+	}
+
+	$('#estadoPedido').html(estado);
+
+});
+//Esto trae los items del pedido desde la base de datos
 $(document).on('click', '.cargarItems', function () {
 	var pedidoId = $(this).data('idpedido');
 	let urlDeConsulta = rutaParaConsulta + "/" + pedidoId;

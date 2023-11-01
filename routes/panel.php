@@ -27,3 +27,4 @@ Route::get('exportar-productos-excel', [ProductoController::class, 'exportarProd
 Route::get('exportar-productos-pdf', [ProductoController::class, 'exportarProductosPDF'])->name('exportar-productos-pdf');
 Route::resource('/pedidos', PedidoController::class)->names('pedidos'); 
 Route::get('/pedidos/itemsPedido/{pedido}', [PedidoController::class, 'itemsPedido'])->name('pedidos.itemsPedido');
+Route::post('/pedidos/cancelarPedido/{pedido}', [PedidoController::class, 'cancelarPedido'])->name('pedidos.cancelarPedido');

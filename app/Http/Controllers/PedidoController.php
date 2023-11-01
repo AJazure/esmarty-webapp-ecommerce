@@ -77,6 +77,13 @@ class PedidoController extends Controller
         foreach ($carrito as $item) {
             $pedido->total += $item->subtotal * $item->cant_producto;
         }
+
+        if (!$pedido->total) {
+            return redirect()
+            ->route('carrito.agregarProductos')
+            ->with('alert', 'No se puede guardar un pedido vacio. ' . '¡Agrega algunos productos al carrito por favor!');
+        }
+
         $pedido->save();
         //Le agrego este ID de pedido a los items que estaban en el carrito: 
         DetallePedidos::whereNull('id_pedido')->where('id_cliente', $pedido->id_cliente)->update(['id_pedido' => $pedido->id]);
@@ -118,10 +125,7 @@ class PedidoController extends Controller
         $detallesPedido = DetallePedidos::latest()->where('id_pedido', $id)->with('productos')->get();
         return response()->json($detallesPedido);
     }
-    /**
-     * Show the form for editing the specified resource.
-     */
-
+    
      public function pago(Request $request)
      {
         //Funcion para consultar si un pedido ya fue pagado
@@ -130,31 +134,41 @@ class PedidoController extends Controller
         $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=$token");
         $response = json_decode($response);
         $pedido_id = $request->external_reference; //Trae el ID del pedido, que mandamos por external_reference al crear la preferencia de mercado pago
-
-        
-        dump($response);
-
         $status = $response->status;
-    
+        
         if ($status == "approved") {
-            
+            $pedido = Pedido::find($pedido_id);
+            $pedido->pagado = true;
+            $pedido->save();
+            return redirect()
+            ->route('pedidos.index')
+            ->with('alert', 'Pedido °' .$pedido->num_pedido . ' pagado exitosamente. Con N° de operación: ' . $response->id );
+        } else {
+            $pedido = Pedido::find($pedido_id);
+            return redirect()
+            ->route('pedidos.index')
+            ->with('error', 'Pedido °' .$pedido->num_pedido . ' no se pudo completar el pago. Con N° operación' . $response->id );
         }
+
     }
 
-    public function edit(Pedido $pedido)
+    public function cancelarPedido($pedido_id)
     {
-        //
-    }
+        //Cancelo el pedido
+        $pedido = Pedido::find($pedido_id);
+        $pedido->cancelado = true;
 
-    /**
-     * Update the specified resource in storage.
-     */
+        //Traigo el carrito creado con este id de pedido
+        $carrito = DetallePedidos::latest()->where('id_pedido', $pedido_id)->with('productos')->get();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Pedido $pedido)
-    {
-        //
+        //Accedo a la funcion SumarStock para devolver los items reservados en el pedido
+        $productoController = app(ProductoController::class);
+        foreach ($carrito as $item) {
+            $idProducto = $item->id_producto;
+            $cant_vendida = $item->cant_producto;
+            $productoController->sumarStock($idProducto, $cant_vendida);
+        }
+
+        $pedido->save();
     }
 }

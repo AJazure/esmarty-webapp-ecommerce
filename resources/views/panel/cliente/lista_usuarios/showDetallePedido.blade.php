@@ -9,8 +9,12 @@
             </div>
             <div class="modal-body">
                 {{-- Contenido del modal --}}
+                <div class="d-flex justify-content-between px-3">
                 <h4 class="text-info"><strong>N° de Pedido:</strong> <span id="modal-num-pedido"></span></h4>
-
+                <h4 class="text-info">Estado del Pedido: <span id="estadoPedido"></span>
+                    
+                </h4>
+                </div>
                 <div class="d-flex justify-content-between px-3">
                     <span>
                     <h5><strong>Nombre:</strong> <span id="modal-nombre"></span></h5>

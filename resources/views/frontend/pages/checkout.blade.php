@@ -130,7 +130,7 @@
               
               <hr class="">
               <div class="">
-                <button class="btn btn-primary btn-lg btn-block m-1" type="submit">Confirmar Pedido</button>
+                <button class="btn btn-primary btn-lg btn-block m-1 @if (!$total) disabled @endif" type=@if(!$total) "button" @else "submit" @endif>Confirmar Pedido</button>
                 <div class="text-info"> <br>*Al confirmar el pedido, se te redirigira a realizar el pago inmediatamente, si el pago falla puedes acceder al link de pago en cualquier momento desde tu panel en la opcion "Mis compras"</div>
               </div>
             </form>

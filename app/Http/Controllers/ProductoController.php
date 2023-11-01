@@ -154,11 +154,20 @@ class ProductoController extends Controller
         return response()->json(['message' => 'Estado de categoría cambiado con éxito']);
     }
 
-    public function restarStock($idProducto,$cant_vendida)
+    public function restarStock($idProducto,$cant_restar)
     {
         $producto = Producto::find($idProducto);
 
-        $producto->stock_disponible -= $cant_vendida; // Merma el stock
+        $producto->stock_disponible -= $cant_restar; // Merma el stock
+        $producto->save();
+
+    }
+
+    public function sumarStock($idProducto,$cant_aumentar)
+    {
+        $producto = Producto::find($idProducto);
+
+        $producto->stock_disponible += $cant_aumentar; // Merma el stock
         $producto->save();
 
     }

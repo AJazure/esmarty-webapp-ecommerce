@@ -4,6 +4,9 @@
 {{-- Activamos el Plugin de Datatables instalado en AdminLTE --}}
 @section('plugins.Datatables', true)
 
+{{-- Activamos el Plugin de Datatables instalado en AdminLTE --}}
+@section('plugins.Sweetalert2', true)
+
 {{-- Titulo en las tabulaciones del Navegador --}}
 @section('title', 'Mis Compras')
 
@@ -24,7 +27,17 @@
             <div class="col-12">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ session('alert') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    
+                </div>
+            </div>
+        @endif
+
+
+        @if (session('error'))
+            <div class="col-12">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
+                    
                 </div>
             </div>
         @endif
@@ -32,7 +45,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <table id="tabla-productos" class="table table-striped table-hover w-100 text-center">
+                <table id="tabla-pedidos" class="table table-striped table-hover w-100 text-center">
                     <thead>
                         <tr>
                             <!-- <th scope="col">#</th> -->
@@ -40,10 +53,7 @@
                             <th scope="col" class="text-uppercase">Fecha de Pedido</th>
                             <th scope="col" class="text-uppercase">Costo Total</th>
                             <th scope="col" class="text-uppercase">N° de Seguimiento</th>
-                            <th scope="col" class="text-uppercase">Pagado</th>
-                            <th scope="col" class="text-uppercase">En Preparacion</th>
-                            <th scope="col" class="text-uppercase">Cancelado</th>
-                            <th scope="col" class="text-uppercase">Enviado</th>
+                            <th scope="col" class="text-uppercase">Estado del Pedido</th>
                             <th scope="col" class="text-uppercase">Acciones</th>
                             
                         </tr>
@@ -55,10 +65,22 @@
                         <td>{{ $pedido->created_at }}</td>
                         <td>{{ $pedido->total }}</td>
                         <td>{{ $pedido->num_seguimiento}}</td>
-                        <td>{{ $pedido->pagado }}</td>
-                        <td>{{ $pedido->en_preparacion }}</td>
-                        <td>{{ $pedido->cancelado }}</td>
-                        <td>{{ $pedido->enviado }}</td>
+                        <td>@if($pedido->cancelado)
+                            <span class="badge badge-danger">Cancelado</span>
+                            @else
+                            @if($pedido->pagado)
+                            <span class="badge badge-success">Pagado</span>
+                                @if($pedido->en_preparacion)
+                                <span class="badge badge-info">En preparacion</span>
+                                @endif
+                                @if($pedido->enviado)
+                                <span class="badge badge-primary">Enviado</span>
+                                @endif
+                            @else
+                            <span class="badge badge-warning text-white">Impago</span>
+                            @endif
+                            @endif
+                        </td>
                         <td><a href="#" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2 cargarItems"
                             data-toggle="modal" data-target="#showDetallePedidoModal"
                             data-idpedido="{{ $pedido->id }}"
@@ -70,10 +92,19 @@
                             data-direccion="{{ $pedido->direccion }}"
                             data-codigopostal="{{ $pedido->codigo_postal }}"
                             data-telefono="{{ $pedido->telefono }}"
-                            data-total="{{ $pedido->total }}">
-                             Ver pedido
+                            data-total="{{ $pedido->total }}"
+                            data-cancelado="{{$pedido->cancelado}}"
+                            data-pagado="{{$pedido->pagado}}"
+                            data-enpreparacion="{{$pedido->en_preparacion}}"
+                            data-enviado="{{$pedido->enviado}}"
+                            >
+                             Ver
                          </a>
-                         <a href="{{$pedido->linkDePago}}" class="btn btn-sm btn-success text-white text-uppercase me-1 mr-2 btnPagar" id="btnPagar" target="_blank">
+                         
+                         <button class="btn btn-sm btn-danger text-white text-uppercase me-1 mr-2 @if(!$pedido->cancelado && !$pedido->pagado) btnEliminar @endif  @if($pedido->pagado || $pedido->cancelado)disabled @endif"  value="{{$pedido->id}}">
+                            Cancelar
+                        </button>
+                         <a href="@if(!$pedido->pagado){{$pedido->linkDePago}}@endif" class="btn btn-sm btn-success text-white text-uppercase me-1 mr-2 btnPagar @if($pedido->pagado || $pedido->cancelado)disabled @endif" id="btnPagar" >
                             Pagar
                          </a>
                         </td>
@@ -98,37 +129,12 @@
 {{-- Importacion de Archivos JS --}}
 @section('js')
     <script>
-
-
-
-    $('#showDetallePedidoModal').on('show.bs.modal', function(event) {
-        var button = $(event.relatedTarget);
-        var numPedido = button.data('num-pedido');
-        var email = button.data('email');
-        var dni = button.data('dni');
-        var telefono = button.data('telefono');
-        var nombre = button.data('nombre');
-        var apellido = button.data('apellido');
-        var direccion = button.data('direccion');
-        var codigopostal = button.data('codigopostal');
-        var total = button.data('total');
-
-        $('#modal-nombre').text(nombre);
-        $('#modal-apellido').text(apellido);
-        $('#modal-num-pedido').text(numPedido);
-        $('#modal-email').text(email);
-        $('#modal-dni').text(dni);
-        $('#modal-telefono').text(telefono);
-        $('#modal-direccion').text(direccion);
-        $('#modal-codigopostal').text(codigopostal);
-        $('#modal-total').text(total);
-
-        var idPedido = button.data('idpedido');
-        $('#modal-idPedido').text(idPedido);
-        
-    });
             let rutaParaConsulta = '{{ route('pedidos.itemsPedido' , '') }}';
+            let rutaParaCancelarPedido = '{{ route('pedidos.cancelarPedido' , '') }}';
             var token = '{{ csrf_token() }}';
     </script>
-    <script src="{{asset('js/carrito/detalle_de_pedido.js')}}"></script>
+    <script src="{{asset('js/pedido/detalle_de_pedido.js')}}"></script>
+    <script src="{{asset('js/pedido/eliminar_pedido.js')}}"></script>
+    <script src="{{ asset('js/pedido/pedidos.js') }}"></script>
+
 @stop

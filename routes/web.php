@@ -2,6 +2,7 @@
 
 use App\Mail\RegisterMailable;
 use App\Models\DetallePedidos;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 

@@ -77,7 +77,7 @@
                                 <span class="badge badge-primary">Enviado</span>
                                 @endif
                             @else
-                            <span class="badge badge-warning text-white">Impago</span>
+                            <span class="badge badge-warning text-white">Esperando Pago</span>
                             @endif
                             @endif
                         </td>

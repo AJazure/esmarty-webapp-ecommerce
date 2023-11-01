@@ -43,7 +43,7 @@ $('#showDetallePedidoModal').on('show.bs.modal', function(event) {
 				estado = '<span class="badge badge-info">En preparacion</span>';
 			}
 		} else {
-			estado = '<span class="badge badge-warning text-white">Impago</span>'
+			estado = '<span class="badge badge-warning text-white">Esperando Pago</span>'
 		}
 	}
 

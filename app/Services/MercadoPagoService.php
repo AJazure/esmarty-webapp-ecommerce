@@ -44,6 +44,20 @@ class MercadoPagoService {
         
         $preference->items = $items;
 
+         $preference->payment_methods = [ //Excluye metodos de pago
+            'excluded_payment_methods' => array (
+                array(
+                    'id' => 'rapipago'
+                ),
+                array(
+                    'id' => 'pagofacil'
+                )
+            )
+         ];
+         
+         
+
+
         /* $preference->external_reference = $compra->id; */
         $preference->save();
         

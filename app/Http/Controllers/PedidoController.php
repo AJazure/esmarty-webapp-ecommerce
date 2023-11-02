@@ -89,6 +89,8 @@ class PedidoController extends Controller
         DetallePedidos::whereNull('id_pedido')->where('id_cliente', $pedido->id_cliente)->update(['id_pedido' => $pedido->id]);
         $preferencia = $this->mercadoPagoService->crearPreferencia($carrito, $pedido->id);
 
+         /* dd($preferencia);  */
+
         $productoController = app(ProductoController::class);
 
         foreach ($carrito as $item) {
@@ -134,20 +136,31 @@ class PedidoController extends Controller
         $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=$token");
         $response = json_decode($response);
         $pedido_id = $request->external_reference; //Trae el ID del pedido, que mandamos por external_reference al crear la preferencia de mercado pago
-        $status = $response->status;
+        $pedido = Pedido::find($pedido_id);//busco el pedido
+
+        /* dd($response->error); */
+
+        if (!isset($response->error)) {
+            $status = $response->status;
+        } else {
+            
+            return redirect()
+            ->route('pedidos.index')
+            ->with('error', 'Pedido N°' .$pedido->num_pedido . ' pago cancelado. Vuelve a intentarlo en este panel.');
+        }
+        
         
         if ($status == "approved") {
-            $pedido = Pedido::find($pedido_id);
             $pedido->pagado = true;
             $pedido->save();
             return redirect()
             ->route('pedidos.index')
-            ->with('alert', 'Pedido °' .$pedido->num_pedido . ' pagado exitosamente. Con N° de operación: ' . $response->id );
+            ->with('alert', 'Pedido N°' .$pedido->num_pedido . ' pagado exitosamente. Con N° de operación: ' . $response->id );
         } else {
-            $pedido = Pedido::find($pedido_id);
+
             return redirect()
             ->route('pedidos.index')
-            ->with('error', 'Pedido °' .$pedido->num_pedido . ' no se pudo completar el pago. Con N° operación: ' . $response->id );
+            ->with('error', 'Pedido N°' .$pedido->num_pedido . ' no se pudo completar el pago. Con N° operación: ' . $response->id );
         }
 
     }

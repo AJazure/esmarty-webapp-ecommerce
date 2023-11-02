@@ -54,7 +54,7 @@
                 </div>
             </div>
             <!--/ End Shopping Cart -->
-
+            <div id="pagar"></div>
         @endsection
         @section('styles')
             <style>
@@ -97,8 +97,13 @@
 
                 if (redirectUrl) {
                     // Redirigir al usuario a la URL adicional
-                    window.location.href = redirectUrl;
+                    /* $pagar = document.getElementById("pagar");
+                    let iframe = document.createElement("iframe");
+                    iframe.src = redirectUrl;
+                    $pagar.append(iframe); */
+                    window.location.href = redirectUrl; 
                     //window.open(redirectUrl, '_blank'); Por si quiero abrirlo en otra pestaña
+
                 } 
 
                 let rutaParaAgregar = '{{ route('carrito.agregarAlCarrito') }}';

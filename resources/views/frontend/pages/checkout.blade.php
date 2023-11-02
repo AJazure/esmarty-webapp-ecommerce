@@ -107,7 +107,7 @@
                 <div class="col-md-4 mb-3">
                     <label for="codigo_postal" class="">Codigo Postal: </label>
                     <div class="">
-                        <input type="text" class="form-control @error('codigo_postal') is-invalid @enderror" id="codigo_postal"
+                        <input type="number" class="form-control @error('codigo_postal') is-invalid @enderror" id="codigo_postal"
                             name="codigo_postal" placeholder="" value="{{ old('codigo_postal', optional($pedido)->codigo_postal) }}">
                         @error('codigo_postal')
                             <div class="invalid-feedback"> {{ $message }} </div>
@@ -119,7 +119,7 @@
               <div class="mb-3">
                 <label for="telefono" class="">Teléfono: </label>
                 <div class="">
-                    <input type="text" class="form-control @error('telefono') is-invalid @enderror" id="telefono"
+                    <input type="number" class="form-control @error('telefono') is-invalid @enderror" id="telefono"
                         name="telefono" placeholder="" value="{{ old('telefono', optional($pedido)->telefono) }}">
                     @error('telefono')
                         <div class="invalid-feedback"> {{ $message }} </div>

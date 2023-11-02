@@ -11,18 +11,18 @@ use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\MercadoPagoService;
+use Barryvdh\DomPDF\Facade\PDF;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 
 class PedidoController extends Controller
 {
-    public function __construct(
+    public function __construct(//Incluye el servicio de MercadoPago
         private MercadoPagoService $mercadoPagoService
     ) {
     }
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    public function index()//Trae los pedidos a mostrar en el panel
     {
         $id_cliente = Auth::id();
         $pedidos = Pedido::where('id_cliente', $id_cliente)->get();
@@ -30,10 +30,7 @@ class PedidoController extends Controller
         return view('panel.cliente.lista_usuarios.misCompras', compact('pedidos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create() //Crea un pedido con los items que tiene en el carrito el cliente
     {
         $pedido = new Pedido();
         $user_id = Auth::id();
@@ -50,13 +47,9 @@ class PedidoController extends Controller
         return view('frontend.pages.checkout', compact('pedido', 'carrito'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(PedidoRequest $request)
+
+    public function store(PedidoRequest $request) //Guarda el pedido si se puede
     {
-
-
         $pedido = new Pedido();
 
         $pedido->id_cliente = Auth::id();
@@ -108,27 +101,14 @@ class PedidoController extends Controller
             ->with('redirectUrl', $preferencia->init_point);
     }
 
-    public function update(Request $requestURL = null, Pedido $pedido)
-    {
-    }
 
-    /**
-     * Display the specified resource.
-     */
-
-    public function show(Pedido $pedido)
-    {
-        //
-    }
-
-
-    public function itemsPedido($id)
+    public function itemsPedido($id) //Consulta los items de un pedido
     {
         $detallesPedido = DetallePedidos::latest()->where('id_pedido', $id)->with('productos')->get();
         return response()->json($detallesPedido);
     }
     
-     public function pago(Request $request)
+     public function pago(Request $request) //Registra el pago de un pedido
      {
         //Funcion para consultar si un pedido ya fue pagado
         $payment_id = $request->payment_id; //Id del pago, se ve en el comprobante
@@ -165,7 +145,7 @@ class PedidoController extends Controller
 
     }
 
-    public function cancelarPedido($pedido_id)
+    public function cancelarPedido($pedido_id) //Cancela un pedido
     {
         //Cancelo el pedido
         $pedido = Pedido::find($pedido_id);
@@ -183,5 +163,22 @@ class PedidoController extends Controller
         }
 
         $pedido->save();
+    }
+
+    public function generarFacturaPDF(){
+        $id = 1;
+        $pedido = Pedido::find($id);
+        $fechaActual = Carbon::now();
+        /* $carrito = DetallePedidos::latest()->where('id_pedido', $id)->with('productos')->get();
+        return view('pdfs.factura.factura', compact('pedido', 'carrito', 'fechaActual')); */
+        if ($pedido->pagado) {
+            $carrito = DetallePedidos::latest()->where('id_pedido', $id)->with('productos')->get();
+            $pdf = PDF::loadView('pdfs.factura.factura', compact('pedido', 'carrito', 'fechaActual'));
+        // Renderizamos la vista
+            $pdf->render();
+        // Visualizaremos el PDF en el navegador
+        return $pdf->stream('factura.pdf');
+        }
+
     }
 }

@@ -56,7 +56,7 @@ Route::any('/pedido/pago', [App\Http\Controllers\PedidoController::class, 'pago'
 
 
 //Mail rutas
-
+Route::any('/generarFacturaPDF', [App\Http\Controllers\PedidoController::class, 'generarFacturaPDF'])->name('pedido.generarFacturaPDF');
 Route::get('mail', function() {
     // Datos de Simulación de Registro
     $data = [

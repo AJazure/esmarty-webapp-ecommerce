@@ -56,13 +56,13 @@
           
 
           <tr>
-            <td colspan="4" class="grand total"><B>TOTAL FACTURA:</B></td>
-            <td class="total"><B>${{$total}}</B></td>
+            <td colspan="4" class="grand gran total"><B>TOTAL FACTURA:</B></td>
+            <td class="grand total"><B>${{$total}}</B></td>
           </tr>
         </tbody>
       </table>
       <div id="notices">
-        <div>AVISO:</div>
+        <div>AVISOS:</div>
         <div class="notice">DOCUMENTO NO VALIDO COMO FACTURA</div>
       </div>
     </main>

@@ -24,6 +24,7 @@ Route::get('productos/categoria/{categoria}', [PaginaDeInicio::class, 'MandarDat
 
 
 
+
 Auth::routes(
     ['verify'=>true]
 ); 

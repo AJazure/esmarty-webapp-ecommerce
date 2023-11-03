@@ -41,7 +41,7 @@
 
                 {{--  --}}
                 <h3 class="titulo">Ultimos Productos</h3>
-                @foreach ($productos->where('activo', 1)->take(2) as $producto)
+                @foreach ($productos as $producto)
                     @php
                         $photo = explode(',', $producto->url_imagen);
                     @endphp
@@ -62,12 +62,12 @@
                     <div class="col-12">
                         <div>
                             <!-- número de elementos por página -->
-                            <form action="{{ route('productos') }}" method="GET" class="mb-3">
+                            <form action="{{ route('MandarDatosCategoriaEspecifica', ['categoria' => request()->route('categoria')]) }}" method="GET" class="mb-3">
                                 <label for="perPage">Mostrar:</label>
                                 <select name="perPage" id="perPage" class="form-select" onchange="this.form.submit()">
-                                    <option value="5" {{ $productos->perPage() == 5 ? 'selected' : '' }}>5</option>
-                                    <option value="10" {{ $productos->perPage() == 10 ? 'selected' : '' }}>10</option>
-                                    <option value="20" {{ $productos->perPage() == 20 ? 'selected' : '' }}>20</option>
+                                    <option value="5" {{ $productos_especificos->perPage() == 5 ? 'selected' : '' }}>5</option>
+                                    <option value="10" {{ $productos_especificos->perPage() == 10 ? 'selected' : '' }}>10</option>
+                                    <option value="20" {{ $productos_especificos->perPage() == 20 ? 'selected' : '' }}>20</option>
                                 </select>
                             </form>
                         </div>
@@ -108,7 +108,7 @@
                 <div class="d-flex justify-content-center">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
-                            {{ $productos->links() }}
+                            {{ $productos_especificos->links() }}
                         </ul>
                     </nav>
                 </div>

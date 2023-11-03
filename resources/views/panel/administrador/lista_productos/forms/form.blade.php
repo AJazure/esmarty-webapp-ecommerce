@@ -8,15 +8,29 @@
 
         <div class="card-body">
 
-            {{-- @if ($post->id) --}}
-            <div class="mb-3 row">
-                <img src="{{ $producto->imagen ?? 'https://via.placeholder.com/1024' }}" alt="{{ $producto->nombre }}"
+            {{-- @if ($producto->id) --}}
+            {{-- <div class="mb3 row" id="imagePreviewContainer">
+                <img src="{{ $producto->imagen ?? 'https://via.placeholder.com/250' }}" alt="{{ $producto->nombre }}"
                     id="image_preview" class="img-fluid"
-                    style="object-fit: cover; object-position: center; height: 420px; width: 100%;">
+                    style="object-fit: cover; object-position: center; height: 250px; width: 250px;">
+            </div> --}}
+
+            <div class="mb-3 row" id="imagePreviewContainer">
+                {{-- MOSTRAR IMAGENES --}}
             </div>
+            
             {{-- @endif --}}
 
-
+            <div class="mb-3 row">
+                <label for="url_imagen" class="col-sm-4 col-form-label"> * Imágenes </label>
+                <div class="col-sm-8">
+                    <input class="form-control @error('url_imagen') is-invalid @enderror" type="file" id="url_imagen"
+                        name="url_imagen[]" multiple accept="image/*">
+                    @error('url_imagen')
+                        <div class="invalid-feedback"> {{ $message }} </div>
+                    @enderror
+                </div>
+            </div>
 
             <div class="mb-3 row">
                 <label for="codigo_producto" class="col-sm-4 col-form-label"> * Codigo </label>
@@ -40,6 +54,7 @@
                     @enderror
                 </div>
             </div>
+            
 
             <div class="mb-3 row">
                 <label for="proveedor" class="col-sm-4 col-form-label"> * Proveedor </label>
@@ -153,16 +168,7 @@
                 </div>
             </div>
 
-            <div class="mb-3 row">
-                <label for="url_imagen" class="col-sm-4 col-form-label"> * Imagen </label>
-                <div class="col-sm-8">
-                    <input class="form-control @error('url_imagen') is-invalid @enderror" type="file" id="url_imagen"
-                        name="url_imagen" accept="image/*">
-                    @error('url_imagen')
-                        <div class="invalid-feedback"> {{ $message }} </div>
-                    @enderror
-                </div>
-            </div>
+            @if ($producto->id)
             <div class="mb-3 row">
                 <label for="activo" class="col-sm-4 col-form-label"> * Estado </label>
                 <div class="col-sm-8">
@@ -175,6 +181,7 @@
                     @enderror
                 </div>
             </div>
+            @endif
 
 
 
@@ -189,21 +196,37 @@
 </div>
 
 @push('js')
-    <script>
-        document.addEventListener("DOMContentLoaded", function(event) {
-            const image = document.getElementById('url_imagen');
+<script>
 
-            image.addEventListener('change', (e) => {
+    //el siguiente evento reconoce cuando se sube una imagen o un grupo de imágenes, entonces inserta un elemento para dar una vista previa
+    document.addEventListener("DOMContentLoaded", function(event) {
+        const image = document.getElementById('url_imagen');
+        const imagePreviewContainer = document.getElementById('imagePreviewContainer');
 
-                const input = e.target;
-                const imagePreview = document.querySelector('#image_preview');
+        image.addEventListener('change', (e) => {
+            const input = e.target;
+            const imagePreviewContainer = document.getElementById('imagePreviewContainer');
 
-                if (!input.files.length) return
+            // Limpiar las imágenes anteriores
+            imagePreviewContainer.innerHTML = '';
 
-                file = input.files[0];
-                objectURL = URL.createObjectURL(file);
-                imagePreview.src = objectURL;
-            });
+            if (input.files.length > 0) {
+                for (let i = 0; i < Math.min(input.files.length, 3); i++) {
+                    const file = input.files[i];
+                    const objectURL = URL.createObjectURL(file);
+                    const img = document.createElement('img');
+                    img.src = objectURL;
+                    img.classList.add('preview-image');
+                    img.src = objectURL;
+                    img.classList.add('preview-image');
+                    img.style.objectFit = 'cover';
+                    img.style.objectPosition = 'center';
+                    img.style.height = '250px';
+                    img.style.width = '250px';
+                    imagePreviewContainer.appendChild(img);
+                }
+            }
         });
-    </script>
+    });
+</script>
 @endpush

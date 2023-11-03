@@ -72,7 +72,10 @@
                             <td>{{ $producto->stock_disponible }}</td>
                             {{-- <td>{{ Str::limit($producto->descripcion, 80) }}</td> --}}
                             <td>
-                                <img src="{{ $producto->url_imagen }}" alt="{{ $producto->nombre }}" class="img-fluid" style="width: 150px;">
+                                @php
+                                    $imagenes= explode('|', $producto->url_imagen)
+                                @endphp
+                                <img src="{{ $imagenes[0] }}" alt="{{ $producto->nombre }}" class="img-fluid" style="width: 150px;">
                             </td>
                             <td>
                                 <form action="{{ route('producto.destroy', $producto) }}" method="POST">

@@ -19,7 +19,9 @@
             <div class="card">
                 <div class="card-body">
                     <div class="mb-3">
-                        <img src="{{ $producto->url_imagen }}" alt="{{ $producto->nombre }}" id="image_preview" class="img-fluid" style="object-fit: cover; object-position: center; height: 420px; width: 100%;">
+                        @foreach ($imagenes as $imagen)
+                        <img src="{{ $imagen }}" alt="{{ $producto->nombre }}" id="image_preview" class="img-fluid" style="object-fit: cover; object-position: center; height: 250px; width: 250px;">    
+                        @endforeach
                     </div>
                     <div class="mb-3">    
                         <h5><strong>Codigo:</strong> {{ $producto->codigo_producto }}</h5>

@@ -39,8 +39,10 @@ class ProductoController extends Controller
         $marcas=Marca::get();//Recordar importar el modelo Categoria
         $proveedores=Proveedor::get();
 
+        $imagenes= explode('|', $producto->url_imagen);
+
         //Retornamos la vista de creacion de productos, enviamos al producto y las categorias
-        return view('panel.administrador.lista_productos.create', compact('producto','categorias','marcas','proveedores')); //compact(mismo nombre de la variable)
+        return view('panel.administrador.lista_productos.create', compact('producto','categorias','marcas','proveedores','imagenes')); //compact(mismo nombre de la variable)
     }
 
     /**
@@ -49,6 +51,8 @@ class ProductoController extends Controller
     public function store(ProductoRequest $request)
     {
         //
+        //dd($request->all());
+        
         $producto = new Producto();
         $producto->codigo_producto = $request->get('codigo_producto');
         $producto->nombre = $request->get('nombre');
@@ -60,15 +64,23 @@ class ProductoController extends Controller
         $producto->id_categoria = $request->get('id_categoria');
         $producto->id_proveedor = $request->get('id_proveedor');
         $producto->id_marca = $request->get('id_marca');
-        /* $producto->vendedor_id = auth()->user()->id; */
-        if ($request->hasFile('url_imagen')) {
-        // Subida de imagen al servidor (public > storage)
-        $url_imagen = $request->file('url_imagen')->store('public/producto');
-        $producto->url_imagen = asset(str_replace('public', 'storage', $url_imagen));
-        } else {
-        $producto->url_imagen = '';
+
+        if ($files = $request->file('url_imagen')) {
+
+            $url_imagen = [];
+
+            foreach ($files as $file) {
+                //$imagen_name = md5(rand(100, 10000)); //cifrado del nombre
+                //$extension = strtolower($file->getClientOriginalExtension()); //obtengo extension
+                //$imagen_full_name = $imagen_name . '.' . $extension; //armado del nombre completo del file
+                $url_imagen[] = asset($file->store('public/producto')); //guardo en un array las direcciones de cada uno 
+                //dd($url_imagen); //puedo ver que se envía la url completa
+                $imagenes = implode('|', $url_imagen); //contiene todas las url de las imagenes del array unidos con |
+            }
         }
-        // Almacena la info del producto en la BD
+
+        $producto->url_imagen = asset(str_replace('public', 'storage', $imagenes)); // Almacena la info del producto en la BD la url de tas las imagenes
+        
         $producto->save();
         return redirect()
         ->route('producto.index')
@@ -81,7 +93,9 @@ class ProductoController extends Controller
     public function show(Producto $producto)
     {
         $proveedor = Proveedor::find($producto->proveedor->id);
-        return view('panel.administrador.lista_productos.show', compact('producto','proveedor'));
+        $imagenes= explode('|', $producto->url_imagen); // separa urls
+
+        return view('panel.administrador.lista_productos.show', compact('producto','proveedor', 'imagenes'));
     }
 
     /**
@@ -115,10 +129,20 @@ class ProductoController extends Controller
         $producto->id_marca = $request->get('id_marca');
 
         if ($request->hasFile('url_imagen')) {
-            // Subida de la imagen nueva al servidor
-            $url_imagen = $request->file('url_imagen')->store('public/producto');
-            $producto->url_imagen = asset(str_replace('public', 'storage', $url_imagen));
+            
+            $files = $request->file('url_imagen');
+            $url_imagen = [];
+
+            foreach ($files as $file) {
+
+                $url_imagen[] = asset($file->store('public/producto')); //guardo en un array las direcciones de cada uno     
+                $imagenes = implode('|', $url_imagen); //contiene todas las url de las imagenes del array unidos con |
+
+            }
         }
+
+        $producto->url_imagen = asset(str_replace('public', 'storage', $imagenes)); // Almacena la info del producto en la BD la url de tas las imagenes
+
         // Actualiza la info del producto en la BD
         $producto->update();
         

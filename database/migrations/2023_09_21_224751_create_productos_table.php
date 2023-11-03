@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('stock_disponible')->nullable();
             $table->integer('stock_minimo')->nullable();
             $table->integer('stock_deseado')->nullable();
-            $table->string('url_imagen')->nullable();
+            $table->text('url_imagen', 200)->nullable(); //text almacena bastante
             $table->tinyInteger('activo')->default(1);
             $table->timestamps();
 

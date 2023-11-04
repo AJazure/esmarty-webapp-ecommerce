@@ -107,7 +107,10 @@ class ProductoController extends Controller
         $categorias = Categoria::get();
         $marcas = Marca::get();
         $proveedores=Proveedor::get();
-        return view('panel.administrador.lista_productos.edit', compact('producto', 'categorias','marcas','proveedores'));
+
+        $imagenes= explode('|', $producto->url_imagen); // separa urls
+
+        return view('panel.administrador.lista_productos.edit', compact('producto', 'categorias','marcas','proveedores', 'imagenes'));
     }
 
     /**
@@ -127,21 +130,28 @@ class ProductoController extends Controller
         $producto->id_proveedor = $request->get('id_proveedor');
         $producto->id_categoria = $request->get('id_categoria');
         $producto->id_marca = $request->get('id_marca');
+        $existeImagen = $request->hasFile('url_imagen'); //bandera para validar así no cambie la imagen existente si no se sube nada
+        //dd($existeImagen);
+        if ($existeImagen) {
+            // si existe imagen cargadaa en el input (por defecto no tiene nada), significa que hay que mandarla a la bd reemplazando las urls existentes
 
-        if ($request->hasFile('url_imagen')) {
-            
-            $files = $request->file('url_imagen');
-            $url_imagen = [];
+                $files = $request->file('url_imagen'); //obtiene files
+                $url_imagen = [];
+    
+                foreach ($files as $file) {
+    
+                    $url_imagen[] = asset($file->store('public/producto')); //guardo en un array las direcciones de cada uno     
+                    $imagenes = implode('|', $url_imagen); //contiene todas las url de las imagenes del array unidos con |
+    
+                }
 
-            foreach ($files as $file) {
+            $url_imagen = $producto->url_imagen = asset(str_replace('public', 'storage', $imagenes)); // Almacena la info del producto en la BD la url de tas las imagenes
+            //dd($url_imagen);
+            $producto->url_imagen = $url_imagen;
 
-                $url_imagen[] = asset($file->store('public/producto')); //guardo en un array las direcciones de cada uno     
-                $imagenes = implode('|', $url_imagen); //contiene todas las url de las imagenes del array unidos con |
+            //dd($producto);
 
-            }
         }
-
-        $producto->url_imagen = asset(str_replace('public', 'storage', $imagenes)); // Almacena la info del producto en la BD la url de tas las imagenes
 
         // Actualiza la info del producto en la BD
         $producto->update();

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_proveedor'); // BIGINT(20) */
             $table->unsignedBigInteger('id_categoria'); // BIGINT(20)
             $table->unsignedBigInteger('id_marca'); // BIGINT(20)
-            $table->integer('codigo_producto')->nullable();
+            $table->string('codigo_producto', 15)->nullable();
             $table->string('nombre');
             $table->string('descripcion')->nullable();
             $table->integer('precio');

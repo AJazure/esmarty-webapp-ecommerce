@@ -10,7 +10,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12 mb-3">
-            <h1>Creación de un nuevo Producto</h1>
+            <h1>Alta de Nuevo Producto</h1>
             <a href="{{ route('producto.index') }}" class="btn btn-sm btn-secondary text-uppercase">
                 Volver Atras
             </a>

@@ -24,6 +24,7 @@ class UserRequest extends FormRequest
 
 
         $rules = [
+            //reglas globales para users
             'name' => 'required|string|regex:/^[^0-9\W]+$/',
             'apellido' => 'required|string|regex:/^[^0-9\W]+$/',
             'telefono' => 'required|numeric',

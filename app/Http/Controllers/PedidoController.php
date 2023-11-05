@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\ProductoController;
 use App\Http\Requests\PedidoRequest;
+use App\Jobs\EnviarFacturaJob;
+use App\Mail\EnviarFacturaMailable;
 use App\Mail\PedidoMailable;
 use App\Models\User;
 use App\Models\Pedido;
@@ -138,6 +140,9 @@ class PedidoController extends Controller
             $urlPDF = $this->generarFacturaPDF($pedido->id); //Genera factura 
             $pedido->urlFactura = $urlPDF; 
             $pedido->save(); //Guarda el pedido exitosamente
+
+            EnviarFacturaJob::dispatch($pedido->id)->onQueue('emails');//Envio factura por mail mediante cola de trabajo
+
             return redirect()
             ->route('pedidos.index')
             ->with('alert', 'Pedido N°' .$pedido->num_pedido . ' pagado exitosamente. Con N° de operación: ' . $response->id );
@@ -201,16 +206,18 @@ class PedidoController extends Controller
             Mail::to($data['email'])->send(new PedidoMailable($data));
     }
 
-    public function avisoPagoConfirmado($id){ //Envio mail una vez se genere el pedido
+/*     public function avisoPagoConfirmado($id){ //Envio mail una vez se genere el pedido
         $pedido = Pedido::find($id);
-        /* $data = [
+        $data = [
             'name' => $pedido->nombre . " " . $pedido->apellido,
             'email' => $pedido->correo, // Correo del Destinatario
             'num_pedido' => $pedido->num_pedido,
             'fecha' => $pedido->created_at,
+            'fecha_pago' => $pedido->updated_at,
+            'urlFactura' => public_path('storage/pdfs/facturas/factura_' . $pedido->num_pedido . '.pdf')
             ];
             // Envio de mail
-            Mail::to($data['email'])->send(new PedidoMailable($data)); */
-    }
+            Mail::to($data['email'])->send(new EnviarFacturaMailable($data)); 
+    } */
 
 }

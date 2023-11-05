@@ -33,6 +33,7 @@ return new class extends Migration
             $table->boolean('en_preparacion')->default(0);
             $table->boolean('cancelado')->default(0);
             $table->boolean('enviado')->default(0);
+            $table->boolean('factura_enviada')->default(0);
             $table->bigInteger('total')->default(0);
             $table->string('linkDePago')->nullable();
             $table->string('urlFactura')->nullable();

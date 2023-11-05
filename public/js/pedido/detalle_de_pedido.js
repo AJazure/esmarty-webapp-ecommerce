@@ -14,6 +14,7 @@ $('#showDetallePedidoModal').on('show.bs.modal', function(event) {
 	var pagado = button.data('pagado');
 	var enviado = button.data('enviado');
 	var enpreparacion = button.data('enpreparacion');
+	var urlfactura = button.data('urlfactura');
 
 	$('#modal-nombre').text(nombre);
 	$('#modal-apellido').text(apellido);
@@ -24,13 +25,20 @@ $('#showDetallePedidoModal').on('show.bs.modal', function(event) {
 	$('#modal-direccion').text(direccion);
 	$('#modal-codigopostal').text(codigopostal);
 	$('#modal-total').text(total);
+	$('#modal-urlfactura').attr('href', urlfactura);
 
 	var idPedido = button.data('idpedido');
 	$('#modal-idPedido').text(idPedido);
 	
+	//Desactiva el boton de la factura, si no hay factura
+	if (!urlfactura) {
+		$('#modal-urlfactura').addClass('disabled');
+	} else {
+		$('#modal-urlfactura').removeClass('disabled');
+	}
+
+	//Muestra el estado del pedido en el modal
 	var estado;
-
-
 	if (cancelado) {
 		estado = '<span class="badge badge-danger">Cancelado</span>';
 	} else {
@@ -50,6 +58,7 @@ $('#showDetallePedidoModal').on('show.bs.modal', function(event) {
 	$('#estadoPedido').html(estado);
 
 });
+
 //Esto trae los items del pedido desde la base de datos
 $(document).on('click', '.cargarItems', function () {
 	var pedidoId = $(this).data('idpedido');

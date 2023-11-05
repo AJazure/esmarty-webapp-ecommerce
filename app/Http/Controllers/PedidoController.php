@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\ProductoController;
 use App\Http\Requests\PedidoRequest;
+use App\Mail\PedidoMailable;
 use App\Models\User;
 use App\Models\Pedido;
 use App\Models\DetallePedidos;
@@ -14,6 +15,7 @@ use App\Services\MercadoPagoService;
 use Barryvdh\DomPDF\Facade\PDF;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 
 class PedidoController extends Controller
 {
@@ -65,25 +67,24 @@ class PedidoController extends Controller
         $nuevoNumPedido = $ultimoNumPedido ? $ultimoNumPedido + 1 : 100; // Trae el último número de pedido de la DB y lo aumenta en 1
         $pedido->num_pedido = $nuevoNumPedido;
 
-
+        //Consulta el carrito del cliente y suma el total
         $carrito = DetallePedidos::latest()->where('id_cliente', Auth::id())->whereNull('id_pedido')->with('productos')->get();
         foreach ($carrito as $item) {
             $pedido->total += $item->subtotal * $item->cant_producto;
         }
-
+        //Si el carrito esta vacion, entonces no se genera el pedido
         if (!$pedido->total) {
             return redirect()
             ->route('carrito.agregarProductos')
             ->with('alert', 'No se puede guardar un pedido vacio. ' . '¡Agrega algunos productos al carrito por favor!');
         }
-
+        //Guarda por primera vez el pedido, pero sin link de pago
         $pedido->save();
         //Le agrego este ID de pedido a los items que estaban en el carrito: 
         DetallePedidos::whereNull('id_pedido')->where('id_cliente', $pedido->id_cliente)->update(['id_pedido' => $pedido->id]);
-        $preferencia = $this->mercadoPagoService->crearPreferencia($carrito, $pedido->id);
+        $preferencia = $this->mercadoPagoService->crearPreferencia($carrito, $pedido->id);//Creo link de pago
 
-         /* dd($preferencia);  */
-
+        //Bajo del stock los productos que se vendieron
         $productoController = app(ProductoController::class);
 
         foreach ($carrito as $item) {
@@ -92,8 +93,11 @@ class PedidoController extends Controller
             $productoController->restarStock($idProducto, $cant_vendida);
         }
 
+        //Guardo link de pago en la db
         $pedido->linkDePago = $preferencia->init_point;
         $pedido->save();
+
+        $this->avisoPedidoConfirmado($pedido->id); //Envio confirmacion de pedido al mail
 
         return redirect()
             ->route('carrito.agregarProductos')
@@ -118,8 +122,7 @@ class PedidoController extends Controller
         $pedido_id = $request->external_reference; //Trae el ID del pedido, que mandamos por external_reference al crear la preferencia de mercado pago
         $pedido = Pedido::find($pedido_id);//busco el pedido
 
-        /* dd($response->error); */
-
+        //Si no se realiza el pago y se vuelve al sitio
         if (!isset($response->error)) {
             $status = $response->status;
         } else {
@@ -129,15 +132,17 @@ class PedidoController extends Controller
             ->with('error', 'Pedido N°' .$pedido->num_pedido . ' pago cancelado. Vuelve a intentarlo en este panel.');
         }
         
-        
+        //Si se vuelve al sitio luego de pagar el pedido con mercado pago
         if ($status == "approved") {
-            $pedido->pagado = true;
-            $pedido->save();
+            $pedido->pagado = true; //Cambia estado del pedido
+            $urlPDF = $this->generarFacturaPDF($pedido->id); //Genera factura 
+            $pedido->urlFactura = $urlPDF; 
+            $pedido->save(); //Guarda el pedido exitosamente
             return redirect()
             ->route('pedidos.index')
             ->with('alert', 'Pedido N°' .$pedido->num_pedido . ' pagado exitosamente. Con N° de operación: ' . $response->id );
         } else {
-
+            //Si no se pudo pagar, no cambia el estado del pedido a pagado
             return redirect()
             ->route('pedidos.index')
             ->with('error', 'Pedido N°' .$pedido->num_pedido . ' no se pudo completar el pago. Con N° operación: ' . $response->id );
@@ -165,20 +170,47 @@ class PedidoController extends Controller
         $pedido->save();
     }
 
-    public function generarFacturaPDF(){
-        $id = 1;
+    public function generarFacturaPDF($id){ //Genero la factura una vez se pague el pedido
         $pedido = Pedido::find($id);
         $fechaActual = Carbon::now();
         /* $carrito = DetallePedidos::latest()->where('id_pedido', $id)->with('productos')->get();
         return view('pdfs.factura.factura', compact('pedido', 'carrito', 'fechaActual')); */
-        if ($pedido->pagado) {
-            $carrito = DetallePedidos::latest()->where('id_pedido', $id)->with('productos')->get();
-            $pdf = PDF::loadView('pdfs.factura.factura', compact('pedido', 'carrito', 'fechaActual'));
-        // Renderizamos la vista
-            $pdf->render();
-        // Visualizaremos el PDF en el navegador
-        return $pdf->stream('factura.pdf');
-        }
-
+        
+        $carrito = DetallePedidos::latest()->where('id_pedido', $id)->with('productos')->get();
+        $pdf = PDF::loadView('pdfs.factura.factura', compact('pedido', 'carrito', 'fechaActual'));
+    
+        // Guardar el PDF en una carpeta dentro de storage/app/public
+        $pdfPath = storage_path('app/public/pdfs/facturas/');
+        $pdfFileName = 'factura_' . $pedido->num_pedido . '.pdf';
+        $pdf->save($pdfPath . $pdfFileName);
+            
+            // Retornar la ruta del PDF guardado
+        return '/storage/pdfs/facturas/' . $pdfFileName; //Regresa la URL PUBLICA de la factura
+        
     }
+
+    public function avisoPedidoConfirmado($id){ //Envio mail una vez se genere el pedido
+        $pedido = Pedido::find($id);
+        $data = [
+            'name' => $pedido->nombre . " " . $pedido->apellido,
+            'email' => $pedido->correo, // Correo del Destinatario
+            'num_pedido' => $pedido->num_pedido,
+            'fecha' => $pedido->created_at
+            ];
+            // Envio de mail
+            Mail::to($data['email'])->send(new PedidoMailable($data));
+    }
+
+    public function avisoPagoConfirmado($id){ //Envio mail una vez se genere el pedido
+        $pedido = Pedido::find($id);
+        /* $data = [
+            'name' => $pedido->nombre . " " . $pedido->apellido,
+            'email' => $pedido->correo, // Correo del Destinatario
+            'num_pedido' => $pedido->num_pedido,
+            'fecha' => $pedido->created_at,
+            ];
+            // Envio de mail
+            Mail::to($data['email'])->send(new PedidoMailable($data)); */
+    }
+
 }

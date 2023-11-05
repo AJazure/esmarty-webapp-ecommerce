@@ -46,10 +46,12 @@
                 </tbody>
             </table>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer d-flex justify-content-between">
+                <a href="" class="btn btn-danger" id="modal-urlfactura" target="_blank">  Factura  <i class="fas fa-file-pdf"> </i></a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
+    
 </div>
 

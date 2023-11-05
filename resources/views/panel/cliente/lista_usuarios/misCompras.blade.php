@@ -97,6 +97,7 @@
                             data-pagado="{{$pedido->pagado}}"
                             data-enpreparacion="{{$pedido->en_preparacion}}"
                             data-enviado="{{$pedido->enviado}}"
+                            data-urlfactura="{{$pedido->urlFactura}}"
                             >
                              Ver
                          </a>

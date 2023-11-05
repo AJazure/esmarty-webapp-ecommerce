@@ -56,8 +56,8 @@ Route::any('/pedido/pago', [App\Http\Controllers\PedidoController::class, 'pago'
 
 
 //Mail rutas
-Route::any('/generarFacturaPDF', [App\Http\Controllers\PedidoController::class, 'generarFacturaPDF'])->name('pedido.generarFacturaPDF');
-Route::get('mail', function() {
+/* Route::any('/generarFacturaPDF', [App\Http\Controllers\PedidoController::class, 'generarFacturaPDF'])->name('pedido.generarFacturaPDF'); */
+/*  Route::get('mail', function() {
     // Datos de Simulación de Registro
     $data = [
     'name' => 'Emanuel Hoyos',
@@ -67,5 +67,5 @@ Route::get('mail', function() {
     // Envio de mail
     Mail::to($data['email'])->send(new RegisterMailable($data));
     return "Mensaje enviado";
-   });
+   });  */
 

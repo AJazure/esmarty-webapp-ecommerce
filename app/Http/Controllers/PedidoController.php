@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\ProductoController;
 use App\Http\Requests\PedidoRequest;
+use App\Jobs\EmailConfirmandoPedidoJob;
 use App\Jobs\EnviarFacturaJob;
 use App\Mail\EnviarFacturaMailable;
 use App\Mail\PedidoMailable;
@@ -99,7 +100,9 @@ class PedidoController extends Controller
         $pedido->linkDePago = $preferencia->init_point;
         $pedido->save();
 
-        $this->avisoPedidoConfirmado($pedido->id); //Envio confirmacion de pedido al mail
+
+        EmailConfirmandoPedidoJob::dispatch($pedido->id)->onConnection('database');//Envio confirmacion por mail mediante cola de trabajo 
+        //$this->avisoPedidoConfirmado($pedido->id); //Envio confirmacion de pedido al mail
 
         return redirect()
             ->route('carrito.agregarProductos')
@@ -138,10 +141,11 @@ class PedidoController extends Controller
         if ($status == "approved") {
             $pedido->pagado = true; //Cambia estado del pedido
             $urlPDF = $this->generarFacturaPDF($pedido->id); //Genera factura 
-            $pedido->urlFactura = $urlPDF; 
+            $pedido->urlFactura = $urlPDF;  
             $pedido->save(); //Guarda el pedido exitosamente
 
-            EnviarFacturaJob::dispatch($pedido->id)->onQueue('emails');//Envio factura por mail mediante cola de trabajo
+            //$this->avisoPagoConfirmado($pedido->id); //Envio factura por mail
+            EnviarFacturaJob::dispatch($pedido->id)->onConnection('database');//Envio factura por mail mediante cola de trabajo 
 
             return redirect()
             ->route('pedidos.index')
@@ -194,7 +198,7 @@ class PedidoController extends Controller
         
     }
 
-    public function avisoPedidoConfirmado($id){ //Envio mail una vez se genere el pedido
+/*     public function avisoPedidoConfirmado($id){ //Envio mail una vez se genere el pedido
         $pedido = Pedido::find($id);
         $data = [
             'name' => $pedido->nombre . " " . $pedido->apellido,
@@ -204,9 +208,9 @@ class PedidoController extends Controller
             ];
             // Envio de mail
             Mail::to($data['email'])->send(new PedidoMailable($data));
-    }
+    } */
 
-/*     public function avisoPagoConfirmado($id){ //Envio mail una vez se genere el pedido
+    /* public function avisoPagoConfirmado($id){ //Envio mail una vez se genere el pedido
         $pedido = Pedido::find($id);
         $data = [
             'name' => $pedido->nombre . " " . $pedido->apellido,
@@ -218,6 +222,6 @@ class PedidoController extends Controller
             ];
             // Envio de mail
             Mail::to($data['email'])->send(new EnviarFacturaMailable($data)); 
-    } */
-
+    } 
+ */
 }

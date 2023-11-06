@@ -141,9 +141,9 @@
             <div class="mb-3 row">
                 <label for="descripcion" class="col-sm-4 col-form-label"> * Descripción </label>
                 <div class="col-sm-8">
-                    <textarea class="form-control @error('descripcio') is-invalid @enderror" id="descripcion" name="descripcion" rows="10"
+                    <textarea id="descripcion" name="descripcion" rows="10" class="form-control @error('descripcion') is-invalid @enderror"
                     placeholder="agregue una descripción del producto, información técnica, características, detalles importantes para el cliente, etc...">{{ old('descripcion', optional($producto)->descripcion) }}</textarea>
-                    @error('descripcio')
+                    @error('descripcion')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
                 </div>
@@ -151,9 +151,9 @@
 
             <div class="mb-3 row">
                 <label for="stock_disponible" class="col-sm-4 col-form-label"> * Stock Disponible </label>
-                <div class="col-sm-8">
+                <div class="col-sm-3">
                     <input type="number" class="form-control @error('stock_disponible') is-invalid @enderror"
-                        id="stock_disponible" name="stock_disponible" placeholder="cantidad de stock disponible actualmente"
+                        id="stock_disponible" name="stock_disponible" placeholder="cantidad disponible actualmente"
                         value="{{ old('stock_disponible', optional($producto)->stock_disponible) }}" maxlength="3">
                     @error('stock_disponible')
                         <div class="invalid-feedback"> {{ $message }} </div>
@@ -163,9 +163,9 @@
 
             <div class="mb-3 row">
                 <label for="stock_deseado" class="col-sm-4 col-form-label"> * Stock Deseado </label>
-                <div class="col-sm-8">
+                <div class="col-sm-3">
                     <input type="number" class="form-control @error('stock_deseado') is-invalid @enderror"
-                        id="stock_deseado" name="stock_deseado" placeholder="cantidad de stock deseado o seguro"
+                        id="stock_deseado" name="stock_deseado" placeholder="cantidad deseada"
                         value="{{ old('stock_deseado', optional($producto)->stock_deseado) }}" maxlength="3">
                     @error('stock_deseado')
                         <div class="invalid-feedback"> {{ $message }} </div>
@@ -175,9 +175,9 @@
 
             <div class="mb-3 row">
                 <label for="stock_minimo" class="col-sm-4 col-form-label"> * Stock Minimo </label>
-                <div class="col-sm-8">
+                <div class="col-sm-3">
                     <input type="number" class="form-control @error('stock_minimo') is-invalid @enderror"
-                        id="stock_minimo" name="stock_minimo" placeholder="cantidad de stock mínimo"
+                        id="stock_minimo" name="stock_minimo" placeholder="cantidad mínima"
                         value="{{ old('stock_minimo', optional($producto)->stock_minimo) }}" maxlength="3">
                     @error('stock_minimo')
                         <div class="invalid-feedback"> {{ $message }} </div>

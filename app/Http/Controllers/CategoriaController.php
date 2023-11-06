@@ -40,7 +40,6 @@ class CategoriaController extends Controller
         $categoria->descripcion = $request->get('descripcion');
         $categoria->activo = $request->get('activo');
 
-
         // Almacena la info del producto en la BD
         $categoria->save();
         return redirect()

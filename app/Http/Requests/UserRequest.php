@@ -25,8 +25,8 @@ class UserRequest extends FormRequest
 
         $rules = [
             //reglas globales para users
-            'name' => 'required|string|regex:/^[^0-9\W]+$/',
-            'apellido' => 'required|string|regex:/^[^0-9\W]+$/',
+            'name' => 'required|string|regex:/^[A-Za-zÁÉÍÓÚÜáéíóúüÑñ\s]+$/',
+            'apellido' => 'required|string|regex:/^[A-Za-zÁÉÍÓÚÜáéíóúüÑñ\s]+$/',
             'telefono' => 'required|numeric',
             'rol_id' => 'required', //es obligatorio que seleccione una opc que no sea 'seleccione un rol'    
         ];

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests;
-
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CategoriaRequest extends FormRequest
@@ -23,20 +23,36 @@ class CategoriaRequest extends FormRequest
     {
 
         $rules = [
-            'descripcion' => 'required|min:3|max:20|unique:marcas',
             'activo' => 'required|boolean'
         ];
 
         if ($this->isMethod('post')) { //para el método store
+            $rules['descripcion'] = 'required|min:3|max:20|unique:categorias,descripcion';
         } else if ($this->isMethod('put')) { //para el método update
+            $categoriaId = $this->route('categoria'); //obtengo el id que está en la ruta
+            
+            $rules['descripcion'] = [
+                'required',
+                'min:3',
+                'max:20',
+                Rule::unique('categorias')->ignore($categoriaId), // uso el id de esta categoría para que ignore la regla
+            ];
         }
-        return $rules;
+    return $rules;
     }
+
+    public function attributes()
+    {   // Renombramiento de los campos
+        return [
+            'descripcion' => 'nombre',
+        ];
+    }
+
     public function messages(): array
     {
         // Definir mensajes de error personalizados
         return [
-            
+            'descripcion.unique' => 'Este nombre ya existe.',
         ];
     }
 }

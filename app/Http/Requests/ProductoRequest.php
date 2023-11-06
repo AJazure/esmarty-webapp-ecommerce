@@ -63,6 +63,7 @@ class ProductoRequest extends FormRequest
             'id_proveedor' => 'proveedor',
             'id_categoria' => 'categoría',
             'id_marca' => 'marca',
+            'descripcion' => 'descripción',
         ];
     }
 
@@ -72,6 +73,7 @@ class ProductoRequest extends FormRequest
         return [
             'url_imagen.required' => 'Debe cargar almenos una imagen para este producto.',
             'url_imagen.max' => 'Solo se permite cargar 3 imágenes como máximo.',
+            'descripcion' => 'La descripción del producto no puede estar vacía',
         ];
     }
 

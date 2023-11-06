@@ -31,8 +31,8 @@
             <div class="mb-3 row">
                 <label for="cuit" class="col-sm-4 col-form-label"> * CUIT </label>
                 <div class="col-sm-8">
-                    <input type="number" class="form-control @error('cuit') is-invalid @enderror" id="cuit"
-                        name="cuit" value="{{ old('cuit', optional($proveedor)->cuit) }}">
+                    <input type="text" class="form-control @error('cuit') is-invalid @enderror" id="cuit"
+                        name="cuit" value="{{ old('cuit', optional($proveedor)->cuit) }}" minlength="13" maxlength="14">
                     @error('cuit')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror

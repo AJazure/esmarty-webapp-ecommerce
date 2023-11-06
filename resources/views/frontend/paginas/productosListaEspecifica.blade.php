@@ -27,15 +27,18 @@
                 </ul>
                 {{--  --}}
                 <h3 class="titulo">Filtrar por Precio</h3>
-                <form method="POST" action="">
+                <form method="POST" action="{{ route('filtrarPorPrecio') }}">
                     @csrf
+                    @php
+                        // Obten el precio máximo de los productos en la base de datos
+                        $precioMaximo = \App\Models\Producto::max('precio');
+                    @endphp
                     <label for="precio_range">Selecciona un rango de precios:</label>
-                    <input type="range" name="precio_range" id="precio_range" min="0" max="" step="1"
-                        value="">
-
-                    <output for="precio_range" id="selected_price"></output>
+                    <input type="range" name="precio_range" id="precio_range" min="0" max="{{ $precioMaximo }}" step="1" value="{{ old('precio_range') ?? 0 }}">
+                
+                    <output for="precio_range" id="selected_price">{{ old('precio_range') ?? 0 }}</output>
                     <br>
-                    <button type="submit">Filtrar</button>
+                    <button type="submit" class="filtrar">Filtrar</button>
                 </form>
                 <br>
 
@@ -48,9 +51,9 @@
                     <div class="card" style="width: 14rem;">
                         <img src="{{ $photo[0] }}" alt="{{ $photo[0] }}" class="card-img-top" width="250">
                         <div class="card-body">
-                            <p class="card-text">
-                                <a href="">{{ $producto->nombre }}</a>
-                            <p class="price">{{ $producto->precio }} </p>
+                            <p class="card-text titulo">
+                                <a href="{{route('MandarDatosProductoEspecifico', $producto->id)}}">{{ $producto->nombre }}</a>
+                            <p class="precio">{{ $producto->precio }} </p>
                             </p>
                         </div>
                     </div>
@@ -60,18 +63,7 @@
             <div class="col-lg-9 col-md-8 col-12">
                 <div class="row">
                     <div class="col-12">
-                        <div>
-                            <!-- número de elementos por página -->
-                            <form action="{{ route('MandarDatosCategoriaEspecifica', ['categoria' => request()->route('categoria')]) }}" method="GET" class="mb-3">
-                                <label for="perPage">Mostrar:</label>
-                                <select name="perPage" id="perPage" class="form-select" onchange="this.form.submit()">
-                                    <option value="5" {{ $productos_especificos->perPage() == 5 ? 'selected' : '' }}>5</option>
-                                    <option value="10" {{ $productos_especificos->perPage() == 10 ? 'selected' : '' }}>10</option>
-                                    <option value="20" {{ $productos_especificos->perPage() == 20 ? 'selected' : '' }}>20</option>
-                                </select>
-                            </form>
-                        </div>
-                        <!--/ End Shop Top -->
+                        <h2>Productos por Categoria</h2>
                     </div>
                 </div>
                 <div class="row">
@@ -94,7 +86,7 @@
                                         </div>
                                     </div>
                                     <div class="product-content text-center">
-                                        <h3><a href="">{{ $product->nombre }}</a></h3>
+                                        <h3 class="titulo"><a href="{{route('MandarDatosProductoEspecifico', $product->id)}}" >{{ $product->nombre }}</a></h3>
                                         <p>${{ $product->precio }}</p>
                                     </div>
                                 </div>
@@ -134,10 +126,3 @@
 
 
 @endsection
-@push('styles')
-    <style>
- 
-    </style>
-@endpush
-@push('scripts')
-@endpush

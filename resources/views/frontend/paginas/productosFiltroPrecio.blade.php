@@ -30,6 +30,7 @@
                 <form method="POST" action="{{ route('filtrarPorPrecio') }}">
                     @csrf
                     @php
+                        // Obten el precio máximo de los productos en la base de datos
                         $precioMaximo = \App\Models\Producto::max('precio');
                     @endphp
                     <label for="precio_range">Selecciona un rango de precios:</label>
@@ -45,7 +46,7 @@
 
                 {{--  --}}
                 <h3 class="titulo">Ultimos Productos</h3>
-                @foreach ($productos->take(2) as $producto)
+                @foreach ($ultimosProductos as $producto)
                     @php
                         $photo = explode(',', $producto->url_imagen);
                     @endphp
@@ -64,13 +65,13 @@
             <div class="col-lg-9 col-md-8 col-12">
                 <div class="row">
                     <div class="col-12">
-                        <h2>Todos los Productos</h2>
+                        <h2>Productos Filtrados por Precio</h2>
                     </div>
                 </div>
                 <div class="row">
                     {{-- Mostrar los productos --}}
                     @if (count($productos) > 0)
-                        @foreach ($productos->where('activo', 1) as $product)
+                        @foreach ($productos as $product)
                             <div class="col-lg-4 col-md-6 col-11">
                                 <div class="single-product">
                                     <div class="product-img">

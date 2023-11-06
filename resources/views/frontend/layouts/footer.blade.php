@@ -1,10 +1,9 @@
 <footer class="footer bg-dark">
     <!-- Footer Top -->
-    <div class="footer-top section pt-4">
+    <div class="footer-top pt-4">
         <div class="container">
             <div class="row">
                 <div class="col-lg-9 col-md-9 col-12">
-                    <div class="single-footer about">
                         <div class="logo">
                             <a href="#"><img src="{{ asset('imagenes/logo-esmarty-cuadrado-claro@0.5x.png') }}"
                                     alt="Logo Esmarty" width="100"></a>
@@ -14,7 +13,6 @@
                             dolores blanditiis qui necessitatibus earum facilis exercitationem sint, dicta similique
                             harum placeat vero commodi numquam, non ab.
                         </p>
-                    </div>
                 </div>
 
                 <div class="col-lg-3 col-md-3 col-12">
@@ -30,7 +28,6 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="sharethis-inline-follow-buttons"></div>
                     </div>
                 </div>
             </div>
@@ -39,7 +36,6 @@
     <!-- Footer Top Fin -->
 
     <div class="copyright">
-        <hr>
         <div class="container">
             <div class="row">
                 <div class="col-12">

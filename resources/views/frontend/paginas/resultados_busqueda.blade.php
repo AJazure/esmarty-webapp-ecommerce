@@ -21,7 +21,7 @@
                 <ul class="categoria-lista">
                     @if ($categorias)
                         @foreach ($categorias as $categoria)
-                            <li><a href="{{route('MandarDatosCategoriaEspecifica', $categoria->id)}}">{{ $categoria->descripcion }}</a></li>
+                        <li><a href="{{route('MandarDatosCategoriaEspecifica', $categoria->id)}}">{{ $categoria->descripcion }}</a></li>
                         @endforeach
                     @endif
                 </ul>
@@ -39,8 +39,6 @@
                     <br>
                     <button type="submit" class="filtrar">Filtrar</button>
                 </form>
-                
-                
                 <br>
 
                 {{--  --}}
@@ -64,13 +62,13 @@
             <div class="col-lg-9 col-md-8 col-12">
                 <div class="row">
                     <div class="col-12">
-                        <h2>Todos los Productos</h2>
+                        <h2>Resultados de Búsqueda para "{{ $terminoBusqueda }}"</h2>
                     </div>
                 </div>
                 <div class="row">
                     {{-- Mostrar los productos --}}
-                    @if (count($productos) > 0)
-                        @foreach ($productos->where('activo', 1) as $product)
+                    @if (count($productosResultados) > 0)
+                        @foreach ($productosResultados->where('activo', 1) as $product)
                             <div class="col-lg-4 col-md-6 col-11">
                                 <div class="single-product">
                                     <div class="product-img">
@@ -94,7 +92,7 @@
                             </div>
                         @endforeach
                     @else
-                        <h4 class="text-warning" style="margin:100px auto;">No hay productos.</h4>
+                        <h4 class="text-warning" style="margin:100px auto;">No se encontraron resultados para "{{ $terminoBusqueda }}"</h4>
                     @endif
                 </div>
 
@@ -115,4 +113,16 @@
 
     {{--  --}}
 
+
+
+
+
+
+
+
+
+
+
+
 @endsection
+

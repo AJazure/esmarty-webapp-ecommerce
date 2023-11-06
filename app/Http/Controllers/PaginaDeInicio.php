@@ -13,37 +13,72 @@ class PaginaDeInicio extends Controller
     {
         $productos = Producto::latest()->get();
 
-        $categorias = Categoria::get()->where('activo', 1);
+        $categorias = Categoria::where('activo', 1)->get();
 
-        return view('frontend.index', compact('productos', 'categorias'));
+        $carrusel = Producto::inRandomOrder()->take(3)->get();
+
+        return view('frontend.index', compact('productos', 'categorias', 'carrusel'));
     }
 
-    public function MandarDatosLista(Request $request)
-{
-    $categorias = Categoria::get()->where('activo', 1);
+    public function resultadosBusqueda(Request $request)
+    {
+        $productos = Producto::latest()
+        ->simplePaginate(12)
+        ->withQueryString();
+        
+        $categorias = Categoria::where('activo', 1)->get();
 
-    $perPage = $request->input('perPage', 10);
+        $terminoBusqueda = $request->input('busqueda');
+        $productosResultados = Producto::where('nombre', 'like', '%' . $terminoBusqueda . '%')->get();
+    
+        return view('frontend.paginas.resultados_busqueda', compact('productos', 'categorias', 'productosResultados', 'terminoBusqueda'));
+    }
+
+    public function MandarDatosLista()
+{
+    $categorias = Categoria::where('activo', 1)->get();
+
 
     $productos = Producto::latest()
-        ->simplePaginate($perPage)
+        ->simplePaginate(12)
         ->withQueryString(); 
 
-    return view('frontend.paginas.productosLista', compact('productos', 'categorias', 'perPage'));
+    return view('frontend.paginas.productosLista', compact('productos', 'categorias'));
 }
 
-public function MandarDatosCategoriaEspecifica(Request $request, $variable)
+public function MandarDatosCategoriaEspecifica( $variable)
 {
-    $productos = Producto::latest()->get()->where('activo', 1)->take(2);
-    $categorias = Categoria::get()->where('activo', 1);
+    $productos = Producto::latest()->where('activo', 1)->take(2)->get();
+    $categorias = Categoria::where('activo', 1)->get();
 
-    $perPage = $request->input('perPage', 10);
 
     $productos_especificos = Producto::where('id_categoria', $variable)
         ->latest()
-        ->simplePaginate($perPage)
+        ->simplePaginate(12)
         ->withQueryString();
 
-    return view('frontend.paginas.productosListaEspecifica', compact('productos', 'productos_especificos', 'categorias', 'perPage'));
+    return view('frontend.paginas.productosListaEspecifica', compact('productos', 'productos_especificos', 'categorias'));
+}
+
+public function MandarDatosProductoEspecifico($id){
+    $producto = Producto::find($id);
+    $categorias = Categoria::where('activo', 1)->get();
+    $marcas= Marca::where('activo', 1)->get();
+    
+    $categoriaEspecifica = Categoria::find($producto->id_categoria);
+    $marcaEspecifica = Marca::find($producto->id_marca);
+
+    return view('frontend.paginas.productoDetalle', compact('producto','marcaEspecifica', 'categorias', 'categoriaEspecifica'));
+}
+
+public function filtrarPorPrecio(Request $request)
+{
+    $categorias = Categoria::where('activo', 1)->get();
+
+    $productos = Producto::where('precio', '<=', $request->input('precio_range'))->simplePaginate(12);
+
+    $ultimosProductos= Producto::latest()->take(2)->get();
+    return view('frontend.paginas.productosFiltroPrecio', compact('productos', 'categorias','ultimosProductos'));
 }
 
 }

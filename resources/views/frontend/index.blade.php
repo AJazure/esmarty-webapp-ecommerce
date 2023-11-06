@@ -7,61 +7,43 @@
     <div class="container-fluid p-0">
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
+                @foreach ($carrusel as $key => $producto)
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $key }}"
+                        class="{{ $key == 0 ? 'active' : '' }}" aria-label="Slide {{ $key + 1 }}"></button>
+                @endforeach
             </div>
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="{{ asset('imagenes/carrusel/2b.png') }}" class="d-block w-100 h-100"
-                        style="object-fit: cover;" alt="...">
-                    <div
-                        class="carousel-caption d-none d-md-block text-start align-items-center justify-content-center h-50">
-                        <div class="bg-dark d-inline-block p-3 rounded" style="opacity: 0.7;">
-                            <h1>Producto 1</h1>
-                            <p>Descripción.</p>
-                            <button class="btn btn-primary">Comprar</button>
+                @foreach ($carrusel as $key => $producto)
+                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                        @if ($producto->url_imagen)
+                            <img src="{{ asset($producto->url_imagen) }}" class="d-block w-100 h-100"
+                                style="object-fit: contain; max-height: 80vh;" alt="...">
+                        @else
+                            <img src="{{ asset('ruta_por_defecto_si_no_hay_imagen') }}" class="d-block w-100 h-100"
+                                style="object-fit: contain; max-height: 80vh;" alt="...">
+                        @endif
+                        <div
+                            class="carousel-caption d-none d-md-block text-start align-items-center justify-content-center">
+                            <div class="bg-dark p-3 rounded" style="opacity: 0.7;">
+                                <h1>{{ $producto->nombre }}</h1>
+                                {{-- <p>{{ $producto->descripcion }}</p> --}}
+                                <a href="{{ route('MandarDatosProductoEspecifico', $producto->id) }}"
+                                    class="btn btn-primary">Comprar</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="{{ asset('imagenes/carrusel/ballena-aerea.jpg') }}" class="d-block w-100 h-100"
-                        style="object-fit: cover;" alt="...">
-                    <div
-                        class="carousel-caption d-none d-md-block text-start align-items-center justify-content-center h-50">
-                        <div class="bg-dark d-inline-block p-3 rounded" style="opacity: 0.7;">
-                            <h1>Producto 2</h1>
-                            <p>Descripción.</p>
-                            <button class="btn btn-primary">Comprar</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img src="{{ asset('imagenes/carrusel/kimetsu.jpg') }}" class="d-block w-100 h-100"
-                        style="object-fit: cover;" alt="...">
-                    <div
-                        class="carousel-caption d-none d-md-block text-start align-items-center justify-content-center h-50">
-                        <div class="bg-dark d-inline-block p-3 rounded" style="opacity: 0.7;">
-                            <h1>Producto </h1>
-                            <p>Descripción.</p>
-                            <button class="btn btn-primary">Comprar</button>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Anterior</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Siguiente</span>
-                </button>
+                @endforeach
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev" >
+                <span class="carousel-control-prev-icon" aria-hidden="true" style="color: white;"></span>
+                <span class="visually-hidden" style="color: white;">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true" style="color: white;"></span>
+                <span class="visually-hidden" style="color: white;">Siguiente</span>
+            </button>
         </div>
     </div>
     {{-- Slider Fin --}}
@@ -80,19 +62,20 @@
                     </div>
                 </div>
                 @if ($categorias)
-                    @foreach ($categorias->where('activo', 1) as $categoria)
+                    @foreach ($categorias as $categoria)
                         <div class="col-lg-4 col-md-6 col-12">
                             <div class="single-banner text-center">
                                 @if ($categoria->activo)
                                     <img src="https://via.placeholder.com/350x200" alt="#">
                                     <div class="content">
-                                        <h3><a href="">{{ $categoria->descripcion }}</a></h3>
+                                        <h3><a class="dropdown-item"
+                                                href="{{ route('MandarDatosCategoriaEspecifica', $categoria->id) }}">{{ $categoria->descripcion }}</a>
+                                        </h3>
                                     </div>
                                 @endif
                             </div>
                         </div>
                     @endforeach
-
                 @endif
             </div>
         </div>
@@ -130,8 +113,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="content">
-                                        <h4 class="title"><a href="#">{{ $product->nombre }}</a></h4>
-                                        <p class="price">{{ $product->precio }}</p>
+                                        <h4 class="titulo"><a href="#">{{ $product->nombre }}</a></h4>
+                                        <p class="precio">${{ $product->precio }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -141,12 +124,5 @@
             </div>
         </div>
     </section>
-
-
-
     {{-- Ultimos Agregados Fin --}}
-
-
-
 @endsection
-

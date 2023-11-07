@@ -39,11 +39,14 @@ class EnviarFacturaJob implements ShouldQueue
             'fecha_pago' => $pedido->updated_at,
             'urlFactura' => public_path('storage/pdfs/facturas/factura_' . $pedido->num_pedido . '.pdf')
             ];
-            if (!$pedido->factura_enviada) { // Envio de mail si no existe 
+
+            Mail::to($data['email'])->send(new EnviarFacturaMailable($data));
+
+            /* if (!$pedido->factura_enviada) { // Envio de mail si no existe 
                 Mail::to($data['email'])->send(new EnviarFacturaMailable($data)); 
                 $pedido->factura_enviada = true;
                 $pedido->save();
-            }
+            } */
            
             
     }

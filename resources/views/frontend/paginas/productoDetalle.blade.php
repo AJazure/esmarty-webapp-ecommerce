@@ -34,7 +34,7 @@
                                 <div class="short">
                                     <h4 class="titulo">{{ $producto->nombre }}</h4>
                                     <p class="precio">${{ $producto->precio }}</p>
-                                    <p class="description">{!! $producto->descripcion !!}</p>
+                                    {{-- <p class="description">{!! $producto->descripcion !!}</p> --}}
                                 </div>
                                 <!--/ Descripcion Fin-->
 

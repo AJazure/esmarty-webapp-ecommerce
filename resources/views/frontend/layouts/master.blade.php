@@ -35,10 +35,8 @@
             });
 
             function search() {
-                // Obtén el valor de búsqueda
                 var searchTerm = $('#busquedaInput').val().trim();
 
-                // Si el término de búsqueda no está vacío, redirige a la página de resultados
                 if (searchTerm !== '') {
                     window.location.href = '/resultados?search=' + searchTerm;
                 }
@@ -56,13 +54,16 @@
     </script>
 
     <script>
-        // Añade este script para actualizar el valor en tiempo real
         var precioRange = document.getElementById('precio_range');
         var selectedPrice = document.getElementById('selected_price');
 
         precioRange.addEventListener('input', function() {
             selectedPrice.value = precioRange.value;
         });
+    </script>
+
+    <script>
+        
     </script>
 
 </body>

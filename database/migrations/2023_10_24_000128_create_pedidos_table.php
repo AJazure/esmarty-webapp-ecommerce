@@ -36,6 +36,7 @@ return new class extends Migration
             $table->bigInteger('total')->default(0);
             $table->string('linkDePago')->nullable();
             $table->string('urlFactura')->nullable();
+            $table->string('factura_enviada')->boolean();
             /* $table->foreign('id_metodo_de_pago')->references('id')->on('metodos_de_pago'); */
             $table->foreign('id_cliente')->references('id')->on('users');
 

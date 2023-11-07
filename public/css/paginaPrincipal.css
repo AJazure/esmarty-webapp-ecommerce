@@ -1,0 +1,158 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+
+}
+.navbar{
+    padding: 0;
+}
+
+.navbar.scrolled {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+}
+
+.nav-item:hover{
+    text-decoration: underline;
+}
+
+/* carrusel */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+    color: white;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: #330ae3;
+    border-radius: 50%;
+    padding: 20px;
+}
+
+.carousel-control-prev:hover .carousel-control-prev-icon,
+.carousel-control-next:hover .carousel-control-next-icon {
+    background-color: #1a0586;
+}
+
+.titulo a{
+    text-decoration: none;
+}
+
+.breadcrumb li a{
+    text-decoration: none;
+}
+
+/* Categorías */
+.categoria-lista {
+    list-style: none;
+    padding: 0;
+}
+
+.categoria-lista li {
+    margin-bottom: 10px;
+
+}
+
+.categoria-lista li a{
+    text-decoration: none;
+
+}
+form {
+    margin-top: 20px;
+}
+.categoria-nombre:hover{
+    text-decoration: underline;
+}
+
+/* botón Filtrar */
+button.filtrar {
+    background-color: #007bff;
+    color: #fff; 
+    border: 1px solid #007bff; 
+    padding: 10px 20px; 
+    border-radius: 5px; 
+    cursor: pointer; 
+}
+
+button.filtrar:hover {
+    background-color: #0056b3;
+    border-color: #0056b3; 
+}
+
+.imagen-detalle img{
+    width: auto;
+}
+
+#precio_range {
+    width: 75%;
+}
+
+/* Últimos Productos */
+.card {
+    margin-bottom: 20px;
+}
+
+/* Todos los Productos */
+.single-product {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+
+}
+
+.product-img img {
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+}
+
+.product-content {
+    padding: 20px;
+}
+
+.pagination {
+    margin: 20px 0;
+}
+
+
+/*Footer */
+.footer {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.footer p {
+    font-size: 14px;
+    color: #a0a0a0;
+}
+
+.contact ul {
+    list-style: none;
+    padding: 0;
+}
+
+.contact li {
+    margin-bottom: 10px;
+}
+
+.contact a {
+    color: #fff;
+    margin-right: 10px;
+}
+
+.copyright {
+    padding-top: 20px;
+    border-top: 1px solid #565656;
+}
+
+.copyright p {
+    font-size: 12px;
+    color: #a0a0a0;
+}
+
+.copyright a {
+    color: #fff;
+    font-weight: bold;
+}

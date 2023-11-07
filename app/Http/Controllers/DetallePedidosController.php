@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Producto;
 use App\Models\DetallePedidos;
 use Illuminate\Http\Request;
@@ -14,13 +15,20 @@ class DetallePedidosController extends Controller
      */
     public function index()
     {
+        $categorias = Categoria::where('activo', 1)->get();
+
+        return view('frontend.pages.cart', compact('categorias'));
+    }
+
+    public function testProductos()
+    {
+        $categorias = Categoria::where('activo', 1)->get();
         $productos = Producto::where('activo', true)->get(); //Trae todos los productos "Activos"
         /* $productos = Producto::where('activo', true)
                     ->where('stock_disponible', '>', 0)
                     ->get(); //Trae todos los productos activos y con stock disponible */ 
-        return view('frontend.pages.productosTest', compact('productos'));
+        return view('frontend.pages.productosTest', compact('productos', 'categorias'));
     }
-
 
 
     public function agregarAlCarrito(Request $request) //Busca un item especifico en los pedidos y actualiza la cantidad pedida

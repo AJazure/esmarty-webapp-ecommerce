@@ -10,6 +10,9 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/paginaPrincipal.css') }}">
     <script src="https://kit.fontawesome.com/88816cb6bd.js" crossorigin="anonymous"></script>
+
+    @yield('styles')
+
 </head>
 
 <body>
@@ -54,17 +57,18 @@
     </script>
 
     <script>
-        var precioRange = document.getElementById('precio_range');
+         var precioRange = document.getElementById('precio_range');
         var selectedPrice = document.getElementById('selected_price');
 
-        precioRange.addEventListener('input', function() {
+        if (precioRange) {
+            precioRange.addEventListener('input', function() {
             selectedPrice.value = precioRange.value;
-        });
-    </script>
-
-    <script>
+        }); 
+        }
         
     </script>
+
+    @yield('js')
 
 </body>
 

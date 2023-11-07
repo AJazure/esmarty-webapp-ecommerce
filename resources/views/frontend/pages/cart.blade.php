@@ -1,5 +1,5 @@
-@extends('frontend.layouts.header')
-@section('title','Cart Page')
+@extends('frontend.layouts.master')
+@section('title', 'Esmarty || Carrito')
 @section('main-content')
 	<!-- Breadcrumbs -->
 
@@ -95,4 +95,4 @@
 		<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script src="{{asset('js/carrito/tabla_carrito.js')}}"></script>
-    @stop
+@stop

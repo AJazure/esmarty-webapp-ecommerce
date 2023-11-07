@@ -50,12 +50,11 @@ Route::post('/metodosdepago/cambiarEstado', [App\Http\Controllers\MetodoDePagoCo
 Route::post('/users/cambiarEstado', [App\Http\Controllers\UserController::class, 'cambiarEstado'])->name('cambiar.estado.users');
 
 //Carrito rutas
-Route::get('/carrito', function () {
-    return view('frontend.pages.cart');
-});
+
+Route::get('/carrito', [App\Http\Controllers\DetallePedidosController::class, 'index'])->name('carrito.carrito');
 
 Route::get('/miCarrito', [App\Http\Controllers\DetallePedidosController::class, 'miCarrito'])->name('carrito.miCarrito');
-Route::get('/agregarProductos', [App\Http\Controllers\DetallePedidosController::class, 'index'])->name('carrito.agregarProductos');
+Route::get('/agregarProductos', [App\Http\Controllers\DetallePedidosController::class, 'testProductos'])->name('carrito.agregarProductos');
 Route::post('/miCarrito/quitarItem', [App\Http\Controllers\DetallePedidosController::class, 'quitarItem'])->name('carrito.quitarItem');
 Route::post('/miCarrito/actualizarCantidad', [App\Http\Controllers\DetallePedidosController::class, 'actualizarCantidad'])->name('carrito.actualizarCantidad');
 Route::post('/miCarrito/agregarAlCarrito', [App\Http\Controllers\DetallePedidosController::class, 'agregarAlCarrito'])->name('carrito.agregarAlCarrito');

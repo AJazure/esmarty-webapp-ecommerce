@@ -1,4 +1,4 @@
-@extends('frontend.layouts.header')
+@extends('frontend.layouts.master')
 @section('title', 'Cart Page')
 @section('main-content')
     <!-- Breadcrumbs -->
@@ -34,7 +34,7 @@
                 @endforeach
               
               <li class="list-group-item d-flex justify-content-between">
-                <span>Total (USD)</span>
+                <span>Total a pagar: </span>
                 <strong>${{$total}}</strong>
               </li>
             </ul>

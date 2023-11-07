@@ -8,6 +8,7 @@ use App\Jobs\EmailConfirmandoPedidoJob;
 use App\Jobs\EnviarFacturaJob;
 use App\Mail\EnviarFacturaMailable;
 use App\Mail\PedidoMailable;
+use App\Models\Categoria;
 use App\Models\User;
 use App\Models\Pedido;
 use App\Models\DetallePedidos;
@@ -49,7 +50,9 @@ class PedidoController extends Controller
         $pedido->telefono = $cliente->telefono;
         $pedido->direccion = $cliente->direccion;
 
-        return view('frontend.pages.checkout', compact('pedido', 'carrito'));
+        $categorias = Categoria::where('activo', 1)->get();
+
+        return view('frontend.pages.checkout', compact('pedido', 'carrito', 'categorias'));
     }
 
 

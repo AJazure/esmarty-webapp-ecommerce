@@ -1,4 +1,4 @@
-@extends('frontend.layouts.header')
+@extends('frontend.layouts.master')
 @section('title', 'Cart Page')
 @section('main-content')
     <!-- Breadcrumbs -->

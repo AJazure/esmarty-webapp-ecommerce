@@ -56,7 +56,7 @@
             {{-- Carrito --}}
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{route('carrito.carrito')}}">
                         <i class="fa-solid fa-shopping-cart"></i> 0
                     </a>
                 </li>

@@ -1,23 +1,29 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', 'Inicio Ecore Admin')
+
+@section('content_header')
+    <h1>Dashboard</h1>
+@stop
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+    <p>Bienvenido a este admin</p>
+    <div class="card">
+        <div class="card-header">
+            <h1>Bienvenido a la Prueba</h1>
+        </div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
+        <div class="card-body">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum magnam voluptas modi enim qui odit, quia possimus, inventore commodi vitae soluta similique ducimus hic! Minus saepe nostrum deserunt quam eum!</p>
         </div>
     </div>
-</div>
-@endsection
+    
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+    <script> console.log('hola'); </script>
+@stop

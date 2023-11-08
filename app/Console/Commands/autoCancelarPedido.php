@@ -27,7 +27,7 @@ class autoCancelarPedido extends Command
      */
     public function handle()
     {
-        $segundos = 120;
+        $segundos = 30;
         $pedidoController = app(PedidoController::class); //Uso el controlador de pedidos
         $horaActual = Carbon::now(); //Traigo Hora actual del servidor
         $pedidos = Pedido::where('pagado', false)->where('cancelado', false)->get(); //Consulto por los pedidos que no estan ni pagados, ni cancelados

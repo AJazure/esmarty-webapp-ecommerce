@@ -51,7 +51,7 @@
                         <img src="{{ $photo[0] }}" alt="{{ $photo[0] }}" class="card-img-top" width="250">
                         <div class="card-body">
                             <p class="card-text titulo">
-                                <a href="{{route('MandarDatosProductoEspecifico', $producto->id)}}">{{ $producto->nombre }}</a>
+                                <a href="{{route('MandarDatosProductoEspecifico', $producto->id)}}">{{Str::limit($producto->nombre, 25)}}</a>
                             <p class="precio">{{ $producto->precio }} </p>
                             </p>
                         </div>

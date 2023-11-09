@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Auth\RedirectsUsers;
+
 
 class LoginController extends Controller
 {
@@ -37,4 +39,14 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+//     protected function redirectPath()
+// {
+//     if (auth()->user()->hasRole('cliente')) {
+//         return redirect()->route('MandarDatosPaginaInicio');
+//     }
+
+//     return redirect()->route('panel.index');
+// }
+
 }

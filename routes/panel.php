@@ -9,10 +9,14 @@ use App\Http\Controllers\MetodoDePagoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
+	if (auth()->user()->hasRole('cliente')) {
+		return redirect()->route('MandarDatosPaginaInicio');
+	}
+
 	return view('panel.index');
 })->middleware(['verified'])->name('Welcome');
 
-Route::resource('/proveedores', ProveedorController::class)->names('proveedor'); 
+Route::resource('/proveedores', ProveedorController::class)->names('proveedor');
 Route::resource('/productos', ProductoController::class)->names('producto');
 Route::resource('/marcas', MarcaController::class)->names('marca'); //como es un controlador tipo resource usaré solo esta línea
 Route::resource('/categorias', CategoriaController::class)->names('categoria');

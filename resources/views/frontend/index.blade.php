@@ -108,12 +108,12 @@
                                             $photo = explode(',', $product->url_imagen);
                                         @endphp
                                         <img src="{{ $photo[0] }}" alt="{{ $photo[0] }}"
-                                            class="img-fluid h-100 d-block mw-100">
+                                            class="img-fluid">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="content">
-                                        <h4 class="titulo"><a href="#">{{ $product->nombre }}</a></h4>
+                                        <h4 class="titulo"><a href="{{ route('MandarDatosProductoEspecifico', $product->id) }}">{{Str::limit($product->nombre, 25)}}</a></h4>
                                         <p class="precio">${{ $product->precio }}</p>
                                     </div>
                                 </div>

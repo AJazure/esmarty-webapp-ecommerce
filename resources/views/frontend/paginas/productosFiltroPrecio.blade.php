@@ -88,7 +88,7 @@
                                         </div>
                                     </div>
                                     <div class="product-content text-center">
-                                        <h3 class="titulo"><a href="{{route('MandarDatosProductoEspecifico', $product->id)}}">{{ $product->nombre }}</a></h3>
+                                        <h3 class="titulo"><a href="{{route('MandarDatosProductoEspecifico', $product->id)}}">{{Str::limit($product->nombre, 25)}}</a></h3>
                                         <p>${{ $product->precio }}</p>
                                     </div>
                                 </div>

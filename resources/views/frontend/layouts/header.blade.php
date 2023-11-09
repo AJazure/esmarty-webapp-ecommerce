@@ -16,13 +16,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/">Inicio</a>
+                    <a class="nav-link under" aria-current="page" href="/">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('productos') }}">Productos</a>
+                    <a class="nav-link under" href="{{ route('productos') }}">Productos</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle under" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Categorias
                     </a>
@@ -38,16 +38,16 @@
             {{-- Navegacion Fin --}}
 
             {{-- Buscador --}}
-                <form method="GET" action="{{ route('resultados-busqueda') }}" class="col-md-6 d-flex mb-3"
-                    autocomplete="off">
-                    <div class="input-group">
-                        <input class="form-control" type="search" name="busqueda" id="busquedaInput"
-                            placeholder="Buscar . . ." aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                    </div>
-                </form>
+            <form method="GET" action="{{ route('resultados-busqueda') }}" class="col-md-6 d-flex mb-3"
+                autocomplete="off">
+                <div class="input-group">
+                    <input class="form-control" type="search" name="busqueda" id="busquedaInput"
+                        placeholder="Buscar . . ." aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </form>
 
 
 
@@ -76,7 +76,19 @@
                             </li>
                             <li><a class="dropdown-item" href="{{ route('register') }}">Registrarse</a></li>
                             {{--  --}}
+                        @else
+                            @role('cliente')
+                                <li><a class="dropdown-item" href="#">Mis compras</a></li>
+                             @endrole
+
+                            <li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Cerrar Sesion</button>
+                                </form>
+                            </li>
                         @endguest
+
                     </ul>
                     {{-- Login y registro Fin --}}
             </ul>

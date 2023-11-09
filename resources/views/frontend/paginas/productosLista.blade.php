@@ -75,7 +75,7 @@
                     {{-- Mostrar los productos --}}
                     @if (count($productos) > 0)
                         @foreach ($productos->where('activo', 1) as $product)
-                            <div class="col-lg-4 col-md-6 col-11">
+                            <div class="col-lg-4 col-md-6 col-11 ">
                                 <div class="single-product">
                                     <div class="product-img">
                                         <a href="">
@@ -93,7 +93,7 @@
                                     </div>
                                     <div class="product-content text-center">
                                         <h3 class="titulo"><a
-                                                href="{{ route('MandarDatosProductoEspecifico', $product->id) }}">{{ $product->nombre }}</a>
+                                                href="{{ route('MandarDatosProductoEspecifico', $product->id) }}">{{Str::limit($product->nombre, 25)}}</a>
                                         </h3>
                                         <p>${{ $product->precio }}</p>
                                     </div>
@@ -116,90 +116,6 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    @if ($productos)
-        @foreach ($productos as $key => $product)
-            <div class="modal fade" id="{{ $product->id }}" tabindex="-1" role="dialog">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                    class="ti-close" aria-hidden="true"></span></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row no-gutters">
-                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                                    <!-- Product Slider -->
-                                    <div class="product-gallery">
-                                        <div class="quickview-slider-active">
-                                            @php
-                                                $photo = explode(',', $product->photo);
-                                                // dd($photo);
-                                            @endphp
-                                            @foreach ($photo as $data)
-                                                <div class="single-slider">
-                                                    <img src="{{ $data }}" alt="{{ $data }}">
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                    <!-- End Product slider -->
-                                </div>
-                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                                    <div class="quickview-content">
-                                        <h2>{{ $product->title }}</h2>
-
-                                        <div class="quickview-stock ml-0">
-                                            @if ($product->stock_disponible > 0)
-                                                <span><i class="fa fa-check-circle-o"></i> {{ $product->stock_disponible }}
-                                                    in
-                                                    stock</span>
-                                            @else
-                                                <span><i class="fa fa-times-circle-o text-danger"></i>
-                                                    {{ $product->stock_disponible }} out stock</span>
-                                            @endif
-                                        </div>
-                                    </div>
-
-                                    <form action="" method="POST">
-                                        @csrf
-                                        <div class="quantity">
-                                            <!-- Input Order -->
-                                            <div class="input-group">
-                                                <div class="button minus">
-                                                    <button type="button" class="btn btn-primary btn-number"
-                                                        disabled="disabled" data-type="minus" data-field="quant[1]">
-                                                        <i class="ti-minus"></i>
-                                                    </button>
-                                                </div>
-                                                <input type="hidden" name="slug"
-                                                    value="{{ $product->descripcion }}">
-                                                <input type="text" name="quant[1]" class="input-number"
-                                                    data-min="1" data-max="1000" value="1">
-                                                <div class="button plus">
-                                                    <button type="button" class="btn btn-primary btn-number"
-                                                        data-type="plus" data-field="quant[1]">
-                                                        <i class="ti-plus"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <!--/ End Input Order -->
-                                        </div>
-                                        <div class="add-to-cart">
-                                            <button type="submit" class="btn">Add to cart</button>
-                                        </div>
-                                    </form>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-        @endforeach
-    @endif
-    <!-- Modal end -->
 
     {{--  --}}
 

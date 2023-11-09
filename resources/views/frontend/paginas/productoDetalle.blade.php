@@ -53,7 +53,6 @@
                                         </a>
                                     </p>
                                     <p class="cat">Marca :{{$marcaEspecifica->descripcion}} </p>
-                                    <p class="availability">Stock : {{$producto->stock_disponible}}</p>
                                 </div>
                                 <!-- -->
                             </div>

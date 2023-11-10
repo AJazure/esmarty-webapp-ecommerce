@@ -5,7 +5,6 @@ use App\Models\DetallePedidos;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PaginaDeInicio;
 
 

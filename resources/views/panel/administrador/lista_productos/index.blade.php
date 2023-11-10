@@ -68,28 +68,30 @@
                                     <th scope="col" class="text-uppercase">Activo</th>
                                     <th scope="col" class="text-uppercase">Acciones</th>
 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($productos as $producto)
-                                    <tr>
-                                        <td>{{ $producto->codigo_producto }}</td>
-                                        <td>{{ $producto->nombre }}</td>
-                                        <td>{{ $producto->categoria->descripcion }}</td>
-                                        {{-- <td>{{ $producto->marca->descripcion}}</td> --}}
-                                        <td>{{ $producto->marca ? $producto->marca->descripcion : 'N/A' }}</td>
-                                        <td>{{ $producto->precio }}</td>
-                                        <td>{{ $producto->stock_disponible }}</td>
-                                        {{-- <td>{{ Str::limit($producto->descripcion, 80) }}</td> --}}
-                                        <td>
-                                            <img src="{{ $producto->url_imagen }}" alt="{{ $producto->nombre }}"
-                                                class="img-fluid" style="width: 150px;">
-                                        </td>
-                                        <td>
-                                            <form action="{{ route('producto.destroy', $producto) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                {{-- <button type="submit" class="btn btn-sm btn-danger text-uppercase">
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($productos as $producto)
+                        <tr>
+                            <td>{{ $producto->codigo_producto }}</td>
+                            <td>{{ $producto->nombre }}</td>
+                            <td>{{ $producto->categoria->descripcion }}</td>
+                            {{-- <td>{{ $producto->marca->descripcion}}</td> --}}
+                            <td>{{ $producto->marca ? $producto->marca->descripcion : 'N/A'}}</td>
+                            <td>{{ $producto->precio }}</td>
+                            <td>{{ $producto->stock_disponible }}</td>
+                            {{-- <td>{{ Str::limit($producto->descripcion, 80) }}</td> --}}
+                            <td>
+                                @php
+                                    $imagenes= explode('|', $producto->url_imagen)
+                                @endphp
+                                <img src="{{ $imagenes[0] }}" alt="{{ $producto->nombre }}" class="img-fluid" style="width: 150px;">
+                            </td>
+                            <td>
+                                <form action="{{ route('producto.destroy', $producto) }}" method="POST">
+                                    @csrf 
+                                    @method('DELETE')
+                                    {{-- <button type="submit" class="btn btn-sm btn-danger text-uppercase">
                                         Eliminar
                                     </button> --}}
                                                 <div>

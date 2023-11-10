@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('proveedores', function (Blueprint $table) {
             $table->id(); // Autoincremental?
             $table->string('descripcion', 40);
-            $table->bigInteger('cuit')->nullable();
+            $table->string('cuit', 18)->nullable();
             $table->string('razon_social', 30)->nullable();
             $table->string('direccion', 40)->nullable();
             $table->bigInteger('telefono')->nullable();

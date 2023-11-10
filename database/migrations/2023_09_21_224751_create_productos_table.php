@@ -16,14 +16,14 @@ return new class extends Migration
             $table->unsignedBigInteger('id_proveedor'); // BIGINT(20) */
             $table->unsignedBigInteger('id_categoria'); // BIGINT(20)
             $table->unsignedBigInteger('id_marca'); // BIGINT(20)
-            $table->integer('codigo_producto')->nullable();
+            $table->string('codigo_producto', 15)->nullable();
             $table->string('nombre');
             $table->string('descripcion')->nullable();
             $table->integer('precio');
             $table->integer('stock_disponible')->nullable();
             $table->integer('stock_minimo')->nullable();
             $table->integer('stock_deseado')->nullable();
-            $table->string('url_imagen')->default("https://via.placeholder.com/640x480.png/1d1d1d?text=ITEM%20GENERICO");
+            $table->text('url_imagen', 200)->nullable(); //text almacena bastante
             $table->tinyInteger('activo')->default(1);
             $table->timestamps();
 

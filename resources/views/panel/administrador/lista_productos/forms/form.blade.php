@@ -8,22 +8,45 @@
 
         <div class="card-body">
 
-            {{-- @if ($post->id) --}}
-            <div class="mb-3 row">
-                <img src="{{ $producto->imagen ?? 'https://via.placeholder.com/1024' }}" alt="{{ $producto->nombre }}"
+            {{-- @if ($producto->id) --}}
+            {{-- <div class="mb3 row" id="imagePreviewContainer">
+                <img src="{{ $producto->imagen ?? 'https://via.placeholder.com/250' }}" alt="{{ $producto->nombre }}"
                     id="image_preview" class="img-fluid"
-                    style="object-fit: cover; object-position: center; height: 420px; width: 100%;">
+                    style="object-fit: cover; object-position: center; height: 250px; width: 250px;">
+            </div> --}}
+            @if (!empty($producto->id))
+            <h3>ENTRO POR EDIT</h3>
+            <div class="mb-3" id="imagePreviewDefault">
+                @foreach ($imagenes as $imagen)
+                <img src="{{ $imagen }}" alt="{{ $producto->nombre }}" id="image_preview" class="img-fluid" style="object-fit: cover; object-position: center; height: 250px; width: 250px;">    
+                @endforeach
+            </div>    
+            @endif
+
+            <div class="mb-3 row" id="imagePreviewContainer">
+                {{-- muestra imágenes con js --}}
+                
             </div>
+            
             {{-- @endif --}}
 
-
+            <div class="mb-3 row">
+                <label for="url_imagen" class="col-sm-4 col-form-label"> * Imágenes </label>
+                <div class="col-sm-8">
+                    <input class="form-control @error('url_imagen') is-invalid @enderror" type="file" id="url_imagen"
+                        name="url_imagen[]" multiple accept="image/*">
+                    @error('url_imagen')
+                        <div class="invalid-feedback"> {{ $message }} </div>
+                    @enderror
+                </div>
+            </div>
 
             <div class="mb-3 row">
-                <label for="codigo_producto" class="col-sm-4 col-form-label"> * Codigo </label>
+                <label for="codigo_producto" class="col-sm-4 col-form-label"> * Código </label>
                 <div class="col-sm-8">
-                    <input type="number" class="form-control @error('codigo_producto') is-invalid @enderror"
-                        id="codigo_producto" name="codigo_producto"
-                        value="{{ old('codigo_producto', optional($producto)->codigo_producto) }}">
+                    <input type="text" class="form-control @error('codigo_producto') is-invalid @enderror"
+                        id="codigo_producto" name="codigo_producto" placeholder="código correspondiente al producto"
+                        value="{{ old('codigo_producto', optional($producto)->codigo_producto) }}" maxlength="15">
                     @error('codigo_producto')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
@@ -34,18 +57,21 @@
                 <label for="nombre" class="col-sm-4 col-form-label"> * Nombre </label>
                 <div class="col-sm-8">
                     <input type="text" class="form-control @error('nombre') is-invalid @enderror" id="nombre"
-                        name="nombre" value="{{ old('nombre', optional($producto)->nombre) }}">
+                        name="nombre" placeholder="nombre del producto"
+                        value="{{ old('nombre', optional($producto)->nombre) }}" maxlength="120">
                     @error('nombre')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
                 </div>
             </div>
+            
 
             <div class="mb-3 row">
                 <label for="proveedor" class="col-sm-4 col-form-label"> * Proveedor </label>
                 <div class="col-sm-8">
                     
-                    <select id="id_proveedor" name="id_proveedor" class="form-control">
+                    <select id="id_proveedor" name="id_proveedor" class="form-control @error('id_proveedor') is-invalid @enderror">
+                        <option disabled selected>---- seleccione un proveedor ----</option>
                         @foreach ($proveedores as $proveedor)
                         @if($proveedor->activo == 1)
                             <option {{$producto->id_proveedor && $producto->id_proveedor == $proveedor->id ? 'selected': ''}} value="{{ $proveedor->id }}"> 
@@ -54,16 +80,17 @@
                         @endif    
                         @endforeach 
                     </select>
-                    {{--                     @error('categoria')
-                        <div class="invalid-feedback"> {{ $message }} </div>
-                    @enderror --}}
+                    @error('id_proveedor')
+                    <div class="invalid-feedback"> {{ $message }} </div>
+                    @enderror
                 </div>
             </div>
 
             <div class="mb-3 row">
                 <label for="id_categoria" class="col-sm-4 col-form-label"> * Categoria </label>
                 <div class="col-sm-8">
-                    <select id="id_categoria" name="id_categoria" class="form-control">
+                    <select id="id_categoria" name="id_categoria" class="form-control @error('id_categoria') is-invalid @enderror">
+                        <option disabled selected>---- seleccione una categoría ----</option>
                         @foreach ($categorias as $categoria)
                         @if($categoria->activo == 1)
                             <option
@@ -74,16 +101,17 @@
                         @endif
                         @endforeach
                     </select>
-                    {{--                     @error('categoria')
-                        <div class="invalid-feedback"> {{ $message }} </div>
-                    @enderror --}}
+                    @error('id_categoria')
+                    <div class="invalid-feedback"> {{ $message }} </div>
+                    @enderror
                 </div>
             </div>
 
             <div class="mb-3 row">
                 <label for="id_marca" class="col-sm-4 col-form-label"> * Marca </label>
                 <div class="col-sm-8">
-                    <select id="id_marca" name="id_marca" class="form-control">
+                    <select id="id_marca" name="id_marca" class="form-control @error('id_marca') is-invalid @enderror">
+                        <option disabled selected>---- seleccione una marca ----</option>
                         @foreach ($marcas as $marca)
                         @if($marca->activo == 1)
                             <option {{$producto->id_marca && $producto->id_marca == $marca->id ? 'selected' : '' }}
@@ -93,14 +121,17 @@
                         @endif
                         @endforeach
                     </select>
+                    @error('id_marca')
+                    <div class="invalid-feedback"> {{ $message }} </div>
+                    @enderror
                 </div>
             </div>
 
             <div class="mb-3 row">
                 <label for="precio" class="col-sm-4 col-form-label"> * Precio </label>
                 <div class="col-sm-8">
-                    <input type="number" class="form-control @error('precio') is-invalid @enderror" id="precio"
-                        name="precio" value="{{ old('precio', optional($producto)->precio) }}">
+                    <input type="number" class="form-control @error('precio') is-invalid @enderror" id="precio" placeholder="precio del producto"
+                        name="precio" value="{{ old('precio', optional($producto)->precio) }}" maxlength="9">
                     @error('precio')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
@@ -110,8 +141,9 @@
             <div class="mb-3 row">
                 <label for="descripcion" class="col-sm-4 col-form-label"> * Descripción </label>
                 <div class="col-sm-8">
-                    <textarea class="form-control @error('descripcio') is-invalid @enderror" id="descripcion" name="descripcion" rows="10">{{ old('descripcion', optional($producto)->descripcion) }}</textarea>
-                    @error('descripcio')
+                    <textarea id="descripcion" name="descripcion" rows="10" class="form-control @error('descripcion') is-invalid @enderror"
+                    placeholder="agregue una descripción del producto, información técnica, características, detalles importantes para el cliente, etc...">{{ old('descripcion', optional($producto)->descripcion) }}</textarea>
+                    @error('descripcion')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
                 </div>
@@ -119,10 +151,10 @@
 
             <div class="mb-3 row">
                 <label for="stock_disponible" class="col-sm-4 col-form-label"> * Stock Disponible </label>
-                <div class="col-sm-8">
+                <div class="col-sm-3">
                     <input type="number" class="form-control @error('stock_disponible') is-invalid @enderror"
-                        id="stock_disponible" name="stock_disponible"
-                        value="{{ old('stock_disponible', optional($producto)->stock_disponible) }}">
+                        id="stock_disponible" name="stock_disponible" placeholder="cantidad disponible actualmente"
+                        value="{{ old('stock_disponible', optional($producto)->stock_disponible) }}" maxlength="3">
                     @error('stock_disponible')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
@@ -131,10 +163,10 @@
 
             <div class="mb-3 row">
                 <label for="stock_deseado" class="col-sm-4 col-form-label"> * Stock Deseado </label>
-                <div class="col-sm-8">
+                <div class="col-sm-3">
                     <input type="number" class="form-control @error('stock_deseado') is-invalid @enderror"
-                        id="stock_deseado" name="stock_deseado"
-                        value="{{ old('stock_deseado', optional($producto)->stock_deseado) }}">
+                        id="stock_deseado" name="stock_deseado" placeholder="cantidad deseada"
+                        value="{{ old('stock_deseado', optional($producto)->stock_deseado) }}" maxlength="3">
                     @error('stock_deseado')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
@@ -143,26 +175,17 @@
 
             <div class="mb-3 row">
                 <label for="stock_minimo" class="col-sm-4 col-form-label"> * Stock Minimo </label>
-                <div class="col-sm-8">
+                <div class="col-sm-3">
                     <input type="number" class="form-control @error('stock_minimo') is-invalid @enderror"
-                        id="stock_minimo" name="stock_minimo"
-                        value="{{ old('stock_minimo', optional($producto)->stock_minimo) }}">
+                        id="stock_minimo" name="stock_minimo" placeholder="cantidad mínima"
+                        value="{{ old('stock_minimo', optional($producto)->stock_minimo) }}" maxlength="3">
                     @error('stock_minimo')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
                 </div>
             </div>
 
-            <div class="mb-3 row">
-                <label for="url_imagen" class="col-sm-4 col-form-label"> * Imagen </label>
-                <div class="col-sm-8">
-                    <input class="form-control @error('url_imagen') is-invalid @enderror" type="file" id="url_imagen"
-                        name="url_imagen" accept="image/*">
-                    @error('url_imagen')
-                        <div class="invalid-feedback"> {{ $message }} </div>
-                    @enderror
-                </div>
-            </div>
+            @if ($producto->id)
             <div class="mb-3 row">
                 <label for="activo" class="col-sm-4 col-form-label"> * Estado </label>
                 <div class="col-sm-8">
@@ -175,6 +198,7 @@
                     @enderror
                 </div>
             </div>
+            @endif
 
 
 
@@ -189,21 +213,43 @@
 </div>
 
 @push('js')
-    <script>
-        document.addEventListener("DOMContentLoaded", function(event) {
-            const image = document.getElementById('url_imagen');
+<script>
 
-            image.addEventListener('change', (e) => {
+    //el siguiente evento reconoce cuando se sube una imagen o un grupo de imágenes, entonces inserta un elemento para dar una vista previa
+    document.addEventListener("DOMContentLoaded", function(event) {
+        const image = document.getElementById('url_imagen');
+        const imagePreviewContainer = document.getElementById('imagePreviewContainer');
 
-                const input = e.target;
-                const imagePreview = document.querySelector('#image_preview');
+        image.addEventListener('change', (e) => {
+            const input = e.target;
+            const imagePreviewContainer = document.getElementById('imagePreviewContainer');
 
-                if (!input.files.length) return
+            if (document.getElementById('imagePreviewDefault') !== null) {
+                console.log('eliminando preview');
+                document.getElementById('imagePreviewDefault').remove(); //si se carga nuevamente imágenes entonces se elimina el div que trae de la bd lo previamente cargado
+            }
 
-                file = input.files[0];
-                objectURL = URL.createObjectURL(file);
-                imagePreview.src = objectURL;
-            });
+            // Limpiar las imágenes anteriores
+            imagePreviewContainer.innerHTML = '';
+            
+
+            if (input.files.length > 0) {
+                for (let i = 0; i < Math.min(input.files.length, 3); i++) {
+                    const file = input.files[i];
+                    const objectURL = URL.createObjectURL(file);
+                    const img = document.createElement('img');
+                    img.src = objectURL;
+                    img.classList.add('preview-image');
+                    img.src = objectURL;
+                    img.classList.add('preview-image');
+                    img.style.objectFit = 'cover';
+                    img.style.objectPosition = 'center';
+                    img.style.height = '250px';
+                    img.style.width = '250px';
+                    imagePreviewContainer.appendChild(img);
+                }
+            }
         });
-    </script>
+    });
+</script>
 @endpush

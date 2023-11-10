@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class MarcaRequest extends FormRequest
+class MetodoDePagoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,15 +27,15 @@ class MarcaRequest extends FormRequest
         ];
 
         if ($this->isMethod('post')) { //para el método store
-            $rules['descripcion'] = 'required|min:3|max:20|unique:categorias,descripcion';
+            $rules['descripcion'] = 'required|min:3|max:20|unique:metodos_de_pago,descripcion';
         } else if ($this->isMethod('put')) { //para el método update
-            $marcaId = $this->route('marca'); //obtengo el id que está en la ruta
+            $mdpId = $this->route('metodosdepago'); //obtengo el id que está en la ruta
             
             $rules['descripcion'] = [
                 'required',
                 'min:3',
                 'max:20',
-                Rule::unique('marcas')->ignore($marcaId), // uso el id de esta categoría para que ignore la regla
+                Rule::unique('metodos_de_pago')->ignore($mdpId), // uso el id de esta categoría para que ignore la regla
             ];
         }
         return $rules;
@@ -52,7 +52,7 @@ class MarcaRequest extends FormRequest
     {
         // Definir mensajes de error personalizados
         return [
-            'descripcion.unique' => 'Este nombre ya existe.',
+            'descripcion.unique' => 'Este método de pago ya existe.',
         ];
     }
 }

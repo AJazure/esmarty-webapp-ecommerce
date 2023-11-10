@@ -34,7 +34,7 @@
                 <label for="dni" class="col-sm-4 col-form-label"> * DNI </label>
                 <div class="col-sm-8">
                     <input type="number" class="form-control @error('dni') is-invalid @enderror" id="dni"
-                        name="dni" placeholder="sin guiones" value="{{ old('dni', optional($user)->dni) }}">
+                        name="dni" placeholder="sin puntos" value="{{ old('dni', optional($user)->dni) }}">
                     @error('dni')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
@@ -89,7 +89,7 @@
                 <label for="rol_id" class="col-sm-4 col-form-label"> * Rol </label>
                 <div class="col-sm-8">
                     <select id="rol_id" name="rol_id" class="form-control @error('rol_id') is-invalid @enderror">
-                        <option disabled selected>Seleccione un rol</option>
+                        <option disabled selected>---- Seleccione un rol ----</option>
                         @foreach ($all_roles as $rol)
                         <option {{ $user_role->contains($rol) ? 'selected': '' }} value="{{ $rol }}"> 
                             {{ ucfirst($rol) }}

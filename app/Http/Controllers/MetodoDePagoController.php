@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MetodoDePago;
 use Illuminate\Http\Request;
+use App\Http\Requests\MetodoDePagoRequest;
 
 class MetodoDePagoController extends Controller
 {
@@ -30,7 +31,7 @@ class MetodoDePagoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(MetodoDePagoRequest $request)
     {
         //
         $mdp  = new MetodoDePago();
@@ -71,7 +72,7 @@ class MetodoDePagoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id )
+    public function update(metodoDePagoRequest $request, $id )
     {
         $mdp  = MetodoDePago::find($id);
         //

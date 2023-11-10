@@ -1,10 +1,8 @@
 <?php
 
 namespace App\Http\Requests;
-
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use App\Models\Proveedor;
+use Illuminate\Foundation\Http\FormRequest;
 
 class ProveedorRequest extends FormRequest
 {
@@ -25,29 +23,49 @@ class ProveedorRequest extends FormRequest
     {
     
         $rules = [
-            'razon_social' => 'min:3|max:30',
-            'direccion' => 'min:3|max:40',
-            'telefono' => 'min:3|max:20',
+            'razon_social' => 'required|min:3|max:30',
+            'direccion' => 'required|min:3|max:40',
+            'telefono' => 'required|min:3|max:20',
             'activo' => 'required|boolean'
         ];
     
         if ($this->isMethod('post')) { // para el método store
             $rules['descripcion'] = 'required|min:3|max:40|unique:proveedores';
-            $rules['correo'] = 'nullable|email|max:30|unique:proveedores';
-            $rules['cuit'] = 'max:20|unique:proveedores';
+            $rules['correo'] = 'required|email|max:30|unique:proveedores';
+            $rules['cuit'] = 'required|min:13|max:14|regex:/^(?=.*\d)(?=.*-)[\d-]+$/|unique:proveedores,cuit';
         } else if ($this->isMethod('put')) { // para el método update
-            $rules['descripcion'] = 'required|min:3|max:40';
-            $rules['correo'] = 'nullable|email|max:30';
-            $rules['cuit'] = 'max:20';
+            $proveedorId = $this->route('proveedor');
+
+            $rules['cuit'] = [
+                'required',
+                'min:13',
+                'max:14',
+                //'regex:/^\d{2}-\d+-\d+$/', //es obligatorio dos guiónes
+                'regex:/^(?=.*\d)(?=.*-)[\d-]+$/', //es obligatorio dos guiónes y otro signo causará error
+                Rule::unique('proveedores')->ignore($proveedorId),
+            ];
+
         }
     
         return $rules;
     }
+
+    public function attributes()
+    {   // Renombramiento de los campos
+        return [
+            'descripcion' => 'nombre',
+            'cuit' => 'CUIT',
+            'razon_social' => 'razón social',
+            'direccion' => 'dirección',
+            'telefono' => 'teléfono',
+        ];
+    }
+
     public function messages(): array
     {
         // Definir mensajes de error personalizados
         return [
-            
+            'cuit.regex' => 'Ingrese un CUIT válido.',
         ];
     }
 }

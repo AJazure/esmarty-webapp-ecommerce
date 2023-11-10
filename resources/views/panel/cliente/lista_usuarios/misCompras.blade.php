@@ -106,10 +106,10 @@
                              Ver
                          </a>
                          
-                         <button class="btn btn-sm btn-danger text-white text-uppercase me-1 mr-2 @if(!$pedido->cancelado && !$pedido->pagado) btnEliminar @endif  @if($pedido->pagado || $pedido->cancelado)disabled @endif"  value="{{$pedido->id}}">
+                         <button class="btn btn-sm btn-danger text-white text-uppercase me-1 mr-2 @if(!$pedido->cancelado && !$pedido->pagado) btnEliminar @endif  @if($pedido->pagado || $pedido->cancelado)d-none @endif"  value="{{$pedido->id}}">
                             Cancelar
                         </button>
-                         <a href="@if(!$pedido->pagado){{$pedido->linkDePago}}@endif" class="btn btn-sm btn-success text-white text-uppercase me-1 mr-2 btnPagar @if($pedido->pagado || $pedido->cancelado)disabled @endif" id="btnPagar" >
+                         <a href="@if(!$pedido->pagado){{$pedido->linkDePago}}@endif" class="btn btn-sm btn-success text-white text-uppercase me-1 mr-2 btnPagar @if($pedido->pagado || $pedido->cancelado)d-none @endif" id="btnPagar" >
                             Pagar
                          </a>
                         </td>

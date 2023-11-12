@@ -323,14 +323,21 @@ return [
             'text'        => 'Administrar Usuarios',
             //'url'         => '#',
             'route' => 'user.index',
-            'icon'        => 'fas fa-user',
+            'icon'        => 'fas fa-users',
             'can'         => 'lista_usuarios' //permiso de admin
+        ],
+        [
+            'text'        => 'Caja - Ventas',
+            'route'      => 'venta.index',
+            'icon'        => 'fas fa-cash-register',
+            'can'         => 'lista_usuarios', 'lista_caja' //permiso de admin<i class="far fa-project-diagram"></i>
+            //'can'         => 'lista_caja' //permiso de cajero
         ],
         [
             'text'        => ' Productos',
             // 'url'         => '#',
             'route' => 'producto.index',
-            'icon'        => 'fas fa-shopping-cart',
+            'icon'        => 'fas fa-box',
             'can'         => 'lista_usuarios' //permiso de admin
         ],
         [
@@ -374,12 +381,6 @@ return [
             'url'         => '#',
             'icon'        => 'fas fa-users',
             'can'         => 'lista_almacen' //permiso de operario de almacén
-        ],
-        [
-            'text'        => 'Acceso a Caja',
-            'url'         => '#',
-            'icon'        => 'fas fa-users',
-            'can'         => 'lista_caja' //permiso de cajero
         ],
         [
             'text'        => 'Mis Datos',

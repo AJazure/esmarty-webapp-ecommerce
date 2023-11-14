@@ -63,9 +63,9 @@ return [
     |
     */
 
-    'logo' => '<b>ESMARTY</b>',
+    //'logo' => '<b>for Esmarty</b>',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo_img_class' => 'brand-image',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'Admin Logo',
@@ -109,11 +109,11 @@ return [
     'preloader' => [
         'enabled' => true,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'vendor/adminlte/dist/img/ecore-admin-logo-solo.png',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
-            'width' => 60,
-            'height' => 60,
+            'width' => 320,
+            'height' => 100,
         ],
     ],
 
@@ -151,7 +151,7 @@ return [
     'layout_topnav' => null,
     'layout_boxed' => null,
     'layout_fixed_sidebar' => null,
-    'layout_fixed_navbar' => null,
+    'layout_fixed_navbar' => true,
     'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
 
@@ -311,6 +311,13 @@ return [
             'text' => 'blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
+        ],
+        [
+            'text'        => 'Inicio',
+            'url'         => 'home',
+            //'route' => '',
+            'icon'        => 'fas fa-home',
+            'can'         => 'lista_usuarios' //permiso de admin
         ],
         [
             'text'        => 'Administrar Usuarios',

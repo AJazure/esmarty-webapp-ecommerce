@@ -10,7 +10,7 @@
 <div class="container">
     <div class="row">
         <div class="col-12 mb-3">
-            <h1>Editar Datos del cliente: "{{ $cliente->name }} {{ $cliente->apellido }}"</h1>
+            <h1>Editar mis datos: "{{ $cliente->name }} {{ $cliente->apellido }}"</h1>
             <a href="{{ route('cliente.index') }}" class="btn btn-sm btn-secondary text-uppercase">
                 Volver Atras
             </a>

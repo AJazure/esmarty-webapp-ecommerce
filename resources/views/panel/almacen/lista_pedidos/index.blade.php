@@ -72,18 +72,21 @@
                                     <td>{{ $pedido->total }}</td>
 
                                     <td>
-                                        <input type="number" {{$pedido->en_preparacion ? '' : 'disabled'}}>
+                                        <form method="POST" action="{{ route('guardarNumero', ['id' => $pedido->id]) }}">
+                                            @csrf
+                                            <input type="number" name="numero" {{$pedido->en_preparacion ? '' : 'disabled'}} onkeypress="return event.keyCode != 13;">
+                                        </form>
                                     </td>
 
                                     <td>
-                                        @if ($pedido->en_preparacion)
-                                            <span class="badge badge-info">En preparacion</span>
+                                        @if ($pedido->num_seguimiento)
+                                            <span class="badge badge-primary">Enviado</span>
                                         @else
-                                            @if ($pedido)
-                                                <span class="badge badge-warning">Pendiente</span>
+                                            @if ($pedido->en_preparacion)
+                                                <span class="badge badge-info">En preparacion</span>
                                             @else
-                                                @if ($pedido->enviado)
-                                                    <span class="badge badge-primary">Enviado</span>
+                                                @if ($pedido)
+                                                    <span class="badge badge-warning">Pendiente</span>
                                                 @endif
                                             @endif
                                         @endif
@@ -105,7 +108,7 @@
                                         </a>
 
                                         @if (!$pedido->en_preparacion)
-                                            <a href="{{ route('preparar.pedido', ['id' => $pedido->id]) }}"
+                                            <a href="{{ route('prepararPedido', ['id' => $pedido->id]) }}"
                                                 class="btn btn-sm btn-success text-white text-uppercase me-1 mr-2">
                                                 Preparar
                                             </a>
@@ -144,5 +147,7 @@
     <script src="{{ asset('js/pedido/detalle_de_pedido.js') }}"></script>
     <script src="{{ asset('js/pedido/eliminar_pedido.js') }}"></script>
     <script src="{{ asset('js/pedido/pedidos.js') }}"></script>
+    <script src="{{ asset('js/pedido/num_seguimiento.js') }}"></script>
+    <script src="{{ asset('js/pedido/recargarPagina.js') }}"></script>
 
 @stop

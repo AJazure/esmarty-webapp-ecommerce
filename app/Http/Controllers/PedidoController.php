@@ -23,12 +23,12 @@ use Illuminate\Support\Facades\Mail;
 
 class PedidoController extends Controller
 {
-    public function __construct(//Incluye el servicio de MercadoPago
+    public function __construct( //Incluye el servicio de MercadoPago
         private MercadoPagoService $mercadoPagoService
     ) {
     }
 
-    public function index()//Trae los pedidos a mostrar en el panel
+    public function index() //Trae los pedidos a mostrar en el panel
     {
         $id_cliente = Auth::id();
         $pedidos = Pedido::where('id_cliente', $id_cliente)->get();
@@ -81,14 +81,14 @@ class PedidoController extends Controller
         //Si el carrito esta vacion, entonces no se genera el pedido
         if (!$pedido->total) {
             return redirect()
-            ->route('carrito.agregarProductos')
-            ->with('alert', 'No se puede guardar un pedido vacio. ' . '¡Agrega algunos productos al carrito por favor!');
+                ->route('carrito.agregarProductos')
+                ->with('alert', 'No se puede guardar un pedido vacio. ' . '¡Agrega algunos productos al carrito por favor!');
         }
         //Guarda por primera vez el pedido, pero sin link de pago
         $pedido->save();
         //Le agrego este ID de pedido a los items que estaban en el carrito: 
         DetallePedidos::whereNull('id_pedido')->where('id_cliente', $pedido->id_cliente)->update(['id_pedido' => $pedido->id]);
-        $preferencia = $this->mercadoPagoService->crearPreferencia($carrito, $pedido->id);//Creo link de pago
+        $preferencia = $this->mercadoPagoService->crearPreferencia($carrito, $pedido->id); //Creo link de pago
 
         //Bajo del stock los productos que se vendieron
         $productoController = app(ProductoController::class);
@@ -104,7 +104,7 @@ class PedidoController extends Controller
         $pedido->save();
 
 
-        EmailConfirmandoPedidoJob::dispatch($pedido->id)->onConnection('database');//Envio confirmacion por mail mediante cola de trabajo 
+        EmailConfirmandoPedidoJob::dispatch($pedido->id)->onConnection('database'); //Envio confirmacion por mail mediante cola de trabajo 
         //$this->avisoPedidoConfirmado($pedido->id); //Envio confirmacion de pedido al mail
 
         return redirect()
@@ -119,47 +119,46 @@ class PedidoController extends Controller
         $detallesPedido = DetallePedidos::latest()->where('id_pedido', $id)->with('productos')->get();
         return response()->json($detallesPedido);
     }
-    
-     public function pago(Request $request) //Registra el pago de un pedido
-     {
+
+    public function pago(Request $request) //Registra el pago de un pedido
+    {
         //Funcion para consultar si un pedido ya fue pagado
         $payment_id = $request->payment_id; //Id del pago, se ve en el comprobante
         $token = config('mercadopago.access_token');
         $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=$token");
         $response = json_decode($response);
         $pedido_id = $request->external_reference; //Trae el ID del pedido, que mandamos por external_reference al crear la preferencia de mercado pago
-        $pedido = Pedido::find($pedido_id);//busco el pedido
+        $pedido = Pedido::find($pedido_id); //busco el pedido
 
         //Si no se realiza el pago y se vuelve al sitio
         if (!isset($response->error)) {
             $status = $response->status;
         } else {
-            
+
             return redirect()
-            ->route('pedidos.index')
-            ->with('error', 'Pedido N°' .$pedido->num_pedido . ' pago cancelado. Vuelve a intentarlo en este panel.');
+                ->route('pedidos.index')
+                ->with('error', 'Pedido N°' . $pedido->num_pedido . ' pago cancelado. Vuelve a intentarlo en este panel.');
         }
-        
+
         //Si se vuelve al sitio luego de pagar el pedido con mercado pago
         if ($status == "approved") {
             $pedido->pagado = true; //Cambia estado del pedido
             $urlPDF = $this->generarFacturaPDF($pedido->id); //Genera factura 
-            $pedido->urlFactura = $urlPDF;  
+            $pedido->urlFactura = $urlPDF;
             $pedido->save(); //Guarda el pedido exitosamente
 
             //$this->avisoPagoConfirmado($pedido->id); //Envio factura por mail
-            EnviarFacturaJob::dispatch($pedido->id)->onConnection('database');//Envio factura por mail mediante cola de trabajo 
+            EnviarFacturaJob::dispatch($pedido->id)->onConnection('database'); //Envio factura por mail mediante cola de trabajo 
 
             return redirect()
-            ->route('pedidos.index')
-            ->with('alert', 'Pedido N°' .$pedido->num_pedido . ' pagado exitosamente. Con N° de operación: ' . $response->id );
+                ->route('pedidos.index')
+                ->with('alert', 'Pedido N°' . $pedido->num_pedido . ' pagado exitosamente. Con N° de operación: ' . $response->id);
         } else {
             //Si no se pudo pagar, no cambia el estado del pedido a pagado
             return redirect()
-            ->route('pedidos.index')
-            ->with('error', 'Pedido N°' .$pedido->num_pedido . ' no se pudo completar el pago. Con N° operación: ' . $response->id );
+                ->route('pedidos.index')
+                ->with('error', 'Pedido N°' . $pedido->num_pedido . ' no se pudo completar el pago. Con N° operación: ' . $response->id);
         }
-
     }
 
     public function cancelarPedido($pedido_id) //Cancela un pedido
@@ -182,26 +181,27 @@ class PedidoController extends Controller
         $pedido->save();
     }
 
-    public function generarFacturaPDF($id){ //Genero la factura una vez se pague el pedido
+    public function generarFacturaPDF($id)
+    { //Genero la factura una vez se pague el pedido
         $pedido = Pedido::find($id);
         $fechaActual = Carbon::now();
         /* $carrito = DetallePedidos::latest()->where('id_pedido', $id)->with('productos')->get();
         return view('pdfs.factura.factura', compact('pedido', 'carrito', 'fechaActual')); */
-        
+
         $carrito = DetallePedidos::latest()->where('id_pedido', $id)->with('productos')->get();
         $pdf = PDF::loadView('pdfs.factura.factura', compact('pedido', 'carrito', 'fechaActual'));
-    
+
         // Guardar el PDF en una carpeta dentro de storage/app/public
         $pdfPath = storage_path('app/public/pdfs/facturas/');
         $pdfFileName = 'factura_' . $pedido->num_pedido . '.pdf';
         $pdf->save($pdfPath . $pdfFileName);
-            
-            // Retornar la ruta del PDF guardado
+
+        // Retornar la ruta del PDF guardado
         return '/storage/pdfs/facturas/' . $pdfFileName; //Regresa la URL PUBLICA de la factura
-        
+
     }
 
-/*     public function avisoPedidoConfirmado($id){ //Envio mail una vez se genere el pedido
+    /*     public function avisoPedidoConfirmado($id){ //Envio mail una vez se genere el pedido
         $pedido = Pedido::find($id);
         $data = [
             'name' => $pedido->nombre . " " . $pedido->apellido,
@@ -229,7 +229,10 @@ class PedidoController extends Controller
  */
     public function pedidosPagados()
     {
-        $pedidos = Pedido::where('pagado', 1)->orderBy('updated_at', 'asc')->get();
+        $pedidos = Pedido::where('pagado', 1)
+        ->where('enviado', '0')
+        ->orderBy('updated_at', 'asc')
+        ->get();
 
         return view('panel.almacen.lista_pedidos.index', compact('pedidos'));
     }
@@ -241,8 +244,28 @@ class PedidoController extends Controller
         $pedido->save();
 
         return redirect()->back();
-
-
     }
-    
+
+    public function guardarNumero(Request $request, $id)
+    {
+        $numero = $request->input('numero');
+
+        $pedido = Pedido::find($id);
+        $pedido->num_seguimiento = $numero;
+        $pedido->enviado = true;
+        $pedido->save();
+
+        return redirect()->back();
+    }
+
+    public function pedidosEnviados()
+    {
+        $pedidos = Pedido::where('pagado', 1)
+        ->where('enviado', 1)
+        ->whereNotNull('num_seguimiento') 
+        ->orderBy('updated_at', 'asc')
+        ->get();
+
+        return view('panel.almacen.lista_pedidos.pedidosEnviados', compact('pedidos'));
+    }
 }

@@ -371,7 +371,8 @@ return [
         ],
         [
             'text'        => 'Gestión de Almacén',
-            'url'         => '#',
+            // 'url'         => '#',
+            'route'       => 'pedidosPagados',
             'icon'        => 'fas fa-users',
             'can'         => 'lista_almacen' //permiso de operario de almacén
         ],

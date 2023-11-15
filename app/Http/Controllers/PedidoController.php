@@ -227,4 +227,22 @@ class PedidoController extends Controller
             Mail::to($data['email'])->send(new EnviarFacturaMailable($data)); 
     } 
  */
+    public function pedidosPagados()
+    {
+        $pedidos = Pedido::where('pagado', 1)->orderBy('updated_at', 'asc')->get();
+
+        return view('panel.almacen.lista_pedidos.index', compact('pedidos'));
+    }
+
+    public function prepararPedido($id)
+    {
+        $pedido = Pedido::findOrFail($id);
+        $pedido->en_preparacion = true;
+        $pedido->save();
+
+        return redirect()->back();
+
+
+    }
+    
 }

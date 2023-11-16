@@ -8,6 +8,7 @@ use App\Models\Proveedor;
 use App\Models\Marca;
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use App\Models\HistoricoStock;
 
 class ProductoController extends Controller
 {
@@ -58,12 +59,18 @@ class ProductoController extends Controller
         $producto->nombre = $request->get('nombre');
         $producto->descripcion = $request->get('descripcion');
         $producto->precio = $request->get('precio');
-        $producto->stock_disponible = $request->get('stock_disponible');
-        $producto->stock_deseado = $request->get('stock_deseado');
-        $producto->stock_minimo = $request->get('stock_minimo');
         $producto->id_categoria = $request->get('id_categoria');
         $producto->id_proveedor = $request->get('id_proveedor');
         $producto->id_marca = $request->get('id_marca');
+        /*/ Valores por defecto:
+        si no ingresa nada o porque no tiene permiso en stock, entonces se asignan valores por defecto
+        stock deseado es = a stock disponible si no se indica cuánto es el stock deseado
+        stock minimo = 1 si no se indica cuánto
+        /*/
+        $producto->stock_disponible = $request->get('stock_disponible') ? $request->get('stock_disponible') : 0; 
+        $producto->stock_deseado = $request->get('stock_disponible') ? $request->get('stock_disponible') : 10; 
+        $producto->stock_minimo = $request->get('stock_minimo') ? $request->get('stock_minimo') : 1;
+        $producto->activo = 0;
 
         if ($files = $request->file('url_imagen')) {
 
@@ -82,6 +89,22 @@ class ProductoController extends Controller
         $producto->url_imagen = asset(str_replace('public', 'storage', $imagenes)); // Almacena la info del producto en la BD la url de tas las imagenes
         
         $producto->save();
+        
+        // Registro para el histórico
+        $ultimoIdInsertado = $producto->id;
+
+        $historico = new HistoricoStock();
+        $historico->id_producto = $ultimoIdInsertado;
+        $historico->id_user = auth()->user()->id; // id user que da el alta
+        $historico->motivo_modif = 'Alta de nuevo producto.';
+        $historico->tipo_modif = 'alta'; // por defecto cuando se da alta se crea como nuevo producto el tipo de modif
+        $historico->cantidad_modif = $producto->stock_disponible;
+        $historico->cantidad_anterior = 0; // la cantidad anterior siempre es cero en alta producto
+        $historico->cantidad_nueva = $producto->stock_disponible; // es igual a la ingresada
+        $historico->created_at = now();
+        
+        $historico->save();
+
         return redirect()
         ->route('producto.index')
         ->with('alert', 'Producto "' . $producto->nombre . '" agregado exitosamente.');
@@ -118,15 +141,12 @@ class ProductoController extends Controller
      */
     public function update(ProductoRequest $request, Producto $producto)
     {
-        //
+        // BORRA EL STOCK DEL PRODUCTO REVISAR
         $producto->codigo_producto = $request->get('codigo_producto');
         $producto->nombre = $request->get('nombre');
         $producto->activo = $request->get('activo');
         $producto->precio = $request->get('precio');
         $producto->descripcion = $request->get('descripcion');
-        $producto->stock_disponible = $request->get('stock_disponible');
-        $producto->stock_deseado = $request->get('stock_deseado');
-        $producto->stock_minimo = $request->get('stock_minimo');
         $producto->id_proveedor = $request->get('id_proveedor');
         $producto->id_categoria = $request->get('id_categoria');
         $producto->id_marca = $request->get('id_marca');

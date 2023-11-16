@@ -8,17 +8,10 @@
 
         <div class="card-body">
 
-            {{-- @if ($producto->id) --}}
-            {{-- <div class="mb3 row" id="imagePreviewContainer">
-                <img src="{{ $producto->imagen ?? 'https://via.placeholder.com/250' }}" alt="{{ $producto->nombre }}"
-                    id="image_preview" class="img-fluid"
-                    style="object-fit: cover; object-position: center; height: 250px; width: 250px;">
-            </div> --}}
             @if (!empty($producto->id))
-            <h3>ENTRO POR EDIT</h3>
             <div class="mb-3" id="imagePreviewDefault">
                 @foreach ($imagenes as $imagen)
-                <img src="{{ $imagen }}" alt="{{ $producto->nombre }}" id="image_preview" class="img-fluid" style="object-fit: cover; object-position: center; height: 250px; width: 250px;">    
+                <img src="{{ $imagen }}" alt="{{ $producto->nombre }}" id="image_preview" class="img-fluid" style="object-fit: contain; object-position: center; height: 250px; width: 250px;">    
                 @endforeach
             </div>    
             @endif
@@ -66,7 +59,7 @@
             </div>
             
 
-            <div class="mb-3 row">
+             <div class="mb-3 row">
                 <label for="proveedor" class="col-sm-4 col-form-label"> * Proveedor </label>
                 <div class="col-sm-8">
                     
@@ -149,42 +142,6 @@
                 </div>
             </div>
 
-            <div class="mb-3 row">
-                <label for="stock_disponible" class="col-sm-4 col-form-label"> * Stock Disponible </label>
-                <div class="col-sm-3">
-                    <input type="number" class="form-control @error('stock_disponible') is-invalid @enderror"
-                        id="stock_disponible" name="stock_disponible" placeholder="cantidad disponible actualmente"
-                        value="{{ old('stock_disponible', optional($producto)->stock_disponible) }}" maxlength="3">
-                    @error('stock_disponible')
-                        <div class="invalid-feedback"> {{ $message }} </div>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="mb-3 row">
-                <label for="stock_deseado" class="col-sm-4 col-form-label"> * Stock Deseado </label>
-                <div class="col-sm-3">
-                    <input type="number" class="form-control @error('stock_deseado') is-invalid @enderror"
-                        id="stock_deseado" name="stock_deseado" placeholder="cantidad deseada"
-                        value="{{ old('stock_deseado', optional($producto)->stock_deseado) }}" maxlength="3">
-                    @error('stock_deseado')
-                        <div class="invalid-feedback"> {{ $message }} </div>
-                    @enderror
-                </div>
-            </div>
-
-            <div class="mb-3 row">
-                <label for="stock_minimo" class="col-sm-4 col-form-label"> * Stock Minimo </label>
-                <div class="col-sm-3">
-                    <input type="number" class="form-control @error('stock_minimo') is-invalid @enderror"
-                        id="stock_minimo" name="stock_minimo" placeholder="cantidad mínima"
-                        value="{{ old('stock_minimo', optional($producto)->stock_minimo) }}" maxlength="3">
-                    @error('stock_minimo')
-                        <div class="invalid-feedback"> {{ $message }} </div>
-                    @enderror
-                </div>
-            </div>
-
             @if ($producto->id)
             <div class="mb-3 row">
                 <label for="activo" class="col-sm-4 col-form-label"> * Estado </label>
@@ -199,8 +156,6 @@
                 </div>
             </div>
             @endif
-
-
 
         </div>
 

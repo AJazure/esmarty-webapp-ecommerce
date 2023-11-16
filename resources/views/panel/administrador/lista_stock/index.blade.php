@@ -5,11 +5,11 @@
 @section('plugins.Datatables', true)
 
 {{-- Titulo en las tabulaciones del Navegador --}}
-@section('title', 'Productos')
+@section('title', 'Stock de Productos')
 
 {{-- Titulo en el contenido de la Pagina --}}
 @section('content_header')
-    <h1>&nbsp;<strong>PRODUCTOS</strong></h1>
+    <h1>&nbsp;<strong>STOCK DE PRODUCTOS</strong></h1>
 @stop
 
 {{-- Contenido de la Pagina --}}
@@ -18,8 +18,8 @@
     <div class="row">
         <div class="col-12 mb-3">
             
-            <a href="{{ route('producto.create') }}" class="btn btn-success text-uppercase">
-                Nuevo Producto 
+            <a href="{{ route('stock.create') }}" class="btn btn-success text-uppercase">
+                Alta Nuevo Producto 
             </a>
         </div>
         
@@ -48,16 +48,16 @@
                 <table id="tabla-productos" class="table table-striped table-hover w-100">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">Código</th>
                             <th scope="col" class="text-uppercase">Nombre</th>
-                            <th scope="col" class="text-uppercase">Categoría</th>
-                            <th scope="col" class="text-uppercase">Marca</th>
-                            <th scope="col" class="text-uppercase">Precio</th>
-                            <th scope="col" class="text-uppercase">Stock</th>
                             <th scope="col" class="text-uppercase">Imagen</th>
+                            {{-- <th scope="col">Proveedor</th> --}}
+                            {{-- <th scope="col" class="text-uppercase">Categoría</th> --}}
+                            <th scope="col" class="text-uppercase">Marca</th>
+                            <th scope="col" class="text-uppercase">Stock</th>
+                            <th scope="col" class="text-uppercase">Nivel de Stock</th>
                             <th scope="col" class="text-uppercase">Activo</th>
                             <th scope="col" class="text-uppercase">Acciones</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -65,22 +65,37 @@
                         <tr>
                             <td>{{ $producto->codigo_producto }}</td>
                             <td>{{ $producto->nombre }}</td>
-                            <td>{{ $producto->categoria->descripcion }}</td>
-                            {{-- <td>{{ $producto->marca->descripcion}}</td> --}}
-                            <td>{{ $producto->marca ? $producto->marca->descripcion : 'N/A'}}</td>
-                            <td>{{ $producto->precio }}</td>
-                            <td class='text-center'>
-                                @if ($producto->stock_disponible == 0)
-                                    <span class="badge badge-danger">SIN STOCK</span>
-                                @else
-                                    {{$producto->stock_disponible}}
-                                @endif
                             <td>
                                 @php
                                     $imagenes= explode('|', $producto->url_imagen)
-                                @endphp
+                                    @endphp
                                 <img src="{{ $imagenes[0] }}" alt="{{ $producto->nombre }}" class="img-fluid" style="width: 150px;">
                             </td>
+                            <td>{{ $producto->marca->descripcion }}</td>
+                            <td class="text-center">{{ $producto->stock_disponible }}</td>
+                            <td class="text-center">
+                                @php
+                                    if ($producto->stock_disponible == 0) {
+                                        echo '<span class="badge badge-danger">SIN STOCK</span>';
+                                    } else {
+                                        $porcentaje = ($producto->stock_disponible / $producto->stock_deseado) * 100;
+                                        $colorBarra = 'bg-danger'; //para cuando es 0 el %
+
+                                        if ($porcentaje <= 20) {
+                                            $colorBarra = 'bg-danger';
+                                        } elseif ($porcentaje <= 40) {
+                                            $colorBarra = 'bg-warning';
+                                        } elseif ($porcentaje > 40 && $porcentaje <= 80) {
+                                            $colorBarra = 'bg-info';
+                                        } else {
+                                            $colorBarra = 'bg-success';
+                                        }
+                                        echo '<h4><span class="badge '. $colorBarra .'" style="color: white !important;">' . round($porcentaje) . '%'.'</span></h4>';
+                                    }
+                                @endphp
+                            </td>
+                            {{-- <td>{{ $producto->stock_deseado }}</td>
+                            <td>{{ $producto->stock_minimo }}</td> --}}
                             <td>
                                 <form action="{{ route('producto.destroy', $producto) }}" method="POST">
                                     @csrf 
@@ -92,17 +107,18 @@
                                         <label class="switch">
                                             <input type="checkbox" class="miInterruptor" value="{{ $producto->stock_disponible == 0 ? 0 : $producto->activo }}" data-change-id="{{ $producto->id }}">
                                             <span class="slider"> <p class="estadop" style="visibility: hidden">{{ $producto->activo }}</p></span>
-                                          
                                         </label>
                                     </div>
                                 </form>
                             </td>
                             <td>
                                 <div class="d-flex">
-                                    <a href="{{ route('producto.show', $producto) }}" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
+                                    <a href="{{ route('stock.show', $producto) }}" data-toggle="modal"
+                                    data-target="#productoModal{{ $producto->id }}"  class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
                                         Ver
                                     </a>
-                                    <a href="{{ route('producto.edit', $producto) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
+                                    @include('panel.administrador.lista_stock.show')
+                                    <a href="{{ route('stock.edit', $producto) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
                                         Editar
                                     </a>
                                     {{-- <form action="{{ route('producto.destroy', $producto) }}" method="POST">

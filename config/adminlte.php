@@ -327,10 +327,24 @@ return [
             'can'         => 'lista_usuarios' //permiso de admin
         ],
         [
-            'text'        => ' Productos',
+            'text'        => 'Productos',
             // 'url'         => '#',
             'route' => 'producto.index',
             'icon'        => 'fas fa-shopping-cart',
+            'can'         => 'lista_usuarios' //permiso de admin
+        ],
+        [
+            'text'        => 'Stock',
+            // 'url'         => '#',
+            'route' => 'stock.index',
+            'icon'        => 'fas fa-box',
+            'can'         => 'lista_usuarios' //permiso de admin
+        ],
+        [
+            'text'        => 'Historico',
+            // 'url'         => '#',
+            'route' => 'stock.historico',
+            'icon'        => 'fas fa-list',
             'can'         => 'lista_usuarios' //permiso de admin
         ],
         [
@@ -499,7 +513,7 @@ return [
                 ],
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',
                 ],
                 [

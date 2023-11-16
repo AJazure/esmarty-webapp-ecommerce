@@ -334,13 +334,6 @@ return [
             //'can'         => 'lista_caja' //permiso de cajero
         ],
         [
-            'text'        => 'Caja - Ventas',
-            'route'      => 'venta.index',
-            'icon'        => 'fas fa-cash-register',
-            'can'         => 'lista_usuarios', 'lista_caja' //permiso de admin<i class="far fa-project-diagram"></i>
-            //'can'         => 'lista_caja' //permiso de cajero
-        ],
-        [
             'text'        => 'Productos',
             // 'url'         => '#',
             'route' => 'producto.index',
@@ -352,28 +345,14 @@ return [
             // 'url'         => '#',
             'route' => 'stock.index',
             'icon'        => 'fas fa-box',
-            'can'         => 'lista_usuarios' //permiso de admin
+            'can'         => 'lista_usuarios','lista_almacen' //permiso de admin
         ],
         [
             'text'        => 'Historico',
             // 'url'         => '#',
             'route' => 'stock.historico',
             'icon'        => 'fas fa-list',
-            'can'         => 'lista_usuarios' //permiso de admin
-        ],
-        [
-            'text'        => 'Stock',
-            // 'url'         => '#',
-            'route' => 'stock.index',
-            'icon'        => 'fas fa-box',
-            'can'         => 'lista_usuarios' //permiso de admin
-        ],
-        [
-            'text'        => 'Historico',
-            // 'url'         => '#',
-            'route' => 'stock.historico',
-            'icon'        => 'fas fa-list',
-            'can'         => 'lista_usuarios' //permiso de admin
+            'can'         => 'lista_usuarios','lista_almacen' //permiso de admin
         ],
         [
             'text'        => 'Proveedores',

@@ -74,12 +74,53 @@
                     @enderror
                 </div>
             </div>
-            
-                <h5>Cambiar contraseña:</h5>
+
+
+        </div> {{-- cierre div card-body --}}
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-success text-uppercase">
+                {{ $cliente->id ? 'Actualizar Datos' : 'Guardar' }}
+            </button>
+        </div>
+    </form>
+</div>
+
+<div  class="card mb-5">
+    <form action="{{ $cliente->id ? route('cliente.actualizar', $cliente->id) : route('cliente.store') }}" method="POST"
+        enctype="multipart/form-data">
+        @csrf
+         @if ($cliente->id)
+            @method('PUT')
+        @endif 
+        
+                <input type="hidden" class="form-control @error('name') is-invalid @enderror" id="name"
+                    name="name" value="{{ $cliente->name }}">
+
+                <input type="hidden" class="form-control @error('apellido') is-invalid @enderror" id="apellido"
+                    name="apellido" value="{{ $cliente->apellido }}">
+
+                <input type="hidden" class="form-control @error('dni') is-invalid @enderror" id="dni"
+                    name="dni" placeholder="Sin puntos" value="{{ $cliente->dni }}">
+
+
+                <input type="hidden" class="form-control @error('email') is-invalid @enderror" id="email"
+                    name="email" value="{{$cliente->email }}">
+
+
+                <input type="hidden" class="form-control @error('telefono') is-invalid @enderror" id="telefono"
+                    name="telefono" placeholder="Solo números" value="{{ $cliente->telefono }}">
+                
+        
+                <input type="hidden" class="form-control @error('direccion') is-invalid @enderror" id="direccion"
+                    name="direccion" placeholder="" value="{{$cliente->direccion }}">
+
+        <div class="card-body">
+    <h5>Cambiar contraseña:</h5>
                 <div class="mb-3 row">
                     <label for="current_password" class="col-sm-4 col-form-label">Contraseña Actual:</label>
                     <div class="col-sm-8">
-                        <input type="current_password" class="form-control @error('current_password') is-invalid @enderror" id="current_password"
+                        <input type="password" class="form-control @error('current_password') is-invalid @enderror" id="current_password"
                             name="current_password" value="">
                         @error('current_password')
                             <div class="invalid-feedback"> {{ $message }} </div>
@@ -106,31 +147,3 @@
                         @enderror
                     </div>
                 </div>
-                <div><span class="text-info">*Si no desea actualizar la contraseña, deje los espacios en blanco </span></div>
-
-            {{-- <div class="mb-3 row">
-                <label for="rol_id" class="col-sm-4 col-form-label"> * Rol </label>
-                <div class="col-sm-8">
-                    <select id="rol_id" name="rol_id" class="form-control @error('rol_id') is-invalid @enderror">
-                        <option disabled selected>Seleccione un rol</option>
-                        @foreach ($all_roles as $rol)
-                        <option {{ $user_role->contains($rol) ? 'selected': '' }} value="{{ $rol }}"> 
-                            {{ ucfirst($rol) }}
-                        </option>
-                        @endforeach
-                    </select>
-                    @error('rol_id')
-                        <div class="invalid-feedback"> {{ $message }} </div>
-                    @enderror
-                </div>
-            </div> --}}
-
-        </div> {{-- cierre div card-body --}}
-
-        <div class="card-footer">
-            <button type="submit" class="btn btn-success text-uppercase">
-                {{ $cliente->id ? 'Actualizar' : 'Guardar' }}
-            </button>
-        </div>
-    </form>
-

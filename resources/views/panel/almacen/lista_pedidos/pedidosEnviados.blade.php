@@ -89,6 +89,11 @@
                                             data-urlfactura="{{ $pedido->urlFactura }}">
                                             Ver
                                         </a>
+                                        <a href=""
+                                        class="btn btn-sm btn-warning text-white text-uppercase me-1 mr-2 mt-1">
+
+                                            Editar
+                                        </a>
 
                                     </td>
                                 </tr>

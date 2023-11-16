@@ -22,10 +22,10 @@
                     <div class="row">
                         <div class="col-lg-6 col-12">
                             <div class="imagen-detalle">
-                                    @php
-                                        $photo = explode(',', $producto->url_imagen);
-                                    @endphp
-                                    <img src="{{ $photo[0] }}" alt="{{ $photo[0] }}" width="250" height="240">
+                                @php
+                                    $photo = explode(',', $producto->url_imagen);
+                                @endphp
+                                <img src="{{ $photo[0] }}" alt="{{ $photo[0] }}" width="250" height="240">
                             </div>
                         </div>
                         <div class="col-lg-6 col-12">
@@ -40,19 +40,21 @@
 
                                 <!-- -->
                                 <div class="product-buy">
-                                    <form action="" method="POST">
-                                        <div class="add-to-cart mt-4">
-                                            <button type="submit" class="btn">Add to cart</button>
-                                        </div>
-                                    </form>
+                                    <div>
+                                        <button href="#" data-agregar-id="{{ $producto->id }}"
+                                            class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2 agregarAlCarrito">
+                                            Agregar al carrito
+                                        </button>
+                                    </div>
 
                                     <p class="cat">Categoria :
-                                        <a href="{{ route('MandarDatosCategoriaEspecifica', ['categoria' => $categoriaEspecifica->id]) }}">
+                                        <a
+                                            href="{{ route('MandarDatosCategoriaEspecifica', ['categoria' => $categoriaEspecifica->id]) }}">
                                             {{ $categoriaEspecifica->descripcion }}
                                             <br>
                                         </a>
                                     </p>
-                                    <p class="cat">Marca :{{$marcaEspecifica->descripcion}} </p>
+                                    <p class="cat">Marca :{{ $marcaEspecifica->descripcion }} </p>
                                 </div>
                                 <!-- -->
                             </div>
@@ -97,4 +99,12 @@
     </section>
     <!-- -->
 
+@endsection
+@section('js')
+    <script>
+        let rutaParaAgregar = '{{ route('carrito.agregarAlCarrito') }}';
+        var token = '{{ csrf_token() }}';
+    </script>
+    
+    <script src="{{ asset('js/carrito/agregar_al_carrito.js') }}"></script>
 @endsection

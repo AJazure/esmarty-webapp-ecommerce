@@ -41,7 +41,7 @@
 			</div>
             <div class="row pt-3">
                 <div class="col-12 d-flex justify-content-between">
-                <a href="{{ route('carrito.agregarProductos') }}" class="btn btn-secondary"><- Seguir comprando</a>
+                <a href="{{ route('productos') }}" class="btn btn-secondary"><- Seguir comprando</a>
                 <a href="{{ route('carrito.create') }}" class="btn btn-primary" id="btn-checkout">Checkout</a>
                 </div>
             </div>

@@ -75,7 +75,10 @@ public function filtrarPorPrecio(Request $request)
 {
     $categorias = Categoria::where('activo', 1)->get();
 
-    $productos = Producto::where('precio', '<=', $request->input('precio_range'))->simplePaginate(12);
+    
+    $precio_range = $request->input('precio_range', 0);
+
+    $productos = Producto::where('precio', '<=', $precio_range)->simplePaginate(12)->withQueryString(); 
 
     $ultimosProductos= Producto::latest()->take(2)->get();
     return view('frontend.paginas.productosFiltroPrecio', compact('productos', 'categorias','ultimosProductos'));

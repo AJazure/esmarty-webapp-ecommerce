@@ -65,7 +65,6 @@
             selectedPrice.value = precioRange.value;
         }); 
         }
-        
     </script>
 
     @yield('js')

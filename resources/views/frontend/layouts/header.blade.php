@@ -78,7 +78,7 @@
                             {{--  --}}
                         @else
                             @role('cliente')
-                                <li><a class="dropdown-item" href="#">Mis compras</a></li>
+                                <li><a class="dropdown-item" href="{{route('pedidos.index')}}">Mis compras</a></li>
                              @endrole
 
                             <li>

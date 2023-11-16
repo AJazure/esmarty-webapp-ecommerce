@@ -16,34 +16,48 @@ class UserSeeder extends Seeder
     {
         //creación de usuarios para roles de prueba
         User::create([
-            'name'=>'admin',
-            'apellido' => '',
+            'name'=>'Marecelo',
+            'apellido' => 'Zenzano',
             'email'=>'admin@esmarty.com',
-            'password'=> Hash::make('12345'),
+            'dni' => '28034723',
+            'telefono' => '3875154423',
+            'password'=> Hash::make('a12345-'),
         ])->assignRole('admin');
 
         User::create([
-            'name'=>'Vendedor Cristian Mené',
+            'name'=>'Cristian',
+            'apellido' => 'Mené',
             'email'=>'vendedor@esmarty.com',
-            'password'=> Hash::make('12345'),
+            'dni' => '32034723',
+            'telefono' => '3875156623',
+            'password'=> Hash::make('a12345-'),
         ])->assignRole('vendedor');
 
         User::create([
-            'name'=>'Operario Emanuel Hoyos',
+            'name'=>'Emanuel',
+            'apellido' => 'Hoyos',
             'email'=>'almacen@esmarty.com',
-            'password'=> Hash::make('12345'),
+            'dni' => '40034723',
+            'telefono' => '3875154122',
+            'password'=> Hash::make('a12345-'),
         ])->assignRole('almacen');
 
         User::create([
-            'name'=>'Cajero Cristian Leyton',
+            'name'=>'Martín Emanuel',
+            'apellido' => 'Fernández',
             'email'=>'cajero@esmarty.com',
-            'password'=> Hash::make('12345'),
+            'dni' => '38034123',
+            'telefono' => '3875154422',
+            'password'=> Hash::make('a12345-'),
         ])->assignRole('cajero');
 
         User::create([
-            'name'=>'Nicolás Juárez',
+            'name'=>'Nicolás',
+            'apellido' => 'Juárez',
             'email'=>'juareznicozar@gmail.com',
-            'password'=> Hash::make('12345'),
+            'dni' => '32000723',
+            'telefono' => '3875112534',
+            'password'=> Hash::make('a12345-'),
         ])->assignRole('cliente');
     }
 }

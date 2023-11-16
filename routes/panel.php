@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MetodoDePagoController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\VentaController;
+use App\Http\Controllers\StockController;
 use Illuminate\Support\Facades\Route;
 
 /* Route::get('/', function () {
@@ -32,7 +33,7 @@ Route::get('/preparar-pedido/{id}', [PedidoController::class, 'prepararPedido'])
 Route::post('/guardar-numero/{id}', [PedidoController::class, 'guardarNumero'])->name('guardarNumero');
 
 
-Route::resource('/marcas', MarcaController::class)->names('marca'); //como es un controlador tipo resource usaré solo esta línea
+Route::resource('/marcas', MarcaController::class)->names('marca'); 
 Route::resource('/categorias', CategoriaController::class)->names('categoria');
 Route::resource('/users', UserController::class)->names('user');
 
@@ -50,3 +51,7 @@ Route::get('/ventas', [VentaController::class, 'index'])->name('venta.index');
 Route::get('/ventas/venta-diaria', [VentaController::class, 'ventasDiarias'])->name('venta.ventasDiarias');
 Route::get('/ventas/exportarExcel', [VentaController::class, 'exportarExcel'])->name('venta.exportarExcel');
 Route::get('/ventas/venta-mensual', [VentaController::class, 'ventasMensuales'])->name('venta.ventasMensuales');
+Route::resource('/stock', StockController::class)->names('stock');
+Route::get('/historico', [StockController::class, 'historicoVista'])->name('stock.historico');
+Route::get('/showDetalle', [StockController::class, 'showDetalle'])->name('stock.showDetalle');
+

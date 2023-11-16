@@ -79,8 +79,12 @@
                             {{-- <td>{{ $producto->marca->descripcion}}</td> --}}
                             <td>{{ $producto->marca ? $producto->marca->descripcion : 'N/A'}}</td>
                             <td>{{ $producto->precio }}</td>
-                            <td>{{ $producto->stock_disponible }}</td>
-                            {{-- <td>{{ Str::limit($producto->descripcion, 80) }}</td> --}}
+                            <td class='text-center'>
+                                @if ($producto->stock_disponible == 0)
+                                    <span class="badge badge-danger">SIN STOCK</span>
+                                @else
+                                    {{$producto->stock_disponible}}
+                                @endif
                             <td>
                                 @php
                                     $imagenes= explode('|', $producto->url_imagen)
@@ -94,31 +98,24 @@
                                     {{-- <button type="submit" class="btn btn-sm btn-danger text-uppercase">
                                         Eliminar
                                     </button> --}}
-                                                <div>
-                                                    <label class="switch">
-                                                        <input type="checkbox" class="miInterruptor"
-                                                            value="{{ $producto->activo }}"
-                                                            data-change-id="{{ $producto->id }}">
-                                                        <span class="slider">
-                                                            <p class="estadop" style="visibility: hidden">
-                                                                {{ $producto->activo }}</p>
-                                                        </span>
-
-                                                    </label>
-                                                </div>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex">
-                                                <a href="{{ route('producto.show', $producto) }}"
-                                                    class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
-                                                    Ver
-                                                </a>
-                                                <a href="{{ route('producto.edit', $producto) }}"
-                                                    class="btn btn-sm btn-warning text-white text-uppercase me-1">
-                                                    Editar
-                                                </a>
-                                                {{-- <form action="{{ route('producto.destroy', $producto) }}" method="POST">
+                                    <div>
+                                        <label class="switch">
+                                            <input type="checkbox" class="miInterruptor" value="{{ $producto->stock_disponible == 0 ? 0 : $producto->activo }}" data-change-id="{{ $producto->id }}">
+                                            <span class="slider"> <p class="estadop" style="visibility: hidden">{{ $producto->activo }}</p></span>
+                                          
+                                        </label>
+                                    </div>
+                                </form>
+                            </td>
+                            <td>
+                                <div class="d-flex">
+                                    <a href="{{ route('producto.show', $producto) }}" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
+                                        Ver
+                                    </a>
+                                    <a href="{{ route('producto.edit', $producto) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
+                                        Editar
+                                    </a>
+                                    {{-- <form action="{{ route('producto.destroy', $producto) }}" method="POST">
                                         @csrf 
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger text-uppercase">

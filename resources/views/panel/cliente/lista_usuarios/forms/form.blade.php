@@ -147,3 +147,12 @@
                         @enderror
                     </div>
                 </div>
+            </div> {{-- cierre div card-body --}}
+
+            <div class="card-footer">
+                <button type="submit" class="btn btn-success text-uppercase">
+                    {{ $cliente->id ? 'Actualizar COntraseña' : 'Guardar' }}
+                </button>
+            </div>
+        </form>
+    </div>

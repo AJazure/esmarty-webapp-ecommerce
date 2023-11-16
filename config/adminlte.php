@@ -376,11 +376,18 @@ return [
             'icon'        => 'fas fa-users',
             'can'         => 'lista_productos' //permiso de vendedor
         ],
+
         [
             'text'        => 'Gestión de Almacén',
             'url'         => '#',
             'icon'        => 'fas fa-users',
             'can'         => 'lista_almacen' //permiso de operario de almacén
+        ],
+        [
+            'text'        => 'Acceso a Caja',
+            'url'         => '#',
+            'icon'        => 'fas fa-users',
+            'can'         => 'lista_caja' //permiso de cajero
         ],
         [
             'text'        => 'Mis Datos',

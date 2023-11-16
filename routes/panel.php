@@ -25,6 +25,13 @@ Route::get('/', function () {
 
 Route::resource('/proveedores', ProveedorController::class)->names('proveedor');
 Route::resource('/productos', ProductoController::class)->names('producto');
+
+Route::get('/pedidos/preparacion', [PedidoController::class, 'pedidosPagados'])->name('pedidosPagados');
+Route::get('/pedidos/enviados', [PedidoController::class, 'pedidosEnviados'])->name('pedidosEnviados');
+Route::get('/preparar-pedido/{id}', [PedidoController::class, 'prepararPedido'])->name('prepararPedido');
+Route::post('/guardar-numero/{id}', [PedidoController::class, 'guardarNumero'])->name('guardarNumero');
+
+
 Route::resource('/marcas', MarcaController::class)->names('marca'); //como es un controlador tipo resource usaré solo esta línea
 Route::resource('/categorias', CategoriaController::class)->names('categoria');
 Route::resource('/users', UserController::class)->names('user');

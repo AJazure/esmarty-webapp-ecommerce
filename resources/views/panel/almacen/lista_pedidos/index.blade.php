@@ -8,11 +8,11 @@
 @section('plugins.Sweetalert2', true)
 
 {{-- Titulo en las tabulaciones del Navegador --}}
-@section('title', 'Mis Compras')
+@section('title', 'Pedidos')
 
 {{-- Titulo en el contenido de la Pagina --}}
 @section('content_header')
-    <h1>&nbsp;<strong>Mis Compras</strong></h1>
+    <h1>&nbsp;<strong>Pedidos en Preparacion</strong></h1>
 @stop
 
 {{-- Contenido de la Pagina --}}
@@ -55,6 +55,7 @@
                                 <!-- <th scope="col">#</th> -->
                                 <th scope="col" class="text-uppercase">N° de Pedido</th>
                                 <th scope="col" class="text-uppercase">Fecha de Pedido</th>
+                                <th scope="col" class="text-uppercase">Fecha de Pago</th>
                                 <th scope="col" class="text-uppercase">Costo Total</th>
                                 <th scope="col" class="text-uppercase">N° de Seguimiento</th>
                                 <th scope="col" class="text-uppercase">Estado del Pedido</th>
@@ -67,27 +68,26 @@
                                 <tr>
                                     <td>{{ $pedido->num_pedido }}</td>
                                     <td>{{ $pedido->created_at }}</td>
+                                    <td>{{ $pedido->updated_at }}</td>
                                     <td>{{ $pedido->total }}</td>
-                                    <td>{{ $pedido->num_seguimiento }}</td>
+
                                     <td>
-                                        @if ($pedido->cancelado)
-                                            <span class="badge badge-danger">Cancelado</span>
+                                        <form method="POST" action="{{ route('guardarNumero', ['id' => $pedido->id]) }}">
+                                            @csrf
+                                            <input type="number" name="numero" {{$pedido->en_preparacion ? '' : 'disabled'}} onkeypress="return event.keyCode != 13;">
+                                        </form>
+                                    </td>
+
+                                    <td>
+                                        @if ($pedido->num_seguimiento)
+                                            <span class="badge badge-primary">Enviado</span>
                                         @else
-                                            @if ($pedido->pagado)
-                                                <span class="badge badge-success">Pagado</span>
-                                                @if ($pedido->num_seguimiento)
-                                                    <span class="badge badge-primary">Enviado</span>
-                                                @else
-                                                    @if (!$pedido->en_preparacion)
-                                                        <span class="badge badge-info">Esperando </span>
-                                                        @else
-                                                        @if ($pedido->en_preparacion)
-                                                            <span class="badge badge-info">En preparacion</span>
-                                                        @endif
-                                                    @endif
-                                                @endif
+                                            @if ($pedido->en_preparacion)
+                                                <span class="badge badge-info">En preparacion</span>
                                             @else
-                                                <span class="badge badge-warning text-white">Esperando Pago</span>
+                                                @if ($pedido)
+                                                    <span class="badge badge-warning">Pendiente</span>
+                                                @endif
                                             @endif
                                         @endif
                                     </td>
@@ -107,16 +107,17 @@
                                             Ver
                                         </a>
 
-                                        <button
-                                            class="btn btn-sm btn-danger text-white text-uppercase me-1 mr-2 @if (!$pedido->cancelado && !$pedido->pagado) btnEliminar @endif  @if ($pedido->pagado || $pedido->cancelado) d-none @endif"
-                                            value="{{ $pedido->id }}">
-                                            Cancelar
-                                        </button>
-                                        <a href="@if (!$pedido->pagado) {{ $pedido->linkDePago }} @endif"
-                                            class="btn btn-sm btn-success text-white text-uppercase me-1 mr-2 btnPagar @if ($pedido->pagado || $pedido->cancelado) d-none @endif"
-                                            id="btnPagar">
-                                            Pagar
-                                        </a>
+                                        @if (!$pedido->en_preparacion)
+                                            <a href="{{ route('prepararPedido', ['id' => $pedido->id]) }}"
+                                                class="btn btn-sm btn-success text-white text-uppercase me-1 mr-2">
+                                                Preparar
+                                            </a>
+                                        @else
+                                            <button class="btn btn-sm btn-success text-white text-uppercase me-1 mr-2"
+                                                disabled>
+                                                Preparar
+                                            </button>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
@@ -146,5 +147,7 @@
     <script src="{{ asset('js/pedido/detalle_de_pedido.js') }}"></script>
     <script src="{{ asset('js/pedido/eliminar_pedido.js') }}"></script>
     <script src="{{ asset('js/pedido/pedidos.js') }}"></script>
+    <script src="{{ asset('js/pedido/num_seguimiento.js') }}"></script>
+    <script src="{{ asset('js/pedido/recargarPagina.js') }}"></script>
 
 @stop

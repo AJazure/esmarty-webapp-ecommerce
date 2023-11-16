@@ -11,11 +11,15 @@ use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\VentaController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+/* Route::get('/', function () {
 	if (auth()->user()->hasRole('cliente')) {
 		return redirect()->route('MandarDatosPaginaInicio');
 	}
 
+	return view('panel.index');
+})->middleware(['verified'])->name('Welcome'); */
+
+Route::get('/', function () {
 	return view('panel.index');
 })->middleware(['verified'])->name('Welcome');
 

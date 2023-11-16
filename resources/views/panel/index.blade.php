@@ -7,21 +7,24 @@
 @stop
 
 @section('content_header')
-<h1>&nbsp;<strong>Panel Esmarty</strong></h1>
+<h1>&nbsp;<strong>Bienvenido al Panel Esmarty</strong></h1>
 @stop
 
-<!-- {{-- @section('content') --}}
+@section('content')
+@if (auth()->user()->hasRole('cliente'))
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 mb-3">
-            <h1>Bienvenido"{{-- {{ $cliente->name }} {{ $cliente->apellido }} --}}"</h1>
-            <a href="{{-- {{  route('cliente.index') }} --}}#" class="btn btn-sm btn-primary text-uppercase">
+            {{-- <h1>Bienvenido a su Panel</h1> --}}
+            <a href="{{  route('MandarDatosPaginaInicio') }}" class="btn btn-sm btn-primary text-uppercase p-2">
                 <i class="fas fa-shopping-cart"></i> Seguir comprando
             </a>
         </div>
     </div>
 </div>
-{{-- @stop  --}}-->
+    
+@endif
+@stop  
 
 
 @section('js')

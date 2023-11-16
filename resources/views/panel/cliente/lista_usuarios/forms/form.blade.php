@@ -151,7 +151,7 @@
 
             <div class="card-footer">
                 <button type="submit" class="btn btn-success text-uppercase">
-                    {{ $cliente->id ? 'Actualizar COntraseña' : 'Guardar' }}
+                    {{ $cliente->id ? 'Actualizar Contraseña' : 'Guardar' }}
                 </button>
             </div>
         </form>

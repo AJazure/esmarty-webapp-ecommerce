@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
             'dni' => '28034723',
             'telefono' => '3875154423',
             'password'=> Hash::make('a12345-'),
+            'email_verified_at'=> '2023-11-17 18:07:39',
         ])->assignRole('admin');
 
         User::create([
@@ -31,6 +32,7 @@ class UserSeeder extends Seeder
             'dni' => '32034723',
             'telefono' => '3875156623',
             'password'=> Hash::make('a12345-'),
+            'email_verified_at'=> '2023-11-17 18:07:39',
         ])->assignRole('vendedor');
 
         User::create([
@@ -40,6 +42,7 @@ class UserSeeder extends Seeder
             'dni' => '40034723',
             'telefono' => '3875154122',
             'password'=> Hash::make('a12345-'),
+            'email_verified_at'=> '2023-11-17 18:07:39',
         ])->assignRole('almacen');
 
         User::create([
@@ -49,6 +52,7 @@ class UserSeeder extends Seeder
             'dni' => '38034123',
             'telefono' => '3875154422',
             'password'=> Hash::make('a12345-'),
+            'email_verified_at'=> '2023-11-17 18:07:39',
         ])->assignRole('cajero');
 
         User::create([
@@ -58,6 +62,7 @@ class UserSeeder extends Seeder
             'dni' => '32000723',
             'telefono' => '3875112534',
             'password'=> Hash::make('a12345-'),
+            'email_verified_at'=> '2023-11-17 18:07:39',
         ])->assignRole('cliente');
     }
 }

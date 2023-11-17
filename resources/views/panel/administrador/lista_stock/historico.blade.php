@@ -56,7 +56,7 @@
                             <td>{{ $registro->user->email }}</td>
                             <td>
                                 {!!
-                                    $registro->tipo_modif == 'alta'
+                                    $registro->tipo_modif == 'alta' || $registro->tipo_modif == 'venta'
                                         ? '<span class="badge badge-success p-2">' . $registro->tipo_modif . '</span>'
                                         : ($registro->tipo_modif == 'ingreso'
                                         ? '<span class="badge badge-primary p-2">' . $registro->tipo_modif . '</span>'

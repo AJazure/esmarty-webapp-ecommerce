@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StockRequest;
 use App\Models\Stock;
 use App\Models\Proveedor;
 use App\Models\Marca;
@@ -9,6 +10,7 @@ use App\Models\Categoria;
 use App\Models\Producto;
 use App\Models\HistoricoStock;
 use Illuminate\Http\Request;
+
 
 class StockController extends Controller
 {
@@ -48,7 +50,7 @@ class StockController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StockRequest $request)
     {
         /*/
         Almacena en la base de datos un producto nuevo, en estado inactivo por defecto.
@@ -127,7 +129,7 @@ class StockController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Stock $stock)
+    public function update(StockRequest $request, Stock $stock)
     {   
         /*/
         Realiza una actualización en la tabla productos del stock y realiza un insert con los datos
@@ -155,11 +157,19 @@ class StockController extends Controller
         }
 
         if(!$modificaStock){
+
             //si no modifica stock entonces no se ejecuta histórico, solo se cambia stock deseado y minimo
-            $producto->stock_minimo = $request->get('stock_minimo');
-            $producto->stock_deseado = $request->get('stock_deseado');
-            //$producto->stock_disponible = $request->get('stock_disponible');
-            $producto->update();
+            if ($request->get('stock_minimo') != null) {
+                $producto->stock_minimo = $request->get('stock_minimo');
+            }
+
+            if ($request->get('stock_deseado') != null) {
+                $producto->stock_deseado = $request->get('stock_deseado');
+            }
+            
+            if ($request->get('stock_minimo') != null || $request->get('stock_deseado') != null) {
+                $producto->update();
+            }
 
             return redirect()
             ->route('stock.index')
@@ -178,9 +188,10 @@ class StockController extends Controller
             $historico->cantidad_nueva = $nuevoStock; // guarda el resultado
             $historico->created_at = now();
 
-            $producto->stock_minimo = $request->get('stock_minimo');
-            $producto->stock_deseado = $request->get('stock_deseado');
-            
+            //solamente envía stock min y des si el valor dentro no es null
+            $producto->stock_minimo = $request->get('stock_minimo') != null ? $request->get('stock_minimo') : $producto->stock_minimo;
+            $producto->stock_deseado = $request->get('stock_deseado') != null ? $request->get('stock_deseado') : $producto->stock_deseado;
+
             $producto->update();
             $historico->save();
 

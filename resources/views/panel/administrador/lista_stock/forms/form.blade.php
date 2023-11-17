@@ -21,7 +21,7 @@
                 <div class="col-sm-8">
                     <input type="text" class="form-control @error('codigo_producto') is-invalid @enderror" {{ $producto->id ? 'readonly' : '' }}
                         id="codigo_producto" name="codigo_producto" placeholder="código correspondiente al producto"
-                        value="{{ old('codigo_producto', optional($producto)->codigo_producto) }}" maxlength="15">
+                        value="{{ old('codigo_producto', optional($producto)->codigo_producto) }}" maxlength="15" required>
                     @error('codigo_producto')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
@@ -33,7 +33,7 @@
                 <div class="col-sm-8">
                     <input type="text" class="form-control @error('nombre') is-invalid @enderror" id="nombre"
                         name="nombre" placeholder="nombre del producto" {{ $producto->id ? 'readonly' : '' }}
-                        value="{{ old('nombre', optional($producto)->nombre) }}" maxlength="120">
+                        value="{{ old('nombre', optional($producto)->nombre) }}" maxlength="120" required>
                     @error('nombre')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
@@ -98,7 +98,7 @@
                 <div class="col-sm-3">
                     <input type="number" class="form-control @error('stock_disponible') is-invalid @enderror" {{ $producto->id ? 'readonly' : '' }}
                         id="stock_disponible" name="stock_disponible" placeholder="cantidad disponible actualmente"
-                        value="{{ old('stock_disponible', optional($producto)->stock_disponible) }}" maxlength="3">
+                        value="{{ old('stock_disponible', optional($producto)->stock_disponible) }}" maxlength="3" required>
                     @error('stock_disponible')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
@@ -153,7 +153,7 @@
                 <div class="col-sm-2">
                     <input type="number" class="form-control @error('cantidad_modif') is-invalid @enderror"
                         id="cantidad_modif" name="cantidad_modif" placeholder="cantidad que modifica"
-                        value="" maxlength="3">
+                        value="" maxlength="3" readonly>
                     @error('cantidad_modif')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
@@ -166,10 +166,11 @@
                 <label for="motivo_modif" class="col-sm-4 col-form-label"> * Motivo de la Modificación </label>
                 <div class="col-sm-8">
                     <textarea id="motivo_modif" name="motivo_modif" rows="4" class="form-control @error('motivo_modif') is-invalid @enderror" minlength="20" maxlength="200"
-                    placeholder="Explique brevemente el motivo de la modificación...">{{ old('motivo_modif', optional($producto)->motivo_modif) }}</textarea>
+                    placeholder="Explique brevemente el motivo de la modificación..." readonly>{{ old('motivo_modif', optional($producto)->motivo_modif) }}</textarea>
                     @error('descripcion')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
+                    <span id="motivo_modif-error" class="invalid-feedback text-danger"></span>
                 </div>
             </div>
             @endif
@@ -186,15 +187,12 @@
 
 
 @section('js')
-<!-- Agrega esto al final de tu vista -->
-<!-- Agrega esto al final de tu vista -->
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-<script>
+{{-- <script>
     $(document).ready(function () {
         // Agrega el evento change para el campo tipo_modif
         $('#tipo_modif').on('change', function () {
-            validateCantidadModif();
+            validateTipoModif();
             updateSubmitButton();
         });
 
@@ -221,21 +219,29 @@
             }
 
             // Muestra el mensaje de error o limpia el mensaje si no hay error
-            if (errorMessage !== '') {
-                $('#cantidad_modif').addClass('is-invalid');
-                $('#cantidad_modif-error').text(errorMessage); // Nueva línea para mostrar el mensaje de error
-            } else {
-                $('#cantidad_modif').removeClass('is-invalid');
-                $('#cantidad_modif-error').text(''); // Nueva línea para limpiar el mensaje de error
+            $('#cantidad_modif').toggleClass('is-invalid', errorMessage !== '');
+            $('#cantidad_modif-error').text(errorMessage);
+        }
+
+        function validateTipoModif() {
+            var tipoModif = $('#tipo_modif').val();
+
+            // Cambia el atributo readonly de los campos cantidad_modif y motivo_modif según la selección
+            $('#cantidad_modif, #motivo_modif').prop('readonly', tipoModif === '');
+
+            // Si el tipoModif es '', también limpia el valor de cantidad_modif
+            if (tipoModif === '') {
+                $('#cantidad_modif').val('');
             }
         }
 
         function updateSubmitButton() {
             // Habilita o deshabilita el botón de enviar según si hay errores o no
-            var hasError = $('#cantidad_modif').hasClass('is-invalid');
-            $('button[type="submit"]').prop('disabled', hasError);
+            $('button[type="submit"]').prop('disabled', $('#cantidad_modif').hasClass('is-invalid'));
         }
     });
-</script>
+</script> --}}
+
+<script src="{{ asset('js/stock_update_validation.js') }}"></script>
 
 @stop

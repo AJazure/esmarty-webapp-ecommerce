@@ -242,7 +242,7 @@ class ProductoController extends Controller
         $historico->id_producto = $idProducto;
         $historico->id_user = auth()->user()->id; // id user que realiza la compra
         $historico->motivo_modif = 'Devolución de producto por cancelación de pedido o por devolución de producto de compra.';
-        $historico->tipo_modif = 'devolución'; // por defecto cuando se da alta se crea como nuevo producto el tipo de modif
+        $historico->tipo_modif = 'cancelación'; 
         $historico->cantidad_modif = $cant_aumentar;
         $historico->cantidad_anterior = $stockAnterior; 
         $historico->cantidad_nueva = $producto->stock_disponible; // ya está aumentado el stock

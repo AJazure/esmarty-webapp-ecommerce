@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_producto');
             $table->unsignedBigInteger('id_user');
             $table->string('tipo_modif')->notnull(); // almacena el tipo de modificación que corresponde
-            $table->string('motivo_modif', 250)->notnull(); // motivo de la modificación
+            $table->string('motivo_modif', 250); // motivo de la modificación
             $table->integer('cantidad_modif')->notnull(); // registra cuanto agregó o quitó al stock
             $table->integer('cantidad_anterior')->notnull(); // registra el stock anterior a la modificación
             $table->integer('cantidad_nueva')->notnull(); // registra el stock resultante de esa modificación

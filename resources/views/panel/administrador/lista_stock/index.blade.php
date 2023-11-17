@@ -4,6 +4,8 @@
 {{-- Activamos el Plugin de Datatables instalado en AdminLTE --}}
 @section('plugins.Datatables', true)
 
+@section('plugins.Sweetalert2', true)
+
 {{-- Titulo en las tabulaciones del Navegador --}}
 @section('title', 'Stock de Productos')
 

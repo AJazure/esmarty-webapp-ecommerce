@@ -210,7 +210,21 @@ class ProductoController extends Controller
     {
         $producto = Producto::find($idProducto);
 
+        $stockAnterior = $producto->stock_disponible; // Guardo el stock anterior a la merma
         $producto->stock_disponible -= $cant_restar; // Merma el stock
+
+        // Registro para el histórico
+        $historico = new HistoricoStock();
+        $historico->id_producto = $idProducto;
+        $historico->id_user = auth()->user()->id; // id user que realiza la compra
+        $historico->motivo_modif = 'Venta de producto en tienda.';
+        $historico->tipo_modif = 'venta'; // por defecto cuando se da alta se crea como nuevo producto el tipo de modif
+        $historico->cantidad_modif = $cant_restar;
+        $historico->cantidad_anterior = $stockAnterior;
+        $historico->cantidad_nueva = $producto->stock_disponible; // ya está mermado el stock
+        $historico->created_at = now();
+        $historico->save();
+        
         $producto->save();
 
     }
@@ -219,7 +233,22 @@ class ProductoController extends Controller
     {
         $producto = Producto::find($idProducto);
 
-        $producto->stock_disponible += $cant_aumentar; // Merma el stock
+        $stockAnterior = $producto->stock_disponible; // Guardo el stock anterior a la suma
+        $producto->stock_disponible += $cant_aumentar; // Aumenta el stock
+        
+
+        // Registro para el histórico
+        $historico = new HistoricoStock();
+        $historico->id_producto = $idProducto;
+        $historico->id_user = auth()->user()->id; // id user que realiza la compra
+        $historico->motivo_modif = 'Devolución de producto por cancelación de pedido o por devolución de producto de compra.';
+        $historico->tipo_modif = 'devolución'; // por defecto cuando se da alta se crea como nuevo producto el tipo de modif
+        $historico->cantidad_modif = $cant_aumentar;
+        $historico->cantidad_anterior = $stockAnterior; 
+        $historico->cantidad_nueva = $producto->stock_disponible; // ya está aumentado el stock
+        $historico->created_at = now();
+        $historico->save();
+
         $producto->save();
 
     }

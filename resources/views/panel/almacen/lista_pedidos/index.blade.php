@@ -72,9 +72,18 @@
                                     <td>{{ $pedido->total }}</td>
 
                                     <td>
-                                        <form method="POST" action="{{ route('guardarNumero', ['id' => $pedido->id]) }}">
+                                        <form class="d-flex" method="POST"
+                                            action="{{ route('guardarNumero', ['id' => $pedido->id]) }}">
                                             @csrf
-                                            <input type="number" name="numero" {{$pedido->en_preparacion ? '' : 'disabled'}} onkeypress="return event.keyCode != 13;">
+                                            <input type="number" name="numero"
+                                                {{ $pedido->en_preparacion ? '' : 'disabled' }}
+                                                onkeypress="return event.keyCode != 13;">
+                                        @if ($pedido->en_preparacion)
+                                            <button type="submit"  class="checkButton">✔</button>
+                                            @else
+                                            <button disabled class="checkButton">✔</button>
+
+                                        @endif
                                         </form>
                                     </td>
 
@@ -108,12 +117,12 @@
                                         </a>
 
                                         @if (!$pedido->en_preparacion)
-                                            <a href="{{ route('prepararPedido', ['id' => $pedido->id]) }}"
-                                                class="btn btn-sm btn-success text-white text-uppercase me-1 mr-2">
-                                                Preparar
-                                            </a>
+                                            <button
+                                                class="btn btn-sm btn-success text-white text-uppercase me-1 mr-2 mt-1 prepararNumSeguimiento"
+                                                data-route="{{ route('prepararPedido', ['id' => $pedido->id]) }}">Preparar
+                                            </button>
                                         @else
-                                            <button class="btn btn-sm btn-success text-white text-uppercase me-1 mr-2"
+                                            <button class="btn btn-sm btn-success text-white text-uppercase me-1 mr-2 mt-1"
                                                 disabled>
                                                 Preparar
                                             </button>
@@ -149,5 +158,30 @@
     <script src="{{ asset('js/pedido/pedidos.js') }}"></script>
     <script src="{{ asset('js/pedido/num_seguimiento.js') }}"></script>
     <script src="{{ asset('js/pedido/recargarPagina.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.prepararNumSeguimiento').click(function() {
+                console.log("Clic detectado");
+                var route = $(this).data('route');
+                var inputId = $(this).closest('tr').find('input[name="numero"]').attr('id');
+                Swal.fire({
+                    title: "¿Quiere preparar este pedido?",
+                    // text: "You won't be able to revert this!",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Si",
+                    cancelButtonText: "No",
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.value) {
+                        window.location.href =route;
+
+                    }
+                });
+
+            });
+        });
+    </script>
 
 @stop

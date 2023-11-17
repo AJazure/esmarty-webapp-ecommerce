@@ -26,7 +26,6 @@ Route::get('/pedidos/enviados', [PedidoController::class, 'pedidosEnviados'])->n
 Route::get('/preparar-pedido/{id}', [PedidoController::class, 'prepararPedido'])->name('prepararPedido');
 Route::post('/guardar-numero/{id}', [PedidoController::class, 'guardarNumero'])->name('guardarNumero');
 
-
 Route::resource('/marcas', MarcaController::class)->names('marca'); //como es un controlador tipo resource usaré solo esta línea
 Route::resource('/categorias', CategoriaController::class)->names('categoria');
 Route::resource('/users', UserController::class)->names('user');

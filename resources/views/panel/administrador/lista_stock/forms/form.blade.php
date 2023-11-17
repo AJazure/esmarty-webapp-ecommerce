@@ -105,6 +105,7 @@
                 </div>
             </div>
             
+            @role('admin')
             <div class="mb-3 row">
                 <label for="stock_deseado" class="col-sm-4 col-form-label"> * Stock Deseado </label>
                 <div class="col-sm-3">
@@ -116,7 +117,7 @@
                     @enderror
                 </div>
             </div>
-            
+            @endrole
 
             @role('admin')
             <div class="mb-3 row">

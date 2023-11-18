@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PaginaDeInicio;
 
-
+//A la tienda solo pueden acceder los clientes
 Route::middleware(['cliente'])->group(function () { //Todas estas rutas solo son accedibles por los clientes, si no es cliente, no puede entrar aqui
     Route::get('/', [PaginaDeInicio::class, 'MandarDatosPaginaInicio'])->name('MandarDatosPaginaInicio');
     Route::get('productos', [PaginaDeInicio::class, 'MandarDatosLista'])->name('productos');

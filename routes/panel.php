@@ -12,8 +12,9 @@ use App\Http\Controllers\VentaController;
 use App\Http\Controllers\StockController;
 use Illuminate\Support\Facades\Route;
 
-
+//Rutas del panel del cliente
 Route::middleware(['cliente','verified'])->group(function () {
+	//Rutas del perfil del cliente
 	Route::get('/cliente/editar', [ClienteController::class, 'editar'])->name('cliente.editar'); 
 	Route::put('/cliente/actualizar/{cliente}', [ClienteController::class, 'actualizar'])->name('cliente.actualizar'); 
 	Route::resource('/cliente', ClienteController::class)->names('cliente');
@@ -22,14 +23,14 @@ Route::middleware(['cliente','verified'])->group(function () {
 	Route::post('/pedidos/cancelarPedido/{pedido}', [PedidoController::class, 'cancelarPedido'])->name('pedidos.cancelarPedido');
 });
 
-
+//Rutas del panel del almacen
 Route::middleware(['almacen','verified'])->group(function () {
+//Rutas de los CRUD basicos
 Route::resource('/proveedores', ProveedorController::class)->names('proveedor');
 //Rutas del stock
 Route::resource('/stock', StockController::class)->names('stock');
 Route::get('/historico-stock', [StockController::class, 'historicoVista'])->name('stock.historico');
 Route::get('/showDetalle', [StockController::class, 'showDetalle'])->name('stock.showDetalle');
-
 //Rutas para preparar pedidos
 Route::get('/preparacion', [PedidoController::class, 'pedidosPagados'])->name('pedidosPagados');
 Route::get('/enviados', [PedidoController::class, 'pedidosEnviados'])->name('pedidosEnviados');

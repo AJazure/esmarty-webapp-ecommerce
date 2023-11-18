@@ -8,19 +8,21 @@
 @section('plugins.Sweetalert2', true)
 
 {{-- Titulo en las tabulaciones del Navegador --}}
-@section('title', 'Mis Compras')
+@section('title', 'Caja - Ventas')
 
 {{-- Titulo en el contenido de la Pagina --}}
 @section('content_header')
-    <h1>&nbsp;<strong>Mis Compras</strong></h1>
+    <h1>&nbsp;<strong>CAJA - VENTAS</strong></h1>
 @stop
 
 {{-- Contenido de la Pagina --}}
 @section('content')
 
     <div class="container-fluid">
-        <div class="row">
-
+        <div class="row ml-3 mb-3">
+            <a href="{{ route('venta.exportarExcel') }}" class="btn btn-success" title="Excel">
+                <span>Historico</span>  <i class="fas fa-file-excel ml-2"></i>
+            </a>
         </div>
 
         @if (session('alert'))
@@ -48,15 +50,32 @@
 
         <div class="col-12">
             <div class="card">
+                
                 <div class="card-body">
+                    
                     <table id="tabla-pedidos" class="table table-striped table-hover w-100 text-center">
+                        <div style="float: right; margin-left: 20px;">
+                            <form id="filtroFechaForm" action="{{ route('venta.ventasDiarias') }}">
+                                <label for="fecha">Filtrar por Dia:</label>
+                                <input type="date" id="start" name="fecha" value="{{ $fechaActual }}"
+                                    min="2023-01-01" />
+                            </form>
+                        </div>
+                        <div style="float: right; margin-left: 20px;">
+                            <form id="filtroMesForm" action="{{ route('venta.ventasMensuales') }}">
+                                <label for="fecha">Filtrar por Mes:</label>
+                                <input type="month" id="start-mes" name="fecha" value="{{ $mesActual }}"
+                                    min="2023-01-01" />
+                            </form>
+                        </div>
+
                         <thead>
                             <tr>
                                 <!-- <th scope="col">#</th> -->
                                 <th scope="col" class="text-uppercase">N° de Pedido</th>
-                                <th scope="col" class="text-uppercase">Fecha de Pedido</th>
-                                <th scope="col" class="text-uppercase">Costo Total</th>
-                                <th scope="col" class="text-uppercase">N° de Seguimiento</th>
+                                <th scope="col" class="text-uppercase">Fecha y Hora</th>
+                                <th scope="col" class="text-uppercase">Total</th>
+                                {{-- <th scope="col" class="text-uppercase">N° de Seguimiento</th> --}}
                                 <th scope="col" class="text-uppercase">Estado del Pedido</th>
                                 <th scope="col" class="text-uppercase">Acciones</th>
 
@@ -67,24 +86,18 @@
                                 <tr>
                                     <td>{{ $pedido->num_pedido }}</td>
                                     <td>{{ $pedido->created_at }}</td>
-                                    <td>{{ $pedido->total }}</td>
-                                    <td>{{ $pedido->num_seguimiento }}</td>
+                                    <td>${{ $pedido->total }}</td>
+                                    {{-- <td>{{ $pedido->num_seguimiento}}</td> --}}
                                     <td>
                                         @if ($pedido->cancelado)
                                             <span class="badge badge-danger">Cancelado</span>
                                         @else
                                             @if ($pedido->pagado)
                                                 <span class="badge badge-success">Pagado</span>
-                                                @if ($pedido->num_seguimiento)
+                                                @if ($pedido->enviado)
                                                     <span class="badge badge-primary">Enviado</span>
-                                                @else
-                                                     @if (!$pedido->en_preparacion)
-                                                        {{-- <span class="badge badge-info">Esperando </span> --}}
-                                                        @else 
-                                                        @if ($pedido->en_preparacion)
-                                                            <span class="badge badge-info">En preparacion</span>
-                                                        @endif
-                                                    @endif
+                                                @elseif($pedido->en_preparacion)
+                                                <span class="badge badge-info">En preparacion</span>
                                                 @endif
                                             @else
                                                 <span class="badge badge-warning text-white">Esperando Pago</span>
@@ -94,7 +107,8 @@
                                     <td><a href="#"
                                             class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2 cargarItems"
                                             data-toggle="modal" data-target="#showDetallePedidoModal"
-                                            data-idpedido="{{ $pedido->id }}" data-num-pedido="{{ $pedido->num_pedido }}"
+                                            data-idpedido="{{ $pedido->id }}"
+                                            data-num-pedido="{{ $pedido->num_pedido }}"
                                             data-nombre="{{ $pedido->nombre }}" data-apellido="{{ $pedido->apellido }}"
                                             data-email="{{ $pedido->correo }}" data-dni="{{ $pedido->dni }}"
                                             data-direccion="{{ $pedido->direccion }}"
@@ -104,7 +118,7 @@
                                             data-enpreparacion="{{ $pedido->en_preparacion }}"
                                             data-enviado="{{ $pedido->enviado }}"
                                             data-urlfactura="{{ $pedido->urlFactura }}">
-                                            Ver
+                                            Detalles
                                         </a>
 
                                         <button
@@ -120,8 +134,13 @@
                                     </td>
                                 </tr>
                             @endforeach
+
                         </tbody>
+                        
                     </table>
+                    <div class="border p-2 text-right float-right" style="font-size: 1.2rem; justify-content: space-between!important">
+                        <span class=""> <b> Total Caja:</b> ${{ $totalCaja }} </span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -139,10 +158,52 @@
 {{-- Importacion de Archivos JS --}}
 @section('js')
     <script>
+        $(document).ready(function() {
+            // Captura el cambio en el input de fecha
+            $('#start').on('change', function() {
+                // Obtiene la fecha seleccionada
+                var fechaSeleccionada = $(this).val();
+
+                // Obtiene la URL base del formulario
+                var urlBase = $('#filtroFechaForm').attr('action');
+
+                // Construye la URL completa con la fecha seleccionada
+                var urlCompleta = urlBase + '?fecha=' + fechaSeleccionada;
+
+                // Redirige a la nueva URL
+                window.location.href = urlCompleta;
+            });
+        });
+
+        $(document).ready(function() {
+            // Captura el cambio en el input de fecha
+            $('#start-mes').on('change', function() {
+                // Obtiene la fecha seleccionada
+                var fechaSeleccionada = $(this).val();
+
+                // Obtiene la URL base del formulario
+                var urlBase = $('#filtroMesForm').attr('action');
+
+                // Construye la URL completa con la fecha seleccionada
+                var urlCompleta = urlBase + '?fecha=' + fechaSeleccionada;
+
+                // Redirige a la nueva URL
+                window.location.href = urlCompleta;
+            });
+        });
+    </script>
+
+    <script>
         let rutaParaConsulta = '{{ route('pedidos.itemsPedido', '') }}';
         let rutaParaCancelarPedido = '{{ route('pedidos.cancelarPedido', '') }}';
         var token = '{{ csrf_token() }}';
     </script>
+
+    {{-- Datatables --}}
+
+    <script src="https://cdn.datatables.net/v/bs4/jszip-3.10.1/dt-1.13.7/b-2.4.2/b-html5-2.4.2/b-print-2.4.2/r-2.5.0/datatables.min.js"></script>
+
+
     <script src="{{ asset('js/pedido/detalle_de_pedido.js') }}"></script>
     <script src="{{ asset('js/pedido/eliminar_pedido.js') }}"></script>
     <script src="{{ asset('js/pedido/pedidos.js') }}"></script>

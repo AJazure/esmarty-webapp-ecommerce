@@ -14,7 +14,7 @@ class CategoriaSeeder extends Seeder
     public function run(): void
     {
         Categoria::create([
-            'descripcion' => 'Notebook'
+            'descripcion' => 'Sin Categoría'
         ]);
         Categoria::create([
             'descripcion' => 'Monitores'

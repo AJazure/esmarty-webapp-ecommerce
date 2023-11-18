@@ -2,7 +2,17 @@
 @section('title', 'Esmarty || Inicio')
 @section('main-content')
 
-
+    @if (session('alert'))
+    <div class="containter-fluid mb-3 p-0">
+        
+            <div class="col-12">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('alert') }}
+                </div>
+            </div>
+        
+    </div>
+    @endif
     {{-- Slider --}}
     <div class="container-fluid p-0">
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -125,4 +135,17 @@
         </div>
     </section>
     {{-- Ultimos Agregados Fin --}}
+@endsection
+
+@section('js')
+<script>
+    // Verificar si hay una URL de redirección adicional
+    var redirectUrl = '{{ session('redirectUrl') }}';
+
+    if (redirectUrl) {
+        // Redirigir al usuario a la URL adicional
+        window.location.href = redirectUrl; 
+        //window.open(redirectUrl, '_blank'); Por si quiero abrirlo en otra pestaña
+    } 
+    </script>
 @endsection

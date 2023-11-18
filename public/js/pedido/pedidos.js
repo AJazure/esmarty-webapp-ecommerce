@@ -9,6 +9,28 @@ let configurationDataTable = {
     searching: true,
 	pageLength: 10,
 	lengthMenu: [[5,10,20,-1],[5,10,20,'Todos']], 
+	 dom: '<"row"<"col-md-6"l><"col-md-6"f>>rt<"row"<"col-md-6"B><"col-md-6"p>>', 
+	          
+        buttons:[ 
+			{
+				extend:    'excelHtml5',
+				text:      'Excel <i class="fas fa-file-excel"></i> ',
+				titleAttr: 'Exportar a Excel',
+				className: 'btn btn-success',
+				exportOptions: {
+					columns: [0, 1, 2] // Índices de las columnas que quieres exportar (0-indexed)
+				}
+			},
+			{
+				extend:    'print',
+				text:      'Imprimir <i class="fa fa-print"></i> ',
+				titleAttr: 'Imprimir',
+				className: 'btn btn-info',
+				exportOptions: {
+					columns: [0, 1, 2] // Índices de las columnas que quieres exportar (0-indexed)
+				}
+			},
+		],
 	language: {
 		"sProcessing": "Procesando...",
 		"sLengthMenu": "Mostrar _MENU_ registros",
@@ -20,7 +42,7 @@ let configurationDataTable = {
 		"sInfoPostFix": "",
 		"sSearch": "Buscar:",
 		"search": "_INPUT_",
-		"searchPlaceholder": "",
+		"searchPlaceholder": "Buscar...",
 		"sUrl": "",
 		"sInfoThousands": ",",
 		"sLoadingRecords": "Cargando...",
@@ -33,7 +55,7 @@ let configurationDataTable = {
 		"oAria": {
 			"sSortAscending": ": Activar para ordenar la columna de manera ascendente",
 			"sSortDescending": ": Activar para ordenar la columna de manera descendente"
-		}
+		},	 
 	},
 }
 

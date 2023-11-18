@@ -85,23 +85,34 @@ class ClienteController extends Controller
             $user->password = Hash::make($nuevaPassword);    
         }
         
+
+        if (!empty($request->get('password_confirmation')) && empty($request->get('current_password'))) {
+            return redirect()
+            ->route('cliente.editar')
+            ->with('error', 'Debe completar con la contraseña anterior!');
+            }
+        if (!empty($request->get('current_password')) && empty($nuevaPassword)) {
+                return redirect()
+                ->route('cliente.editar')
+                ->with('error', 'Debe completar con las nuevas contraseñas!');
+        }
         if (!empty($nuevaPassword) && !empty($request->get('current_password'))){ //si escribio una contraseña anterior, verifica que sea correcta, si no lo es, no va a actualizar nada
             if (!Hash::check($request->get('current_password'), Auth::user()->password)) {
             return redirect()
             ->route('cliente.editar')
-            ->with('alert', 'Contraseña actual incorrecta!');
+            ->with('error', 'Contraseña actual incorrecta!');
             }
         } else if(!empty($nuevaPassword) && empty($request->get('current_password'))){//si escribe una nueva contraseña, debe escribir si o si la actual
             return redirect()
             ->route('cliente.editar')
-            ->with('alert', 'Debe ingresar la contraseña actual!');
+            ->with('error', 'Debe ingresar la contraseña actual!');
         }
         // Actualiza la info del user en la BD
         $user->update();
         
         return redirect()
             ->route('cliente.editar')
-            ->with('alert', 'Datos de "' .$user->name. " " .$user->apellido. '" actualizados exitosamente.');
+            ->with('alert', 'Cliente "' .$user->name. " " .$user->apellido. '" actualizado exitosamente.');
     }
 
     /**

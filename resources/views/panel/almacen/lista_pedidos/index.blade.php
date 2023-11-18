@@ -95,7 +95,7 @@
                                                 <span class="badge badge-info">En preparacion</span>
                                             @else
                                                 @if ($pedido)
-                                                    <span class="badge badge-warning">Pendiente</span>
+                                                    <span class="badge badge-warning text-white">Pendiente</span>
                                                 @endif
                                             @endif
                                         @endif

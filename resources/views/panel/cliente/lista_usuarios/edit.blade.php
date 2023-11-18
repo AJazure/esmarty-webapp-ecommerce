@@ -11,9 +11,6 @@
     <div class="row">
         <div class="col-12 mb-3">
             <h1>Perfil del cliente: "{{ $cliente->name }} {{ $cliente->apellido }}"</h1>
-            <a href="{{ route('cliente.index') }}" class="btn btn-sm btn-secondary text-uppercase">
-                Volver Atras
-            </a>
         </div>
         <div class="col-12">
             @if (session('alert'))

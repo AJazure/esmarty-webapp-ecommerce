@@ -24,9 +24,9 @@ class RolesSeeder extends Seeder
 
         // Permisos para cada rol
         Permission::create(['name' => 'lista_admin'])->assignRole($rol_admin);
-        Permission::create(['name' => 'lista_ventas'])->assignRole($rol_vendedor);
+        Permission::create(['name' => 'lista_ventas'])->assignRole($rol_admin, $rol_vendedor);
         Permission::create(['name' => 'lista_almacen'])->assignRole($rol_admin, $rol_almacen);
-        Permission::create(['name' => 'lista_caja'])->assignRole($rol_cajero);
+        Permission::create(['name' => 'lista_caja'])->assignRole($rol_admin, $rol_cajero, $rol_vendedor);
 
         Permission::create(['name' => 'lista_compras'])->assignRole($rol_cliente);
     }

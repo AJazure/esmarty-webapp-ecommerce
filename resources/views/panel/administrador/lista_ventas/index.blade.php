@@ -94,11 +94,10 @@
                                         @else
                                             @if ($pedido->pagado)
                                                 <span class="badge badge-success">Pagado</span>
-                                                @if ($pedido->en_preparacion)
-                                                    <span class="badge badge-info">En preparacion</span>
-                                                @endif
                                                 @if ($pedido->enviado)
                                                     <span class="badge badge-primary">Enviado</span>
+                                                @elseif($pedido->en_preparacion)
+                                                <span class="badge badge-info">En preparacion</span>
                                                 @endif
                                             @else
                                                 <span class="badge badge-warning text-white">Esperando Pago</span>

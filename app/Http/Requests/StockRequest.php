@@ -36,7 +36,8 @@ class StockRequest extends FormRequest
             
             $rules['stock_disponible'] = [
                 'required',
-                'numeric',
+                'integer',
+                'min:0',
             ];
 
         } else if ($this->isMethod('put')) { // para el método update

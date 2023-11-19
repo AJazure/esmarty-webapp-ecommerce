@@ -105,4 +105,5 @@ class CategoriaController extends Controller
     //     // Retornamos una vista y enviamos la variable "categorias"
     //     return view('frontend.index', compact('categorias'));
     // }
+
 }

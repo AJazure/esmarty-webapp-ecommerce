@@ -59,5 +59,14 @@ class UserSeeder extends Seeder
             'telefono' => '3875112534',
             'password'=> Hash::make('a12345-'),
         ])->assignRole('cliente');
+
+        User::create([
+            'name'=>'Nicolas',
+            'apellido' => 'Juarez',
+            'email'=>'juareznicozar2@gmail.com',
+            'dni' => '32000723',
+            'telefono' => '3875112534',
+            'password'=> Hash::make('a123456-'),
+        ])->assignRole('cliente');
     }
 }

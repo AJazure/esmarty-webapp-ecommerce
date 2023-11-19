@@ -57,7 +57,7 @@ class ClienteController extends Controller
     {
         
         $user_id = Auth::id();
-        $cliente = User::with('roles')->role(['cliente'])->where('id', $user_id)->first();
+        $cliente = User::with('roles')->where('id', $user_id)->first();
         $user_role = $cliente->getRoleNames();
         $all_roles = Role::all()->pluck('name'); //guardo todos los roles existentes
         //var_dump($all_roles_in_database);die();
@@ -70,8 +70,9 @@ class ClienteController extends Controller
     public function actualizar(ClienteRequest $request, $user_id)
     {
 
+        /* dd($request); */
 
-        $user = User::with('roles')->role(['cliente'])->where('id', $user_id)->first();
+        $user = User::with('roles')->where('id', $user_id)->first();
         $user->name = $request->get('name');
         $user->apellido = $request->get('apellido');
         $user->dni = $request->get('dni'); 
@@ -84,7 +85,6 @@ class ClienteController extends Controller
         if (!empty($nuevaPassword)) {
             $user->password = Hash::make($nuevaPassword);    
         }
-        
 
         if (!empty($request->get('password_confirmation')) && empty($request->get('current_password'))) {
             return redirect()
@@ -112,7 +112,7 @@ class ClienteController extends Controller
         
         return redirect()
             ->route('cliente.editar')
-            ->with('alert', 'Cliente "' .$user->name. " " .$user->apellido. '" actualizado exitosamente.');
+            ->with('alert', 'Usuario "' .$user->name. " " .$user->apellido. '" actualizado exitosamente.');
     }
 
     /**

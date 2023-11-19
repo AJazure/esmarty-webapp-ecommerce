@@ -12,11 +12,15 @@ use App\Http\Controllers\VentaController;
 use App\Http\Controllers\StockController;
 use Illuminate\Support\Facades\Route;
 
+//Rutas del panel para editar perfil
+Route::middleware(['verified'])->group(function () {
+Route::get('/usuario/editar', [ClienteController::class, 'editar'])->name('cliente.editar'); 
+Route::put('/usuario/actualizar/{cliente}', [ClienteController::class, 'actualizar'])->name('cliente.actualizar');
+});
+
 //Rutas del panel del cliente
 Route::middleware(['cliente','verified'])->group(function () {
-	//Rutas del perfil del cliente
-	Route::get('/cliente/editar', [ClienteController::class, 'editar'])->name('cliente.editar'); 
-	Route::put('/cliente/actualizar/{cliente}', [ClienteController::class, 'actualizar'])->name('cliente.actualizar'); 
+	//Rutas del perfil del cliente 
 	Route::resource('/cliente', ClienteController::class)->names('cliente');
 	Route::resource('/pedidos', PedidoController::class)->names('pedidos'); 
 	Route::post('/pedidos/cancelarPedido/{pedido}', [PedidoController::class, 'cancelarPedido'])->name('pedidos.cancelarPedido');

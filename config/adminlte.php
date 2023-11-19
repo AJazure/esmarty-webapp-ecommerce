@@ -397,7 +397,7 @@ return [
             /* 'url'         => '#', */
             'route'       => 'cliente.editar',
             'icon'        =>  'fas fa-id-card',
-            'can'         => 'lista_compras' //permiso de clientes
+/*             'can'         => 'lista_compras' //permiso de clientes */
         ],
         [
             'text'        => 'Mis Compras',

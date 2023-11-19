@@ -10,10 +10,9 @@
 <div class="container">
     <div class="row">
         <div class="col-12 mb-3">
-            <h1>Perfil del cliente: "{{ $cliente->name }} {{ $cliente->apellido }}"</h1>
+            <h1>Perfil de: "{{ $cliente->name }} {{ $cliente->apellido }}"</h1>
         </div>
-        <div class="col-12">
-            @if (session('alert'))
+        @if (session('alert'))
             <div class="col-12">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ session('alert') }}
@@ -33,6 +32,8 @@
                 </div>
             </div>
         @endif
+        <div class="col-12">
+            
             @include('panel.cliente.lista_usuarios.forms.form')
         </div>
     </div>

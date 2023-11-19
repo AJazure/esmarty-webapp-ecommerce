@@ -23,9 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MarcaSeeder::class);
         $this->call(ProveedorSeeder::class);
         $this->call(MetodosDePagoSeeder::class);
-        // Crearemos 20 productos
-        Producto::factory(20)->create();
-        DetallePedidos::factory(5)->create();
-        /* Pedido::factory(3)->create(); */
+        // Crearemos 4 productos (20 era mucho ratones)
+        Producto::factory(4)->create();
     }
 }

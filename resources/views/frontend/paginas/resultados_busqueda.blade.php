@@ -27,7 +27,7 @@
                 </ul>
                 {{--  --}}
                 <h3 class="titulo">Filtrar por Precio</h3>
-                <form method="POST" action="{{ route('filtrarPorPrecio') }}">
+                <form method="GET" action="{{ route('filtrarPorPrecio') }}">
                     @csrf
                     @php
                         $precioMaximo = \App\Models\Producto::max('precio');
@@ -78,10 +78,11 @@
                                             @endphp
                                             <img src="{{ $photo[0] }}" alt="{{ $photo[0] }}" width="250" height="240">
                                         </a>
-                                        <div class="button-head">
-                                            <div class="product-action ">
-                                                <a title="Add to cart" href="">Añadir al carrito</a>
-                                            </div>
+                                        <div>
+                                            <button href="#" data-agregar-id="{{ $product->id }}"
+                                                class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2 agregarAlCarrito">
+                                                Agregar al carrito
+                                            </button>
                                         </div>
                                     </div>
                                     <div class="product-content text-center">
@@ -110,19 +111,13 @@
     </div>
     </div>
     </div>
+@endsection
 
-    {{--  --}}
-
-
-
-
-
-
-
-
-
-
-
-
+@section('js')
+    <script>
+        let rutaParaAgregar = '{{ route('carrito.agregarAlCarrito') }}';
+        var token = '{{ csrf_token() }}';
+    </script>
+    <script src="{{ asset('js/carrito/agregar_al_carrito.js') }}"></script>
 @endsection
 

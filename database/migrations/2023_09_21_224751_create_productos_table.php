@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_marca'); // BIGINT(20)
             $table->string('codigo_producto', 15)->nullable();
             $table->string('nombre');
-            $table->string('descripcion')->nullable();
+            $table->string('descripcion', 1000)->nullable();
             $table->integer('precio');
             $table->integer('stock_disponible')->nullable();
             $table->integer('stock_minimo')->nullable();

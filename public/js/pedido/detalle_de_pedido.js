@@ -44,11 +44,12 @@ $('#showDetallePedidoModal').on('show.bs.modal', function(event) {
 	} else {
 		if (pagado) {
 			estado = '<span class="badge badge-success">Pagado</span>';
-			if (enviado) {
-				estado = '<span class="badge badge-primary">Enviado</span>';
-			}
+			
 			if (enpreparacion) {
 				estado = '<span class="badge badge-info">En preparacion</span>';
+				if (enviado) {
+					estado = '<span class="badge badge-primary">Enviado</span>';
+				}
 			}
 		} else {
 			estado = '<span class="badge badge-warning text-white">Esperando Pago</span>'

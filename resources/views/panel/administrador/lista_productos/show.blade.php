@@ -11,9 +11,15 @@
     <div class="row">
         <div class="col-12 mb-3">
             <h1>Datos del Producto "{{ $producto->nombre }}"</h1>
+            @if (isset($bandera))
+                <a href="{{ route('stock.index') }}" class="btn btn-sm btn-secondary text-uppercase">
+                Volver Atras a Stock
+                </a>    
+            @else
             <a href="{{ route('producto.index') }}" class="btn btn-sm btn-secondary text-uppercase">
                 Volver Atras
             </a>
+            @endif
         </div>
         <div class="col-12">
             <div class="card">

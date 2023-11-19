@@ -32,10 +32,10 @@ class ProductoRequest extends FormRequest
             'id_categoria' => 'required',
             'id_marca' => 'required',
             'precio' => 'required|numeric|min:0',
-            'descripcion' => 'required|string',
+            'descripcion' => 'required|string|max:1000',
             'stock_disponible' => 'nullable|numeric|min:0',
-            'stock_deseado' => 'nullable|numeric|min:0',
-            'stock_minimo' => 'nullable|numeric|min:0',
+            'stock_deseado' => 'nullable|numeric|min:1',
+            'stock_minimo' => 'nullable|numeric|min:1',
         ];
     
         if ($this->isMethod('post')) { // para el método store
@@ -44,7 +44,7 @@ class ProductoRequest extends FormRequest
             $productoId = $this->route('producto');
             $rules['nombre'] = [
                 'required',
-                'max:40',
+                'max:80',
                 Rule::unique('productos')->ignore($productoId),
             ];
             $rules['url_imagen'] = 'nullable|max:3';

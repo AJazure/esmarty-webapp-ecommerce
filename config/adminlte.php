@@ -310,49 +310,56 @@ return [
         [
             'text' => 'blog',
             'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
+            'can'  => 'manage-blog'
         ],
         [
             'text'        => 'Inicio',
             'url'         => 'home',
             //'route' => '',
             'icon'        => 'fas fa-home',
-            'can'         => 'lista_usuarios' //permiso de admin
+            'can'         => 'lista_almacen', //permiso de admin
         ],
         [
             'text'        => 'Administrar Usuarios',
             //'url'         => '#',
             'route' => 'user.index',
-            'icon'        => 'fas fa-user',
-            'can'         => 'lista_usuarios' //permiso de admin
+            'icon'        => 'fas fa-users',
+            'can'         => 'lista_admin' //permiso de admin
         ],
         [
-            'text'        => ' Productos',
+            'text'        => 'Caja - Ventas',
+            'route'      => 'venta.index',
+            'icon'        => 'fas fa-cash-register',
+            'can'         => 'lista_admin', 'lista_caja' //permiso de admin<i class="far fa-project-diagram"></i>
+            //'can'         => 'lista_caja' //permiso de cajero
+        ],
+        [
+            'text'        => 'Productos',
             // 'url'         => '#',
             'route' => 'producto.index',
             'icon'        => 'fas fa-shopping-cart',
-            'can'         => 'lista_usuarios' //permiso de admin
+            'can'         => 'lista_admin' //permiso de admin
         ],
         [
             'text'        => 'Proveedores',
             /* 'url'         => '#', */
             'route' => 'proveedor.index',
             'icon'        => 'fas fa-users',
-            'can'         => 'lista_usuarios' //permiso de admin
+            'can'         => 'lista_almacen' //permiso de admin
         ],
         [
             'text'        => ' Marcas',
             // 'url'         => '#',
             'route' => 'marca.index',
             'icon'        => 'fas fa-clipboard-list',
-            'can'         => 'lista_usuarios' //permiso de admin<i class="fas fa-clipboard-list"></i>
+            'can'         => 'lista_admin' //permiso de admin<i class="fas fa-clipboard-list"></i>
         ],
         [
             'text'        => ' Categorias',
             'route'       => 'categoria.index',
             // 'route' => 'proveedor.index',
             'icon'        => 'fas fa-project-diagram',
-            'can'         => 'lista_usuarios' //permiso de admin<i class="far fa-project-diagram"></i>
+            'can'         => 'lista_admin' //permiso de admin<i class="far fa-project-diagram"></i>
         ],
 
         [
@@ -360,7 +367,7 @@ return [
             'route'       => 'metodosdepago.index',
             // 'route' => 'proveedor.index',
             'icon'        => 'fas fa-money-bill',
-            'can'         => 'lista_usuarios' //permiso de admin<i class="far fa-project-diagram"></i>
+            'can'         => 'lista_admin' //permiso de admin<i class="far fa-project-diagram"></i>
         ],
         
         [
@@ -371,9 +378,31 @@ return [
         ],
         [
             'text'        => 'Gestión de Almacén',
-            'url'         => '#',
+            // 'url'         => '#',
+            'route'       => 'pedidosPagados',
             'icon'        => 'fas fa-users',
-            'can'         => 'lista_almacen' //permiso de operario de almacén
+            'can'         => 'lista_almacen',//permiso de operario de almacén
+        ],
+        [
+            'text'        => 'Pedidos Enviados',
+            // 'url'         => '#',
+            'route'       => 'pedidosEnviados',
+            'icon'        => 'fas fa-users',
+            'can'         => 'lista_almacen',///permiso de operario de almacén
+        ],
+        [
+            'text'        => 'Stock',
+            // 'url'         => '#',
+            'route' => 'stock.index',
+            'icon'        => 'fas fa-box',
+            'can'         => 'lista_almacen'///permiso de operario de almacén
+        ],
+        [
+            'text'        => 'Historico',
+            // 'url'         => '#',
+            'route' => 'stock.historico',
+            'icon'        => 'fas fa-list',
+            'can'         => 'lista_almacen'///permiso de operario de almacén
         ],
         [
             'text'        => 'Acceso a Caja',
@@ -514,7 +543,7 @@ return [
                 ],
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',
                 ],
                 [

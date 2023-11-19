@@ -72,7 +72,7 @@ function sumarTotales(data) {
 	const btnCheckout = document.getElementById('btn-checkout');
 	if (totalSuma == 0) {
 		btnCheckout.classList.add("disabled");
-	}else{
+	} else {
 		btnCheckout.classList.remove("disabled");
 	}
 }
@@ -107,7 +107,7 @@ $('#tabla_carrito').on('click', '.eliminar-btn', function () {
 	const btnCheckout = document.getElementById('btn-checkout');
 	if (valorTotal.textContent == 0) {
 		btnCheckout.classList.add("disabled");
-	}else{
+	} else {
 		btnCheckout.classList.remove("disabled");
 	}
 	table.row($(this).parents('tr')).remove().draw(); // Eliminar la fila
@@ -124,7 +124,25 @@ $('#tabla_carrito').on('click', '.eliminar-btn', function () {
 		},
 		success: function (response) {
 			// Maneja la respuesta exitosa, actualiza la interfaz de usuario, si es necesario.
-
+			fetch(rutaContarItemsCarrito)
+				.then(response => {
+					// Verificar si la solicitud fue exitosa (código de respuesta 200)
+					if (!response.ok) {
+						throw new Error('Error al obtener los datos de la API');
+					}
+					// Parsear la respuesta JSON
+					return response.json();
+				})
+				.then(data => {
+					// Hacer algo con los datos obtenidos
+					let cant_carrito = document.querySelector("#cant_carrito");
+					cant_carrito.innerHTML = data;
+					console.log('Items en carrito:', data);
+				})
+				.catch(error => {
+					// Capturar errores durante el proceso
+					console.error('Error:', error);
+				});
 			console.log(response.message);
 
 		},
@@ -154,6 +172,11 @@ $('#tabla_carrito').on('click', '.disminuir-cantidad', function () {
 		var totalMenos = rowData.subtotal;
 		valorTotal.textContent = parseFloat(valorTotal.textContent) - totalMenos;
 
+		//Actualiza el valor en el header
+		let cant_carrito = document.querySelector("#cant_carrito");
+		cant_carrito.innerHTML--;
+		console.log('Items en carrito:', cant_carrito.innerHTML);
+
 		// Envía la actualización al servidor
 		actualizarCantidadEnBackend(rowData.id, rowData.cant_producto);
 	}
@@ -178,6 +201,11 @@ $('#tabla_carrito').on('click', '.aumentar-cantidad', function () {
 		var totalMas = rowData.subtotal;
 		valorTotal.textContent = parseFloat(valorTotal.textContent) + totalMas;
 
+		//Actualiza el valor en el header
+		let cant_carrito = document.querySelector("#cant_carrito");
+		cant_carrito.innerHTML++;
+		console.log('Items en carrito:', cant_carrito.innerHTML);
+
 		// Envía la actualización al servidor
 		actualizarCantidadEnBackend(rowData.id, rowData.cant_producto);
 	}
@@ -195,6 +223,7 @@ function actualizarCantidadEnBackend(id, nuevaCantidad) {
 		},
 		success: function (response) {
 			// Maneja la respuesta exitosa, si es necesario.
+
 			console.log(response.message);
 		},
 		error: function (xhr) {
@@ -206,6 +235,6 @@ function actualizarCantidadEnBackend(id, nuevaCantidad) {
 }
 
 
-(function() {
-    
+(function () {
+
 })();

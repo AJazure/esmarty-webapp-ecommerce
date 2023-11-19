@@ -17,6 +17,8 @@ Route::middleware(['cliente'])->group(function () { //Todas estas rutas solo son
     Route::get('/resultados', [PaginaDeInicio::class, 'resultadosBusqueda'])->name('resultados-busqueda');
 
     //Rutas para el carrito de compras
+    Route::get('/carritoCantidadItems', [App\Http\Controllers\DetallePedidosController::class, 'contarItemsCarrito'])->name('carrito.contarItemsCarrito');
+
     Route::get('/carrito', [App\Http\Controllers\DetallePedidosController::class, 'index'])->name('carrito.carrito');
     Route::get('/miCarrito', [App\Http\Controllers\DetallePedidosController::class, 'miCarrito'])->name('carrito.miCarrito');
     Route::get('/agregarProductos', [App\Http\Controllers\DetallePedidosController::class, 'testProductos'])->name('carrito.agregarProductos');

@@ -2,20 +2,32 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="userModalLabel{{ $user->id }}">Detalles del Usuario: {{ $user->name }} {{ $user->apellido }}</h5>
+                <h5 class="modal-title" id="userModalLabel{{ $user->id }}"><strong>Detalles del Usuario: "{{ $user->name }} {{ $user->apellido }}"</strong></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 {{-- Contenido del modal --}}
-                <h5><strong>Nombre:</strong> {{ $user->name }} {{ $user->apellido }}</h5>
-                <h5><strong>E-mail:</strong> {{ $user->email }}</h5>
-                <h5><strong>DNI:</strong> {{ $user->dni }}</h5>
-                <h5><strong>Teléfono:</strong> {{ $user->telefono }}</h5>
-                <h5><strong>Rol:</strong> @foreach($user->getRoleNames() as $role)
-                    {{ ucfirst($role) }}
-                @endforeach</h5>
+                <ul class="list-group list-group-flush">
+                <li class="list-group-item bg-light pb-0">
+                    <strong>Nombre:</strong><p> {{ $user->name }} {{ $user->apellido }} </p>
+                </li>
+                <li class="list-group-item pb-0">
+                    <strong>E-mail:</strong><p> {{ $user->email }}</p>
+                </li>
+                <li class="list-group-item bg-light pb-0">
+                    <strong>DNI:</strong><p> {{ $user->dni }}</p>
+                </li>
+                <li class="list-group-item pb-0">
+                    <strong>Teléfono:</strong><p> {{ $user->telefono }}</p>
+                </li>
+                <li class="list-group-item bg-light pb-0">
+                    <strong>Rol:</strong><p> @foreach($user->getRoleNames() as $role)
+                        {{ ucfirst($role) }}
+                    @endforeach</p>
+                </li>
+                </ul>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>

@@ -28,7 +28,9 @@
                 <div class="col-12">
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('alert') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span class="text-white" aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 </div>
             @endif
@@ -81,9 +83,11 @@
                                         <td>
                                             <div class="d-flex justify-content-center">
                                                 <a href="{{ route('metodosdepago.show', $mdp) }}"
+                                                data-toggle="modal" data-target="#mdpModal{{ $mdp->id }}"
                                                     class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
                                                     Ver
                                                 </a>
+                                                @include('panel.administrador.lista_mdp.show')
                                                 <a href="{{ route('metodosdepago.edit', $mdp) }}"
                                                     class="btn btn-sm btn-warning text-white text-uppercase me-1">
                                                     Editar

@@ -27,7 +27,9 @@
                 <div class="col-12">
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('alert') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span class="text-white" aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 </div>
             @endif
@@ -80,9 +82,11 @@
                                         <td>
                                             <div class="d-flex justify-content-center">
                                                 <a href="{{ route('marca.show', $marca) }}"
+                                                data-toggle="modal" data-target="#marcaModal{{ $marca->id }}"
                                                     class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
                                                     Ver
                                                 </a>
+                                                @include('panel.administrador.lista_marcas.show')
                                                 <a href="{{ route('marca.edit', $marca) }}"
                                                     class="btn btn-sm btn-warning text-white text-uppercase me-1">
                                                     Editar

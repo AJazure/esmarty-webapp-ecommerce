@@ -44,7 +44,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="card-footer text-muted">
+            <div class="card-footer text-muted d-flex justify-content-end">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>

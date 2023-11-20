@@ -18,7 +18,7 @@ let configurationDataTable = {
 				titleAttr: 'Exportar a Excel',
 				className: 'btn btn-success',
 				exportOptions: {
-					columns: [0, 1, 2, 3, 4] // Índices de las columnas que quieres exportar (0-indexed)
+					columns: [0, 1, 2, 3 ,5] // Índices de las columnas que quieres exportar (0-indexed)
 				}
 			},
 			{
@@ -27,7 +27,7 @@ let configurationDataTable = {
 				titleAttr: 'Imprimir',
 				className: 'btn btn-info',
 				exportOptions: {
-					columns: [0, 1, 2, 3, 4] // Índices de las columnas que quieres exportar (0-indexed)
+					columns: [0, 1, 2, 3 ,5] // Índices de las columnas que quieres exportar (0-indexed)
 				}
 			},
 		],

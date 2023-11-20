@@ -62,7 +62,7 @@ let configurationDataTable = {
 		{
 			orderable: false,
 			className: '', //Agregar clase
-			targets: 5, // en la columna 8 
+			targets: 4, // en la columna 8 
 			sortable: false
 		}
 	]

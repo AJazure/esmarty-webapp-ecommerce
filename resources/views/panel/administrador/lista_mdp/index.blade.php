@@ -54,7 +54,7 @@
                                 <tr>
                                     <th scope="col" class="text-uppercase">Descripcion</th>
                                     <th scope="col" class="text-uppercase">Activo</th>
-                                    <th scope="col" class="text-uppercase">Acciones</th>
+                                    <th scope="col" class="text-uppercase text-center">Acciones</th>
 
                                 </tr>
                             </thead>

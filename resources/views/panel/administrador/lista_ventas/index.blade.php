@@ -54,21 +54,22 @@
                 <div class="card-body">
                     
                     <table id="tabla-pedidos" class="table table-striped table-hover w-100 text-center">
-                        <div style="float: right; margin-left: 20px;">
+                        <div id="filtros" class="d-flex justify-content-between">
+                        <div style="">
                             <form id="filtroFechaForm" action="{{ route('venta.ventasDiarias') }}">
                                 <label for="fecha">Filtrar por Dia:</label>
                                 <input type="date" id="start" name="fecha" value="{{ $fechaActual }}"
                                     min="2023-01-01" />
                             </form>
                         </div>
-                        <div style="float: right; margin-left: 20px;">
+                        <div style="">
                             <form id="filtroMesForm" action="{{ route('venta.ventasMensuales') }}">
                                 <label for="fecha">Filtrar por Mes:</label>
                                 <input type="month" id="start-mes" name="fecha" value="{{ $mesActual }}"
                                     min="2023-01-01" />
                             </form>
                         </div>
-
+                    </div>
                         <thead>
                             <tr>
                                 <!-- <th scope="col">#</th> -->
@@ -200,10 +201,6 @@
     </script>
 
     {{-- Datatables --}}
-
-    <script src="https://cdn.datatables.net/v/bs4/jszip-3.10.1/dt-1.13.7/b-2.4.2/b-html5-2.4.2/b-print-2.4.2/r-2.5.0/datatables.min.js"></script>
-
-
     <script src="{{ asset('js/pedido/detalle_de_pedido.js') }}"></script>
     <script src="{{ asset('js/pedido/eliminar_pedido.js') }}"></script>
     <script src="{{ asset('js/pedido/pedidos.js') }}"></script>

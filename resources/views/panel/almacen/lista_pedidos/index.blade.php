@@ -118,11 +118,11 @@
 
                                         @if (!$pedido->en_preparacion)
                                             <button
-                                                class="btn btn-sm btn-success text-white text-uppercase me-1 mr-2 mt-1 prepararNumSeguimiento"
-                                                data-route="{{ route('prepararPedido', ['id' => $pedido->id]) }}">Preparar
+                                                class="btn btn-sm btn-success text-white text-uppercase prepararNumSeguimiento"
+                                                data-route="{{ route('prepararPedido', ['id' => $pedido->id]) }}" onclick="">Preparar
                                             </button>
                                         @else
-                                            <button class="btn btn-sm btn-success text-white text-uppercase me-1 mr-2 mt-1"
+                                            <button class="btn btn-sm btn-success text-white text-uppercase "
                                                 disabled>
                                                 Preparar
                                             </button>
@@ -155,7 +155,7 @@
     </script>
     <script src="{{ asset('js/pedido/detalle_de_pedido.js') }}"></script>
     <script src="{{ asset('js/pedido/eliminar_pedido.js') }}"></script>
-    <script src="{{ asset('js/pedido/pedidos.js') }}"></script>
+    <script src="{{ asset('js/pedido/pedidosPreparar.js') }}"></script>
     <script src="{{ asset('js/pedido/num_seguimiento.js') }}"></script>
     <script src="{{ asset('js/pedido/recargarPagina.js') }}"></script>
     <script>
@@ -175,8 +175,7 @@
                     allowOutsideClick: false
                 }).then((result) => {
                     if (result.value) {
-                        window.location.href =route;
-
+                        window.location.href = route;
                     }
                 });
 

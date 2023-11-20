@@ -53,7 +53,7 @@
                                 <tr>
                                     <th scope="col" class="text-uppercase">Descripcion</th>
                                     <th scope="col" class="text-uppercase">Activo</th>
-                                    <th scope="col" class="text-uppercase">Acciones</th>
+                                    <th scope="col" class="text-uppercase text-center">Acciones</th>
 
                                 </tr>
                             </thead>
@@ -86,7 +86,7 @@
                                                     class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
                                                     Ver
                                                 </a>
-                                                @include('panel.administrador.lista_marcas.show')
+                                                
                                                 <a href="{{ route('marca.edit', $marca) }}"
                                                     class="btn btn-sm btn-warning text-white text-uppercase me-1">
                                                     Editar
@@ -94,6 +94,7 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    @include('panel.administrador.lista_marcas.show')
                                 @endforeach
 
                             </tbody>

@@ -114,7 +114,7 @@
                                     <a href="{{ route('producto.show', $producto) }}" data-toggle="modal" data-target="#productoModal{{ $producto->id }}" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
                                         Ver
                                     </a>
-                                    @include('panel.administrador.lista_productos.show')
+                                    
                                     <a href="{{ route('producto.edit', $producto) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
                                         Editar
                                     </a>
@@ -128,6 +128,7 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    @include('panel.administrador.lista_productos.show')
                                 @endforeach
                             </tbody>
                         </table>

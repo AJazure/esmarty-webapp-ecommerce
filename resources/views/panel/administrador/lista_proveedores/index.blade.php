@@ -57,7 +57,7 @@
                             <th scope="col" class="text-uppercase">Telefono</th>
                             <th scope="col" class="text-uppercase">Email</th>
                             <th scope="col" class="text-uppercase">Activo</th>
-                            <th scope="col" class="text-uppercase">Acciones</th>
+                            <th scope="col" class="text-uppercase text-center">Acciones</th>
 
                         </tr>
                     </thead>
@@ -70,7 +70,7 @@
                             <td>{{ $proveedor->direccion }}</td>
                             <td>{{ $proveedor->telefono }}</td>
                             <td>{{ $proveedor->correo }}</td>
-                            <td class="d-flex justify-content-center">
+                            <td class="">
                                 <form action="{{ route('producto.destroy', $proveedor) }}" method="POST">
                                     @csrf 
                                     @method('DELETE')
@@ -86,11 +86,11 @@
                                 </form>
                             </td>
                             <td> 
-                                <div class="d-flex">
+                                <div class="d-flex justify-content-center">
                                     <a href="{{route('proveedor.show', $proveedor)}}" data-toggle="modal" data-target="#proveedorModal{{ $proveedor->id }}" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
                                         Ver
                                     </a>
-                                    @include('panel.administrador.lista_proveedores.show')
+                                    
                                     <a href="{{route('proveedor.edit', $proveedor)}}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
                                         Editar
                                     </a>
@@ -104,6 +104,7 @@
                                 </div>
                             </td>
                         </tr>
+                        @include('panel.administrador.lista_proveedores.show')
                         @endforeach
                     </tbody>
                 </table>

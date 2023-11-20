@@ -15,13 +15,13 @@ let configurationDataTable = {
 		"sLengthMenu": "Mostrar _MENU_ registros",
 		"sZeroRecords": "No se encontraron resultados",
 		"sEmptyTable": "Ningún dato disponible en esta tabla",
-		"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-		"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-		"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+		"sInfo": "Productos del _START_ al _END_ de un total de _TOTAL_",
+		"sInfoEmpty": "No se encontraron coincidencias",
+		"sInfoFiltered": "",
 		"sInfoPostFix": "",
 		"sSearch": "Buscar:",
 		"search": "_INPUT_",
-		"searchPlaceholder": "",
+		"searchPlaceholder": "Buscar...",
 		"sUrl": "",
 		"sInfoThousands": ",",
 		"sLoadingRecords": "Cargando...",
@@ -36,13 +36,19 @@ let configurationDataTable = {
 			"sSortDescending": ": Activar para ordenar la columna de manera descendente"
 		}
 	},
+
+	columnDefs: [
+		{
+			orderable: false,
+			className: '', //Agregar clase
+			targets: 8, // en la columna 8 
+			sortable: false
+		}
+	]
 }
 
 $(function() {
     table = $('#tabla-productos').DataTable(configurationDataTable);
-/* 	table = $('#tabla-marcas').DataTable(configurationDataTable);
-	table = $('#tabla-categorias').DataTable(configurationDataTable);
-	table = $('#tabla-proveedores').DataTable(configurationDataTable); */
 });
 
 

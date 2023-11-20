@@ -513,7 +513,7 @@ return [
     */
 
     'plugins' => [
-        'Datatables' => [
+         'Datatables' => [
             'active' => false,
             'files' => [
                 [
@@ -532,7 +532,7 @@ return [
                     'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
                 ],
             ],
-        ],
+        ], 
         'Select2' => [
             'active' => false,
             'files' => [

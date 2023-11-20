@@ -7,7 +7,7 @@ interruptores.forEach(interruptor => {
   } else {
     interruptor.checked = false;
   }
-});
+}); 
 
 
 //CAMBIA EL ESTADO EN LA BASE DE DATOS

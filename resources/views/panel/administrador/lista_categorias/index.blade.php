@@ -52,7 +52,7 @@
                         <tr>
                             <th scope="col" class="text-uppercase">Nombre</th>
                             <th scope="col" class="text-uppercase">Activo</th>
-                            <th scope="col" class="text-uppercase">Acciones</th>
+                            <th scope="col" class="text-uppercase text-center">Acciones</th>
 
                         </tr>
                     </thead>
@@ -80,7 +80,7 @@
                                     <a href="{{ route('categoria.show', $categoria) }}" data-toggle="modal" data-target="#categoriaModal{{ $categoria->id }}" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
                                         Ver
                                     </a>
-                                    @include('panel.administrador.lista_categorias.show')
+                                    
                                     <a href="{{ route('categoria.edit', $categoria) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
                                         Editar
                                     </a>
@@ -94,6 +94,7 @@
                                 </div>
                             </td>
                         </tr>
+                        @include('panel.administrador.lista_categorias.show')
                         @endforeach
 
                     </tbody>

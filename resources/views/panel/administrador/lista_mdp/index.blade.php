@@ -120,5 +120,5 @@
 
         <script src="{{ asset('js/button_switch.js') }}"></script>
         {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
-        <script src="{{ asset('js/marcas.js') }}"></script>
+        <script src="{{ asset('js/mdp.js') }}"></script>
     @stop

@@ -52,7 +52,12 @@ $(document).on('click', '.agregarAlCarrito', function () {
           "showEasing": "swing",
           "hideEasing": "linear",
           "showMethod": "fadeIn",
-          "hideMethod": "fadeOut"
+          "hideMethod": "fadeOut",
+
+          onclick: function () {
+            // La función que se ejecutará al hacer clic en la notificación
+            window.location.href = "/carrito";// Me lleva al carrito
+          }
         }
 
         toastr["warning"](response.message)
@@ -67,7 +72,6 @@ $(document).on('click', '.agregarAlCarrito', function () {
           "progressBar": true,
           "positionClass": "toast-bottom-right",
           "preventDuplicates": false,
-          "onclick": null,
           "showDuration": "300",
           "hideDuration": "1000",
           "timeOut": "2500",
@@ -75,7 +79,12 @@ $(document).on('click', '.agregarAlCarrito', function () {
           "showEasing": "swing",
           "hideEasing": "linear",
           "showMethod": "fadeIn",
-          "hideMethod": "fadeOut"
+          "hideMethod": "fadeOut",
+
+          onclick: function () {
+            // La función que se ejecutará al hacer clic en la notificación
+            window.location.href = "/carrito";// Me lleva al carrito
+          }
         }
 
         toastr["success"](response.message)

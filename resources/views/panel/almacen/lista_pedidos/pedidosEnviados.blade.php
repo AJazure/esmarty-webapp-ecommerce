@@ -128,7 +128,7 @@
     </script>
     <script src="{{ asset('js/pedido/detalle_de_pedido.js') }}"></script>
     <script src="{{ asset('js/pedido/eliminar_pedido.js') }}"></script>
-    <script src="{{ asset('js/pedido/pedidos.js') }}"></script>
+    <script src="{{ asset('js/pedido/pedidosPreparar.js') }}"></script>
     <script src="{{ asset('js/pedido/num_seguimiento.js') }}"></script>
     <script>
         

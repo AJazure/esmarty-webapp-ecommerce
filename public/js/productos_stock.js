@@ -44,7 +44,29 @@ let configurationDataTable = {
 			targets: 7, // en la columna 8 
 			sortable: false
 		},
-	]
+	],
+
+	dom: '<"row"<"col-md-6"l><"col-md-6"f>>rt<"row"<"col-md-6"B><"col-md-6"pi>>', 
+	buttons:[ 
+		{
+			extend:    'excelHtml5',
+			text:      'Excel <i class="fas fa-file-excel"></i> ',
+			titleAttr: 'Exportar a Excel',
+			className: 'btn btn-success',
+			exportOptions: {
+				columns: [0, 1, 2, 3, 4, 5,6] // Índices de las columnas que quieres exportar (0-indexed)
+			}
+		},
+		{
+			extend:    'print',
+			text:      'Imprimir <i class="fa fa-print"></i> ',
+			titleAttr: 'Imprimir',
+			className: 'btn btn-info',
+			exportOptions: {
+				columns: [0, 1, 2, 3, 4, 5,6] // Índices de las columnas que quieres exportar (0-indexed)
+			}
+		},
+	],
 }
 
  // Esto ordena la primera columna (#) de mayor a menor

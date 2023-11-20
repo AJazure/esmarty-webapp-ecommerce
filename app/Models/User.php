@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -47,4 +48,21 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function adminlte_desc() {
+
+        $user_id = Auth::id();
+        $cliente = User::with('roles')->where('id', $user_id)->first();
+        $user_role = $cliente->getRoleNames();
+        return ucfirst($user_role[0]);
+    }
+
+    public function adminlte_image() {
+        return asset("/imagenes/perfil.png");
+    }
+    
+
+    public function adminlte_profile_url() {
+        return "/panel/usuario/editar";
+    }
 }

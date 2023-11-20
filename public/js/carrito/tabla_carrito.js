@@ -143,6 +143,25 @@ $('#tabla_carrito').on('click', '.eliminar-btn', function () {
 					// Capturar errores durante el proceso
 					console.error('Error:', error);
 				});
+				toastr.options = {
+					"closeButton": true,
+					"debug": true,
+					"newestOnTop": false,
+					"progressBar": true,
+					"positionClass": "toast-bottom-right",
+					"preventDuplicates": false,
+					"onclick": null,
+					"showDuration": "300",
+					"hideDuration": "1000",
+					"timeOut": "2500",
+					"extendedTimeOut": "1000",
+					"showEasing": "swing",
+					"hideEasing": "linear",
+					"showMethod": "fadeIn",
+					"hideMethod": "fadeOut"
+				  }
+		  
+				  toastr["error"](response.message)
 			console.log(response.message);
 
 		},
@@ -223,7 +242,6 @@ function actualizarCantidadEnBackend(id, nuevaCantidad) {
 		},
 		success: function (response) {
 			// Maneja la respuesta exitosa, si es necesario.
-
 			console.log(response.message);
 		},
 		error: function (xhr) {

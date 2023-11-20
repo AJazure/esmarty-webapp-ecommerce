@@ -61,7 +61,7 @@ class DetallePedidosController extends Controller
              if ($producto->stock_disponible > $itemViejo->cant_producto) {
                 $itemViejo->cant_producto += 1;
                 $itemViejo->save();
-                return response()->json(['message' => '+1 agregado al carrito correctamente']);
+                return response()->json(['message' => 'Uno más agregado al carrito']);
              } else {
                 return response()->json(['message' => 'No hay mas stock del producto']);
              }

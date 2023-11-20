@@ -10,7 +10,7 @@
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/paginaPrincipal.css') }}">
     <script src="https://kit.fontawesome.com/88816cb6bd.js" crossorigin="anonymous"></script>
-
+    <link href="{{ asset('css/toastr.css') }}" rel="stylesheet"/>
     @yield('styles')
 
 </head>
@@ -67,6 +67,7 @@
         }
     </script>
 
+    <script src="{{ asset('js/carrito/toastr.min.js') }}"></script>
     @yield('js')
 
 </body>

@@ -138,6 +138,7 @@
 @endsection
 
 @section('js')
+
 <script>
     // Verificar si hay una URL de redirección adicional
     var redirectUrl = '{{ session('redirectUrl') }}';
@@ -147,5 +148,8 @@
         window.location.href = redirectUrl; 
         //window.open(redirectUrl, '_blank'); Por si quiero abrirlo en otra pestaña
     } 
+    // Display an info toast with no title
     </script>
+
+    
 @endsection

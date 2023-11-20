@@ -127,6 +127,6 @@ class DetallePedidosController extends Controller
         }
 
         $item->delete();
-        return response()->json(['message' => 'Producto eliminado correctamente']);
+        return response()->json(['message' => 'Producto eliminado del carrito correctamente']);
     }
 }

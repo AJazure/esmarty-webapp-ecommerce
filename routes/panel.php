@@ -64,6 +64,8 @@ Route::get('/ventas/venta-mensual', [VentaController::class, 'ventasMensuales'])
 Route::middleware(['admin','verified'])->group(function () {
 Route::resource('/metodosdepago', MetodoDePagoController::class)->names('metodosdepago');
 Route::resource('/users', UserController::class)->names('user');
+Route::get('/home',[ProductoController::class,'graficosProductosxCategoria'])->name('graficos-productos');
+Route::post('exportar-graficos-pdf',[ProductoController::class,'exportarGraficosPDF'])->name('exportar-graficos-pdf');
 });
 
 Route::get('/', function () {//Ruta principal del panel

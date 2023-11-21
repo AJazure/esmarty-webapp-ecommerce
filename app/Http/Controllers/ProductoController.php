@@ -7,6 +7,7 @@ use App\Models\Categoria;
 use App\Models\Proveedor;
 use App\Models\Marca;
 use App\Models\Producto;
+use App\Models\Pedido;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\ProductosExport;
@@ -26,7 +27,6 @@ class ProductoController extends Controller
         $productos = Producto::latest()->get();
         // Retornamos una vista y enviamos la variable "productos"
         return view('panel.administrador.lista_productos.index', compact('productos'));
-        
     }
 
     /**
@@ -37,16 +37,16 @@ class ProductoController extends Controller
         //
         //Creamos un Producto nuevo para cargarle datos
         $producto = new Producto();
-        
-        //Recuperamos todas las categorias de la BD
-        $categorias=Categoria::get();//Recordar importar el modelo Categoria
-        $marcas=Marca::get();//Recordar importar el modelo Categoria
-        $proveedores=Proveedor::get();
 
-        $imagenes= explode('|', $producto->url_imagen);
+        //Recuperamos todas las categorias de la BD
+        $categorias = Categoria::get(); //Recordar importar el modelo Categoria
+        $marcas = Marca::get(); //Recordar importar el modelo Categoria
+        $proveedores = Proveedor::get();
+
+        $imagenes = explode('|', $producto->url_imagen);
 
         //Retornamos la vista de creacion de productos, enviamos al producto y las categorias
-        return view('panel.administrador.lista_productos.create', compact('producto','categorias','marcas','proveedores','imagenes')); //compact(mismo nombre de la variable)
+        return view('panel.administrador.lista_productos.create', compact('producto', 'categorias', 'marcas', 'proveedores', 'imagenes')); //compact(mismo nombre de la variable)
     }
 
     /**
@@ -56,7 +56,7 @@ class ProductoController extends Controller
     {
         //
         //dd($request->all());
-        
+
         $producto = new Producto();
         $producto->codigo_producto = $request->get('codigo_producto');
         $producto->nombre = $request->get('nombre');
@@ -70,8 +70,8 @@ class ProductoController extends Controller
         stock deseado es = a stock disponible si no se indica cuánto es el stock deseado
         stock minimo = 1 si no se indica cuánto
         /*/
-        $producto->stock_disponible = $request->get('stock_disponible') ? $request->get('stock_disponible') : 0; 
-        $producto->stock_deseado = $request->get('stock_disponible') ? $request->get('stock_disponible') : 10; 
+        $producto->stock_disponible = $request->get('stock_disponible') ? $request->get('stock_disponible') : 0;
+        $producto->stock_deseado = $request->get('stock_disponible') ? $request->get('stock_disponible') : 10;
         $producto->stock_minimo = $request->get('stock_minimo') ? $request->get('stock_minimo') : 1;
         $producto->activo = 0;
 
@@ -90,9 +90,9 @@ class ProductoController extends Controller
         }
 
         $producto->url_imagen = asset(str_replace('public', 'storage', $imagenes)); // Almacena la info del producto en la BD la url de tas las imagenes
-        
+
         $producto->save();
-        
+
         // Registro para el histórico
         $ultimoIdInsertado = $producto->id;
 
@@ -105,12 +105,12 @@ class ProductoController extends Controller
         $historico->cantidad_anterior = 0; // la cantidad anterior siempre es cero en alta producto
         $historico->cantidad_nueva = $producto->stock_disponible; // es igual a la ingresada
         $historico->created_at = now();
-        
+
         $historico->save();
 
         return redirect()
-        ->route('producto.index')
-        ->with('alert', 'Producto "' . $producto->nombre . '" agregado exitosamente.');
+            ->route('producto.index')
+            ->with('alert', 'Producto "' . $producto->nombre . '" agregado exitosamente.');
     }
 
     /**
@@ -119,9 +119,9 @@ class ProductoController extends Controller
     public function show(Producto $producto)
     {
         $proveedor = Proveedor::find($producto->proveedor->id);
-        $imagenes= explode('|', $producto->url_imagen); // separa urls
+        $imagenes = explode('|', $producto->url_imagen); // separa urls
 
-        return view('panel.administrador.lista_productos.show', compact('producto','proveedor', 'imagenes'));
+        return view('panel.administrador.lista_productos.show', compact('producto', 'proveedor', 'imagenes'));
     }
 
     /**
@@ -132,11 +132,11 @@ class ProductoController extends Controller
         //
         $categorias = Categoria::get();
         $marcas = Marca::get();
-        $proveedores=Proveedor::get();
+        $proveedores = Proveedor::get();
 
-        $imagenes= explode('|', $producto->url_imagen); // separa urls
+        $imagenes = explode('|', $producto->url_imagen); // separa urls
 
-        return view('panel.administrador.lista_productos.edit', compact('producto', 'categorias','marcas','proveedores', 'imagenes'));
+        return view('panel.administrador.lista_productos.edit', compact('producto', 'categorias', 'marcas', 'proveedores', 'imagenes'));
     }
 
     /**
@@ -158,15 +158,15 @@ class ProductoController extends Controller
         if ($existeImagen) {
             // si existe imagen cargadaa en el input (por defecto no tiene nada), significa que hay que mandarla a la bd reemplazando las urls existentes
 
-                $files = $request->file('url_imagen'); //obtiene files
-                $url_imagen = [];
-    
-                foreach ($files as $file) {
-    
-                    $url_imagen[] = asset($file->store('public/producto')); //guardo en un array las direcciones de cada uno     
-                    $imagenes = implode('|', $url_imagen); //contiene todas las url de las imagenes del array unidos con |
-    
-                }
+            $files = $request->file('url_imagen'); //obtiene files
+            $url_imagen = [];
+
+            foreach ($files as $file) {
+
+                $url_imagen[] = asset($file->store('public/producto')); //guardo en un array las direcciones de cada uno     
+                $imagenes = implode('|', $url_imagen); //contiene todas las url de las imagenes del array unidos con |
+
+            }
 
             $url_imagen = $producto->url_imagen = asset(str_replace('public', 'storage', $imagenes)); // Almacena la info del producto en la BD la url de tas las imagenes
             //dd($url_imagen);
@@ -178,10 +178,10 @@ class ProductoController extends Controller
 
         // Actualiza la info del producto en la BD
         $producto->update();
-        
+
         return redirect()
             ->route('producto.index')
-            ->with('alert', 'Producto "' .$producto->nombre. '" actualizado exitosamente.');
+            ->with('alert', 'Producto "' . $producto->nombre . '" actualizado exitosamente.');
     }
 
     /**
@@ -189,7 +189,6 @@ class ProductoController extends Controller
      */
     public function destroy(Request $id)
     {
-        
     }
 
     public function cambiarEstado(Request $request)
@@ -206,7 +205,7 @@ class ProductoController extends Controller
         return response()->json(['message' => 'Estado de categoría cambiado con éxito']);
     }
 
-    public function restarStock($idProducto,$cant_restar)
+    public function restarStock($idProducto, $cant_restar)
     {
         $producto = Producto::find($idProducto);
 
@@ -224,18 +223,17 @@ class ProductoController extends Controller
         $historico->cantidad_nueva = $producto->stock_disponible; // ya está mermado el stock
         $historico->created_at = now();
         $historico->save();
-        
-        $producto->save();
 
+        $producto->save();
     }
 
-    public function sumarStock($idProducto,$cant_aumentar)
+    public function sumarStock($idProducto, $cant_aumentar)
     {
         $producto = Producto::find($idProducto);
 
         $stockAnterior = $producto->stock_disponible; // Guardo el stock anterior a la suma
         $producto->stock_disponible += $cant_aumentar; // Aumenta el stock
-        
+
 
         // Registro para el histórico
         $historico = new HistoricoStock();
@@ -244,27 +242,82 @@ class ProductoController extends Controller
         $historico->motivo_modif = 'Devolución de producto por cancelación de pedido o por devolución de producto de compra.';
         $historico->tipo_modif = 'devolución'; // por defecto cuando se da alta se crea como nuevo producto el tipo de modif
         $historico->cantidad_modif = $cant_aumentar;
-        $historico->cantidad_anterior = $stockAnterior; 
+        $historico->cantidad_anterior = $stockAnterior;
         $historico->cantidad_nueva = $producto->stock_disponible; // ya está aumentado el stock
         $historico->created_at = now();
         $historico->save();
 
         $producto->save();
-
     }
 
-    public function exportarProductosExcel() {
-        return Excel::download(new ProductosExport, 'productos.xlsx'); 
-         }
+    public function exportarProductosExcel()
+    {
+        return Excel::download(new ProductosExport, 'productos.xlsx');
+    }
 
-         public function exportarProductosPDF() {
-            // Traemos los productos 
-            $productos = Producto::latest()->get();
-            // capturamos la vista y los datos que enviaremos a la misma
-            $pdf = PDF::loadView('panel.administrador.lista_productos.pdf_productos', compact('productos'));
-            // Renderizamos la vista
-            $pdf->render();
-            // Visualizaremos el PDF en el navegador
-            return $pdf->stream('productos.pdf');
+    public function exportarProductosPDF()
+    {
+        // Traemos los productos 
+        $productos = Producto::latest()->get();
+        // capturamos la vista y los datos que enviaremos a la misma
+        $pdf = PDF::loadView('panel.administrador.lista_productos.pdf_productos', compact('productos'));
+        // Renderizamos la vista
+        $pdf->render();
+        // Visualizaremos el PDF en el navegador
+        return $pdf->stream('productos.pdf');
+    }
+
+    public function graficosProductosxCategoria()
+    {
+        // Si se hace una peticion AJAX
+        if (request()->ajax()) {
+            $labels = [];
+            $counts = [];
+            $totalPedidos = [];
+            $totalPedidosAlmacen = [];
+            $estados = ['Pagado', 'Cancelado', 'Esperando Pago'];
+            $estadosAlmacen = ['Enviados', 'En Preparacion'];
+
+            // Cantidad de Stock de cada Categoria
+            $categorias = Categoria::where('activo', 1)->get();
+            foreach ($categorias as $categoria) {
+                $labels[] = $categoria->descripcion;
+                $counts[] = Producto::where('id_categoria', $categoria->id)->count();
             }
+
+            // Total de Pedidos Pagados/Cancelados/Esperando Pago
+            $totalPedidosPagados= Pedido::where('pagado', 1)->count();
+            $totalPedidosCancelados = Pedido::where('cancelado', 1)->count();
+            $totalPedidosEsperandoPago = Pedido::where('pagado', 0)->count();
+            $totalPedidos[] = $totalPedidosPagados;
+            $totalPedidos[] = $totalPedidosCancelados;
+            $totalPedidos[] = $totalPedidosEsperandoPago;
+
+            // Total de Pedidos Enviados/En Preparacion
+            $totalPedidosAlmacenEnviados = Pedido::where('enviado', 1)->count();
+            $totalPedidosAlmacenEnPreparacion = Pedido::where('en_preparacion', 1)->count();
+            $totalPedidosAlmacen [] = $totalPedidosAlmacenEnviados;
+            $totalPedidosAlmacen [] = $totalPedidosAlmacenEnPreparacion;
+
+
+            $response = [
+                'success' => true,
+                'data' => [$labels, $counts, $totalPedidos, $estados, $estadosAlmacen, $totalPedidosAlmacen]
+            ];
+            return json_encode($response);
+        }
+        return view('home');
+    }
+
+    public function exportarGraficosPDF(Request $request)
+    {
+        // Traemos los datos enviados desde el formulario
+        $data = $request->get('config_grafics');
+        // capturamos la vista y los datos que enviaremos a la misma
+        $pdf = PDF::loadView('pdfs.graficos.pdf_productos_graficos', compact('data'));
+        // Renderizamos la vista
+        $pdf->render();
+        // Visualizaremos el PDF en el navegador
+        return $pdf->stream('chartjs_productos.pdf');
+    }
 }

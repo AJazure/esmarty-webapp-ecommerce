@@ -253,6 +253,7 @@ class PedidoController extends Controller
         $pedido = Pedido::find($id);
         $pedido->num_seguimiento = $numero;
         $pedido->enviado = true;
+        $pedido->en_preparacion = false;
         $pedido->save();
 
         return redirect()->back();

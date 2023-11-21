@@ -37,7 +37,9 @@
                 <div class="col-12">
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('alert') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span class="text-white" aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 </div>
             @endif
@@ -109,9 +111,10 @@
                             </td>
                             <td>
                                 <div class="d-flex">
-                                    <a href="{{ route('producto.show', $producto) }}" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
+                                    <a href="{{ route('producto.show', $producto) }}" data-toggle="modal" data-target="#productoModal{{ $producto->id }}" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
                                         Ver
                                     </a>
+                                    
                                     <a href="{{ route('producto.edit', $producto) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
                                         Editar
                                     </a>
@@ -125,6 +128,7 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    @include('panel.administrador.lista_productos.show')
                                 @endforeach
                             </tbody>
                         </table>

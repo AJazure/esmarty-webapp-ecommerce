@@ -1,43 +1,37 @@
-@extends('adminlte::page')
-
-@section('title', 'Ver')
-
-@section('content_header')
-
-@stop
-
-@section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-12 mb-3">
-                <h1>Datos de la Categoria "{{ $categoria->descripcion }}"</h1>
-                <a href="{{ route('categoria.index') }}" class="btn btn-sm btn-secondary text-uppercase">
-                    Volver Atras
-                </a>
+<div class="modal fade" id="categoriaModal{{ $categoria->id }}" tabindex="-1" role="dialog"
+    aria-labelledby="categoriaModalLabel{{ $categoria->id }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="categoriaModalLabel{{ $categoria->id }}"><strong>
+                    Datos de la Categoria:
+                        "{{ $categoria->descripcion }}"
+                </strong></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="mb-3">
-                            {{-- <img src="{{ $producto->url_imagen }}" alt="{{ $producto->nombre }}" id="image_preview" class="img-fluid" style="object-fit: cover; object-position: center; height: 420px; width: 100%;"> --}}
-                        </div>
-                        <div class="mb-3">
-                            <h5><strong>Nombre:</strong> {{ $categoria->descripcion }}</h5>
-                        </div>
-                        <div class="mb-3">
-                            <h5><strong>Estado:</strong> @if ($categoria->activo){{"Activado"}} @else {{"Desactivado"}}@endif </h5>
-                        </div>
-                    </div>
-                </div>
+            <div class="modal-body">
+                {{-- Contenido del modal --}}
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item bg-light pb-0">
+                        <strong>Nombre:</strong> <p>{{ $categoria->descripcion }}</p>
+                    </li>
+                    <li class="list-group-item pb-0">
+                        <strong>Estado:</strong>
+                        <p>
+                            @if ($categoria->activo)
+                                {{ 'Activado' }}
+                            @else
+                                {{ 'Desactivado' }}
+                            @endif
+                        </p>
+                    </li>
+                    </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
-@stop
-
-@section('css')
-
-@stop
-
-@section('js')
-
-@stop
+</div>

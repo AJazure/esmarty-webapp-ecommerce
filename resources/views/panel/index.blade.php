@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col-12 mb-3">
             {{-- <h1>Bienvenido a su Panel</h1> --}}
-            <a href="{{  route('MandarDatosPaginaInicio') }}" class="btn btn-sm btn-primary text-uppercase p-2">
+            <a href="{{  route('MandarDatosPaginaInicio') }}" class="btn btn-sm btn-info text-uppercase p-2">
                 <i class="fas fa-shopping-cart"></i> Seguir comprando
             </a>
         </div>

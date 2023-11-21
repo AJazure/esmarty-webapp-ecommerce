@@ -26,7 +26,9 @@
             <div class="col-12">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ session('alert') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span class="text-white" aria-hidden="true">&times;</span>
+                    </button>
                 </div>
             </div>
         @endif
@@ -34,7 +36,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body"> 
-                <table id="tabla-productos" class="table table-striped table-hover w-100">
+                <table id="tabla-stock" class="table table-striped table-hover w-100">
                     <thead>
                         <tr>
                             <th scope="col" class="text-uppercase">#</th>
@@ -74,10 +76,11 @@
                                     data-target="#registroModal{{ $registro->id }}"  class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
                                         Ver Detalles
                                     </a>
-                                    @include('panel.administrador.lista_stock.detalle')
+                                    
                                 </div>
                             </td>
                         </tr>
+                        @include('panel.administrador.lista_stock.detalle')
                         @endforeach
                     </tbody>
                 </table>
@@ -95,13 +98,15 @@
 
 {{-- Importacion de Archivos JS --}}
 @section('js')
+    
+    {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
+    <script src="{{ asset('js/productos_stock.js') }}"></script>
+
     <script>
-        $(document).ready(function () {
-            $('#tabla-productos').DataTable({
+        /* $(document).ready(function () {
+            $('#tabla-stock').DataTable({
                 "order": [[0, "desc"]] // Esto ordena la primera columna (#) de mayor a menor
             });
-        });
+        }); */
     </script>
-    {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
-    <script src="{{ asset('js/productos.js') }}"></script>
 @stop

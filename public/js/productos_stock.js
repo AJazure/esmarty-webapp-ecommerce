@@ -41,9 +41,9 @@ let configurationDataTable = {
 		{
 			orderable: false,
 			className: '', //Agregar clase
-			targets: 8, // en la columna 8 
+			targets: 7, // en la columna 8 
 			sortable: false
-		}
+		},
 	],
 
 	dom: '<"row"<"col-md-6"l><"col-md-6"f>>rt<"row"<"col-md-6"B><"col-md-6"pi>>', 
@@ -54,7 +54,7 @@ let configurationDataTable = {
 			titleAttr: 'Exportar a Excel',
 			className: 'btn btn-success',
 			exportOptions: {
-				columns: [0, 1, 2, 3, 4, 5,7] // Índices de las columnas que quieres exportar (0-indexed)
+				columns: [0, 1, 2, 3, 4, 5,6] // Índices de las columnas que quieres exportar (0-indexed)
 			}
 		},
 		{
@@ -63,14 +63,16 @@ let configurationDataTable = {
 			titleAttr: 'Imprimir',
 			className: 'btn btn-info',
 			exportOptions: {
-				columns: [0, 1, 2, 3, 4, 5,7] // Índices de las columnas que quieres exportar (0-indexed)
+				columns: [0, 1, 2, 3, 4, 5,6] // Índices de las columnas que quieres exportar (0-indexed)
 			}
 		},
 	],
 }
 
+ // Esto ordena la primera columna (#) de mayor a menor
+
 $(function() {
-    table = $('#tabla-productos').DataTable(configurationDataTable);
+    table = $('#tabla-stock').DataTable(configurationDataTable);
 });
 
 

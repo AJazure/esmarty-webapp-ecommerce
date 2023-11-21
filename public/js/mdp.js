@@ -1,22 +1,22 @@
 let configurationDataTable = {
-	responsive: true,
+    responsive: true,
 	autoWidth: false,
 	paging: true,
 	destroy: true,
 	deferRender: false,
 	bLengthChange: true,
 	select: false,
-	searching: true,
+    searching: true,
 	pageLength: 5,
-	lengthMenu: [[5, 10, 20, -1], [5, 10, 20, 'Todos']],
+	lengthMenu: [[5,10,20,-1],[5,10,20,'Todos']], 
 	language: {
 		"sProcessing": "Procesando...",
-		"sLengthMenu": "Mostrar _MENU_ usuarios",
+		"sLengthMenu": "Mostrar _MENU_ registros",
 		"sZeroRecords": "No se encontraron resultados",
 		"sEmptyTable": "Ningún dato disponible en esta tabla",
-		"sInfo": "Usuarios _START_ al _END_ de un total de _TOTAL_",
+		"sInfo": "Metodos del _START_ al _END_ de un total de _TOTAL_",
 		"sInfoEmpty": "No se encontraron coincidencias",
-		"sInfoFiltered": "", //(filtrado de un total de _MAX_ registros)
+		"sInfoFiltered": "",
 		"sInfoPostFix": "",
 		"sSearch": "Buscar:",
 		"search": "_INPUT_",
@@ -35,17 +35,27 @@ let configurationDataTable = {
 			"sSortDescending": ": Activar para ordenar la columna de manera descendente"
 		}
 	},
+
 	columnDefs: [
 		{
 			orderable: false,
 			className: '', //Agregar clase
-			targets: 5, // en la columna 5 
+			targets: 2, // en la columna 8 
 			sortable: false
 		}
-	],
+	]
 }
 
-
-$(function () {
-	table = $('#tabla-usuarios').DataTable(configurationDataTable);
+$(function() {
+    table= $('#tabla-marcas').DataTable(configurationDataTable);
 });
+
+
+$(document).ready(function() {
+    $('#filtroSelect').on('change', function() {
+        var filtro = $(this).val();
+
+        table.column(1).search(filtro).draw();
+    });
+});
+

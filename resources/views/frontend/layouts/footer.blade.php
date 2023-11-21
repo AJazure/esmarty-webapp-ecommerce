@@ -49,3 +49,10 @@
     </div>
 </footer>
 
+<script>
+
+    var token = '{{ csrf_token() }}';
+    let rutaContarItemsCarrito = '{{ route('carrito.contarItemsCarrito') }}';
+
+</script>
+<script src="{{asset('js/carrito/cant_items_carrito.js')}}"></script>

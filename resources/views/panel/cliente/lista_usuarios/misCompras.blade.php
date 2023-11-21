@@ -78,9 +78,9 @@
                                                 @if ($pedido->num_seguimiento)
                                                     <span class="badge badge-primary">Enviado</span>
                                                 @else
-                                                    @if (!$pedido->en_preparacion)
-                                                        <span class="badge badge-info">Esperando </span>
-                                                        @else
+                                                     @if (!$pedido->en_preparacion)
+                                                        {{-- <span class="badge badge-info">Esperando </span> --}}
+                                                        @else 
                                                         @if ($pedido->en_preparacion)
                                                             <span class="badge badge-info">En preparacion</span>
                                                         @endif

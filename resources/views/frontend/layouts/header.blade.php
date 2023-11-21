@@ -57,7 +57,7 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('carrito.carrito')}}">
-                        <i class="fa-solid fa-shopping-cart"></i> 0
+                        <i class="fa-solid fa-shopping-cart"></i> <span id="cant_carrito">0</span>
                     </a>
                 </li>
                 {{-- Carrito Fin --}}
@@ -78,6 +78,7 @@
                             {{--  --}}
                         @else
                             @role('cliente')
+                                <li><a class="dropdown-item" href="{{route('cliente.editar')}}">Mi Perfil</a></li>
                                 <li><a class="dropdown-item" href="{{route('pedidos.index')}}">Mis compras</a></li>
                              @endrole
 

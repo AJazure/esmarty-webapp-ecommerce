@@ -16,14 +16,31 @@
     /* height: 400px; */
 }
 
-.btn.btn-flat {
+.login-box .btn.btn-flat {
     border-radius: 10px;
     border-width: 1px;
     box-shadow: none;
     background-color: #1429a0;
 }
 
-.btn.btn-flat:hover {
+.register-box .btn.btn-flat {
+    border-radius: 10px;
+    border-width: 1px;
+    box-shadow: none;
+    background-color: #1429a0;
+}
+
+.register-box .btn.btn-flat:hover {
+    /* border-radius: 0;
+    border-width: 1px; */
+    /* box-shadow: none; */
+    background-color:#f8f9fa ;
+    color: #1429a0;
+    /* text-decoration: underline; */
+    
+}
+
+.login-box .btn.btn-flat:hover {
     /* border-radius: 0;
     border-width: 1px; */
     /* box-shadow: none; */
@@ -37,6 +54,10 @@
 .card-primary.card-outline {
     border-top: 3px solid #1429a0;
 }
+
+/* .divLogo {
+    background-color: black!important;
+} */
 
 /* #f7f7f7 */
 

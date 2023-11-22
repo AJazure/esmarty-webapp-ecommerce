@@ -1,4 +1,4 @@
-<div class="card mb-5">
+<div class="card mb-5" style="flex-grow: 2">
     <form action="{{ $cliente->id ? route('cliente.actualizar', $cliente->id) : route('cliente.store') }}" method="POST"
         enctype="multipart/form-data">
         @csrf
@@ -121,7 +121,7 @@
     </form>
 </div>
 
-<div class="card mb-5">
+<div class="card mb-5" style="flex-grow: 1">
     <form action="{{ $cliente->id ? route('cliente.actualizar', $cliente->id) : route('cliente.store') }}"
         method="POST" enctype="multipart/form-data">
         @csrf
@@ -156,7 +156,7 @@
                 <label for="current_password" class="col-sm-4 col-form-label">Contraseña Actual:</label>
                 <div class="col-sm-8">
                     <input type="password" class="form-control @error('current_password') is-invalid @enderror"
-                        id="current_password" name="current_password" value="">
+                        id="current_password" name="current_password" value="" required>
                     @error('current_password')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
@@ -166,7 +166,7 @@
                 <label for="password" class="col-sm-4 col-form-label">Nueva Contraseña: </label>
                 <div class="col-sm-8">
                     <input type="password" class="form-control @error('password') is-invalid @enderror"
-                        id="password" name="password" value="">
+                        id="password" name="password" value="" required>
                     @error('password')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror
@@ -176,7 +176,7 @@
                 <label for="password-confirm" class="col-sm-4 col-form-label">Confirmar Nueva Contraseña: </label>
                 <div class="col-sm-8">
                     <input type="password" class="form-control @error('password-confirm') is-invalid @enderror"
-                        id="password-confirm" name="password_confirmation" value="">
+                        id="password-confirm" name="password_confirmation" value="" required>
                     @error('password-confirm')
                         <div class="invalid-feedback"> {{ $message }} </div>
                     @enderror

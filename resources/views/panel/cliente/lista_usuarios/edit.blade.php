@@ -3,15 +3,13 @@
 @section('title', 'Editar')
 
 @section('content_header')
-    
+    <h1>&nbsp;<strong>Mi Perfil - {{ $cliente->name }} {{ $cliente->apellido }}</strong></h1>
 @stop
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-12 mb-3">
-            <h1>Perfil de: "{{ $cliente->name }} {{ $cliente->apellido }}"</h1>
-        </div>
+
         @if (session('alert'))
             <div class="col-12">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -32,7 +30,7 @@
                 </div>
             </div>
         @endif
-        <div class="col-12">
+        <div class="container-fluid col-12 d-flex justify-content-between flex-wrap align-items-baseline" style="gap: 30px">
             
             @include('panel.cliente.lista_usuarios.forms.form')
         </div>

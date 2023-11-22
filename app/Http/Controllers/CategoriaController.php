@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CategoriaExport;
 use App\Http\Requests\CategoriaRequest;
 use App\Models\Categoria;
 use Illuminate\Http\Request;
+use App\Exports\CategoriaExportExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\PDF;
+
 
 class CategoriaController extends Controller
 {
@@ -105,5 +110,21 @@ class CategoriaController extends Controller
     //     // Retornamos una vista y enviamos la variable "categorias"
     //     return view('frontend.index', compact('categorias'));
     // }
+
+
+    public function exportarCategoriaExcel() {
+        return Excel::download(new CategoriaExport, 'marca.xlsx'); 
+         }
+
+         public function exportarCategoriaPDF() {
+            // Traemos los productos 
+            $categorias = Categoria::latest()->get();
+            // capturamos la vista y los datos que enviaremos a la misma
+            $pdf = PDF::loadView('panel.administrador.lista_categorias.pdf_categoria', compact('categorias'));
+            // Renderizamos la vista
+            $pdf->render();
+            // Visualizaremos el PDF en el navegador
+            return $pdf->stream('categoria.pdf');
+            }
 
 }

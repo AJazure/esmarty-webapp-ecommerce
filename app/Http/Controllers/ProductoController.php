@@ -9,9 +9,11 @@ use App\Models\Marca;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\ProductosExport;
+use App\Exports\StockExport;
 use Barryvdh\DomPDF\Facade\PDF;
 use App\Models\HistoricoStock;
+use App\Exports\ProductosExport;
+
 
 class ProductoController extends Controller
 {
@@ -259,7 +261,7 @@ class ProductoController extends Controller
 
          public function exportarProductosPDF() {
             // Traemos los productos 
-            $productos = Producto::latest()->get();
+            $productos= Producto::latest()->get();
             // capturamos la vista y los datos que enviaremos a la misma
             $pdf = PDF::loadView('panel.administrador.lista_productos.pdf_productos', compact('productos'));
             // Renderizamos la vista
@@ -267,4 +269,9 @@ class ProductoController extends Controller
             // Visualizaremos el PDF en el navegador
             return $pdf->stream('productos.pdf');
             }
-}
+
+            
+
+
+        }
+

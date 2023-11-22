@@ -21,6 +21,12 @@
             <a href="{{ route('categoria.create') }}" class="btn btn-success text-uppercase">
                 Nueva Categoria 
             </a>
+            <a href="{{ route('exportar-categoria-pdf') }}" class="btn btn-danger" title="PDF" target="_blank">
+                    <i class="fas fa-file-pdf"></i>
+                </a>
+            <a href="{{ route('exportar-categoria-excel') }}" class="btn btn-success" title="Excel">
+                    <i class="fas fa-file-excel"></i>
+                </a>
         </div>
         
         @if (session('alert'))

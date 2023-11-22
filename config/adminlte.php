@@ -429,7 +429,7 @@ return [
             // 'url'         => '#',
             'route' => 'precio.index',
             'icon'        => 'fas fa-shopping-cart',
-            'can'         => 'lista_usuarios' //permiso de admin
+            'can'         => 'lista_admin' //permiso de admin
         ],
         // ['header' => 'account_settings'],
         // [

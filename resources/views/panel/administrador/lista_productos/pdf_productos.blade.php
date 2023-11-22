@@ -12,19 +12,25 @@
 <table class="table table-striped w-100">
 <thead class="bg-primary text-center text-white">
 <tr>
+<th scope="col" class="text-uppercase">#</th>
 <th scope="col" class="text-uppercase">Nombre</th>
-<th scope="col" class="text-uppercase">Descripción</th>
+<th scope="col" class="text-uppercase">Categoria</th>
+<th scope="col" class="text-uppercase">Marca</th>
 <th scope="col" class="text-uppercase">Precio</th>
+<th scope="col" class="text-uppercase">Stock</th>
+
 
 </tr>
 </thead>
 <tbody class="text-center">
 @foreach ($productos as $producto)
 <tr>
+<td>{{ $producto->codigo_producto }}</td>
 <td>{{ $producto->nombre }}</td>
-<td>{{ Str::limit($producto->descripcion, 30) }}</td> <!-- Corta el string a 30 
-caracteres -->
+<td>{{ $producto->categoria->descripcion}}</td>
+<td>{{ $producto->marca->descripcion}}</td>
 <td>{{ $producto->precio}}</td>
+<td>{{ $producto->stock_disponible}}</td>
 </tr>
 @endforeach
 </tbody>

@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\MarcaController;
 use App\Http\Controllers\ProveedorController;

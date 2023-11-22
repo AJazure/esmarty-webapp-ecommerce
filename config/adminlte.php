@@ -335,7 +335,7 @@ return [
             'can'         => 'lista_ventas' //permiso de admin
         ],
         [
-            'text'        => ' Actualizar Precios',
+            'text'        => 'Actualizar Precios',
             // 'url'         => '#',
             'route' => 'precio.index',
             'icon'        => 'fa fa-university',
@@ -345,7 +345,7 @@ return [
             'text'        => 'Proveedores',
             /* 'url'         => '#', */
             'route' => 'proveedor.index',
-            'icon'        => 'fas fa-users',
+            'icon'        => 'fa fa-user-secret',
             'can'         => 'lista_almacen' //permiso de admin
         ],
         [
@@ -382,7 +382,7 @@ return [
             'text'        => 'Pedidos Enviados',
             // 'url'         => '#',
             'route'       => 'pedidosEnviados',
-            'icon'        => 'fas fa-address-card',
+            'icon'        => 'fa fa-truck',
             'can'         => 'lista_almacen', ///permiso de operario de almacén
         ],
         [

@@ -21,6 +21,12 @@
                 <a href="{{ route('marca.create') }}" class="btn btn-success text-uppercase">
                     Nueva Marca
                 </a>
+                <a href="{{ route('exportar-marca-pdf') }}" class="btn btn-danger" title="PDF" target="_blank">
+                    <i class="fas fa-file-pdf"></i>
+                </a>
+            <a href="{{ route('exportar-marca-excel') }}" class="btn btn-success" title="Excel">
+                    <i class="fas fa-file-excel"></i>
+                </a>
             </div>
 
             @if (session('alert'))

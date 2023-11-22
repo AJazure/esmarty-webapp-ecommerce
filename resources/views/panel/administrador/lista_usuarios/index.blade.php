@@ -23,7 +23,7 @@
             <a href="{{ route('user.create') }}" class="btn btn-success text-uppercase">
                 Crear Nuevo Usuario
             </a>
-        </div>
+                   </div>
         
         @if (session('alert'))
             <div class="col-12">

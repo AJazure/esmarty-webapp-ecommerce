@@ -17,10 +17,14 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 mb-3">
-            <a href="{{ route('stock.create') }}" class="btn btn-success text-uppercase">
-                Exportar Excel
-            </a>
+        <a href="{{ route('exportar-historial-excel') }}" class="btn btn-success" title="Excel">
+                    <i class="fas fa-file-excel"></i>
+                </a>
+                <a href="{{ route('exportar-historial-pdf') }}" class="btn btn-danger" title="PDF" target="_blank">
+                    <i class="fas fa-file-pdf"></i>
+                </a>
         </div>
+        
         
         @if (session('alert'))
             <div class="col-12">

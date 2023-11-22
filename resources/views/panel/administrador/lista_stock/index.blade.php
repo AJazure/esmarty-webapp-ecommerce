@@ -23,6 +23,13 @@
             <a href="{{ route('stock.create') }}" class="btn btn-success text-uppercase">
                 Alta Nuevo Producto 
             </a>
+            <a href="{{ route('exportar-stock-pdf') }}" class="btn btn-danger" title="PDF" target="_blank">
+                    <i class="fas fa-file-pdf"></i>
+                </a>
+
+                <a href="{{ route('exportar-stock-excel') }}" class="btn btn-success" title="Excel">
+                    <i class="fas fa-file-excel"></i>
+                </a>
         </div>
         
         @if (session('alert'))

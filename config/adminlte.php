@@ -399,11 +399,19 @@ return [
             'icon'        =>  'fas fa-id-card',
 /*             'can'         => 'lista_compras' //permiso de clientes */
         ],
+        
         [
             'text'        => 'Mis Compras',
             'route'         => 'pedidos.index',
             'icon'        => 'fas fa-shopping-cart',
             'can'         => 'lista_compras' //permiso de clientes
+        ],
+        [
+            'text'        => ' Actualizar Precios',
+            // 'url'         => '#',
+            'route' => 'precio.index',
+            'icon'        => 'fas fa-shopping-cart',
+            'can'         => 'lista_admin' //permiso de admin
         ],
         [
             'text'        => 'Volver a la Tienda',

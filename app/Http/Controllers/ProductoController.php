@@ -10,9 +10,11 @@ use App\Models\Producto;
 use App\Models\Pedido;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\ProductosExport;
+use App\Exports\StockExport;
 use Barryvdh\DomPDF\Facade\PDF;
 use App\Models\HistoricoStock;
+use App\Exports\ProductosExport;
+
 
 class ProductoController extends Controller
 {

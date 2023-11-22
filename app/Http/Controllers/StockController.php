@@ -10,6 +10,10 @@ use App\Models\Categoria;
 use App\Models\Producto;
 use App\Models\HistoricoStock;
 use Illuminate\Http\Request;
+use App\Exports\HistorialStockExport;
+use App\Exports\StockExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\PDF;
 
 
 class StockController extends Controller
@@ -94,6 +98,9 @@ class StockController extends Controller
         ->route('stock.index')
         ->with('alert', 'Producto "' . $producto->nombre . '" agregado exitosamente.');
     }
+
+
+   
 
     /**
      * Display the specified resource.
@@ -232,4 +239,40 @@ class StockController extends Controller
         /*/
         return view('panel.administrador.lista_stock.detalle', compact('registro'));
     }
+
+
+    public function exportarStockExcel() {
+        return Excel::download(new StockExport, 'stock.xlsx'); 
+         }
+    
+         public function exportarStockPDF() {
+            // Traemos los productos 
+            $producto = Producto::latest()->get();
+            // capturamos la vista y los datos que enviaremos a la misma
+            $pdf = PDF::loadView('panel.administrador.lista_stock.pdf_stock', compact('producto'));
+            // Renderizamos la vista
+            $pdf->render();
+            // Visualizaremos el PDF en el navegador
+            return $pdf->stream('Stock.pdf');
+            }
+
+
+            public function exportarHistorialExcel() {
+                return Excel::download(new HistorialStockExport, 'historial.xlsx'); 
+                 }
+            
+                 public function exportarHistorialPDF() {
+                    // Traemos los productos 
+                    $productoo = Producto::latest()->get();
+                    // capturamos la vista y los datos que enviaremos a la misma
+                    $pdf = PDF::loadView('panel.administrador.lista_stock.pdf_historial', compact('productoo'));
+                    // Renderizamos la vista
+                    $pdf->render();
+                    // Visualizaremos el PDF en el navegador
+                    return $pdf->stream('historial.pdf');
+                    }
+        
+
+   
+
 }

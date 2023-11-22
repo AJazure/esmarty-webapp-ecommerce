@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\MarcaRequest;
 use App\Models\Marca;
 use Illuminate\Http\Request;
+use App\Exports\MarcasExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\PDF;
+
 
 class MarcaController extends Controller
 {
@@ -116,4 +120,24 @@ class MarcaController extends Controller
 
         return response()->json(['message' => 'Estado de categoría cambiado con éxito']);
     }
+
+    public function exportarMarcaExcel() {
+        return Excel::download(new MarcasExport, 'marca.xlsx'); 
+         }
+
+         public function exportarMarcaPDF() {
+            // Traemos los productos 
+            $marcas = Marca::latest()->get();
+            // capturamos la vista y los datos que enviaremos a la misma
+            $pdf = PDF::loadView('panel.administrador.lista_marcas.pdf_marca', compact('marcas'));
+            // Renderizamos la vista
+            $pdf->render();
+            // Visualizaremos el PDF en el navegador
+            return $pdf->stream('marca.pdf');
+            }
+
+
+
+
+
 }

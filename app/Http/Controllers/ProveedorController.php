@@ -6,6 +6,12 @@ use App\Http\Requests\ProveedorRequest;
 use App\Models\Proveedor;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Echo_;
+use App\Exports\ProveedorExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\PDF;
+
+
+
 
 class ProveedorController extends Controller
 {
@@ -74,9 +80,23 @@ class ProveedorController extends Controller
         return view('panel.administrador.lista_proveedores.edit', compact('proveedor'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
+    public function exportarProveedorExcel() {
+        return Excel::download(new ProveedorExport, 'proveedores.xlsx'); 
+         }
+
+         public function exportarProveedorPDF() {
+            // Traemos los productos 
+            $proveedor = Proveedor::latest()->get();
+            // capturamos la vista y los datos que enviaremos a la misma
+            $pdf = PDF::loadView('panel.administrador.lista_proveedores.pdf_proveedor', compact('proveedor'));
+            // Renderizamos la vista
+            $pdf->render();
+            // Visualizaremos el PDF en el navegador
+            return $pdf->stream('proveedor.pdf');
+            }
+
+
     public function update(ProveedorRequest $request, $id)
     {
         //
@@ -123,4 +143,6 @@ class ProveedorController extends Controller
     {
         //
     }
+
+ 
 }

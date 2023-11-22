@@ -339,7 +339,7 @@ return [
             // 'url'         => '#',
             'route' => 'precio.index',
             'icon'        => 'fa fa-university',
-            'can'         => 'lista_admin' //permiso de admin
+            'can'         => 'lista_ventas' //permiso de admin
         ],
         [
             'text'        => 'Proveedores',

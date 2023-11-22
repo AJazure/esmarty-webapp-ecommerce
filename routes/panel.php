@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Exports\HistorialStockExport;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\MarcaController;

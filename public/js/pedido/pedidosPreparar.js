@@ -9,7 +9,7 @@ let configurationDataTable = {
     searching: true,
 	pageLength: 10,
 	lengthMenu: [[5,10,20,-1],[5,10,20,'Todos']], 
-	 dom: '<"row"<"col-md-6"l><"col-md-6"f>>rt<"row"<"col-md-6"B><"col-md-6"pi>>', 
+	 dom: '<"row"<"col-md-6"l><"col-md-6"f>>rt<"row"<"col-md-6"B><"col-md-6"p>i>', 
 	          
         buttons:[ 
 			{

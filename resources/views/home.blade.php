@@ -8,8 +8,11 @@
 
 @section('content')
     {{-- Stock --}}
+
+<hr style="margin-top: -1px">
+
     <div class="card">
-        <div class="container-fluid">
+        <div class="container-fluid pt-2">
             <div class="row">
 
                 <!-- BAR CHART -->
@@ -68,11 +71,11 @@
     {{-- Pedidos Pagadas/Canceladas --}}
     <div class="card">
 
-        <div class="container-fluid">
+        <div class="container-fluid pt-2">
             <div class="row">
                 <!-- Doughnut CHART -->
                 <div class="col-lg-12">
-                    <div class="card">
+                    <div class="card ">
                         <div class="card-header bg-primary text-white">
                             <div class="d-flex justify-content-between align-items-center">
                                 <strong>Pedidos Pagados/Cancelados/Esperando Pago</strong>
@@ -100,7 +103,7 @@
     {{--  --}}
     {{-- Pedidos  Enviados/En Preparacion --}}
     <div class="card">
-        <div class="container-fluid">
+        <div class="container-fluid pt-2">
             <div class="row">
                 <!-- Doughnut CHART -->
                 <div class="col-lg-12">

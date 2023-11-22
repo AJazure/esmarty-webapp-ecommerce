@@ -68,7 +68,7 @@
                                     <th scope="col" class="text-uppercase">Stock</th>
                                     <th scope="col" class="text-uppercase">Imagen</th>
                                     <th scope="col" class="text-uppercase">Activo</th>
-                                    <th scope="col" class="text-uppercase">Acciones</th>
+                                    <th scope="col" class="text-uppercase text-center">Acciones</th>
 
                         </tr>
                     </thead>
@@ -80,7 +80,7 @@
                             <td>{{ $producto->categoria->descripcion }}</td>
                             {{-- <td>{{ $producto->marca->descripcion}}</td> --}}
                             <td>{{ $producto->marca ? $producto->marca->descripcion : 'N/A'}}</td>
-                            <td>{{ $producto->precio }}</td>
+                            <td>${{ $producto->precio }}</td>
                             <td class='text-center'>
                                 @if ($producto->stock_disponible == 0)
                                     <span class="badge badge-danger">SIN STOCK</span>
@@ -110,7 +110,7 @@
                                 </form>
                             </td>
                             <td>
-                                <div class="d-flex">
+                                <div class="d-flex justify-content-center">
                                     <a href="{{ route('producto.show', $producto) }}" data-toggle="modal" data-target="#productoModal{{ $producto->id }}" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
                                         Ver
                                     </a>

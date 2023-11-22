@@ -263,7 +263,10 @@ class StockController extends Controller
             
                  public function exportarHistorialPDF() {
                     // Traemos los productos 
-                    $productoo = Producto::latest()->get();
+                    $productoo = HistoricoStock::select('productos.codigo_producto','productos.nombre','users.email','tipo_modif','cantidad_modif','historico_stock.created_at')
+                    ->join('productos', 'productos.id', 'historico_stock.id_producto')
+                    ->join('users', 'users.id', 'historico_stock.id_user')->get();
+                     
                     // capturamos la vista y los datos que enviaremos a la misma
                     $pdf = PDF::loadView('panel.administrador.lista_stock.pdf_historial', compact('productoo'));
                     // Renderizamos la vista

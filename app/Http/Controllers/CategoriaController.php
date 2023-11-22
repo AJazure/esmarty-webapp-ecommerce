@@ -113,7 +113,7 @@ class CategoriaController extends Controller
 
 
     public function exportarCategoriaExcel() {
-        return Excel::download(new CategoriaExport, 'marca.xlsx'); 
+        return Excel::download(new CategoriaExport, 'categorias.xlsx'); 
          }
 
          public function exportarCategoriaPDF() {
@@ -124,7 +124,7 @@ class CategoriaController extends Controller
             // Renderizamos la vista
             $pdf->render();
             // Visualizaremos el PDF en el navegador
-            return $pdf->stream('categoria.pdf');
+            return $pdf->stream('categorias.pdf');
             }
 
 }

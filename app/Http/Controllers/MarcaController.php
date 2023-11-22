@@ -122,7 +122,7 @@ class MarcaController extends Controller
     }
 
     public function exportarMarcaExcel() {
-        return Excel::download(new MarcasExport, 'marca.xlsx'); 
+        return Excel::download(new MarcasExport, 'marcas.xlsx'); 
          }
 
          public function exportarMarcaPDF() {
@@ -133,7 +133,7 @@ class MarcaController extends Controller
             // Renderizamos la vista
             $pdf->render();
             // Visualizaremos el PDF en el navegador
-            return $pdf->stream('marca.pdf');
+            return $pdf->stream('marcas.pdf');
             }
 
 

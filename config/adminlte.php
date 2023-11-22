@@ -335,6 +335,13 @@ return [
             'can'         => 'lista_ventas' //permiso de admin
         ],
         [
+            'text'        => ' Actualizar Precios',
+            // 'url'         => '#',
+            'route' => 'precio.index',
+            'icon'        => 'fa fa-university',
+            'can'         => 'lista_admin' //permiso de admin
+        ],
+        [
             'text'        => 'Proveedores',
             /* 'url'         => '#', */
             'route' => 'proveedor.index',
@@ -405,13 +412,6 @@ return [
             'route'         => 'pedidos.index',
             'icon'        => 'fas fa-shopping-cart',
             'can'         => 'lista_compras' //permiso de clientes
-        ],
-        [
-            'text'        => ' Actualizar Precios',
-            // 'url'         => '#',
-            'route' => 'precio.index',
-            'icon'        => 'fas fa-shopping-cart',
-            'can'         => 'lista_admin' //permiso de admin
         ],
         [
             'text'        => 'Volver a la Tienda',

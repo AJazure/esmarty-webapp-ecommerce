@@ -49,7 +49,7 @@
                                     <th scope="col" class="text-uppercase">Marca</th>
                                     <th scope="col" class="text-uppercase">Imagen</th>
                                     <th scope="col" class="text-uppercase">Precio</th>
-                                    <th scope="col" class="text-uppercase">Acciones</th>
+                                    <th scope="col" class="text-uppercase text-center">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -66,9 +66,9 @@
                                             @endphp
                                             <img src="{{ $imagenes[0] }}" alt="{{ $producto->nombre }}" class="img-fluid" style="width: 150px;">
                                         </td>
-                                        <td>{{ $producto->precio }}</td>
+                                        <td>${{ $producto->precio }}</td>
                                         <td>
-                                            <div class="d-flex">
+                                            <div class="d-flex justify-content-center">
                                                 <a href="{{ route('precio.edit', $producto) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
                                                     Editar
                                                 </a>

@@ -46,7 +46,7 @@ let configurationDataTable = {
 		}
 	],
 
-	dom: '<"row"<"col-md-6"l><"col-md-6"f>>rt<"row"<"col-md-6"B><"col-md-6"pi>>', 
+	dom: '<"row"<"col-md-6"l><"col-md-6"f>>rt<"row"<"col-md-6"B><"col-md-6"p>i>', 
 	buttons:[ 
 		{
 			extend:    'excelHtml5',

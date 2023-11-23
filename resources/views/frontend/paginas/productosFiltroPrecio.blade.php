@@ -2,120 +2,120 @@
 @section('title', 'Esmarty || Productos')
 @section('main-content')
 
-    {{-- Breadcrumbs --}}
-    <div class="container-fluid">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Productos</li>
-            </ol>
-        </nav>
-    </div>
-    {{-- Breadcrumbs Fin --}}
+{{-- Aside Categorias / Filtrar / Novedades --}}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-2 col-md-4 col-12 content-box">
+            
+            {{-- Categorias --}}
+            <hr>
+            <h3 class="text-heading">Categorias</h3>
+            <ul class="categoria-lista">
+                @if ($categorias)
+                @foreach ($categorias as $categoria)
+                <li class="badge text-bg-secondary"><a href="{{ route('MandarDatosCategoriaEspecifica', $categoria->id) }}">
+                {{ $categoria->descripcion }}</a>
+                </li>
+                @endforeach
+                @endif
+            </ul>
+            {{-- End Categorias --}}
+            {{-- Filtro --}}
+            <hr>
+            <h3 class="text-heading">Filtrar por Precio</h3>
+            <form method="GET" action="{{ route('filtrarPorPrecio') }}">
+                @csrf
+                @php
+                $precioMaximo = \App\Models\Producto::max('precio');
+                @endphp
+                <label for="precio_range">Selecciona un rango de precios:</label>
+                <input type="range" name="precio_range" id="precio_range" min="0" max="{{ $precioMaximo }}" step="1"
+                    value="{{ old('precio_range') ?? 0 }}">
 
-    {{--  --}}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-3 col-md-4 col-12 ">
-                <h3 class="titulo">Categorias</h3>
-                <ul class="categoria-lista">
-                    @if ($categorias)
-                        @foreach ($categorias as $categoria)
-                            <li><a href="{{route('MandarDatosCategoriaEspecifica', $categoria->id)}}">{{ $categoria->descripcion }}</a></li>
-                        @endforeach
-                    @endif
-                </ul>
-                {{--  --}}
-                <h3 class="titulo">Filtrar por Precio</h3>
-                <form method="GET" action="{{ route('filtrarPorPrecio') }}">
-                    @csrf
-                    @php
-                        // Obten el precio máximo de los productos en la base de datos
-                        $precioMaximo = \App\Models\Producto::max('precio');
-                    @endphp
-                    <label for="precio_range">Selecciona un rango de precios:</label>
-                    <input type="range" name="precio_range" id="precio_range" min="0" max="{{ $precioMaximo }}" step="1" value="{{ old('precio_range') ?? 0 }}">
-                
-                    <output for="precio_range" id="selected_price">{{ old('precio_range') ?? 0 }}</output>
-                    <br>
-                    <button type="submit" class="filtrar">Filtrar</button>
-                </form>
-                
-                
+                <output for="precio_range" id="selected_price">{{ old('precio_range') ?? 0 }}</output>
                 <br>
+                <button type="submit" class="filtrar color-enfasis">Filtrar</button>
+            </form>
+            {{-- End Filtro --}}
 
-                {{--  --}}
-                <h3 class="titulo">Ultimos Productos</h3>
-                @foreach ($ultimosProductos as $producto)
-                    @php
-                        $photo = explode(',', $producto->url_imagen);
-                    @endphp
-                    <div class="card" style="width: 14rem;">
-                        <img src="{{ $photo[0] }}" alt="{{ $photo[0] }}" class="card-img-top" width="250">
+            {{-- Productos Side --}}
+            <hr>
+            <div class="container pb-5">
+                <h3 class="text-heading"> Novedades </h3>
+                @foreach ($productos->where('activo', 1)->take(2) as $producto)
+                @php $imagen = explode(',', $producto->url_imagen) @endphp
+                <div class="col-md-2 col-sm-5 justify-content-center">
+                    <div class="card element-box m-2 producto-card" style="width: 11rem">
+                        <div class="container mt-3 bg-white" style="width: 150px; height: 100px">
+                            <img src="{{ $imagen[0] }}" class="card-img-top img-fluid" alt="{{ $imagen[0] }}">
+                        </div>
                         <div class="card-body">
-                            <p class="card-text titulo">
-                                <a href="{{route('MandarDatosProductoEspecifico', $producto->id)}}">{{ $producto->nombre }}</a>
-                            <p class="precio">{{ $producto->precio }} </p>
-                            </p>
+                            <h5 class="card-title"> {{ Str::limit($producto->nombre, 25) }} </h5>
+                            <p class="card-text">$ {{ $producto->precio }}</p>
+                            <a href="{{ route('MandarDatosProductoEspecifico', $producto->id) }}"
+                                class="btn color-enfasis"> Agregar al Carrito </a>
                         </div>
                     </div>
+                </div>
                 @endforeach
             </div>
+            {{-- End Productos Side --}}
+    </div>
+        {{-- End Aside Categorias / Filtrar / Novedades --}}
 
-            <div class="col-lg-9 col-md-8 col-12">
-                <div class="row">
-                    <div class="col-12">
-                        <h2>Productos Filtrados por Precio</h2>
-                    </div>
-                </div>
-                <div class="row">
-                    {{-- Mostrar los productos --}}
-                    @if (count($productos) > 0)
-                        @foreach ($productos as $product)
-                            <div class="col-lg-4 col-md-6 col-11">
-                                <div class="single-product">
-                                    <div class="product-img">
-                                        <a href="#">
-                                            @php
-                                                $photo = explode(',', $product->url_imagen);
-                                            @endphp
-                                            <img src="{{ $photo[0] }}" alt="{{ $photo[0] }}" width="250" height="240">
-                                        </a>
-                                        <div>
-                                            <button href="#" data-agregar-id="{{ $product->id }}"
-                                                class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2 agregarAlCarrito">
-                                                Agregar al carrito
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="product-content text-center">
-                                        <h3 class="titulo"><a href="{{route('MandarDatosProductoEspecifico', $product->id)}}">{{Str::limit($product->nombre, 25)}}</a></h3>
-                                        <p>${{ $product->precio }}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    @else
-                        <h4 class="text-warning" style="margin:100px auto;">No hay productos.</h4>
-                    @endif
-                </div>
-
-                <div class="d-flex justify-content-center">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            {{ $productos->links() }}
-                        </ul>
+        {{-- Sección Principal --}}
+        <div class="col-lg-9 col-md-8 col-12">
+            <div class="col-md-12" style="height: 12rem">
+                <div class="container bg-cover img-fluid" style="height: 100%; background-image:url('https://media.istockphoto.com/id/1314343964/es/foto/unidad-de-sistema-de-gama-alta-para-el-primer-plano-de-la-computadora-de-juego.jpg?s=1024x1024&w=is&k=20&c=ASsjLSJzfd2hyzwQlvR3McJTeGduju4pMxqWZXPiCc8=')"></div>
+            </div>
+            <div class="row pt-4">
+                {{-- Breadcrumbs --}}
+                <div class="container-fluid">
+                    <h1> Productos Filtrados por Precio</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Productos</li>
+                        </ol>
                     </nav>
                 </div>
+                {{-- Breadcrumbs Fin --}}
+                {{-- Mostrar Todos los Productos --}}
+                @if (count($productos) > 0)
+                @foreach ($productos->where('activo', 1) as $producto)
+                @php $imagen = explode(',', $producto->url_imagen) @endphp
+                <div class="col-lg-3 col-md-6 col-11 ">
+                    <div class="card element-box m-2 producto-card" style="width: 14rem;">
+                        <div class="container mt-3 bg-white rounded-4" style="width: 200px; height: 200px">
+                            <img src="{{ $imagen[0] }}" class="card-img-top img-fluid" alt="{{ $imagen[0] }}">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"> {{ Str::limit($producto->nombre, 25) }} </h5>
+                            <p class="card-text">$ {{ $producto->precio }}</p>
+                            <a href="{{ route('MandarDatosProductoEspecifico', $producto->id) }}"
+                                class="btn color-enfasis"> Agregar al Carrito </a>
+                        </div>
+                    </div>
+                </div> {{-- End Mostrar Todos los Productos --}}
+                @endforeach
+                @else
+                <h4 class="text-warning" style="margin:100px auto;"> No hay productos disponibles. </h4>
+                @endif
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        {{ $productos->links() }}
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
+</div>
+{{-- End Sección Principal --}}
 
-    </div>
-    </div>
-    </div>
 
-    {{--  --}}
 
 @endsection
 @section('js')

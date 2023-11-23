@@ -8,7 +8,10 @@
     <title>@yield('title')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/nice-select/nice-select.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/owlcarousel/owl.carousel.css') }}">
     <link rel="stylesheet" href="{{ asset('css/paginaPrincipal.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/base.css') }}">
     <script src="https://kit.fontawesome.com/88816cb6bd.js" crossorigin="anonymous"></script>
 
     @yield('styles')

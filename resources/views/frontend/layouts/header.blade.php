@@ -2,7 +2,7 @@
     <div class="container-fluid">
         {{-- Logo --}}
         <a class="navbar-brand" href="/">
-            <img src="{{ asset('imagenes/logo-esmarty-rectangular.png') }}" alt="Logo-Esmarty" width="170px">
+            <img src="{{ asset('imagenes/logo-esmarty-rectangular.png') }}" alt="Logo-Esmarty" width="30%">
         </a>
         {{-- Logo Fin --}}
 

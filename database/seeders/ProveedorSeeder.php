@@ -14,7 +14,7 @@ class ProveedorSeeder extends Seeder
     public function run(): void
     {
         Proveedor::create([
-            'descripcion' => 'CDL',
+            'descripcion' => 'Tech Data',
             'cuit' => '12345678',
             'razon_social' => 'Leyton Cristian',
             'direccion' => 'Vicente Lopez 2887',
@@ -22,7 +22,7 @@ class ProveedorSeeder extends Seeder
             'correo' => 'cdl@esmarty.com',
         ]);
         Proveedor::create([
-            'descripcion' => 'Black',
+            'descripcion' => 'Ingram Micro',
             'cuit' => '39784560',
             'razon_social' => 'Goku Black',
             'direccion' => 'Planeta Kaio 878',
@@ -30,7 +30,7 @@ class ProveedorSeeder extends Seeder
             'correo' => 'black@esmarty.com',
         ]);
         Proveedor::create([
-            'descripcion' => 'Mebac',
+            'descripcion' => 'Synnex',
             'cuit' => '39602131',
             'razon_social' => 'Mebac Salta',
             'direccion' => 'Mendoza 213',
@@ -38,7 +38,7 @@ class ProveedorSeeder extends Seeder
             'correo' => 'mebac@esmarty.com',
         ]);
         Proveedor::create([
-            'descripcion' => 'Galdeano',
+            'descripcion' => 'MediaMarkt',
             'cuit' => '25098560',
             'razon_social' => 'Liliana Galdeano',
             'direccion' => 'Av. Virrey Toledo 1026',
@@ -46,7 +46,7 @@ class ProveedorSeeder extends Seeder
             'correo' => 'galdeano@esmarty.com',
         ]);
         Proveedor::create([
-            'descripcion' => 'Redragon',
+            'descripcion' => 'Arrow Electronics',
             'cuit' => '20397805206',
             'razon_social' => 'Shenlong Salta',
             'direccion' => 'Av. Siempre Viva 123',
@@ -55,7 +55,7 @@ class ProveedorSeeder extends Seeder
         ]);
 
         Proveedor::create([
-            'descripcion' => 'Redragon2',
+            'descripcion' => 'Avnet',
             'cuit' => '203978052016',
             'razon_social' => 'Shenlong Salta 2',
             'direccion' => 'Av. Siempre Viva 1243',

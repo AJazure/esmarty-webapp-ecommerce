@@ -94,11 +94,11 @@
                             <td> 
                                 <div class="d-flex justify-content-center">
                                     <a href="{{route('proveedor.show', $proveedor)}}" data-toggle="modal" data-target="#proveedorModal{{ $proveedor->id }}" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
-                                        Ver
+                                        <i class="far fa-eye" aria-hidden="true"></i>
                                     </a>
                                     
                                     <a href="{{route('proveedor.edit', $proveedor)}}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
-                                        Editar
+                                        <i class="fas fa-edit" aria-hidden="true"></i>
                                     </a>
                                     {{-- <form action="{{ route('producto.destroy', $producto) }}" method="POST">
                                         @csrf 

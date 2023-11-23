@@ -84,11 +84,11 @@
                             <td>
                                 <div class="d-flex justify-content-center">
                                     <a href="{{ route('categoria.show', $categoria) }}" data-toggle="modal" data-target="#categoriaModal{{ $categoria->id }}" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
-                                        Ver
+                                        <i class="far fa-eye" aria-hidden="true"></i>
                                     </a>
                                     
                                     <a href="{{ route('categoria.edit', $categoria) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
-                                        Editar
+                                        <i class="fas fa-edit" aria-hidden="true"></i>
                                     </a>
                                     {{-- <form action="{{ route('producto.destroy', $producto) }}" method="POST">
                                         @csrf 

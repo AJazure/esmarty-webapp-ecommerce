@@ -100,7 +100,9 @@
                                             @endif
                                         @endif
                                     </td>
-                                    <td><a href="#"
+                                    <td >
+                                        <div class="d-flex justify-content-center">
+                                        <a href="#" title="Ver"
                                             class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2 cargarItems"
                                             data-toggle="modal" data-target="#showDetallePedidoModal"
                                             data-idpedido="{{ $pedido->id }}" data-num-pedido="{{ $pedido->num_pedido }}"
@@ -113,20 +115,21 @@
                                             data-enpreparacion="{{ $pedido->en_preparacion }}"
                                             data-enviado="{{ $pedido->enviado }}"
                                             data-urlfactura="{{ $pedido->urlFactura }}">
-                                            Ver
+                                            <i class="far fa-eye"></i>
                                         </a>
 
                                         @if (!$pedido->en_preparacion)
-                                            <button
+                                            <button  title="Preparar"
                                                 class="btn btn-sm btn-success text-white text-uppercase prepararNumSeguimiento"
-                                                data-route="{{ route('prepararPedido', ['id' => $pedido->id]) }}" onclick="">Preparar
+                                                data-route="{{ route('prepararPedido', ['id' => $pedido->id]) }}" onclick=""><i class="fas fa-box"></i>
                                             </button>
                                         @else
                                             <button class="btn btn-sm btn-success text-white text-uppercase "
                                                 disabled>
-                                                Preparar
+                                                <i class="fas fa-box"></i>
                                             </button>
                                         @endif
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

@@ -20,7 +20,9 @@
 
     <div class="container-fluid">
         <div class="row ml-3 mb-3">
-            
+            <a href="{{ route('venta.exportarExcel') }}" class="btn btn-success" title="Excel">
+                <span>Historico</span>  <i class="fas fa-file-excel ml-2"></i>
+            </a>
         </div>
 
         @if (session('alert'))
@@ -117,7 +119,7 @@
                                             data-enpreparacion="{{ $pedido->en_preparacion }}"
                                             data-enviado="{{ $pedido->enviado }}"
                                             data-urlfactura="{{ $pedido->urlFactura }}">
-                                            Detalles
+                                            <i class="far fa-eye" aria-hidden="true"></i>
                                         </a>
 
                                         <button

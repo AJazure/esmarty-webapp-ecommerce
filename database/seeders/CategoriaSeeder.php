@@ -13,23 +13,27 @@ class CategoriaSeeder extends Seeder
      */
     public function run(): void
     {
+        
         Categoria::create([
-            'descripcion' => 'Sin Categoría'
+            'descripcion' => 'Notebook'
         ]);
         Categoria::create([
-            'descripcion' => 'Monitores'
+            'descripcion' => 'Celulares'
         ]);
         Categoria::create([
-            'descripcion' => 'GPU'
+            'descripcion' => 'Componentes PC'
         ]);
         Categoria::create([
-            'descripcion' => 'CPU'
+            'descripcion' => 'Televisores'
         ]);
         Categoria::create([
             'descripcion' => 'Proyectores'
         ]);
         Categoria::create([
-            'descripcion' => 'Patito'
+            'descripcion' => 'Audio'
+        ]);
+        Categoria::create([
+            'descripcion' => 'Sin Categoría'
         ]);
     }
 }

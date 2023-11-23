@@ -70,7 +70,7 @@
                                         <td>
                                             <div class="d-flex justify-content-center">
                                                 <a href="{{ route('precio.edit', $producto) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
-                                                    Editar
+                                                    <i class="fas fa-edit" aria-hidden="true"></i>
                                                 </a>
                                             </div>
                                         </td>

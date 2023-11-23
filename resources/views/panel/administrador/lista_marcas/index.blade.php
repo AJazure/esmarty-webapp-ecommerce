@@ -90,12 +90,12 @@
                                                 <a href="{{ route('marca.show', $marca) }}"
                                                 data-toggle="modal" data-target="#marcaModal{{ $marca->id }}"
                                                     class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
-                                                    Ver
+                                                    <i class="far fa-eye" aria-hidden="true"></i>
                                                 </a>
                                                 
                                                 <a href="{{ route('marca.edit', $marca) }}"
                                                     class="btn btn-sm btn-warning text-white text-uppercase me-1">
-                                                    Editar
+                                                    <i class="fas fa-edit" aria-hidden="true"></i>
                                                 </a>
                                             </div>
                                         </td>

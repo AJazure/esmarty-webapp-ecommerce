@@ -85,12 +85,12 @@
                                                 <a href="{{ route('metodosdepago.show', $mdp) }}"
                                                 data-toggle="modal" data-target="#mdpModal{{ $mdp->id }}"
                                                     class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
-                                                    Ver
+                                                    <i class="far fa-eye" aria-hidden="true"></i>
                                                 </a>
                                                 @include('panel.administrador.lista_mdp.show')
                                                 <a href="{{ route('metodosdepago.edit', $mdp) }}"
                                                     class="btn btn-sm btn-warning text-white text-uppercase me-1">
-                                                    Editar
+                                                    <i class="fas fa-edit" aria-hidden="true"></i>
                                                 </a>
                                             </div>
                                         </td>

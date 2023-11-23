@@ -26,8 +26,8 @@
     /* Text Sizes */
     --biggest-font-size: 2rem;
     --big-font-size: 1.5rem;
-    --normal-font-size: 1rem;
-    --small-font-size: .813rem;
+    --normal-font-size: 1.2rem;
+    --small-font-size: 1rem;
     --smaller-font-size: .75rem;
     --h2-font-size: 1.25rem;
     --h3-font-size: 1.125rem;
@@ -114,6 +114,8 @@ p, .text-body-g {
     object-fit: contain;
 }
 
+
+
 .color-enfasis {
     background-color: var(--enfasis) !important;
     color: #dee2e6;
@@ -122,4 +124,16 @@ p, .text-body-g {
 
 .card {
     border: none !important;
+}
+
+.btn-enfasis{
+    font-size: 0.9rem;
+    width: 13rem;
+}
+
+.btn-enfasis:hover {
+    /* opacity: 0.9;  */
+    background-color: rgb(255, 255, 255) !important;
+    color: var(--enfasis) !important;
+    border: 2px solid var(--enfasis) !important;
 }

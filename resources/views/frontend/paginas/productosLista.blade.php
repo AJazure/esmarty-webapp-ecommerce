@@ -46,7 +46,7 @@
                 @php $imagen = explode(',', $producto->url_imagen) @endphp
                 <div class="col-md-2 col-sm-5 justify-content-center">
                     <div class="card element-box m-2 producto-card" style="width: 11rem">
-                        <div class="container mt-3 bg-white" style="width: 150px; height: 100px">
+                        <div class="container mt-3 bg-white rounded-4" style="width: 150px; height: 200px">
                             <img src="{{ $imagen[0] }}" class="card-img-top img-fluid" alt="{{ $imagen[0] }}">
                         </div>
                         <div class="card-body">

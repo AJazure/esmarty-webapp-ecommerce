@@ -3,19 +3,83 @@
 @section('main-content')
 <link rel="stylesheet" href="{{ asset('css/detalleProducto.css') }}">
 
-    {{-- Breadcrumbs --}}
-    <div class="container-fluid">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('productos') }}">Productos</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Detalles del Producto</li>
-            </ol>
-        </nav>
-    </div>
-    {{-- Breadcrumbs Fin --}}
+@php
+$imagen = explode('|', $producto->url_imagen);
 
-@include('frontend.paginas.productoDetalleInfo')
+@endphp
+<div class = "container">
+    <div class = "card add-shadow">
+      <!-- Card Izquierda -->
+      <div class = "product-imgs">
+        <div class = "img-display">
+          <div class = "img-showcase">
+            <img class="imagen" src = "{{ $imagen[0] }}" alt = "imagen-producto">
+            <img class="imagen" src = "{{ isset($imagen[1]) ? $imagen[1] : '' }}" alt = "imagen-producto">
+            <img class="imagen" src = "{{ isset($imagen[2]) ? $imagen[2] : '' }}" alt = "imagen-producto">
+          </div>
+        </div>
+        <div class = "img-select">
+          <div class = "img-item">
+            <a href = "#" data-id = "1">
+              <img src = "{{ $imagen[0] }}" alt = "{{ $imagen[0] }}">
+            </a>
+          </div>
+          <div class = "img-item">
+            <a href = "#" data-id = "2">
+              <img src = "{{ isset($imagen[1]) ? $imagen[1] : '' }}" alt = "{{ isset($imagen[1]) ? $imagen[1] : '' }}">
+            </a>
+          </div>
+          <div class = "img-item">
+            <a href = "#" data-id = "3">
+              <img src = "{{ isset($imagen[2]) ? $imagen[2] : '' }}" alt = "{{ isset($imagen[2]) ? $imagen[2] : '' }}">
+            </a>
+          </div>
+        </div>
+      </div>
+      {{-- End Card Izquierda --}}
+      <!-- Card Derecha-->
+      <div class = "product-content">
+        {{-- Breadcrumbs --}}
+        <div class="container-fluid pt-4">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('productos') }}">Productos</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Detalles del Producto</li>
+                </ol>
+            </nav>
+        </div>
+        {{-- Breadcrumbs Fin --}}
+    {{-- Detalle Info --}}
+    <link rel="stylesheet" href="{{ asset('css/detalleProducto.css') }}">
+        <h2 class = "text-title product-title"> {{ $producto->nombre }} </h2>
+        <a href = "{{ route('MandarDatosCategoriaEspecifica', ['categoria' => $categoriaEspecifica->id]) }}"
+            class = "badge-category badge text-bg-secondary"> {{ $categoriaEspecifica->descripcion }} </a>
+  
+        <div class = "product-price">
+            <h2><span>$ {{ $producto->precio }} </span></h3>
+        </div>
+        <div class="product-buy">
+            <div>
+                <button href="#" data-agregar-id="{{ $producto->id }}"
+                    class="btn btn-sm color-enfasis btn-enfasis rounded-pill text-white text-uppercase agregarAlCarrito">
+                    AGREGAR AL CARRITO
+                </button>
+            </div>
+        </div>
+        <hr>
+        <div class="product-detail">
+            <div class="container element-box p-4">
+                <h3>Descripción:</h3>
+                <p>{{ $producto->descripcion }}</p>
+            </div>
+        </div>
+        <!-- End card derecha -->
+  
+      </div>
+    </div>
+  </div>
+    {{-- End Detalle Info --}}
 
 @endsection
 @section('js')

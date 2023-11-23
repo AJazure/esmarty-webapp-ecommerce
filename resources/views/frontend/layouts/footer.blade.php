@@ -20,8 +20,8 @@
                         <h4>Contactanos</h4>
                         <div class="contact">
                             <ul>
-                                <li>Esmarty@esmarty.com</li>
-                                <li>Telefono: 123123132</li>
+                                <li>consultas@esmarty.com</li>
+                                <li>0810-444-7025</li>
                                 <li>
                                     <a href=""><i class="fa-brands fa-instagram fa-2x"></i></a>
                                     <a href=""><i class="fa-brands fa-github fa-2x"></i></a>

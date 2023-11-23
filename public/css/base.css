@@ -114,8 +114,6 @@ p, .text-body-g {
     object-fit: contain;
 }
 
-
-
 .color-enfasis {
     background-color: var(--enfasis) !important;
     color: #dee2e6;

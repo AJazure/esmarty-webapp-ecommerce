@@ -61,7 +61,8 @@
                             <td>{{ $registro->producto->codigo_producto }}</td>
                             <td>{{ $registro->producto->nombre }}</td>
                             <td>{{ $registro->user->email }}</td>
-                            <td>
+                            <td >
+                                <div class="d-flex justify-content-center">
                                 {!!
                                     $registro->tipo_modif == 'alta' || $registro->tipo_modif == 'venta'
                                         ? '<span class="badge badge-success p-2">' . $registro->tipo_modif . '</span>'
@@ -69,17 +70,18 @@
                                         ? '<span class="badge badge-primary p-2">' . $registro->tipo_modif . '</span>'
                                         : '<span class="badge badge-danger p-2">' . $registro->tipo_modif . '</span>')
                                 !!}
+                                </div>
                             </td>
                             
                             
                             
-                            <td>{{ $registro->cantidad_modif }}</td>
+                            <td><div class="d-flex justify-content-center">{{ $registro->cantidad_modif }}</div></td>
                             <td>{{ $registro->created_at }}</td>
                             <td>
-                                <div class="d-flex">
+                                <div title="Ver" class="d-flex justify-content-center">
                                     <a href="{{ route('stock.showDetalle', $registro) }}"  data-toggle="modal"
                                     data-target="#registroModal{{ $registro->id }}"  class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
-                                        Ver Detalles
+                                    <i class="far fa-eye"></i>
                                     </a>
                                     
                                 </div>

@@ -83,7 +83,10 @@
                                     <td><span class="badge badge-primary">Enviado</span></td>
 
 
-                                    <td><a href="#"
+                                    <td>
+                                        <div class="d-flex justify-content-center">
+                                        <a href="#"
+                                        title="Ver"
                                             class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2 cargarItems"
                                             data-toggle="modal" data-target="#showDetallePedidoModal"
                                             data-idpedido="{{ $pedido->id }}" data-num-pedido="{{ $pedido->num_pedido }}"
@@ -96,11 +99,12 @@
                                             data-enpreparacion="{{ $pedido->en_preparacion }}"
                                             data-enviado="{{ $pedido->enviado }}"
                                             data-urlfactura="{{ $pedido->urlFactura }}">
-                                            Ver
+                                            <i class="far fa-eye"></i>
                                         </a>
-                                        <button
-                                            class="btn btn-sm btn-success text-white text-uppercase me-1 mr-2 mt-1 editarNumSeguimiento">Editar</button>
-                                    </td>
+                                        <button title="Editar"
+                                            class="btn btn-sm btn-warning text-white text-uppercase editarNumSeguimiento"><i class="fas fa-edit"></i></button>
+                                        </div>
+                                        </td>
                                 </tr>
                             @endforeach
                         </tbody>

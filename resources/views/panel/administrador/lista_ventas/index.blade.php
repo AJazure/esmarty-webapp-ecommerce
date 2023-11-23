@@ -106,6 +106,7 @@
                                         @endif
                                     </td>
                                     <td><a href="#"
+                                            title="Ver"
                                             class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2 cargarItems"
                                             data-toggle="modal" data-target="#showDetallePedidoModal"
                                             data-idpedido="{{ $pedido->id }}"

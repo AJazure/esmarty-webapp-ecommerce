@@ -124,13 +124,13 @@
                             </td>
                             <td>
                                 <div class="d-flex justify-content-center">
-                                    <a href="{{ route('stock.show', $producto) }}" data-toggle="modal"
+                                    <a title="Ver" href="{{ route('stock.show', $producto) }}" data-toggle="modal"
                                     data-target="#productoModal{{ $producto->id }}"  class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
-                                        Ver
+                                    <i class="far fa-eye"></i>
                                     </a>
                                     
-                                    <a href="{{ route('stock.edit', $producto) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
-                                        Editar
+                                    <a title="Editar" href="{{ route('stock.edit', $producto) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
+                                        <i class="fas fa-edit"></i>
                                     </a>
                                     {{-- <form action="{{ route('producto.destroy', $producto) }}" method="POST">
                                         @csrf 

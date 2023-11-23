@@ -87,13 +87,13 @@
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-center">
-                                                <a href="{{ route('marca.show', $marca) }}"
+                                                <a href="{{ route('marca.show', $marca) }}" title="Ver"
                                                 data-toggle="modal" data-target="#marcaModal{{ $marca->id }}"
                                                     class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
                                                     <i class="far fa-eye" aria-hidden="true"></i>
                                                 </a>
                                                 
-                                                <a href="{{ route('marca.edit', $marca) }}"
+                                                <a href="{{ route('marca.edit', $marca) }}" title="Editar"
                                                     class="btn btn-sm btn-warning text-white text-uppercase me-1">
                                                     <i class="fas fa-edit" aria-hidden="true"></i>
                                                 </a>

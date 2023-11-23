@@ -109,7 +109,7 @@
                                             data-nombre="{{ $pedido->nombre }}" data-apellido="{{ $pedido->apellido }}"
                                             data-email="{{ $pedido->correo }}" data-dni="{{ $pedido->dni }}"
                                             data-direccion="{{ $pedido->direccion }}"
-                                            data-codigopostal="{{ $pedido->codigo_postal }}"
+                                              data-codigopostal="{{ $pedido->codigo_postal }}"
                                             data-telefono="{{ $pedido->telefono }}" data-total="{{ $pedido->total }}"
                                             data-cancelado="{{ $pedido->cancelado }}" data-pagado="{{ $pedido->pagado }}"
                                             data-enpreparacion="{{ $pedido->en_preparacion }}"

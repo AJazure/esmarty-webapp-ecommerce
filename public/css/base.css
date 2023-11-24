@@ -17,6 +17,17 @@
    --text-general-w: #dee2e6 !important;
    --enfasis: #330ae3 !important;
 
+    /* Colores para Gradients */
+    --blue-400: #847aff;
+    --blue-600: #481eff;
+
+    --blue-500: #5c44ff;
+    --blue-700: #330ae3;
+
+    --blue-800: #2f0acd;
+
+
+
    /* Fuentes y Tipografía */
    --title-font: 'GalanoGrotesque';
    --subheading-font: 'CheyenneSans';
@@ -27,7 +38,7 @@
     --biggest-font-size: 2rem;
     --big-font-size: 1.5rem;
     --normal-font-size: 1.2rem;
-    --small-font-size: 1rem;
+    --small-font-size: 1.1em;
     --smaller-font-size: .75rem;
     --h2-font-size: 1.25rem;
     --h3-font-size: 1.125rem;
@@ -78,6 +89,12 @@ h3, .text-heading-h3 {
 p, .text-body-g {
     color: var(--text-general-grey);
     font-size: var(--normal-font-size);
+    font-family: var(--body-font);
+}
+
+.p-small {
+    color: var(--text-general-grey);
+    font-size: var(--small-font-size);
     font-family: var(--body-font);
 }
 

@@ -80,7 +80,6 @@ button.filtrar:hover {
     border: 1px solid #ddd;
     border-radius: 5px;
     margin-bottom: 20px;
-
 }
 
 .product-img img {
@@ -95,6 +94,14 @@ button.filtrar:hover {
 .pagination {
     margin: 20px 0;
 }
+
+/* Carrito de Compras */
+btn-disminuir {
+    width: 20px;
+    height: 20px;
+}
+
+
 
 /* Efectos */
 

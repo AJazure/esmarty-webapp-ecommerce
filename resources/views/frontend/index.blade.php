@@ -73,7 +73,7 @@
         <div class="container content-box p-4">
             <div class="row justify-content-around pb-4 mt-auto">
 
-                <div class="col-md-12 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
+                <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
                     <div class="row p-2">
                         <div class="col-md-12 justify-center">
                             <img src="https://samsungar.vtexassets.com/assets/vtex.file-manager-graphql/images/311d432e-b6fe-4a4f-80a8-612a322288af___1dba251a9fbb46961106513eb2dc58b6.png" alt="#" width="100%">
@@ -85,7 +85,7 @@
 
                 </div>
 
-                <div class="col-md-12 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
+                <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
                     <div class="row p-2">
                         <div class="col-md-12 justify-center">
                             <img src="https://samsungar.vtexassets.com/assets/vtex.file-manager-graphql/images/311d432e-b6fe-4a4f-80a8-612a322288af___1dba251a9fbb46961106513eb2dc58b6.png" alt="#" width="100%">
@@ -96,7 +96,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-12 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
+                <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
                     <div class="row p-2">
                         <div class="col-md-12 justify-center">
                             <img src="https://samsungar.vtexassets.com/assets/vtex.file-manager-graphql/images/311d432e-b6fe-4a4f-80a8-612a322288af___1dba251a9fbb46961106513eb2dc58b6.png" alt="#" width="100%">
@@ -107,7 +107,7 @@
                     </div>
                 </div>
                 
-                <div class="col-md-12 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
+                <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
                     <div class="row p-2">
                         <div class="col-md-12 justify-center">
                             <img src="https://samsungar.vtexassets.com/assets/vtex.file-manager-graphql/images/311d432e-b6fe-4a4f-80a8-612a322288af___1dba251a9fbb46961106513eb2dc58b6.png" alt="#" width="100%">
@@ -122,7 +122,7 @@
 
             <div class="row justify-content-around">
 
-                <div class="col-md-12 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
+                <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
                     <div class="row p-2">
                         <div class="col-md-12 justify-center">
                             <img src="https://samsungar.vtexassets.com/assets/vtex.file-manager-graphql/images/311d432e-b6fe-4a4f-80a8-612a322288af___1dba251a9fbb46961106513eb2dc58b6.png" alt="#" width="100%">
@@ -133,7 +133,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-12 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
+                <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
                     <div class="row p-2">
                         <div class="col-md-12 justify-center">
                             <img src="https://samsungar.vtexassets.com/assets/vtex.file-manager-graphql/images/311d432e-b6fe-4a4f-80a8-612a322288af___1dba251a9fbb46961106513eb2dc58b6.png" alt="#" width="100%">
@@ -144,7 +144,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-12 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
+                <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
                     <div class="row p-2">
                         <div class="col-md-12 justify-center">
                             <img src="https://samsungar.vtexassets.com/assets/vtex.file-manager-graphql/images/311d432e-b6fe-4a4f-80a8-612a322288af___1dba251a9fbb46961106513eb2dc58b6.png" alt="#" width="100%">
@@ -155,7 +155,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-12 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
+                <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
                     <div class="row p-2">
                         <div class="col-md-12 justify-center">
                             <img src="https://samsungar.vtexassets.com/assets/vtex.file-manager-graphql/images/311d432e-b6fe-4a4f-80a8-612a322288af___1dba251a9fbb46961106513eb2dc58b6.png" alt="#" width="100%">

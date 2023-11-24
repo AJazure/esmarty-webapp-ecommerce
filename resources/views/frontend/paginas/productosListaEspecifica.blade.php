@@ -5,7 +5,7 @@
 {{-- Aside Categorias / Filtrar / Novedades --}}
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-2 col-md-4 col-12 content-box">
+        <div class="col-lg-2 col-md-12 col-12 content-box">
             
             {{-- Categorias --}}
             <hr>
@@ -36,35 +36,13 @@
                 <br>
                 <button type="submit" class="filtrar color-enfasis">Filtrar</button>
             </form>
-            {{-- End Filtro --}}
-
-            {{-- Productos Side --}}
             <hr>
-            <div class="container pb-5">
-                <h3 class="text-heading"> Novedades </h3>
-                @foreach ($productos->where('activo', 1)->take(2) as $producto)
-                @php $imagen = explode('|', $producto->url_imagen) @endphp
-                <div class="col-md-2 col-sm-5 justify-content-center">
-                    <div class="card element-box m-2 producto-card" style="width: 11rem">
-                        <div class="container mt-3 bg-white rounded-4" style="width: 150px; height: 200px">
-                            <img src="{{ $imagen[0] }}" class="card-img-top img-fluid" alt="{{ $imagen[0] }}">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title"> {{ Str::limit($producto->nombre, 25) }} </h5>
-                            <p class="card-text">$ {{ $producto->precio }}</p>
-                            <a href="{{ route('MandarDatosProductoEspecifico', $producto->id) }}"
-                                class="btn color-enfasis"> Agregar al Carrito </a>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-            {{-- End Productos Side --}}
+            {{-- End Filtro --}}
     </div>
         {{-- End Aside Categorias / Filtrar / Novedades --}}
 
         {{-- Sección Principal --}}
-        <div class="col-lg-9 col-md-8 col-12">
+        <div class="col-lg-10 col-md-12 col-sm-12 col-12">
             <div class="col-md-12" style="height: 12rem">
                 <div class="container bg-cover img-fluid" style="height: 100%; background-image:url('https://media.istockphoto.com/id/1314343964/es/foto/unidad-de-sistema-de-gama-alta-para-el-primer-plano-de-la-computadora-de-juego.jpg?s=1024x1024&w=is&k=20&c=ASsjLSJzfd2hyzwQlvR3McJTeGduju4pMxqWZXPiCc8=')"></div>
             </div>
@@ -84,18 +62,22 @@
                 @if (count($productos_especificos) > 0)
                 @foreach ($productos_especificos->where('activo', 1) as $producto)
                 @php $imagen = explode('|', $producto->url_imagen) @endphp
-                <div class="col-lg-3 col-md-6 col-11 ">
-                    <div class="card element-box m-2 producto-card" style="width: 14rem;">
-                        <div class="container mt-3 bg-white rounded-4" style="width: 200px; height: 200px">
-                            <img src="{{ $imagen[0] }}" class="card-img-top img-fluid" alt="{{ $imagen[0] }}">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-6 ">
+                    <a href="{{ route('MandarDatosProductoEspecifico', $producto->id) }}" style="color: rgb(38, 38, 38)">
+                        <div class="card element-box m-2 producto-card" style="width: 14rem;">
+                            <div class="container mt-3 bg-white rounded-4" style="width: 200px; height: 200px">
+                                <img src="{{ $imagen[0] }}" class="card-img-top img-fluid"
+                                    alt="{{ $imagen[0] }}">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title"> {{ Str::limit($producto->nombre, 25) }} </h5>
+                                <p class="card-text">$ {{ $producto->precio }}</p>
+                                <a href="#"
+                                    class="btn color-enfasis"> Agregar al Carrito 
+                                </a>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <h5 class="card-title"> {{ Str::limit($producto->nombre, 25) }} </h5>
-                            <p class="card-text">$ {{ $producto->precio }}</p>
-                            <a href="{{ route('MandarDatosProductoEspecifico', $producto->id) }}"
-                                class="btn color-enfasis"> Agregar al Carrito </a>
-                        </div>
-                    </div>
+                    </a>
                 </div> {{-- End Mostrar Todos los Productos --}}
                 @endforeach
                 @else

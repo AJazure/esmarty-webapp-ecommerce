@@ -72,7 +72,7 @@
             <h1 class="pb-4"> Categorías Principales </h1>
         </div>
         <div class="container content-box p-4">
-            <div class="row justify-content-around pb-4">
+            <div class="row justify-content-around pb-4 mt-auto">
 
                 <div class="col-md-12 rounded-4 element-box add-shadow" style="height: 250px; width: 300px;">
                     <div class="row p-2">
@@ -222,7 +222,7 @@
 
                 @foreach ($productos->where('activo', 1)->take(5) as $producto)
                 @php $imagen = explode(',', $producto->url_imagen) @endphp
-                <div class="col-md-2 col-sm-5 justify-content-around">
+                <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 justify-content-around">
                     <div class="card element-box m-2 producto-card" style="width: 14rem;">
                         <div class="container mt-3 bg-white" style="width: 200px; height: 200px">
                             <img src="{{ $imagen[0] }}" class="card-img-top img-fluid" alt="{{ $imagen[0] }}">

@@ -1,20 +1,21 @@
 @extends('frontend.layouts.master')
 @section('title', 'Esmarty || Carrito')
 @section('main-content')
+<link rel="stylesheet" href="{{ asset('css/cart.css') }}">
 	<!-- Breadcrumbs -->
 
 
 	<!-- Shopping Cart -->
-	<div class="shopping-cart section ">
-		<div class="container border p-2">
+	<div class="shopping-cart section m-4">
+		<div class="container border p-2 rounded-2 add-shadow bg-white border-0" style="">
 			<div class="row ">
-				<div class="col-12 ">
+				<div class="col-12">
 					<!-- Shopping Summery -->
-                    <h4 class="p-4">Carrito de compras</h4>
+                    <h4> <i class='bx bx-cart-alt'></i>Carrito de Compras</h4>
 					<table id="tabla_carrito" class="table shopping-summery table-striped text-center" style="width: 100%;">
-						<thead class="table-dark">
+						<thead class="table content-box">
 							<tr class="main-hading">
-								<th class="text-center">Imagen</th>
+								<th class="text-center"></th>
 								<th class="text-center">Producto</th>
 								<th class="text-center">Precio</th>
 								<th class="text-center">Cantidad</th>
@@ -28,21 +29,20 @@
 					<!--/ End Shopping Summery -->
 				</div>
 			</div>
-            <hr>
 			<div class="row">
 				<div class="col-12 d-flex justify-content-end">
 					<!-- Total Amount -->
                     
-					<div class="total-amount border p-2">
-						<span><strong>Total:</strong></span> $<span id="valorTotal"></span>
+					<div class="total-amount text-center text-white border pt-2" style="width: 15rem; margin-top: -15px; border-radius: 0 0 30px 30px; background: rgb(116, 160, 139);">
+						<p><i class='bx bx-money-withdraw'></i> Total a pagar:</span> $<span id="valorTotal"></p>
 					</div>
 					<!--/ End Total Amount -->
 				</div>
 			</div>
             <div class="row pt-3">
                 <div class="col-12 d-flex justify-content-between">
-                <a href="{{ route('productos') }}" class="btn btn-secondary"><- Seguir comprando</a>
-                <a href="{{ route('carrito.create') }}" class="btn btn-primary" id="btn-checkout">Checkout</a>
+                <a href="{{ route('productos') }}" class="btn btn-secondary"><i class='bx bx-arrow-back' style='color:#ffffff' ></i> Seguir comprando</a>
+                <a href="{{ route('carrito.create') }}" id="btn-checkout"><button class="btn btn-success rounded-pill"><span><i class='bx bx-credit-card'></i></span> Ir a Pagar </button></a>
                 </div>
             </div>
 		</div>
@@ -52,6 +52,7 @@
 @endsection
 @section('styles')
 	<style>
+
 		.cantidades {
 			padding: 5px;
 		}

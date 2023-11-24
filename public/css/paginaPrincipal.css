@@ -1,40 +1,36 @@
+@import url(slider.css);
+
+/* Estilo general */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style-type: none;
+}
+
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
+    background-color: var(--background);
     color: #333;
-
 }
+
 .navbar{
     padding: 0;
 }
 
 .navbar.scrolled {
-    background-color: #fff;
+    background-color: var(--background);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 .under:hover{
-    text-decoration: underline;
+    text-decoration: none;
 }
 
-/* carrusel */
-.carousel-control-prev,
-.carousel-control-next {
-    width: 5%;
-    color: white;
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    background-color: #330ae3;
-    border-radius: 50%;
-    padding: 20px;
-}
-
-.carousel-control-prev:hover .carousel-control-prev-icon,
-.carousel-control-next:hover .carousel-control-next-icon {
-    background-color: #1a0586;
-}
+/* ul a:visited, ul a:link {
+    color: #f3f3f3;
+} ver el tema que me hace invisible los icons del navbar*/
 
 .titulo a{
     text-decoration: none;
@@ -50,20 +46,8 @@ body {
     padding: 0;
 }
 
-.categoria-lista li {
-    margin-bottom: 10px;
-
-}
-
-.categoria-lista li a{
+a {
     text-decoration: none;
-
-}
-form {
-    margin-top: 20px;
-}
-.categoria-nombre:hover{
-    text-decoration: underline;
 }
 
 /* botón Filtrar */
@@ -81,10 +65,6 @@ button.filtrar:hover {
     border-color: #0056b3; 
 }
 
-.imagen-detalle img{
-    width: auto;
-}
-
 #precio_range {
     width: 75%;
 }
@@ -100,7 +80,6 @@ button.filtrar:hover {
     border: 1px solid #ddd;
     border-radius: 5px;
     margin-bottom: 20px;
-
 }
 
 .product-img img {
@@ -114,6 +93,24 @@ button.filtrar:hover {
 
 .pagination {
     margin: 20px 0;
+}
+
+/* Carrito de Compras */
+btn-disminuir {
+    width: 20px;
+    height: 20px;
+}
+
+
+
+/* Efectos */
+
+.zoom-effect {
+    transition: background-size .2s ease-in-out;
+}
+
+.zoom-effect:hover{
+    background-size: 110%;
 }
 
 

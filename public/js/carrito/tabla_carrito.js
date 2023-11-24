@@ -11,29 +11,54 @@ function cargarTabla() {
 						{
 							data: 'productos.url_imagen',
 							render: function (data, type, row) {
-								return `<img src="${data}" class="image" width=100px>`
+								var imagen = data.split('|');
+								return `<div class="container bg-white rounded-4 d-flex justify-content-center align-items-center" style="width: auto; height: 100px;">
+											<img src="${imagen[0]}" class="image" height=70px>
+										</div>`
 							}
 						},
-						{ data: 'productos.nombre' },
-						{ data: 'subtotal' },
+						{
+							data: 'productos.nombre',
+							render: function(data, type, row){
+								return `<div class="container d-flex align-items-center justify-content-start" style="height: 100px; width: 33rem; overflow: hidden;">
+											<p class="text-truncate d-inline-block" style="max-width: 98%;" title="${data}">${data}</p>
+										</div>`
+							}
+						},
+						{
+							data: 'subtotal',
+							render: function(data, type, row){
+								return `<div class="container border-start border-end border-2 d-flex align-items-center" style="width: 100px; height: 100px;">
+											<p class="p-small">$ ${data}</p>
+										</div>`
+							}
+						},
 						{
 							data: 'cant_producto', // No necesitas datos para esta columna, ya que se calculará usando render
 							render: function (data, type, row) {
 								// Calcula la multiplicación de subtotal y cant_producto para cada fila
-								return `<div class="columnaCantidad"><button class="btn btn-warning disminuir-cantidad" id="disminuir-cantidad"> - </button><span id='cantidad' class='cantidades'>${data}</span><button class="btn btn-warning aumentar-cantidad" id="aumentar-cantidad"> + </button><div>`;
+								return `<div class="columnaCantidad container d-flex align-items-center" style="width: auto; height: 100px;">
+											<button class="btn btn-sm btn-disminuir text-center border border-2 disminuir-cantidad btn-disminuir" id="disminuir-cantidad"><i class='bx bx-minus'></i></button>
+											<span id='cantidad' class='cantidades'>${data}</span>
+											<button class="btn btn-sm btn-aumentar text-center border border-2 aumentar-cantidad btn-aumentar" id="aumentar-cantidad"><i class='bx bx-plus'></i></button>
+										<div>`;
 							}
 						},
 						{
 							data: null, // No necesitas datos para esta columna, ya que se calculará usando render
 							render: function (data, type, row) {
 								// Calcula la multiplicación de subtotal y cant_producto para cada fila
-								return `<span id='totales'>${row.subtotal * row.cant_producto}</span>`;
+								return `<div class="container border-start border-end border-2 d-flex align-items-center" style="width: 100px; height: 100px;">
+											<p class="p-small" id='totales'>$ ${row.subtotal * row.cant_producto}</p>
+										</div>`;
 							}
 						},
 						{
 							data: null,
 							render: function (data, type, row) {
-								return '<button class="btn btn-danger eliminar-btn">Eliminar</button>';
+								return `<div class="container d-flex align-items-center" style="width: auto; height: 100px;">
+											<button class="btn btn-danger eliminar-btn"><i class='bx bxs-x-circle'></i></button>
+										</div>`;
 							}
 						},
 						// Agrega más columnas según sea necesario
@@ -187,6 +212,26 @@ $('#tabla_carrito').on('click', '.disminuir-cantidad', function () {
 		row.find('td:eq(4)').text(rowData.subtotal * rowData.cant_producto);
 		row.find('.cantidades').text(rowData.cant_producto);
 
+		// Crea un contenedor div
+        var containerDiv = $('<div>', {
+            class: 'container border-end border-2 d-flex align-items-center',
+            style: 'width: 100px; height: 100px;'
+        });
+
+        // Crea un párrafo p con el formato especificado
+        var subtotalCell = $('<p>', {
+            class: 'p-small',
+            id: 'totales',
+            text: '$ ' + (rowData.subtotal * rowData.cant_producto)
+        });
+
+		// Agrega el párrafo al contenedor
+        containerDiv.append(subtotalCell);
+
+		// Reemplaza el contenido de la celda por el nuevo contenedor
+        row.find('td:eq(4)').html(containerDiv);
+        row.find('.cantidades').text(rowData.cant_producto);
+
 		// Actualiza el total
 		var totalMenos = rowData.subtotal;
 		valorTotal.textContent = parseFloat(valorTotal.textContent) - totalMenos;
@@ -205,16 +250,34 @@ $('#tabla_carrito').on('click', '.disminuir-cantidad', function () {
 
 // Maneja el aumento de cantidad
 $('#tabla_carrito').on('click', '.aumentar-cantidad', function () {
-	var row = $(this).closest('tr');
-	var rowData = $('#tabla_carrito').DataTable().row(row).data();
+    var row = $(this).closest('tr');
+    var rowData = $('#tabla_carrito').DataTable().row(row).data();
 
-	if (rowData.cant_producto < rowData.productos.stock_disponible) {
+    if (rowData.cant_producto < rowData.productos.stock_disponible) {
 
-		rowData.cant_producto++;
-		/* console.log(rowData.productos) */
-		// Actualiza la interfaz
-		row.find('td:eq(4)').text(rowData.subtotal * rowData.cant_producto);
-		row.find('.cantidades').text(rowData.cant_producto);
+        rowData.cant_producto++;
+        /* console.log(rowData.productos) */
+        // Actualiza la interfaz
+
+        // Crea un contenedor div
+        var containerDiv = $('<div>', {
+            class: 'container border-end border-2 d-flex align-items-center',
+            style: 'width: 100px; height: 100px;'
+        });
+
+        // Crea un párrafo p con el formato especificado
+        var subtotalCell = $('<p>', {
+            class: 'p-small',
+            id: 'totales',
+            text: '$ ' + (rowData.subtotal * rowData.cant_producto)
+        });
+
+        // Agrega el párrafo al contenedor
+        containerDiv.append(subtotalCell);
+
+        // Reemplaza el contenido de la celda por el nuevo contenedor
+        row.find('td:eq(4)').html(containerDiv);
+        row.find('.cantidades').text(rowData.cant_producto);
 
 		// Actualiza el total
 		var totalMas = rowData.subtotal;
@@ -225,10 +288,12 @@ $('#tabla_carrito').on('click', '.aumentar-cantidad', function () {
 		cant_carrito.innerHTML++;
 		console.log('Items en carrito:', cant_carrito.innerHTML);
 
-		// Envía la actualización al servidor
-		actualizarCantidadEnBackend(rowData.id, rowData.cant_producto);
-	}
+        // Envía la actualización al servidor
+        actualizarCantidadEnBackend(rowData.id, rowData.cant_producto);
+    }
 });
+
+
 
 function actualizarCantidadEnBackend(id, nuevaCantidad) {
 	// Enviar la solicitud AJAX para actualizar la cantidad en el backend

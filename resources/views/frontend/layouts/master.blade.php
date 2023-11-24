@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('css/owlcarousel/owl.carousel.css') }}">
     <link rel="stylesheet" href="{{ asset('css/paginaPrincipal.css') }}">
     <link rel="stylesheet" href="{{ asset('css/base.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/header.css') }}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/88816cb6bd.js" crossorigin="anonymous"></script>
 

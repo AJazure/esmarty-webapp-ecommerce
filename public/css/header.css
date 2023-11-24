@@ -77,6 +77,11 @@
     color: var(--enfasis)!important;
 }
 
+
+.dropdown-item:active {
+    background-color: var(--enfasis)!important;
+}
+
 footer a  {
     transition: 0.3s all ease-in-out;
     color: #8b8b8b;
@@ -86,4 +91,10 @@ footer a  {
 footer a:hover  {
 
     color: #fff;
+}
+
+@media (max-width: 992px){
+    .barra-busqueda-form {
+    margin: auto;    
+    }
 }

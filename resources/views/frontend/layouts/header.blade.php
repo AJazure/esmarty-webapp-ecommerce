@@ -38,7 +38,7 @@
             {{-- Navegacion Fin --}}
 
             {{-- Buscador --}}
-            <form method="GET" action="{{ route('resultados-busqueda') }}" class="col-md-5 mb-1"
+            <form method="GET" action="{{ route('resultados-busqueda') }}" class="col-md-5 mb-1 barra-busqueda-form"
                 autocomplete="off">
                 <div class="d-flex">
                     <input class="form-control barra-busqueda" type="search" name="busqueda" id="busquedaInput"
@@ -76,7 +76,7 @@
                                 {{--  --}}
                             @else
                                 @role('cliente')
-                                    <li><a class="dropdown-item" href="{{ route('pedidos.index') }}">Mis compras</a></li>
+                                    <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="{{ route('pedidos.index') }}">Mis compras <i class="fa-solid fa-bag-shopping"></i></a></li>
                                 @endrole
 
                                 <li>

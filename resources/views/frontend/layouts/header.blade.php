@@ -54,7 +54,7 @@
             
                 <ul class="navbar-nav carrito-logout gap-1">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('carrito.carrito') }}">
+                        <a class="nav-link" href="{{ route('carrito.carrito') }}" title="Mi carrito">
                             <i class="fa-solid fa-shopping-cart"></i> 0
                         </a>
                     </li>
@@ -63,10 +63,17 @@
                     {{-- Login y registro --}}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <i class="fa-solid fa-user"></i>
+                            aria-expanded="false" title="
+                            @php 
+                            if (isset(Auth::user()->name)) {
+                                echo Auth::user()->name . " " . Auth::user()->apellido;
+                            }
+                            @endphp">
+                            <i class="fa-solid fa-user"></i>{{-- <span class="small"></span> --}}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
+                            
+
                             @guest
                                 <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="{{ route('login') }}">Iniciar Sesión <i class="fas fa-sign-in-alt"></i></a></li>
                                 <li>
@@ -76,6 +83,7 @@
                                 {{--  --}}
                             @else
                                 @role('cliente')
+                                    <li><a class="dropdown-item d-flex align-items-center justify-content-between " href="{{route('cliente.editar')}}">Mi Perfil <i class="fa-solid fa-user-gear small"></i></a></li>
                                     <li><a class="dropdown-item d-flex align-items-center justify-content-between" href="{{ route('pedidos.index') }}">Mis compras <i class="fa-solid fa-bag-shopping"></i></a></li>
                                 @endrole
 

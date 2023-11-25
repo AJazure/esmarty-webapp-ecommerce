@@ -233,13 +233,18 @@
                 @php $imagen = explode(',', $producto->url_imagen) @endphp
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 justify-content-around">
                     <div class="card element-box m-2 producto-card" style="width: 14rem;">
+                        <a href="{{ route('MandarDatosProductoEspecifico', $producto->id) }}" style="color: rgb(38, 38, 38)">
                         <div class="container mt-3 bg-white" style="width: 200px; height: 200px">
                             <img src="{{ $imagen[0] }}" class="card-img-top img-fluid" alt="{{ $imagen[0] }}">
                         </div>
                         <div class="card-body">
                             <h5 class="card-title"> {{ Str::limit($producto->nombre, 25) }} </h5>
+                            </a>
                             <p class="card-text">$ {{ $producto->precio }}</p>
-                            <a href="{{ route('MandarDatosProductoEspecifico', $producto->id) }}" class="btn color-enfasis"> Comprar </a>
+                            <button data-agregar-id="{{ $producto->id }}"
+                                class="btn btn-sm mb-3 color-enfasis btn-enfasis-adicional rounded-pill text-white text-uppercase agregarAlCarrito add-shadow">
+                                Comprar
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -270,4 +275,6 @@
 @section('js')
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+
 @endsection

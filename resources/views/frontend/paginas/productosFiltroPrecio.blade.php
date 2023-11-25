@@ -13,8 +13,9 @@
                 <ul class="categoria-lista">
                     @if ($categorias)
                         @foreach ($categorias as $categoria)
-                            <li class="badge text-bg-secondary"><a
-                                    href="{{ route('MandarDatosCategoriaEspecifica', $categoria->id) }}">
+                            <li><a
+                                    href="{{ route('MandarDatosCategoriaEspecifica', $categoria->id) }}"
+                                    class="categoria-descripcion-estilo badge text-bg-secondary">
                                     {{ $categoria->descripcion }}</a>
                             </li>
                         @endforeach
@@ -35,7 +36,7 @@
 
                     <output for="precio_range" id="selected_price">{{ old('precio_range') ?? 0 }}</output>
                     <br>
-                    <button type="submit" class="filtrar color-enfasis">Filtrar</button>
+                    <button type="submit" class="color-enfasis btn-enfasis rounded-pill text-white text-uppercase">Filtrar</button>
                 </form>
                 <hr>
                 {{-- End Filtro --}}
@@ -56,6 +57,7 @@
                         <h1> Productos Filtrados por Precio</h1>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><i class='bx bxs-folder-open'></i></li>
                                 <li class="breadcrumb-item"><a href="/">Inicio</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Productos</li>
                             </ol>
@@ -66,7 +68,7 @@
                     @if (count($productos) > 0)
                         @foreach ($productos->where('activo', 1) as $producto)
                             @php $imagen = explode('|', $producto->url_imagen) @endphp
-                            <div class="col-lg-3 col-md-4 col-sm-6 col-6 ">
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-6" style="text-align: -webkit-center;">
                                 <a href="{{ route('MandarDatosProductoEspecifico', $producto->id) }}"
                                     style="color: rgb(38, 38, 38)">
                                     <div class="card element-box m-2 producto-card" style="width: 14rem;">
@@ -76,12 +78,14 @@
                                         </div>
                                         <div class="card-body">
                                             <h5 class="card-title"> {{ Str::limit($producto->nombre, 25) }} </h5>
+                                        </a>
                                             <p class="card-text">$ {{ $producto->precio }}</p>
-                                            <a href="#" class="btn color-enfasis"> Agregar al Carrito
-                                            </a>
+                                            <button data-agregar-id="{{ $producto->id }}"
+                                                class="btn btn-sm mb-3 color-enfasis btn-enfasis-adicional rounded-pill text-white text-uppercase agregarAlCarrito add-shadow">
+                                                Agregar al Carrito
+                                            </button>
                                         </div>
                                     </div>
-                                </a>
                             </div>
                             {{-- End Mostrar Todos los Productos --}}
                         @endforeach

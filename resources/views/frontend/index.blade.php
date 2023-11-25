@@ -24,13 +24,13 @@
     
         <div class="carousel-inner">
           <div class="carousel-item active c-item">
-            <img src="https://www.mexx.com.ar/uploads/13-11-2023-09-11-26-Banner%201.jpg" class="d-block w-100 c-img img-fluid" alt="Slide 1">
+            <img src="{{ asset('imagenes/carrusel/banner-index.jpg')}}" class="d-block w-100 c-img img-fluid" alt="Slide 1">
           </div>
           <div class="carousel-item c-item">
-            <img src="https://www.mexx.com.ar/uploads/15-11-2023-10-11-06-nvidia%20nuevo%20bund.jpg" class="d-block w-100 c-img img-fluid" alt="Slide 2">
+            <img src="{{ asset('imagenes/carrusel/banner-index-1.jpg')}}" class="d-block w-100 c-img img-fluid" alt="Slide 2">
           </div>
           <div class="carousel-item c-item">
-            <img src="https://www.mexx.com.ar/uploads/13-11-2023-09-11-22-ffnn.jpg" class="d-block w-100 c-img img-fluid" alt="Slide 3">
+            <img src="{{ asset('imagenes/carrusel/banner-index-2.jpg')}}" class="d-block w-100 c-img img-fluid" alt="Slide 3">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev">
@@ -53,19 +53,19 @@
                     <div class="text-center">
                         <h1 class="pb-4"> Categorías Principales </h1>
                     </div>
-                    <div class="row p-4 content-box content-box mx-auto">
+                    <div class="row p-4 content-box content-box mx-auto add-shadow">
 
                         <div class="col-md-12 col-sm-12 col-12 p-2" style="height: 19rem">
-                            <div class="container bg-cover img-fluid rounded-4 zoom-effect" style="height: 100%; background-image:url('https://media.istockphoto.com/id/1314343964/es/foto/unidad-de-sistema-de-gama-alta-para-el-primer-plano-de-la-computadora-de-juego.jpg?s=1024x1024&w=is&k=20&c=ASsjLSJzfd2hyzwQlvR3McJTeGduju4pMxqWZXPiCc8=')"></div>
+                            <div class="container bg-cover img-fluid rounded-4 zoom-effect" style="height: 100%; background-image:url('{{ asset('imagenes/categoria-ancha-1.jpg') }}')"></div>
                         </div>
                         <div class="col-md-6 col-sm-12 p-2" style="height: 23 rem">
-                            <div class="container bg-cover img-fluid rounded-4 zoom-effect" style="height: 100%; background-image:url('https://media.istockphoto.com/id/1314343964/es/foto/unidad-de-sistema-de-gama-alta-para-el-primer-plano-de-la-computadora-de-juego.jpg?s=1024x1024&w=is&k=20&c=ASsjLSJzfd2hyzwQlvR3McJTeGduju4pMxqWZXPiCc8=')"></div>
+                            <div class="container bg-cover img-fluid rounded-4 zoom-effect" style="height: 100%; background-image:url('{{ asset('imagenes/categoria-1.jpg') }}')"></div>
                         </div>
                         <div class="col-md-6 col-sm-12 p-2" style="height: 23rem">
-                            <div class="container bg-cover img-fluid rounded-4 zoom-effect" style="height: 100%; background-image:url('https://media.istockphoto.com/id/1314343964/es/foto/unidad-de-sistema-de-gama-alta-para-el-primer-plano-de-la-computadora-de-juego.jpg?s=1024x1024&w=is&k=20&c=ASsjLSJzfd2hyzwQlvR3McJTeGduju4pMxqWZXPiCc8=')"></div>
+                            <div class="container bg-cover img-fluid rounded-4 zoom-effect" style="height: 100%; background-image:url('{{ asset('imagenes/categoria-2.jpg') }}')"></div>
                         </div>
                         <div class="col-md-12 col-sm-12 p-2" style="height: 19rem">
-                            <div class="container bg-cover img-fluid rounded-4 zoom-effect" style="height: 100%; background-image:url('https://media.istockphoto.com/id/1314343964/es/foto/unidad-de-sistema-de-gama-alta-para-el-primer-plano-de-la-computadora-de-juego.jpg?s=1024x1024&w=is&k=20&c=ASsjLSJzfd2hyzwQlvR3McJTeGduju4pMxqWZXPiCc8=')"></div>
+                            <div class="container bg-cover img-fluid rounded-4 zoom-effect" style="height: 100%; background-image:url('{{ asset('imagenes/categoria-ancha-2.jpg') }}')"></div>
                         </div>
 
                     </div>
@@ -80,16 +80,16 @@
         <div class="text-center">
             <h1 class="pb-4"> Categorías Principales </h1>
         </div>
-        <div class="container content-box p-4">
+        <div class="container content-box p-4 add-inner-shadow">
             <div class="row justify-content-around pb-4 mt-auto">
 
                 <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
                     <div class="row p-2">
-                        <div class="col-md-12 justify-center">
-                            <img src="https://samsungar.vtexassets.com/assets/vtex.file-manager-graphql/images/311d432e-b6fe-4a4f-80a8-612a322288af___1dba251a9fbb46961106513eb2dc58b6.png" alt="#" width="100%">
+                        <div class="col-md-12 justify-center" style="height: 12rem;">
+                            <img src="{{ asset('imagenes/cat-tvs.png')}}" alt="#" style="height: 100%; width: 100%; object-fit: contain;">
                         </div>
                         <div class="col-md-12 text-center">
-                            <div class="text-enfasis">Smartwatches</div>
+                            <div class="text-enfasis">Tvs y Monitores</div>
                         </div>
                     </div>
 
@@ -97,33 +97,33 @@
 
                 <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
                     <div class="row p-2">
-                        <div class="col-md-12 justify-center">
-                            <img src="https://samsungar.vtexassets.com/assets/vtex.file-manager-graphql/images/311d432e-b6fe-4a4f-80a8-612a322288af___1dba251a9fbb46961106513eb2dc58b6.png" alt="#" width="100%">
-                        </div>
-                        <div class="col-md-12 text-center">
-                            <div class="text-enfasis">Tvs</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
-                    <div class="row p-2">
-                        <div class="col-md-12 justify-center">
-                            <img src="https://samsungar.vtexassets.com/assets/vtex.file-manager-graphql/images/311d432e-b6fe-4a4f-80a8-612a322288af___1dba251a9fbb46961106513eb2dc58b6.png" alt="#" width="100%">
+                        <div class="col-md-12 justify-center" style="height: 12rem;">
+                            <img src="{{ asset('imagenes/cat-consolas.png')}}" alt="#" style="height: 100%; width: 100%; object-fit: contain;">
                         </div>
                         <div class="col-md-12 text-center">
                             <div class="text-enfasis">Consolas</div>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
+                    <div class="row p-2">
+                        <div class="col-md-12 justify-center" style="height: 12rem;">
+                            <img src="{{ asset('imagenes/cat-perifericos.png')}}" alt="#" style="height: 100%; width: 100%; object-fit: contain;">
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <div class="text-enfasis">Periféricos</div>
+                        </div>
+                    </div>
+                </div>
                 
                 <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
                     <div class="row p-2">
-                        <div class="col-md-12 justify-center">
-                            <img src="https://samsungar.vtexassets.com/assets/vtex.file-manager-graphql/images/311d432e-b6fe-4a4f-80a8-612a322288af___1dba251a9fbb46961106513eb2dc58b6.png" alt="#" width="100%">
+                        <div class="col-md-12 justify-center" style="height: 12rem;">
+                            <img src="{{ asset('imagenes/cat-componentes.png')}}" alt="#" style="height: 100%; width: 100%; object-fit: contain;">
                         </div>
                         <div class="col-md-12 text-center">
-                            <div class="text-enfasis">Smartphones</div>
+                            <div class="text-enfasis">Componentes PC</div>
                         </div>
                     </div>
                 </div>
@@ -134,30 +134,30 @@
 
                 <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
                     <div class="row p-2">
-                        <div class="col-md-12 justify-center">
-                            <img src="https://samsungar.vtexassets.com/assets/vtex.file-manager-graphql/images/311d432e-b6fe-4a4f-80a8-612a322288af___1dba251a9fbb46961106513eb2dc58b6.png" alt="#" width="100%">
+                        <div class="col-md-12 justify-center" style="height: 12rem;">
+                            <img src="{{ asset('imagenes/cat-celulares.png')}}" alt="#" style="height: 100%; width: 100%; object-fit: contain;">
                         </div>
                         <div class="col-md-12 text-center">
-                            <div class="text-enfasis">Componentes PC</div>
+                            <div class="text-enfasis">Smartphones y Tablets</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
                     <div class="row p-2">
-                        <div class="col-md-12 justify-center">
-                            <img src="https://samsungar.vtexassets.com/assets/vtex.file-manager-graphql/images/311d432e-b6fe-4a4f-80a8-612a322288af___1dba251a9fbb46961106513eb2dc58b6.png" alt="#" width="100%">
+                        <div class="col-md-12 justify-center" style="height: 12rem;">
+                            <img src="{{ asset('imagenes/cat-relojes.png')}}" alt="#" style="height: 100%; width: 100%; object-fit: contain;">
                         </div>
                         <div class="col-md-12 text-center">
-                            <div class="text-enfasis">Periféricos</div>
+                            <div class="text-enfasis">Watches y Buds</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
                     <div class="row p-2">
-                        <div class="col-md-12 justify-center">
-                            <img src="https://samsungar.vtexassets.com/assets/vtex.file-manager-graphql/images/311d432e-b6fe-4a4f-80a8-612a322288af___1dba251a9fbb46961106513eb2dc58b6.png" alt="#" width="100%">
+                        <div class="col-md-12 justify-center" style="height: 12rem;">
+                            <img src="{{ asset('imagenes/cat-notebook.png')}}" alt="#" style="height: 100%; width: 100%; object-fit: contain;">
                         </div>
                         <div class="col-md-12 text-center">
                             <div class="text-enfasis">Notebooks</div>
@@ -167,11 +167,11 @@
 
                 <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
                     <div class="row p-2">
-                        <div class="col-md-12 justify-center">
-                            <img src="https://samsungar.vtexassets.com/assets/vtex.file-manager-graphql/images/311d432e-b6fe-4a4f-80a8-612a322288af___1dba251a9fbb46961106513eb2dc58b6.png" alt="#" width="100%">
+                        <div class="col-md-12 justify-center" style="height: 12rem;">
+                            <img src="{{ asset('imagenes/cat-audio.png')}}" alt="#" style="height: 100%; width: 100%; object-fit: contain;">
                         </div>
                         <div class="col-md-12 text-center">
-                            <div class="text-enfasis">Juegos</div>
+                            <div class="text-enfasis">Audio</div>
                         </div>
                     </div>
                 </div>

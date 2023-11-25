@@ -189,3 +189,7 @@ p, .text-body-g {
     outline: 0;
     box-shadow: 0 0 0 0.20rem rgba(40, 10, 109, 0.25);
 }
+
+.main-content {
+    min-height: 65vh;
+}

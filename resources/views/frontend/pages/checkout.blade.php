@@ -1,18 +1,19 @@
 @extends('frontend.layouts.master')
-@section('title', 'Cart Page')
+@section('title', 'Confirmar pedido || Esmarty')
 @section('main-content')
     <!-- Breadcrumbs -->
-    <div class="container">
-        <div class="py-5 text-left">
+    <div class="section m-4 check-out">
+    <div class="container border p-3 rounded-3 add-shadow bg-white border-0 ">
+        <div class="pt-3 pb-1 text-left">
           
           <h2>Completa tus datos:</h2>
-          <p class="lead">Automaticamente se cargan los datos de tu perfil, pero puedes cambiarlos dependiendo de quien reciba el producto.</p>
+          <p class="lead">Automaticamente se cargan los datos de tu perfil, pero puedes cambiarlos dependiendo de quien reciba el paquete.</p>
         </div>
       
         <div class="row">
-          <div class="col-md-4 order-md-2 mb-4">
+          <div class="col-md-5 order-md-2 mb-4">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
-              <span class="text-muted">Tu carrito</span>
+              <span class="text-heading-h3">Tu carrito: </span>
               <span class="badge badge-secondary badge-pill">{{count($carrito)}}</span>
             </h4>
             <ul class="list-group mb-3">
@@ -22,9 +23,9 @@
                 <li class="list-group-item d-flex justify-content-between lh-condensed">
                     <div>
                       <h6 class="my-0">{{$item->productos->nombre}}</h6>
-                      <small class="text-muted">Cantidad: {{$item->cant_producto}}</small>
+                      <small style="color: #330AE3; opacity: 0.9;">Cantidad: {{$item->cant_producto}}</small>
                     </div>
-                    <span class="text-muted">${{$item->subtotal * $item->cant_producto}}</span>
+                    <span style="color: #330AE3; opacity: 0.9;" >${{$item->subtotal * $item->cant_producto}}</span>
                   </li>    
                 
                 
@@ -35,14 +36,14 @@
               
               <li class="list-group-item d-flex justify-content-between">
                 <span>Total a pagar: </span>
-                <strong>${{$total}}</strong>
+                <strong style="color: #330AE3;">${{$total}}</strong>
               </li>
             </ul>
       
             
           </div>
-          <div class="col-md-8 order-md-1">
-            <h4 class="mb-3">Dirección de envío</h4>
+          <div class="col-md-7 order-md-1">
+            <h4 class="mb-3 text-heading-h3">Dirección de envío: </h4>
             <form class="needs-validation" novalidate action="{{route('pedido.store')}}" method="POST">
                 @csrf
               <div class="row">
@@ -127,24 +128,29 @@
                 </div>
               </div>
       
-              
-              <hr class="">
-              <div class="">
-                <button class="btn btn-primary btn-lg btn-block m-1 @if (!$total) disabled @endif" type=@if(!$total) "button" @else "submit" @endif>Confirmar Pedido</button>
-                <div class="text-info"> <br>*Al confirmar el pedido, se te redirigira a realizar el pago inmediatamente, si el pago falla puedes acceder al link de pago en cualquier momento desde tu panel en la opcion "Mis compras"</div>
+            
+              <div class="d-flex flex-column ">
+                <div class="d-flex justify-content-between">
+                <a style="border: 2px solid gray!important; background-color: gray;" class="d-flex align-items-center justify-content-around btn btn-atras color-atras btn-lg btn-block m-1" href="{{route('carrito.carrito')}}">Volver al carrito <i class='bx bx-cart-add lead' ></i></a>
+               <button style="border: 2px solid #330AE3!important" class="d-flex align-items-center justify-content-around btn btn-enfasis color-enfasis btn-lg btn-block m-1 @if (!$total) disabled @endif" type=@if(!$total) "button" @else "submit" @endif>Confirmar Pedido<i class='bx bx-cart-download lead'></i></button>
+              </div>
+               <div class="text-secondary small"> <br><i class='bx bxs-info-circle' ></i> Al confirmar el pedido, se te redirigira a realizar el pago inmediatamente, si el pago falla puedes acceder al link de pago en cualquier momento desde tu panel en la opcion "Mis compras"</div> 
               </div>
             </form>
           </div>
-        </div>
-      
+        </div> 
       </div>
-      
+    </div>
+      @endsection
 
-@endsection
-@section('styles')
+      @section('styles')
+    
+    
+    </div>
     <style>
 
     </style>
+
 @endsection
 
 
@@ -156,6 +162,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @stop

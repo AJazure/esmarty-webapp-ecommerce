@@ -81,10 +81,10 @@
                         <td>
                             <div class="d-flex">
                                 <a href="{{ route('cliente.show', $cliente) }}" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
-                                    Ver
+                                    <i class="far fa-eye" aria-hidden="true"></i>
                                 </a>
                                 <a href="{{ route('cliente.edit', $cliente) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
-                                    Editar
+                                    <i class="fas fa-edit" aria-hidden="true"></i>
                                 </a>
                                 {{-- <form action="{{ route('cliente.destroy', $cliente) }}" method="POST">
                                     @csrf 

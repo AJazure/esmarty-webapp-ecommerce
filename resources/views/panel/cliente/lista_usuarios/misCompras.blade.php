@@ -91,7 +91,9 @@
                                             @endif
                                         @endif
                                     </td>
-                                    <td><a href="#"
+                                    <td>
+                                        <div class="d-flex justify-content-center">
+                                        <a href="#"
                                             class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2 cargarItems"
                                             data-toggle="modal" data-target="#showDetallePedidoModal"
                                             data-idpedido="{{ $pedido->id }}" data-num-pedido="{{ $pedido->num_pedido }}"
@@ -103,20 +105,21 @@
                                             data-cancelado="{{ $pedido->cancelado }}" data-pagado="{{ $pedido->pagado }}"
                                             data-enpreparacion="{{ $pedido->en_preparacion }}"
                                             data-enviado="{{ $pedido->enviado }}"
-                                            data-urlfactura="{{ $pedido->urlFactura }}">
-                                            Ver
+                                            data-urlfactura="{{ $pedido->urlFactura }}"
+                                            title="Ver">
+                                            <i class="far fa-eye" aria-hidden="true"></i>
                                         </a>
-
-                                        <button
-                                            class="btn btn-sm btn-danger text-white text-uppercase me-1 mr-2 @if (!$pedido->cancelado && !$pedido->pagado) btnEliminar @endif  @if ($pedido->pagado || $pedido->cancelado) d-none @endif"
-                                            value="{{ $pedido->id }}">
-                                            Cancelar
-                                        </button>
                                         <a href="@if (!$pedido->pagado) {{ $pedido->linkDePago }} @endif"
                                             class="btn btn-sm btn-success text-white text-uppercase me-1 mr-2 btnPagar @if ($pedido->pagado || $pedido->cancelado) d-none @endif"
-                                            id="btnPagar">
-                                            Pagar
+                                            id="btnPagar" title="Pagar">
+                                            <i class="far fa-credit-card" aria-hidden="true"></i>
                                         </a>
+                                        <button
+                                            class="btn btn-sm btn-danger text-white text-uppercase me-1 mr-2 @if (!$pedido->cancelado && !$pedido->pagado) btnEliminar @endif  @if ($pedido->pagado || $pedido->cancelado) d-none @endif"
+                                            value="{{ $pedido->id }}" title="Cancelar">
+                                            <i class="fa fa-ban" aria-hidden="true"></i>
+                                        </button>
+                                    </div>
                                     </td>
                                 </tr>
                             @endforeach

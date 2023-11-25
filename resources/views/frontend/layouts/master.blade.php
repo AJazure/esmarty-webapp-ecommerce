@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://kit.fontawesome.com/88816cb6bd.js" crossorigin="anonymous"></script>
+
     <link href="{{ asset('css/toastr.css') }}" rel="stylesheet"/>
     @yield('styles')
 

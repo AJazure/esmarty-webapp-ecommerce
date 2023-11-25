@@ -24,13 +24,13 @@
     
         <div class="carousel-inner">
           <div class="carousel-item active c-item">
-            <img src="https://www.mexx.com.ar/uploads/13-11-2023-09-11-26-Banner%201.jpg" class="d-block w-100 c-img" alt="Slide 1">
+            <img src="https://www.mexx.com.ar/uploads/13-11-2023-09-11-26-Banner%201.jpg" class="d-block w-100 c-img img-fluid" alt="Slide 1">
           </div>
           <div class="carousel-item c-item">
-            <img src="https://www.mexx.com.ar/uploads/15-11-2023-10-11-06-nvidia%20nuevo%20bund.jpg" class="d-block w-100 c-img" alt="Slide 2">
+            <img src="https://www.mexx.com.ar/uploads/15-11-2023-10-11-06-nvidia%20nuevo%20bund.jpg" class="d-block w-100 c-img img-fluid" alt="Slide 2">
           </div>
           <div class="carousel-item c-item">
-            <img src="https://www.mexx.com.ar/uploads/13-11-2023-09-11-22-ffnn.jpg" class="d-block w-100 c-img" alt="Slide 3">
+            <img src="https://www.mexx.com.ar/uploads/13-11-2023-09-11-22-ffnn.jpg" class="d-block w-100 c-img img-fluid" alt="Slide 3">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev">

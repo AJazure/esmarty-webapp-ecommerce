@@ -64,7 +64,7 @@ return [
     */
 
     //'logo' => '<b>for Esmarty</b>',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => 'vendor/adminlte/dist/img/ecore-admin-logo-solo.png',
     'logo_img_class' => 'brand-image',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',

@@ -29,7 +29,7 @@ function cargarTabla() {
 							data: 'subtotal',
 							render: function(data, type, row){
 								return `<div class="container border-start border-end border-2 d-flex align-items-center" style="width: 100px; height: 100px;">
-											<p class="p-small">$ ${data}</p>
+											<p class="p-small"  style="white-space: nowrap;">$ ${data}</p>
 										</div>`
 							}
 						},
@@ -49,7 +49,7 @@ function cargarTabla() {
 							render: function (data, type, row) {
 								// Calcula la multiplicación de subtotal y cant_producto para cada fila
 								return `<div class="container border-start border-end border-2 d-flex align-items-center" style="width: 100px; height: 100px;">
-											<p class="p-small" id='totales'>$ ${row.subtotal * row.cant_producto}</p>
+											<p class="p-small" id='totales' style="white-space: nowrap;">$ ${row.subtotal * row.cant_producto}</p>
 										</div>`;
 							}
 						},
@@ -215,7 +215,7 @@ $('#tabla_carrito').on('click', '.disminuir-cantidad', function () {
 		// Crea un contenedor div
         var containerDiv = $('<div>', {
             class: 'container border-end border-2 d-flex align-items-center',
-            style: 'width: 100px; height: 100px;'
+            style: 'width: 100px; height: 100px; white-space: nowrap;'
         });
 
         // Crea un párrafo p con el formato especificado
@@ -262,7 +262,7 @@ $('#tabla_carrito').on('click', '.aumentar-cantidad', function () {
         // Crea un contenedor div
         var containerDiv = $('<div>', {
             class: 'container border-end border-2 d-flex align-items-center',
-            style: 'width: 100px; height: 100px;'
+            style: 'width: 100px; height: 100px; white-space: nowrap;'
         });
 
         // Crea un párrafo p con el formato especificado

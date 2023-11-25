@@ -142,8 +142,10 @@ p, .text-body-g {
 }
 
 .btn-enfasis{
-    /* font-size: 0.9rem; */
-    width: 13rem;
+    border: 2px solid var(--enfasis) !important;
+    font-size: 0.9rem; 
+    min-width: 9rem;
+    transition: 0.3s all ease-in-out;
 }
 
 .btn-enfasis:hover {
@@ -153,9 +155,14 @@ p, .text-body-g {
     border: 2px solid var(--enfasis) !important;
 }
 
+.btn-enfasis:active{
+    background-color: var(--enfasis)!important;
+    color: white!important;
+}
+
 .btn-atras{
-    font-size: 0.9rem;
-    width: 13rem;
+    font-size: 0.9rem; 
+    min-width: 9rem;
     color: white;
 }
 

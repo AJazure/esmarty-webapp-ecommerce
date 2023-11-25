@@ -96,6 +96,4 @@
         var token = '{{ csrf_token() }}';
         let clienteId = {{ Auth::id() ? Auth::id() : 0 }}
     </script>
-
-    <script src="{{ asset('js/carrito/agregar_al_carrito.js') }}"></script>
 @endsection

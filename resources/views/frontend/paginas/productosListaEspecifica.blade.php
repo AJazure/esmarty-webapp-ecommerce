@@ -10,7 +10,7 @@
             {{-- Categorias --}}
             <hr>
             <h3 class="text-heading">Categorias</h3>
-            <ul class="categoria-lista">
+            <ul class="categoria-lista d-flex flex-wrap gap-1">
                 @if ($categorias)
                 @foreach ($categorias as $categoria)
                 <li><a href="{{ route('MandarDatosCategoriaEspecifica', $categoria->id) }}"
@@ -64,8 +64,8 @@
                 @if (count($productos_especificos) > 0)
                 @foreach ($productos_especificos->where('activo', 1) as $producto)
                 @php $imagen = explode('|', $producto->url_imagen) @endphp
-                <div class="col-lg-3 col-md-4 col-sm-6 col-6" style="text-align: -webkit-center;">
-                    <div class="card element-box m-2 producto-card" style="width: 14rem;">
+                <div class="col-lg-3 col-md-4 col-sm-6" style="text-align: -webkit-center;">
+                    <div class="card element-box m-2 producto-card" style="min-width: 14rem;">
                         <a href="{{ route('MandarDatosProductoEspecifico', $producto->id) }}" style="color: rgb(38, 38, 38)">
                             <div class="container mt-3 bg-white rounded-4" style="width: 200px; height: 200px">
                                 <img src="{{ $imagen[0] }}" class="card-img-top img-fluid"
@@ -76,7 +76,7 @@
                             </a>
                                 <p class="card-text">$ {{ $producto->precio }}</p>
                                 <button data-agregar-id="{{ $producto->id }}"
-                                    class="btn btn-sm mb-3 color-enfasis btn-enfasis-adicional rounded-pill text-white text-uppercase agregarAlCarrito add-shadow">
+                                    class="btn btn-sm mb-3 color-enfasis btn-enfasis rounded-pill text-white text-uppercase agregarAlCarrito add-shadow">
                                     Agregar al Carrito
                                 </button>
                             </div>
@@ -109,5 +109,5 @@
         var token = '{{ csrf_token() }}';
         let clienteId = {{ Auth::id() ? Auth::id() : 0 }} 
     </script>
-    <script src="{{ asset('js/carrito/agregar_al_carrito.js') }}"></script>
+
 @endsection

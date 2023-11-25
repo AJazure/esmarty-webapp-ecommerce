@@ -1,5 +1,5 @@
 <div class="modal fade" id="showDetallePedidoModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
-    <div class="modal-dialog container" role="document" style="max-width: 800px">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable container" role="document" style="max-width: 800px">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="userModalLabel">Detalles del Pedido: </h5>

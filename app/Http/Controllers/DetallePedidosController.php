@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use App\Models\Producto;
 use App\Models\DetallePedidos;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session as FacadesSession;
 
 class DetallePedidosController extends Controller
 {
@@ -31,23 +33,35 @@ class DetallePedidosController extends Controller
     }
 
 
+    public function contarItemsCarrito(){
+        $cant_carrito = 0; //Inicio la variable que guarda la cantidad de items en el carrito
+
+        $user_id = Auth::id();
+        $carrito = DetallePedidos::latest()->where('id_cliente', $user_id)->whereNull('id_pedido')->with('productos')->get();
+        
+        foreach ($carrito as $item) {//Recorro el carrito y cuento cuantos items hay
+            $cant_carrito += $item->cant_producto;
+        }
+
+        return $cant_carrito;
+    }
+
+
     public function agregarAlCarrito(Request $request) //Busca un item especifico en los pedidos y actualiza la cantidad pedida
     {
-
         $producto = Producto::find($request->_id);
 
         if (!$producto) {
             return response()->json(['error' => 'Producto no encontrado'], 404);
         }
-
-        $itemViejo = DetallePedidos::where('id_producto', $producto->id)->whereNull('id_pedido')->first(); //Se fija si ya hay un producto igual cargado en el carrito
+        $user_id = Auth::id();
+        $itemViejo = DetallePedidos::where('id_cliente', $user_id)->where('id_producto', $producto->id)->whereNull('id_pedido')->first(); //Se fija si ya hay un producto igual cargado en el carrito
 
         if ($itemViejo) { //Si ya existe ese producto en el carrito, solo aumenta la cantidad en +1
              if ($producto->stock_disponible > $itemViejo->cant_producto) {
-                # code...
                 $itemViejo->cant_producto += 1;
                 $itemViejo->save();
-                return response()->json(['message' => '+1 agregado al carrito correctamente']);
+                return response()->json(['message' => 'Uno más agregado al carrito']);
              } else {
                 return response()->json(['message' => 'No hay mas stock del producto']);
              }
@@ -61,6 +75,9 @@ class DetallePedidosController extends Controller
             $nuevoItem->subtotal = $producto->precio * $nuevoItem->cant_producto;
 
             $nuevoItem->save();
+
+            //Aumento item al carrito
+
             return response()->json(['message' => 'Producto agregado al carrito correctamente']);
         } else {
             return response()->json(['message' => 'No hay mas stock del producto']);
@@ -90,7 +107,9 @@ class DetallePedidosController extends Controller
         if ($producto->stock_disponible >= $request->cantidad) {
             $item->cant_producto = $request->cantidad;
             $item->update();
-            return response()->json(['message' => 'Producto actualizado correctamente']);
+            //Aumento item al carrito
+
+            return response()->json(['message' => 'Cantidad en carrito actualizada correctamente']);
         } else {
             return response()->json(['message' => 'No hay mas stock del producto']);
         }
@@ -108,6 +127,6 @@ class DetallePedidosController extends Controller
         }
 
         $item->delete();
-        return response()->json(['message' => 'Producto eliminado correctamente']);
+        return response()->json(['message' => 'Producto eliminado del carrito correctamente']);
     }
 }

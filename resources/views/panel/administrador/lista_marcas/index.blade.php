@@ -33,7 +33,9 @@
                 <div class="col-12">
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('alert') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span class="text-white" aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 </div>
             @endif
@@ -57,7 +59,7 @@
                                 <tr>
                                     <th scope="col" class="text-uppercase">Descripcion</th>
                                     <th scope="col" class="text-uppercase">Activo</th>
-                                    <th scope="col" class="text-uppercase">Acciones</th>
+                                    <th scope="col" class="text-uppercase text-center">Acciones</th>
 
                                 </tr>
                             </thead>
@@ -85,17 +87,20 @@
                                         </td>
                                         <td>
                                             <div class="d-flex justify-content-center">
-                                                <a href="{{ route('marca.show', $marca) }}"
+                                                <a href="{{ route('marca.show', $marca) }}" title="Ver"
+                                                data-toggle="modal" data-target="#marcaModal{{ $marca->id }}"
                                                     class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
-                                                    Ver
+                                                    <i class="far fa-eye" aria-hidden="true"></i>
                                                 </a>
-                                                <a href="{{ route('marca.edit', $marca) }}"
+                                                
+                                                <a href="{{ route('marca.edit', $marca) }}" title="Editar"
                                                     class="btn btn-sm btn-warning text-white text-uppercase me-1">
-                                                    Editar
+                                                    <i class="fas fa-edit" aria-hidden="true"></i>
                                                 </a>
                                             </div>
                                         </td>
                                     </tr>
+                                    @include('panel.administrador.lista_marcas.show')
                                 @endforeach
 
                             </tbody>

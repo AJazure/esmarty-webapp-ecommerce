@@ -28,9 +28,10 @@
                 <tr>
                     <td>{{ $producto->codigo_producto }}</td>
                     <td>{{ $producto->nombre }}</td>
-                    <td>{{ $producto->marca->descripcion }}</td>
-                    <td>{{ $producto->id_user->name }}</td>
-                    
+                    <td>{{ $producto->email }}</td>
+                    <td>{{ $producto->tipo_modif }}</td>
+                    <td>{{ $producto->cantidad_modif }}</td>
+                    <td>{{ $producto->created_at }}</td>
                     
                    
                 </tr>

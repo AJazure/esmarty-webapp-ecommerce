@@ -7,7 +7,7 @@ interruptores.forEach(interruptor => {
   } else {
     interruptor.checked = false;
   }
-});
+}); 
 
 
 //CAMBIA EL ESTADO EN LA BASE DE DATOS
@@ -56,14 +56,14 @@ $(document).on('click', '.miInterruptor', function (e) {
         }
       })
 
-         /* .then(response => {
-          swalWithBootstrapButtons.fire(
-            'Actualizado',
-            'El estado fue cambiado con exito! ',
-            'success'
-          )
-          
-        })  */
+      /* .then(response => {
+       swalWithBootstrapButtons.fire(
+         'Actualizado',
+         'El estado fue cambiado con exito! ',
+         'success'
+       )
+       
+     })  */
 
 
     } else (
@@ -71,5 +71,6 @@ $(document).on('click', '.miInterruptor', function (e) {
       result.dismiss === Swal.DismissReason.cancel
     )
 
-  })});
+  })
+});
 

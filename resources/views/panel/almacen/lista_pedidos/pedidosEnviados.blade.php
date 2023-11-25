@@ -70,11 +70,23 @@
                                     <td>{{ $pedido->created_at }}</td>
                                     <td>{{ $pedido->updated_at }}</td>
                                     <td>{{ $pedido->total }}</td>
-                                    <td>{{ $pedido->num_seguimiento }}</td>
+                                    <td>
+                                        <form class="d-flex" method="POST"
+                                            action="{{ route('guardarNumero', ['id' => $pedido->id]) }}">
+                                            @csrf
+                                            <input type="number" value="{{ $pedido->num_seguimiento }}" name="numero"
+                                                id="num_seguimiento_{{ $pedido->id }}" disabled
+                                                onkeypress="return event.keyCode != 13;"> <button disabled
+                                                class="checkButton">✔</button>
+                                        </form>
+                                    </td>
                                     <td><span class="badge badge-primary">Enviado</span></td>
 
 
-                                    <td><a href="#"
+                                    <td>
+                                        <div class="d-flex justify-content-center">
+                                        <a href="#"
+                                        title="Ver"
                                             class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2 cargarItems"
                                             data-toggle="modal" data-target="#showDetallePedidoModal"
                                             data-idpedido="{{ $pedido->id }}" data-num-pedido="{{ $pedido->num_pedido }}"
@@ -87,15 +99,12 @@
                                             data-enpreparacion="{{ $pedido->en_preparacion }}"
                                             data-enviado="{{ $pedido->enviado }}"
                                             data-urlfactura="{{ $pedido->urlFactura }}">
-                                            Ver
+                                            <i class="far fa-eye"></i>
                                         </a>
-                                        <a href=""
-                                        class="btn btn-sm btn-warning text-white text-uppercase me-1 mr-2 mt-1">
-
-                                            Editar
-                                        </a>
-
-                                    </td>
+                                        <button title="Editar"
+                                            class="btn btn-sm btn-warning text-white text-uppercase editarNumSeguimiento"><i class="fas fa-edit"></i></button>
+                                        </div>
+                                        </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -123,6 +132,37 @@
     </script>
     <script src="{{ asset('js/pedido/detalle_de_pedido.js') }}"></script>
     <script src="{{ asset('js/pedido/eliminar_pedido.js') }}"></script>
-    <script src="{{ asset('js/pedido/pedidos.js') }}"></script>
+    <script src="{{ asset('js/pedido/pedidosPreparar.js') }}"></script>
+    <script src="{{ asset('js/pedido/num_seguimiento.js') }}"></script>
+    <script>
+        
+        $(document).ready(function() {
+            $('.editarNumSeguimiento').click(function() {
+                console.log("Clic detectado"); 
+                var inputId = $(this).closest('tr').find('input[name="numero"]').attr('id');
+                var checkButton = $(this).closest('tr').find('.checkButton');
+                Swal.fire({
+                    title: "¿Esta seguro de querer editar?",
+                    // text: "You won't be able to revert this!",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Si",
+                    cancelButtonText: "No",
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.value) {
+                        $('#' + inputId).prop('disabled', function(i, val) {
+                            return !val;
+                        });
+                        checkButton.prop('disabled', function(i, val) {
+                            return !val;
+                        });
+                    }
+                });
+
+            });
+        });
+    </script>
 
 @stop

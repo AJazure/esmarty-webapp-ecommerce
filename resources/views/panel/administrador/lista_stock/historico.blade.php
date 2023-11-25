@@ -17,12 +17,13 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 mb-3">
+            <a href="{{ route('exportar-historial-pdf') }}" class="btn btn-danger" title="PDF" target="_blank">
+                <i class="fas fa-file-pdf"></i>
+            </a>
         <a href="{{ route('exportar-historial-excel') }}" class="btn btn-success" title="Excel">
                     <i class="fas fa-file-excel"></i>
                 </a>
-                <a href="{{ route('exportar-historial-pdf') }}" class="btn btn-danger" title="PDF" target="_blank">
-                    <i class="fas fa-file-pdf"></i>
-                </a>
+                
         </div>
         
         
@@ -30,7 +31,9 @@
             <div class="col-12">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ session('alert') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span class="text-white" aria-hidden="true">&times;</span>
+                    </button>
                 </div>
             </div>
         @endif
@@ -38,7 +41,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body"> 
-                <table id="tabla-productos" class="table table-striped table-hover w-100">
+                <table id="tabla-stock" class="table table-striped table-hover w-100">
                     <thead>
                         <tr>
                             <th scope="col" class="text-uppercase">#</th>
@@ -58,7 +61,8 @@
                             <td>{{ $registro->producto->codigo_producto }}</td>
                             <td>{{ $registro->producto->nombre }}</td>
                             <td>{{ $registro->user->email }}</td>
-                            <td>
+                            <td >
+                                <div class="d-flex justify-content-center">
                                 {!!
                                     $registro->tipo_modif == 'alta' || $registro->tipo_modif == 'venta'
                                         ? '<span class="badge badge-success p-2">' . $registro->tipo_modif . '</span>'
@@ -66,22 +70,24 @@
                                         ? '<span class="badge badge-primary p-2">' . $registro->tipo_modif . '</span>'
                                         : '<span class="badge badge-danger p-2">' . $registro->tipo_modif . '</span>')
                                 !!}
+                                </div>
                             </td>
                             
                             
                             
-                            <td>{{ $registro->cantidad_modif }}</td>
+                            <td><div class="d-flex justify-content-center">{{ $registro->cantidad_modif }}</div></td>
                             <td>{{ $registro->created_at }}</td>
                             <td>
-                                <div class="d-flex">
+                                <div title="Ver" class="d-flex justify-content-center">
                                     <a href="{{ route('stock.showDetalle', $registro) }}"  data-toggle="modal"
                                     data-target="#registroModal{{ $registro->id }}"  class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
-                                        Ver Detalles
+                                    <i class="far fa-eye"></i>
                                     </a>
-                                    @include('panel.administrador.lista_stock.detalle')
+                                    
                                 </div>
                             </td>
                         </tr>
+                        @include('panel.administrador.lista_stock.detalle')
                         @endforeach
                     </tbody>
                 </table>
@@ -99,13 +105,15 @@
 
 {{-- Importacion de Archivos JS --}}
 @section('js')
+    
+    {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
+    <script src="{{ asset('js/productos_stock.js') }}"></script>
+
     <script>
-        $(document).ready(function () {
-            $('#tabla-productos').DataTable({
+        /* $(document).ready(function () {
+            $('#tabla-stock').DataTable({
                 "order": [[0, "desc"]] // Esto ordena la primera columna (#) de mayor a menor
             });
-        });
+        }); */
     </script>
-    {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
-    <script src="{{ asset('js/productos.js') }}"></script>
 @stop

@@ -81,7 +81,7 @@ class PedidoController extends Controller
         //Si el carrito esta vacion, entonces no se genera el pedido
         if (!$pedido->total) {
             return redirect()
-                ->route('carrito.agregarProductos')
+                ->route('MandarDatosPaginaInicio')
                 ->with('alert', 'No se puede guardar un pedido vacio. ' . '¡Agrega algunos productos al carrito por favor!');
         }
         //Guarda por primera vez el pedido, pero sin link de pago
@@ -108,7 +108,7 @@ class PedidoController extends Controller
         //$this->avisoPedidoConfirmado($pedido->id); //Envio confirmacion de pedido al mail
 
         return redirect()
-            ->route('carrito.agregarProductos')
+            ->route('MandarDatosPaginaInicio')
             ->with('alert', 'Pedido de "' . $pedido->nombre . " " . $pedido->apellido . '" agregado exitosamente. Con N°' . $pedido->num_pedido . '. Abriendo link de pago...')
             ->with('redirectUrl', $preferencia->init_point);
     }
@@ -253,6 +253,7 @@ class PedidoController extends Controller
         $pedido = Pedido::find($id);
         $pedido->num_seguimiento = $numero;
         $pedido->enviado = true;
+        $pedido->en_preparacion = false;
         $pedido->save();
 
         return redirect()->back();

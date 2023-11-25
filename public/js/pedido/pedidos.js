@@ -9,7 +9,7 @@ let configurationDataTable = {
     searching: true,
 	pageLength: 10,
 	lengthMenu: [[5,10,20,-1],[5,10,20,'Todos']], 
-	 dom: '<"row"<"col-md-6"l><"col-md-6"f>>rt<"row"<"col-md-6"B><"col-md-6"p>>', 
+	 dom: '<"row"<"col-md-6"l><"col-md-6"f>>rt<"row"<"col-md-6"B><"col-md-6"p>i>', 
 	          
         buttons:[ 
 			{
@@ -18,7 +18,7 @@ let configurationDataTable = {
 				titleAttr: 'Exportar a Excel',
 				className: 'btn btn-success',
 				exportOptions: {
-					columns: [0, 1, 2] // Índices de las columnas que quieres exportar (0-indexed)
+					columns: [0, 1, 2, 3] // Índices de las columnas que quieres exportar (0-indexed)
 				}
 			},
 			{
@@ -27,7 +27,7 @@ let configurationDataTable = {
 				titleAttr: 'Imprimir',
 				className: 'btn btn-info',
 				exportOptions: {
-					columns: [0, 1, 2] // Índices de las columnas que quieres exportar (0-indexed)
+					columns: [0, 1, 2, 3] // Índices de las columnas que quieres exportar (0-indexed)
 				}
 			},
 		],
@@ -36,9 +36,9 @@ let configurationDataTable = {
 		"sLengthMenu": "Mostrar _MENU_ registros",
 		"sZeroRecords": "No se encontraron resultados",
 		"sEmptyTable": "Ningún dato disponible en esta tabla",
-		"sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-		"sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-		"sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+		"sInfo": "Ventas _START_ a la _END_ de un total de _TOTAL_",
+		"sInfoEmpty": "No se encontraron coincidencias",
+		"sInfoFiltered": "",
 		"sInfoPostFix": "",
 		"sSearch": "Buscar:",
 		"search": "_INPUT_",
@@ -57,6 +57,15 @@ let configurationDataTable = {
 			"sSortDescending": ": Activar para ordenar la columna de manera descendente"
 		},	 
 	},
+
+	columnDefs: [
+		{
+			orderable: false,
+			className: '', //Agregar clase
+			targets: 5, // en la columna 8 
+			sortable: false
+		}
+	]
 }
 
 $(function() {

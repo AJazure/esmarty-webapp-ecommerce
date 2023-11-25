@@ -16,7 +16,7 @@ return [
 
     'title' => 'Esmarty',
     'title_prefix' => '',
-    'title_postfix' => '',
+    'title_postfix' => ' || Esmarty',
 
     /*
     |--------------------------------------------------------------------------
@@ -130,11 +130,11 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
-    'usermenu_header_class' => 'bg-primary',
-    'usermenu_image' => false,
-    'usermenu_desc' => false,
-    'usermenu_profile_url' => false,
+    'usermenu_header' => true,
+    'usermenu_header_class' => 'bg-white',
+    'usermenu_image' => true,
+    'usermenu_desc' => true,
+    'usermenu_profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -150,7 +150,7 @@ return [
 
     'layout_topnav' => null,
     'layout_boxed' => null,
-    'layout_fixed_sidebar' => null,
+    'layout_fixed_sidebar' => true,
     'layout_fixed_navbar' => true,
     'layout_fixed_footer' => null,
     'layout_dark_mode' => null,
@@ -187,12 +187,12 @@ return [
     */
 
     'classes_body' => '',
-    'classes_brand' => '',
+    'classes_brand' => 'divLogo',
     'classes_brand_text' => '',
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-dark-info elevation-4',
     'classes_sidebar_nav' => '',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -213,7 +213,7 @@ return [
     'sidebar_mini' => 'lg',
     'sidebar_collapse' => false,
     'sidebar_collapse_auto_size' => false,
-    'sidebar_collapse_remember' => false,
+    'sidebar_collapse_remember' => true,
     'sidebar_collapse_remember_no_transition' => true,
     'sidebar_scrollbar_theme' => 'os-theme-light',
     'sidebar_scrollbar_auto_hide' => 'l',
@@ -306,31 +306,25 @@ return [
             'type' => 'sidebar-menu-search',
             'text' => 'Buscar',
         ],
-            
+
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog'
-        ],
-        [
-            'text'        => 'Inicio',
+            'text'        => 'Dashboard',
             'url'         => 'home',
-            //'route' => '',
-            'icon'        => 'fas fa-home',
-            'can'         => 'lista_almacen', //permiso de admin
+            'icon'        => 'fa fa-industry',
+            'can'         => 'lista_admin', //permiso de admin
         ],
         [
             'text'        => 'Administrar Usuarios',
             //'url'         => '#',
-            'route' => 'user.index',
+            'route'       => 'user.index',
             'icon'        => 'fas fa-users',
             'can'         => 'lista_admin' //permiso de admin
         ],
         [
             'text'        => 'Caja - Ventas',
-            'route'      => 'venta.index',
+            'route'       => 'venta.index',
             'icon'        => 'fas fa-cash-register',
-            'can'         => 'lista_admin', 'lista_caja' //permiso de admin<i class="far fa-project-diagram"></i>
+            'can'         => 'lista_caja' //permiso de admin<i class="far fa-project-diagram"></i>
             //'can'         => 'lista_caja' //permiso de cajero
         ],
         [
@@ -338,28 +332,35 @@ return [
             // 'url'         => '#',
             'route' => 'producto.index',
             'icon'        => 'fas fa-shopping-cart',
-            'can'         => 'lista_admin' //permiso de admin
+            'can'         => 'lista_ventas' //permiso de admin
+        ],
+        [
+            'text'        => 'Actualizar Precios',
+            // 'url'         => '#',
+            'route' => 'precio.index',
+            'icon'        => 'fa fa-university',
+            'can'         => 'lista_ventas' //permiso de admin
         ],
         [
             'text'        => 'Proveedores',
             /* 'url'         => '#', */
             'route' => 'proveedor.index',
-            'icon'        => 'fas fa-users',
+            'icon'        => 'fa fa-user-secret',
             'can'         => 'lista_almacen' //permiso de admin
         ],
         [
-            'text'        => ' Marcas',
+            'text'        => 'Marcas',
             // 'url'         => '#',
             'route' => 'marca.index',
             'icon'        => 'fas fa-clipboard-list',
-            'can'         => 'lista_admin' //permiso de admin<i class="fas fa-clipboard-list"></i>
+            'can'         => 'lista_ventas' //permiso de admin<i class="fas fa-clipboard-list"></i>
         ],
         [
-            'text'        => ' Categorias',
+            'text'        => 'Categorias',
             'route'       => 'categoria.index',
             // 'route' => 'proveedor.index',
             'icon'        => 'fas fa-project-diagram',
-            'can'         => 'lista_admin' //permiso de admin<i class="far fa-project-diagram"></i>
+            'can'         => 'lista_ventas' //permiso de admin<i class="far fa-project-diagram"></i>
         ],
 
         [
@@ -369,53 +370,41 @@ return [
             'icon'        => 'fas fa-money-bill',
             'can'         => 'lista_admin' //permiso de admin<i class="far fa-project-diagram"></i>
         ],
-        
-        [
-            'text'        => 'Lista de Productos',
-            'url'         => '#',
-            'icon'        => 'fas fa-users',
-            'can'         => 'lista_productos' //permiso de vendedor
-        ],
+
         [
             'text'        => 'Gestión de Almacén',
             // 'url'         => '#',
             'route'       => 'pedidosPagados',
-            'icon'        => 'fas fa-users',
-            'can'         => 'lista_almacen',//permiso de operario de almacén
+            'icon'        => 'fas fa-archive',
+            'can'         => 'lista_almacen', //permiso de operario de almacén
         ],
         [
             'text'        => 'Pedidos Enviados',
             // 'url'         => '#',
             'route'       => 'pedidosEnviados',
-            'icon'        => 'fas fa-users',
-            'can'         => 'lista_almacen',///permiso de operario de almacén
+            'icon'        => 'fa fa-truck',
+            'can'         => 'lista_almacen', ///permiso de operario de almacén
         ],
         [
             'text'        => 'Stock',
             // 'url'         => '#',
             'route' => 'stock.index',
             'icon'        => 'fas fa-box',
-            'can'         => 'lista_almacen'///permiso de operario de almacén
+            'can'         => 'lista_almacen' ///permiso de operario de almacén
         ],
         [
             'text'        => 'Historico',
             // 'url'         => '#',
             'route' => 'stock.historico',
             'icon'        => 'fas fa-list',
-            'can'         => 'lista_almacen'///permiso de operario de almacén
+            'can'         => 'lista_almacen' ///permiso de operario de almacén
         ],
         [
-            'text'        => 'Acceso a Caja',
-            'url'         => '#',
-            'icon'        => 'fas fa-users',
-            'can'         => 'lista_caja' //permiso de cajero
-        ],
-        [
-            'text'        => 'Mis Datos',
+            'text'        => 'Mi Perfil',
             /* 'url'         => '#', */
             'route'       => 'cliente.editar',
-            'icon'        => 'fas fa-user',
-            'can'         => 'lista_compras' //permiso de clientes
+            'icon'        =>  'fas fa-id-card',
+/*             'can'         => 'lista_compras' //permiso de clientes */
         ],
         
         [
@@ -425,11 +414,10 @@ return [
             'can'         => 'lista_compras' //permiso de clientes
         ],
         [
-            'text'        => ' Actualizar Precios',
-            // 'url'         => '#',
-            'route' => 'precio.index',
-            'icon'        => 'fas fa-shopping-cart',
-            'can'         => 'lista_admin' //permiso de admin
+            'text'        => 'Volver a la Tienda',
+            'url'         => '/',
+            'icon'        => 'fas fa-store',
+            'can'         => 'lista_compras' //permiso de clientes
         ],
         // ['header' => 'account_settings'],
         // [
@@ -533,7 +521,7 @@ return [
     */
 
     'plugins' => [
-        'Datatables' => [
+         'Datatables' => [
             'active' => false,
             'files' => [
                 [
@@ -552,7 +540,7 @@ return [
                     'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
                 ],
             ],
-        ],
+        ], 
         'Select2' => [
             'active' => false,
             'files' => [

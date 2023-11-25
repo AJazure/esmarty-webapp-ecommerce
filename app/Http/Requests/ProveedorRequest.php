@@ -65,7 +65,7 @@ class ProveedorRequest extends FormRequest
     {
         // Definir mensajes de error personalizados
         return [
-            'cuit.regex' => 'Ingrese un CUIT válido.',
+            'cuit.regex' => 'Ingrese un CUIT válido. Con el formato 99-99999999-9',
         ];
     }
 }

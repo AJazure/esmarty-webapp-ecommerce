@@ -12,6 +12,7 @@
     <h1>&nbsp;<strong>Administrar Usuarios</strong></h1>
 @stop
 
+
 {{-- Contenido de la Pagina --}}
 @section('content')
 
@@ -28,7 +29,9 @@
             <div class="col-12">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ session('alert') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span class="text-white" aria-hidden="true">&times;</span>
+                    </button>
                 </div>
             </div>
         @endif
@@ -36,7 +39,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <table id="tabla-productos" class="table table-striped table-hover w-100">
+                <table id="tabla-usuarios" class="table table-striped table-hover w-100 nowrap">
                     <thead>
                         <tr>
                             <!-- <th scope="col">#</th> -->
@@ -46,8 +49,8 @@
                             <!-- <th scope="col" class="text-uppercase">DNI</th> -->
                             <!-- <th scope="col" class="text-uppercase">Telefono</th> -->
                             <th scope="col" class="text-uppercase">Rol</th>
-                            <th scope="col" class="text-uppercase">Activo</th>
-                            <th scope="col" class="text-uppercase">Acciones</th>
+                            <th scope="col" class="text-uppercase text-center">Activo</th>
+                            <th scope="col" class="text-uppercase text-center">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -68,7 +71,7 @@
                                 {{-- <button type="submit" class="btn btn-sm btn-danger text-uppercase">
                                     Eliminar
                                 </button> --}}
-                                <div>
+                                <div class="d-flex justify-content-center">
                                     <label class="switch">
                                         <input type="checkbox" class="miInterruptor" value="{{ $user->enabled }}" data-change-id="{{ $user->id }}">
                                         <span class="slider"> <p class="estadop" style="visibility: hidden">{{ $user->enabled }}</p></span>
@@ -77,13 +80,12 @@
                             </form>
                         </td>
                         <td>
-                            <div class="d-flex">
-                                <a href="{{ route('user.show', $user) }}" data-toggle="modal" data-target="#userModal{{ $user->id }}"  class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
-                                    Ver
+                            <div class="d-flex justify-content-center">
+                                <a href="{{ route('user.show', $user) }}" title="Ver" data-toggle="modal" data-target="#userModal{{ $user->id }}"  class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
+                                    <i class="far fa-eye" aria-hidden="true"></i>
                                 </a>
-                                @include('panel.administrador.lista_usuarios.show')
-                                <a href="{{ route('user.edit', $user) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
-                                    Editar
+                                <a href="{{ route('user.edit', $user) }}" title="Editar" class="btn btn-sm btn-warning text-white text-uppercase me-1">
+                                    <i class="fas fa-edit" aria-hidden="true"></i>
                                 </a>
                                 {{-- <form action="{{ route('user.destroy', $user) }}" method="POST">
                                     @csrf 
@@ -95,6 +97,8 @@
                             </div>
                         </td>
                         </tr>
+
+                        @include('panel.administrador.lista_usuarios.show')
                         @endforeach
                     </tbody>
                 </table>
@@ -106,7 +110,8 @@
 
 {{-- Importacion de Archivos CSS --}}
 @section('css')
-    
+
+
 @stop
 
 
@@ -118,5 +123,7 @@
     </script>
     <script src="{{ asset('js/button_switch.js') }}"></script>
     {{-- La funcion asset() es una funcion de Laravel PHP que nos dirige a la carpeta "public" --}}
+    
     <script src="{{ asset('js/usuarios.js') }}"></script>
+    
 @stop

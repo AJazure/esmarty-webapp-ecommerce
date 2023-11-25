@@ -37,7 +37,9 @@
                 <div class="col-12">
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         {{ session('alert') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span class="text-white" aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 </div>
             @endif
@@ -66,7 +68,7 @@
                                     <th scope="col" class="text-uppercase">Stock</th>
                                     <th scope="col" class="text-uppercase">Imagen</th>
                                     <th scope="col" class="text-uppercase">Activo</th>
-                                    <th scope="col" class="text-uppercase">Acciones</th>
+                                    <th scope="col" class="text-uppercase text-center">Acciones</th>
 
                         </tr>
                     </thead>
@@ -78,7 +80,7 @@
                             <td>{{ $producto->categoria->descripcion }}</td>
                             {{-- <td>{{ $producto->marca->descripcion}}</td> --}}
                             <td>{{ $producto->marca ? $producto->marca->descripcion : 'N/A'}}</td>
-                            <td>{{ $producto->precio }}</td>
+                            <td>${{ $producto->precio }}</td>
                             <td class='text-center'>
                                 @if ($producto->stock_disponible == 0)
                                     <span class="badge badge-danger">SIN STOCK</span>
@@ -108,12 +110,13 @@
                                 </form>
                             </td>
                             <td>
-                                <div class="d-flex">
-                                    <a href="{{ route('producto.show', $producto) }}" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
-                                        Ver
+                                <div class="d-flex justify-content-center">
+                                    <a href="{{ route('producto.show', $producto) }}" title="Ver" data-toggle="modal" data-target="#productoModal{{ $producto->id }}" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
+                                        <i class="far fa-eye" aria-hidden="true"></i>
                                     </a>
-                                    <a href="{{ route('producto.edit', $producto) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
-                                        Editar
+                                    
+                                    <a href="{{ route('producto.edit', $producto) }}" title="Editar" class="btn btn-sm btn-warning text-white text-uppercase me-1">
+                                        <i class="fas fa-edit" aria-hidden="true"></i>
                                     </a>
                                     {{-- <form action="{{ route('producto.destroy', $producto) }}" method="POST">
                                         @csrf 
@@ -125,6 +128,7 @@
                                             </div>
                                         </td>
                                     </tr>
+                                    @include('panel.administrador.lista_productos.show')
                                 @endforeach
                             </tbody>
                         </table>

@@ -33,7 +33,9 @@
             <div class="col-12">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ session('alert') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span class="text-white" aria-hidden="true">&times;</span>
+                    </button>
                 </div>
             </div>
         @endif
@@ -56,7 +58,7 @@
                         <tr>
                             <th scope="col" class="text-uppercase">Nombre</th>
                             <th scope="col" class="text-uppercase">Activo</th>
-                            <th scope="col" class="text-uppercase">Acciones</th>
+                            <th scope="col" class="text-uppercase text-center">Acciones</th>
 
                         </tr>
                     </thead>
@@ -81,11 +83,12 @@
                             </td>
                             <td>
                                 <div class="d-flex justify-content-center">
-                                    <a href="{{ route('categoria.show', $categoria) }}" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
-                                        Ver
+                                    <a href="{{ route('categoria.show', $categoria) }}" title="Ver" data-toggle="modal" data-target="#categoriaModal{{ $categoria->id }}" class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2">
+                                        <i class="far fa-eye" aria-hidden="true"></i>
                                     </a>
-                                    <a href="{{ route('categoria.edit', $categoria) }}" class="btn btn-sm btn-warning text-white text-uppercase me-1">
-                                        Editar
+                                    
+                                    <a href="{{ route('categoria.edit', $categoria) }}" title="Editar" class="btn btn-sm btn-warning text-white text-uppercase me-1">
+                                        <i class="fas fa-edit" aria-hidden="true"></i>
                                     </a>
                                     {{-- <form action="{{ route('producto.destroy', $producto) }}" method="POST">
                                         @csrf 
@@ -97,6 +100,7 @@
                                 </div>
                             </td>
                         </tr>
+                        @include('panel.administrador.lista_categorias.show')
                         @endforeach
 
                     </tbody>

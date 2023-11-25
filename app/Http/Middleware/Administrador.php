@@ -2,11 +2,13 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class Tienda
+class Administrador
 {
     /**
      * Handle an incoming request.
@@ -15,6 +17,12 @@ class Tienda
      */
     public function handle(Request $request, Closure $next): Response
     {
+        $user = User::find(Auth::id());
+        $user_rol = $user->getRoleNames();
+    if ($user_rol[0] == 'admin') { //Si esta logueado y es admin, lo deja acceder
         return $next($request);
+    } else { //Si no, lo manda al inicio del panel
+        return redirect()->route('Welcome');
+    }
     }
 }

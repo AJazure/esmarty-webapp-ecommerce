@@ -1,4 +1,10 @@
 .login-page, .register-page{
+    background-image: url('../imagenes/patron-esmarty.svg') !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.login-page, .register-page{
     -ms-flex-align: center;
     align-items: center;
     background-color: #f8f9fa;

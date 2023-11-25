@@ -46,7 +46,8 @@
     /* Box Shadows */
     --content-box-shadow: 10px 10px 15px -3px rgba(87, 87, 87, 0.11);
     --inner-content-box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
-    
+    --inner-content-box-shadow-right: inset -39px 0px 11px -33px rgba(0,0,0,0.1);
+
     /* Z index */
     --z-tooltip: 10;
     --z-fixed: 100;
@@ -118,6 +119,10 @@ p, .text-body-g {
 
 .add-inner-shadow {
     box-shadow: var(--inner-content-box-shadow);
+}
+
+.add-inner-right-shadow {
+    box-shadow: var(--inner-content-box-shadow-right);
 }
 
 /******************************** Clases del Tema */

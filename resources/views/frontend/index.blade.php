@@ -51,7 +51,7 @@
 
                 <div class="col-md-12 justify-content-center">
                     <div class="text-center">
-                        <h1 class="pb-4"> Categorías Principales </h1>
+                        <h1 class="pb-4"> Elecciones Principales </h1>
                     </div>
                     <div class="row p-4 content-box content-box mx-auto add-shadow">
 
@@ -78,7 +78,7 @@
     {{-- Todas las Categorías --}}
     <section class="todas-categorias">
         <div class="text-center">
-            <h1 class="pb-4"> Categorías Principales </h1>
+            <h1 class="pb-4"> Categorías </h1>
         </div>
         <div class="container content-box p-4 add-inner-shadow">
             <div class="row justify-content-around pb-4 mt-auto">

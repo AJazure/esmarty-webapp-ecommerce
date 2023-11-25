@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg sticky-top">
     <div class="container-fluid p-1 ">
         {{-- Logo --}}
-        <a class="navbar-brand" href="/" style="max-width: 60%">
-            <img src="{{ asset('imagenes/logo-esmarty-rectangular.png') }}" alt="Logo-Esmarty" width="40%">
+        <a class="navbar-brand" href="/" style="max-width: 60%; min-width: 400px; padding-left: 60px;">
+            <img src="{{ asset('imagenes/logo-esmarty-rectangular.png') }}" alt="Logo-Esmarty" width="30%">
         </a>
         {{-- Logo Fin --}}
 

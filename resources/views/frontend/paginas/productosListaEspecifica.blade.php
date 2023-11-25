@@ -5,7 +5,7 @@
 {{-- Aside Categorias / Filtrar / Novedades --}}
 <div class="container-fluid">
     <div class="row">
-        <div class="col-lg-2 col-md-12 col-12 content-box">
+        <div class="col-lg-2 col-md-12 col-12 content-box add-inner-right-shadow">
             
             {{-- Categorias --}}
             <hr>
@@ -45,7 +45,9 @@
         {{-- Sección Principal --}}
         <div class="col-lg-10 col-md-12 col-sm-12 col-12">
             <div class="col-md-12" style="height: 12rem">
-                <div class="container bg-cover img-fluid" style="height: 100%; background-image:url('https://media.istockphoto.com/id/1314343964/es/foto/unidad-de-sistema-de-gama-alta-para-el-primer-plano-de-la-computadora-de-juego.jpg?s=1024x1024&w=is&k=20&c=ASsjLSJzfd2hyzwQlvR3McJTeGduju4pMxqWZXPiCc8=')"></div>
+                <div class="bg-cover img-fluid add-shadow"
+                        style="background-repeat: no-repeat; height: 100%; background-size: cover; background-position: center; background-image:url('{{ asset('imagenes/banner-general.jpg') }}')">
+                </div>
             </div>
             <div class="row pt-4">
                 {{-- Breadcrumbs --}}

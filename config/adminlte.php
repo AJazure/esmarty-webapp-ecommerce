@@ -64,7 +64,7 @@ return [
     */
 
     //'logo' => '<b>for Esmarty</b>',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => 'vendor/adminlte/dist/img/esmarty-blanco-xs.png',
     'logo_img_class' => 'brand-image',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -84,12 +84,12 @@ return [
     */
 
     'auth_logo' => [
-        'enabled' => false,
+        'enabled' => true,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'vendor/adminlte/dist/img/esmarty-login.png',
             'alt' => 'Auth Logo',
             'class' => '',
-            'width' => 50,
+            'width' => 180,
             'height' => 50,
         ],
     ],

@@ -22,16 +22,13 @@ class PaginaDeInicio extends Controller
 
     public function resultadosBusqueda(Request $request)
     {
-        $productos = Producto::latest()
-        ->simplePaginate(12)
-        ->withQueryString();
         
         $categorias = Categoria::where('activo', 1)->get();
 
         $terminoBusqueda = $request->input('busqueda');
-        $productosResultados = Producto::where('nombre', 'like', '%' . $terminoBusqueda . '%')->get();
+        $productosResultados = Producto::where('nombre', 'like', '%' . $terminoBusqueda . '%')->simplePaginate(12)->withQueryString();
     
-        return view('frontend.paginas.resultados_busqueda', compact('productos', 'categorias', 'productosResultados', 'terminoBusqueda'));
+        return view('frontend.paginas.resultados_busqueda', compact('categorias', 'productosResultados', 'terminoBusqueda'));
     }
 
     public function MandarDatosLista()
@@ -78,7 +75,10 @@ public function filtrarPorPrecio(Request $request)
     
     $precio_range = $request->input('precio_range', 0);
 
-    $productos = Producto::where('precio', '<=', $precio_range)->simplePaginate(12)->withQueryString(); 
+    $productos = Producto::where('precio', '<=', $precio_range)
+    ->orderBy('precio', 'asc')
+    ->simplePaginate(12)
+    ->withQueryString(); 
 
     $ultimosProductos= Producto::latest()->take(2)->get();
     return view('frontend.paginas.productosFiltroPrecio', compact('productos', 'categorias','ultimosProductos'));

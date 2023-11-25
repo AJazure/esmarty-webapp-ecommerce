@@ -52,17 +52,17 @@ a {
 
 /* botón Filtrar */
 button.filtrar {
-    background-color: #007bff;
+    background-color: #330ae3;
     color: #fff; 
-    border: 1px solid #007bff; 
+    border: 1px solid #330ae3; 
     padding: 10px 20px; 
     border-radius: 5px; 
     cursor: pointer; 
 }
 
 button.filtrar:hover {
-    background-color: #0056b3;
-    border-color: #0056b3; 
+    background-color: #2f0acd!important;
+    border-color: #2f0acd!important; 
 }
 
 #precio_range {
@@ -152,4 +152,25 @@ btn-disminuir {
 .copyright a {
     color: #fff;
     font-weight: bold;
+}
+
+.precio-estilo{
+    white-space: nowrap;
+}
+
+.categoria-descripcion-estilo{
+    text-transform: uppercase;
+    transition: all 0.5s ease;
+    color: white;
+}
+
+.categoria-descripcion-estilo:hover{
+    color: white;
+    opacity: 0.4;
+}
+
+.btn-enfasis-adicional:hover{
+    background-color: rgba(255, 255, 255, 0) !important;
+    color: var(--enfasis) !important;
+    border: 1px solid var(--enfasis) !important;
 }

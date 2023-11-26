@@ -97,3 +97,8 @@ Route::middleware(['admin', 'verified'])->group(function () {
 Route::get('/', function () {
 	return view('panel.index');
 })->middleware(['verified'])->name('Welcome');
+
+
+/* Route::get('/', function () {
+	redirect()->away('/');
+})->middleware(['verified'])->name('pagina'); */

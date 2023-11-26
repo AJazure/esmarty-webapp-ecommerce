@@ -86,7 +86,7 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'vendor/adminlte/dist/img/AdminLTELogo2.png',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,
@@ -109,7 +109,7 @@ return [
     'preloader' => [
         'enabled' => true,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/ecore-admin-logo-solo.png',
+            'path' => 'vendor/adminlte/dist/img/ecore-admin-logonegro-solo.png',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
             'width' => 320,

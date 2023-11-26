@@ -64,9 +64,9 @@ return [
     */
 
     //'logo' => '<b>for Esmarty</b>',
-    'logo_img' => 'vendor/adminlte/dist/img/esmarty-blanco-xs.png',
+    'logo_img' => 'vendor/adminlte/dist/img/esmarty-blanco.png',
     'logo_img_class' => 'brand-image',
-    'logo_img_xl' => null,
+    'logo_img_xl' => 'vendor/adminlte/dist/img/esmarty-blanco-xs.png',
     'logo_img_xl_class' => 'brand-image-xs',
     'logo_img_alt' => 'Admin Logo',
 

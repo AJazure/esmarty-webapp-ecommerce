@@ -109,7 +109,7 @@ return [
     'preloader' => [
         'enabled' => true,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/ecore-admin-logo-solo.png',
+            'path' => 'vendor/adminlte/dist/img/ecore-admin-logonegro-solo.png',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
             'width' => 320,

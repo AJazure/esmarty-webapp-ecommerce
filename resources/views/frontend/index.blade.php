@@ -86,7 +86,7 @@
                 <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
                     <a href="/productos/categoria/4">
                     <div class="row p-2">
-                        <div class="col-md-12 justify-center" style="height: 12rem;">
+                        <div class="col-md-12 justify-center zoom-effect" style="height: 12rem;">
                             <img src="{{ asset('imagenes/cat-tvs.png')}}" alt="#" style="height: 100%; width: 100%; object-fit: contain;">
                         </div>
                         <div class="col-md-12 text-center">
@@ -99,7 +99,7 @@
                 <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
                     <a href="/productos/categoria/8">
                     <div class="row p-2">
-                        <div class="col-md-12 justify-center" style="height: 12rem;">
+                        <div class="col-md-12 justify-center zoom-effect" style="height: 12rem;">
                             <img src="{{ asset('imagenes/cat-consolas.png')}}" alt="#" style="height: 100%; width: 100%; object-fit: contain;">
                         </div>
                         <div class="col-md-12 text-center">
@@ -112,7 +112,7 @@
                 <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
                     <a href="/productos/categoria/9">
                     <div class="row p-2">
-                        <div class="col-md-12 justify-center" style="height: 12rem;">
+                        <div class="col-md-12 justify-center zoom-effect" style="height: 12rem;">
                             <img src="{{ asset('imagenes/cat-perifericos.png')}}" alt="#" style="height: 100%; width: 100%; object-fit: contain;">
                         </div>
                         <div class="col-md-12 text-center">
@@ -125,7 +125,7 @@
                 <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
                     <a href="/productos/categoria/3">
                     <div class="row p-2">
-                        <div class="col-md-12 justify-center" style="height: 12rem;">
+                        <div class="col-md-12 justify-center zoom-effect" style="height: 12rem;">
                             <img src="{{ asset('imagenes/cat-componentes.png')}}" alt="#" style="height: 100%; width: 100%; object-fit: contain;">
                         </div>
                         <div class="col-md-12 text-center">
@@ -142,7 +142,7 @@
                 <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
                     <a href="/productos/categoria/2">
                     <div class="row p-2">
-                        <div class="col-md-12 justify-center" style="height: 12rem;">
+                        <div class="col-md-12 justify-center zoom-effect" style="height: 12rem;">
                             <img src="{{ asset('imagenes/cat-celulares.png')}}" alt="#" style="height: 100%; width: 100%; object-fit: contain;">
                         </div>
                         <div class="col-md-12 text-center">
@@ -155,7 +155,7 @@
                 <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
                     <a href="/productos/categoria/10">
                     <div class="row p-2">
-                        <div class="col-md-12 justify-center" style="height: 12rem;">
+                        <div class="col-md-12 justify-center zoom-effect" style="height: 12rem;">
                             <img src="{{ asset('imagenes/cat-relojes.png')}}" alt="#" style="height: 100%; width: 100%; object-fit: contain;">
                         </div>
                         <div class="col-md-12 text-center">
@@ -168,7 +168,7 @@
                 <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
                     <a href="/productos/categoria/1">
                     <div class="row p-2">
-                        <div class="col-md-12 justify-center" style="height: 12rem;">
+                        <div class="col-md-12 justify-center zoom-effect" style="height: 12rem;">
                             <img src="{{ asset('imagenes/cat-notebook.png')}}" alt="#" style="height: 100%; width: 100%; object-fit: contain;">
                         </div>
                         <div class="col-md-12 text-center">
@@ -181,7 +181,7 @@
                 <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
                     <a href="/productos/categoria/6">
                     <div class="row p-2">
-                        <div class="col-md-12 justify-center" style="height: 12rem;">
+                        <div class="col-md-12 justify-center zoom-effect" style="height: 12rem;">
                             <img src="{{ asset('imagenes/cat-audio.png')}}" alt="#" style="height: 100%; width: 100%; object-fit: contain;">
                         </div>
                         <div class="col-md-12 text-center">
@@ -196,44 +196,9 @@
     </section>
     {{-- Fin Todas las Categorías --}}
 
-    {{-- Banner Categorias --}}
-
-    {{--     <section class="small-banner section">
-        <div class="container-fluid ">
-            <div class="row">
-                <div class="col-12">
-                    <div class="text-center">
-                        <h1 class="pb-4"> Categorías </h1>
-                    </div>
-                </div>
-                @if ($categorias)
-                    @foreach ($categorias as $categoria)
-                        <div class="col-lg-4 col-md-6 col-12">
-                            <div class="single-banner text-center">
-                                @if ($categoria->activo)
-                                    <img src="https://via.placeholder.com/350x200" alt="#">
-                                    <div class="content">
-                                        <h3><a class="dropdown-item"
-                                                href="{{ route('MandarDatosCategoriaEspecifica', $categoria->id) }}">{{ $categoria->descripcion }}</a>
-                                        </h3>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                    @endforeach
-                @endif
-            </div>
-        </div>
-    </section> --}}
-    {{-- Banner Categorias Fin --}}
-
-    <br>
-    <br>
-
-
     {{-- Ultimos Agregados --}}
-    <section class="shop-home-list section">
-        <div class="container">
+    <section class="shop-home-list section pt-4">
+        <div class="container pt-4">
             <div class="row">
                 <div class="col-12">
                     <div class="shop-section-title text-center">
@@ -242,14 +207,14 @@
                 </div>
             </div>
 
-            <div class="row justify-content-around mt-4 mb-4">
+            <div class="row justify-content-around mt-2 mb-4">
 
                 @foreach ($productos->where('activo', 1)->take(5) as $producto)
                 @php $imagen = explode('|', $producto->url_imagen) @endphp
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 justify-content-around">
-                    <div class="card element-box m-2 producto-card" style="width: 14rem;">
+                    <div class="card element-box m-2 producto-card zoom-shadow" style="width: 14rem;">
                         <a href="{{ route('MandarDatosProductoEspecifico', $producto->id) }}" style="color: rgb(38, 38, 38)">
-                        <div class="container mt-3 bg-white" style="width: 200px; height: 200px">
+                        <div class="container mt-3 bg-white inner" style="width: 200px; height: 200px">
                             <img src="{{ $imagen[0] }}" class="card-img-top img-fluid" alt="{{ $imagen[0] }}">
                         </div>
                         <div class="card-body">
@@ -258,7 +223,7 @@
                             <p class="card-text">$ {{ $producto->precio }}</p>
                             <button data-agregar-id="{{ $producto->id }}"
                                 class="btn btn-sm mb-3 color-enfasis btn-enfasis-adicional rounded-pill text-white text-uppercase agregarAlCarrito add-shadow">
-                                Comprar
+                                Agregar al Carrito
                             </button>
                         </div>
                     </div>

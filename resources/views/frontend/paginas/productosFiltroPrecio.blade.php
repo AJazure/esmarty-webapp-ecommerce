@@ -71,8 +71,8 @@
                             <div class="col-lg-3 col-md-4 col-sm-6 col-6" style="text-align: -webkit-center;">
                                 <a href="{{ route('MandarDatosProductoEspecifico', $producto->id) }}"
                                     style="color: rgb(38, 38, 38)">
-                                    <div class="card element-box m-2 producto-card" style="min-width: 14rem;">
-                                        <div class="container mt-3 bg-white rounded-4" style="width: 200px; height: 200px">
+                                    <div class="card element-box m-2 producto-card zoom-shadow" style="min-width: 13rem; max-width: 14rem;">
+                                        <div class="container mt-3 bg-white rounded-4 inner" style="width: 200px; height: 200px">
                                             <img src="{{ $imagen[0] }}" class="card-img-top img-fluid"
                                                 alt="{{ $imagen[0] }}">
                                         </div>

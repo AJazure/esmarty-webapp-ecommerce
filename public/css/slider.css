@@ -24,7 +24,7 @@
   
   /* Declare heights because of positioning of img element */
   .carousel-item {
-    height: 12rem;
+    height: 10rem;
   }
   .carousel-item > img {
     position: absolute;
@@ -70,7 +70,7 @@
     }
 
     .carousel-item {
-      height: 24rem;
+      height: 18rem;
     }
   }
   

@@ -56,16 +56,16 @@
                     <div class="row p-4 content-box content-box mx-auto add-shadow">
 
                         <div class="col-md-12 col-sm-12 col-12 p-2" style="height: 19rem">
-                            <div class="container bg-cover img-fluid rounded-4 zoom-effect" style="height: 100%; background-image:url('{{ asset('imagenes/categoria-ancha-1.jpg') }}')"></div>
+                            <a href="/productos/categoria/2"><div class="container bg-cover img-fluid rounded-4 zoom-effect" style="height: 100%; background-image:url('{{ asset('imagenes/categoria-ancha-1.jpg') }}')"></div></a>
                         </div>
                         <div class="col-md-6 col-sm-12 p-2" style="height: 23 rem">
-                            <div class="container bg-cover img-fluid rounded-4 zoom-effect" style="height: 100%; background-image:url('{{ asset('imagenes/categoria-1.jpg') }}')"></div>
+                            <a href="/productos/categoria/9"><div class="container bg-cover img-fluid rounded-4 zoom-effect" style="height: 100%; background-image:url('{{ asset('imagenes/categoria-1.jpg') }}')"></div></a>
                         </div>
                         <div class="col-md-6 col-sm-12 p-2" style="height: 23rem">
-                            <div class="container bg-cover img-fluid rounded-4 zoom-effect" style="height: 100%; background-image:url('{{ asset('imagenes/categoria-2.jpg') }}')"></div>
+                            <a href="/productos/categoria/1"><div class="container bg-cover img-fluid rounded-4 zoom-effect" style="height: 100%; background-image:url('{{ asset('imagenes/categoria-2.jpg') }}')"></div></a>
                         </div>
                         <div class="col-md-12 col-sm-12 p-2" style="height: 19rem">
-                            <div class="container bg-cover img-fluid rounded-4 zoom-effect" style="height: 100%; background-image:url('{{ asset('imagenes/categoria-ancha-2.jpg') }}')"></div>
+                            <a href="/productos/categoria/6"><div class="container bg-cover img-fluid rounded-4 zoom-effect" style="height: 100%; background-image:url('{{ asset('imagenes/categoria-ancha-2.jpg') }}')"></div></a>
                         </div>
 
                     </div>
@@ -84,6 +84,7 @@
             <div class="row justify-content-around pb-4 mt-auto">
 
                 <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
+                    <a href="/productos/categoria/4">
                     <div class="row p-2">
                         <div class="col-md-12 justify-center" style="height: 12rem;">
                             <img src="{{ asset('imagenes/cat-tvs.png')}}" alt="#" style="height: 100%; width: 100%; object-fit: contain;">
@@ -92,10 +93,11 @@
                             <div class="text-enfasis">Tvs y Monitores</div>
                         </div>
                     </div>
-
+                </a>
                 </div>
 
                 <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
+                    <a href="/productos/categoria/8">
                     <div class="row p-2">
                         <div class="col-md-12 justify-center" style="height: 12rem;">
                             <img src="{{ asset('imagenes/cat-consolas.png')}}" alt="#" style="height: 100%; width: 100%; object-fit: contain;">
@@ -104,9 +106,11 @@
                             <div class="text-enfasis">Consolas</div>
                         </div>
                     </div>
+                    </a>
                 </div>
 
                 <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
+                    <a href="/productos/categoria/9">
                     <div class="row p-2">
                         <div class="col-md-12 justify-center" style="height: 12rem;">
                             <img src="{{ asset('imagenes/cat-perifericos.png')}}" alt="#" style="height: 100%; width: 100%; object-fit: contain;">
@@ -115,9 +119,11 @@
                             <div class="text-enfasis">Periféricos</div>
                         </div>
                     </div>
+                    </a>
                 </div>
                 
                 <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
+                    <a href="/productos/categoria/3">
                     <div class="row p-2">
                         <div class="col-md-12 justify-center" style="height: 12rem;">
                             <img src="{{ asset('imagenes/cat-componentes.png')}}" alt="#" style="height: 100%; width: 100%; object-fit: contain;">
@@ -126,6 +132,7 @@
                             <div class="text-enfasis">Componentes PC</div>
                         </div>
                     </div>
+                    </a>
                 </div>
 
             </div>
@@ -133,6 +140,7 @@
             <div class="row justify-content-around">
 
                 <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
+                    <a href="/productos/categoria/2">
                     <div class="row p-2">
                         <div class="col-md-12 justify-center" style="height: 12rem;">
                             <img src="{{ asset('imagenes/cat-celulares.png')}}" alt="#" style="height: 100%; width: 100%; object-fit: contain;">
@@ -141,9 +149,11 @@
                             <div class="text-enfasis">Smartphones y Tablets</div>
                         </div>
                     </div>
+                    </a>
                 </div>
 
                 <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
+                    <a href="/productos/categoria/10">
                     <div class="row p-2">
                         <div class="col-md-12 justify-center" style="height: 12rem;">
                             <img src="{{ asset('imagenes/cat-relojes.png')}}" alt="#" style="height: 100%; width: 100%; object-fit: contain;">
@@ -152,9 +162,11 @@
                             <div class="text-enfasis">Watches y Buds</div>
                         </div>
                     </div>
+                    </a>
                 </div>
 
                 <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
+                    <a href="/productos/categoria/1">
                     <div class="row p-2">
                         <div class="col-md-12 justify-center" style="height: 12rem;">
                             <img src="{{ asset('imagenes/cat-notebook.png')}}" alt="#" style="height: 100%; width: 100%; object-fit: contain;">
@@ -163,9 +175,11 @@
                             <div class="text-enfasis">Notebooks</div>
                         </div>
                     </div>
+                    </a>
                 </div>
 
                 <div class="col-md-6 col-sm-6 rounded-4 element-box add-shadow mb-2 mt-2" style="height: 250px; width: 300px;">
+                    <a href="/productos/categoria/6">
                     <div class="row p-2">
                         <div class="col-md-12 justify-center" style="height: 12rem;">
                             <img src="{{ asset('imagenes/cat-audio.png')}}" alt="#" style="height: 100%; width: 100%; object-fit: contain;">
@@ -174,6 +188,7 @@
                             <div class="text-enfasis">Audio</div>
                         </div>
                     </div>
+                    </a>
                 </div>
 
             </div>
@@ -230,7 +245,7 @@
             <div class="row justify-content-around mt-4 mb-4">
 
                 @foreach ($productos->where('activo', 1)->take(5) as $producto)
-                @php $imagen = explode(',', $producto->url_imagen) @endphp
+                @php $imagen = explode('|', $producto->url_imagen) @endphp
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-6 justify-content-around">
                     <div class="card element-box m-2 producto-card" style="width: 14rem;">
                         <a href="{{ route('MandarDatosProductoEspecifico', $producto->id) }}" style="color: rgb(38, 38, 38)">

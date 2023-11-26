@@ -86,5 +86,15 @@ class MarcaSeeder extends Seeder
         Marca::create([
             'descripcion' => 'JBL'
         ]);
+
+        Marca::create([
+            'descripcion' => 'Microsoft'
+        ]);
+        Marca::create([
+            'descripcion' => 'Sin Marca'
+        ]);
+        Marca::create([
+            'descripcion' => 'Nintendo'
+        ]);
     }
 }

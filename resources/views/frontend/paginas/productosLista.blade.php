@@ -55,7 +55,11 @@
                 <div class="row pt-4 ">
                     {{-- Breadcrumbs --}}
                     <div class="container-fluid ">
-                        <h1>Todos los Productos</h1>
+                        <h1>
+
+                            Todos los Productos
+
+                        </h1>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><i class='bx bxs-folder-open'></i></li>

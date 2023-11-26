@@ -37,24 +37,28 @@ class PaginaDeInicio extends Controller
 
 
     $productos = Producto::latest()
-        ->simplePaginate(12)
+        ->simplePaginate(24)
         ->withQueryString(); 
 
     return view('frontend.paginas.productosLista', compact('productos', 'categorias'));
 }
 
-public function MandarDatosCategoriaEspecifica( $variable)
+public function MandarDatosCategoriaEspecifica($variable)
 {
     $productos = Producto::latest()->where('activo', 1)->take(2)->get();
     $categorias = Categoria::where('activo', 1)->get();
 
+    $categoria = Categoria::where('id', $variable)->first();
+    $categoriaEspecifica = $categoria->descripcion;
+
+    /* dd($categoriaEspecifica); */
 
     $productos_especificos = Producto::where('id_categoria', $variable)
         ->latest()
         ->simplePaginate(12)
         ->withQueryString();
 
-    return view('frontend.paginas.productosListaEspecifica', compact('productos', 'productos_especificos', 'categorias'));
+    return view('frontend.paginas.productosListaEspecifica', compact('productos', 'productos_especificos', 'categorias', 'categoriaEspecifica'));
 }
 
 public function MandarDatosProductoEspecifico($id){

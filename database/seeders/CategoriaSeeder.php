@@ -18,13 +18,13 @@ class CategoriaSeeder extends Seeder
             'descripcion' => 'Notebook'
         ]);
         Categoria::create([
-            'descripcion' => 'Celulares'
+            'descripcion' => 'Celulares y Tablets'
         ]);
         Categoria::create([
             'descripcion' => 'Componentes PC'
         ]);
         Categoria::create([
-            'descripcion' => 'Televisores'
+            'descripcion' => 'Tvs y Monitores'
         ]);
         Categoria::create([
             'descripcion' => 'Proyectores'
@@ -34,6 +34,15 @@ class CategoriaSeeder extends Seeder
         ]);
         Categoria::create([
             'descripcion' => 'Sin Categoría'
+        ]);
+        Categoria::create([
+            'descripcion' => 'Consolas'
+        ]);
+        Categoria::create([
+            'descripcion' => 'Periféricos'
+        ]);
+        Categoria::create([
+            'descripcion' => 'Watches'
         ]);
     }
 }

@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     {
         //creación de usuarios para roles de prueba
         User::create([
-            'name'=>'Marecelo',
+            'name'=>'Marcelo',
             'apellido' => 'Zenzano',
             'email'=>'admin@esmarty.com',
             'dni' => '28034723',
@@ -58,7 +58,7 @@ class UserSeeder extends Seeder
         User::create([
             'name'=>'Nicolás',
             'apellido' => 'Juárez',
-            'email'=>'juareznicozar@gmail.com',
+            'email'=>'cliente@esmarty.com',
             'dni' => '32000723',
             'telefono' => '3875112534',
             'password'=> Hash::make('a12345-'),

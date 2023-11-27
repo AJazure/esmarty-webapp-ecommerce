@@ -58,6 +58,8 @@
                 <h2 class ="text-title product-title"> {{ $producto->nombre }} </h2>
                 <a href="{{ route('MandarDatosCategoriaEspecifica', ['categoria' => $categoriaEspecifica->id]) }}"
                     class="badge-category badge text-bg-secondary"> {{ $categoriaEspecifica->descripcion }} </a>
+               {!! $producto->stock_disponible > 3 ? "<p class='badge-category badge text-bg-warning'> Últimos Disponibles </p>" :
+                ($producto->stock_disponible > 0 ? "<p class='badge-category badge text-bg-success'> Stock Disponible </p>" : "<p class='badge-category badge text-bg-danger'> Sin Stock </p>") !!}</p>
 
                 <div class="product-price">
                     <div class="row">
@@ -78,10 +80,10 @@
                     <div class="container element-box p-4">
                         <h3>Descripción:</h3>
                         <p>{{ $producto->descripcion }}</p>
+                        <span class="badge-category badge text-bg-light"> Marca {{ $producto->marca->descripcion }}</span>
                     </div>
                 </div>
                 <!-- End card derecha -->
-
             </div>
         </div>
     </div>

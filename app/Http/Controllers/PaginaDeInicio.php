@@ -13,7 +13,7 @@ class PaginaDeInicio extends Controller
     {
         $productos = Producto::latest()->get();
 
-        $categorias = Categoria::where('activo', 1)->get();
+        $categorias = Categoria::where('activo', 1)->where('descripcion', '!=', 'Sin Categoría')->get();
 
         $carrusel = Producto::inRandomOrder()->take(3)->get();
 
@@ -23,7 +23,7 @@ class PaginaDeInicio extends Controller
     public function resultadosBusqueda(Request $request)
     {
         
-        $categorias = Categoria::where('activo', 1)->get();
+        $categorias = Categoria::where('activo', 1)->where('descripcion', '!=', 'Sin Categoría')->get();
 
         $terminoBusqueda = $request->input('busqueda');
         $productosResultados = Producto::where('nombre', 'like', '%' . $terminoBusqueda . '%')->simplePaginate(12)->withQueryString();
@@ -33,7 +33,7 @@ class PaginaDeInicio extends Controller
 
     public function MandarDatosLista()
 {
-    $categorias = Categoria::where('activo', 1)->get();
+    $categorias = Categoria::where('activo', 1)->where('descripcion', '!=', 'Sin Categoría')->get();
 
 
     $productos = Producto::latest()
@@ -46,7 +46,7 @@ class PaginaDeInicio extends Controller
 public function MandarDatosCategoriaEspecifica($variable)
 {
     $productos = Producto::latest()->where('activo', 1)->take(2)->get();
-    $categorias = Categoria::where('activo', 1)->get();
+    $categorias = Categoria::where('activo', 1)->where('descripcion', '!=', 'Sin Categoría')->get();
 
     $categoria = Categoria::where('id', $variable)->first();
     $categoriaEspecifica = $categoria->descripcion;
@@ -63,7 +63,7 @@ public function MandarDatosCategoriaEspecifica($variable)
 
 public function MandarDatosProductoEspecifico($id){
     $producto = Producto::find($id);
-    $categorias = Categoria::where('activo', 1)->get();
+    $categorias = Categoria::where('activo', 1)->where('descripcion', '!=', 'Sin Categoría')->get();
     $marcas= Marca::where('activo', 1)->get();
     
     $categoriaEspecifica = Categoria::find($producto->id_categoria);
@@ -74,7 +74,7 @@ public function MandarDatosProductoEspecifico($id){
 
 public function filtrarPorPrecio(Request $request)
 {
-    $categorias = Categoria::where('activo', 1)->get();
+    $categorias = Categoria::where('activo', 1)->where('descripcion', '!=', 'Sin Categoría')->get();
 
     
     $precio_range = $request->input('precio_range', 0);

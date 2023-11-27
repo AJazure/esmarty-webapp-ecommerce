@@ -88,8 +88,13 @@ $(document).on('click', '.cargarItems', function () {
 			// Vacía el tbody antes de agregar nuevos elementos
 			tbody.innerHTML = '';
 			data.forEach(item => {
+				
+				imagenes = item.productos.url_imagen.split('|');
+
+				/* console.log(imagenes); */
+
 				// Accede a las propiedades de cada objeto
-				console.log('Imagen:', item.productos.url_imagen);
+				console.log('Imagen:', imagenes[0]);
 				console.log('Producto:', item.productos.nombre);
 				console.log('Precio:', item.productos.precio);
 				console.log('Cantidad:', item.cant_producto);
@@ -101,7 +106,7 @@ $(document).on('click', '.cargarItems', function () {
 				// Crea las celdas y asigna los valores de las propiedades
 				let imagenCell = document.createElement('td');
 				let imagen = document.createElement('img');
-				imagen.src = item.productos.url_imagen;
+				imagen.src = imagenes[0];
 				imagen.width = '120';
 				imagenCell.appendChild(imagen);
 				row.appendChild(imagenCell); // Agrega la celda a la fila

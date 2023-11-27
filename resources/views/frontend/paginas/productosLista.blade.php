@@ -71,7 +71,7 @@
                     {{-- Breadcrumbs Fin --}}
                     {{-- Mostrar Todos los Productos --}}
                     @if (count($productos) > 0)
-                        @foreach ($productos->where('activo', 1) as $producto)
+                        @foreach ($productos as $producto)
                             @php $imagen = explode('|', $producto->url_imagen) @endphp
                             <div class="col-lg-3 col-md-4 col-sm-6 col-6" style="text-align: -webkit-center;">
                                 <div class="card element-box m-2 producto-card zoom-shadow" style="min-width: 13rem; max-width: 14rem;">

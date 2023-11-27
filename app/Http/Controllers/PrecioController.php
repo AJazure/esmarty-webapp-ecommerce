@@ -141,49 +141,73 @@ class PrecioController extends Controller
 
     public function updateProveedor(Request $request)
     {
-        $productos = Producto::where('id_proveedor',$request->get('id_proveedor'))->get();
-        
-
+        $productos = Producto::where('id_proveedor', $request->get('id_proveedor'))->get();
+    
         foreach ($productos as $producto) {
-            $producto->precio = $producto->precio + $producto->precio * $request->get('precioProveedor')/100;
+            $porcentaje = $request->get('precioProveedor');
+    
+            // Verifica si se debe aumentar o disminuir
+            $operacion = $request->get('operacion');
+    
+            // Calcula el nuevo precio según la operación seleccionada
+            if ($operacion === 'aumentar') {
+                $producto->precio = $producto->precio + $producto->precio * $porcentaje / 100;
+            } elseif ($operacion === 'disminuir') {
+                $producto->precio = $producto->precio - $producto->precio * $porcentaje / 100;
+            }
+    
             $producto->update();
         }
-
-        return redirect()
-            ->route('precio.index');
-           /*  ->with('alert', 'Producto "' . $producto->nombre . '" actualizado exitosamente.'); */
+    
+        return redirect()->route('precio.index');
     }
-
     //nuevo
     public function updateCategoria(Request $request)
     {
-        $productos = Producto::where('id_categoria',$request->get('id_categoria'))->get();
-        
-
+        $productos = Producto::where('id_categoria', $request->get('id_categoria'))->get();
+    
         foreach ($productos as $producto) {
-            $producto->precio = $producto->precio + $producto->precio * $request->get('precioCategoria')/100;
+            $porcentaje = $request->get('precioCategoria');
+    
+            // Verifica si se debe aumentar o disminuir
+            $operacion = $request->get('operacion');
+    
+            // Calcula el nuevo precio según la operación seleccionada
+            if ($operacion === 'aumentar') {
+                $producto->precio = $producto->precio + $producto->precio * $porcentaje / 100;
+            } elseif ($operacion === 'disminuir') {
+                $producto->precio = $producto->precio - $producto->precio * $porcentaje / 100;
+            }
+    
             $producto->update();
         }
-
-        return redirect()
-            ->route('precio.index');
-           /*  ->with('alert', 'Producto "' . $producto->nombre . '" actualizado exitosamente.'); */
+    
+        return redirect()->route('precio.index');
     }
 
     public function updateMarca(Request $request)
     {
-        $productos = Producto::where('id_marca',$request->get('id_marca'))->get();
-        
-
+        $productos = Producto::where('id_marca', $request->get('id_marca'))->get();
+    
         foreach ($productos as $producto) {
-            $producto->precio = $producto->precio + $producto->precio * $request->get('precioMarca')/100;
+            $porcentaje = $request->get('precioMarca');
+    
+            // Verifica si se debe aumentar o disminuir
+            $operacion = $request->get('operacion');
+    
+            // Calcula el nuevo precio según la operación seleccionada
+            if ($operacion === 'aumentar') {
+                $producto->precio = $producto->precio + $producto->precio * $porcentaje / 100;
+            } elseif ($operacion === 'disminuir') {
+                $producto->precio = $producto->precio - $producto->precio * $porcentaje / 100;
+            }
+    
             $producto->update();
         }
-
-        return redirect()
-            ->route('precio.index');
-           /*  ->with('alert', 'Producto "' . $producto->nombre . '" actualizado exitosamente.'); */
+    
+        return redirect()->route('precio.index');
     }
+
     
     /**
      * Remove the specified resource from storage.

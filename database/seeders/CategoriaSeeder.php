@@ -14,9 +14,6 @@ class CategoriaSeeder extends Seeder
     public function run(): void
     {
         Categoria::create([
-            'descripcion' => 'Sin Categoría'
-        ]);
-        Categoria::create([
             'descripcion' => 'Notebook'
         ]);
         Categoria::create([
@@ -30,6 +27,9 @@ class CategoriaSeeder extends Seeder
         ]);
         Categoria::create([
             'descripcion' => 'Audio'
+        ]);
+        Categoria::create([
+            'descripcion' => 'Sin Categoría'
         ]);
         Categoria::create([
             'descripcion' => 'Consolas'

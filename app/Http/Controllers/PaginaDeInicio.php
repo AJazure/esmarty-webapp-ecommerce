@@ -26,7 +26,7 @@ class PaginaDeInicio extends Controller
         $categorias = Categoria::where('activo', 1)->where('descripcion', '!=', 'Sin Categoría')->get();
 
         $terminoBusqueda = $request->input('busqueda');
-        $productosResultados = Producto::where('nombre', 'like', '%' . $terminoBusqueda . '%')->simplePaginate(12)->withQueryString();
+        $productosResultados = Producto::where('activo', 1)->where('nombre', 'like', '%' . $terminoBusqueda . '%')->simplePaginate(12)->withQueryString();
     
         return view('frontend.paginas.resultados_busqueda', compact('categorias', 'productosResultados', 'terminoBusqueda'));
     }

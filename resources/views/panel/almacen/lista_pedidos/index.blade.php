@@ -78,12 +78,11 @@
                                             <input type="number" name="numero"
                                                 {{ $pedido->en_preparacion ? '' : 'disabled' }}
                                                 onkeypress="return event.keyCode != 13;">
-                                        @if ($pedido->en_preparacion)
-                                            <button type="submit"  class="checkButton">✔</button>
+                                            @if ($pedido->en_preparacion)
+                                                <button type="submit" class="checkButton">✔</button>
                                             @else
-                                            <button disabled class="checkButton">✔</button>
-
-                                        @endif
+                                                <button disabled class="checkButton">✔</button>
+                                            @endif
                                         </form>
                                     </td>
 
@@ -100,35 +99,37 @@
                                             @endif
                                         @endif
                                     </td>
-                                    <td >
+                                    <td>
                                         <div class="d-flex justify-content-center">
-                                        <a href="#" title="Ver"
-                                            class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2 cargarItems"
-                                            data-toggle="modal" data-target="#showDetallePedidoModal"
-                                            data-idpedido="{{ $pedido->id }}" data-num-pedido="{{ $pedido->num_pedido }}"
-                                            data-nombre="{{ $pedido->nombre }}" data-apellido="{{ $pedido->apellido }}"
-                                            data-email="{{ $pedido->correo }}" data-dni="{{ $pedido->dni }}"
-                                            data-direccion="{{ $pedido->direccion }}"
-                                              data-codigopostal="{{ $pedido->codigo_postal }}"
-                                            data-telefono="{{ $pedido->telefono }}" data-total="{{ $pedido->total }}"
-                                            data-cancelado="{{ $pedido->cancelado }}" data-pagado="{{ $pedido->pagado }}"
-                                            data-enpreparacion="{{ $pedido->en_preparacion }}"
-                                            data-enviado="{{ $pedido->enviado }}"
-                                            data-urlfactura="{{ $pedido->urlFactura }}">
-                                            <i class="far fa-eye"></i>
-                                        </a>
+                                            <a href="#" title="Ver"
+                                                class="btn btn-sm btn-info text-white text-uppercase me-1 mr-2 cargarItems"
+                                                data-toggle="modal" data-target="#showDetallePedidoModal"
+                                                data-idpedido="{{ $pedido->id }}"
+                                                data-num-pedido="{{ $pedido->num_pedido }}"
+                                                data-nombre="{{ $pedido->nombre }}"
+                                                data-apellido="{{ $pedido->apellido }}" data-email="{{ $pedido->correo }}"
+                                                data-dni="{{ $pedido->dni }}" data-direccion="{{ $pedido->direccion }}"
+                                                data-codigopostal="{{ $pedido->codigo_postal }}"
+                                                data-telefono="{{ $pedido->telefono }}" data-total="{{ $pedido->total }}"
+                                                data-cancelado="{{ $pedido->cancelado }}"
+                                                data-pagado="{{ $pedido->pagado }}"
+                                                data-enpreparacion="{{ $pedido->en_preparacion }}"
+                                                data-enviado="{{ $pedido->enviado }}"
+                                                data-urlfactura="{{ $pedido->urlFactura }}">
+                                                <i class="far fa-eye"></i>
+                                            </a>
 
-                                        @if (!$pedido->en_preparacion)
-                                            <button  title="Preparar"
-                                                class="btn btn-sm btn-success text-white text-uppercase prepararNumSeguimiento"
-                                                data-route="{{ route('prepararPedido', ['id' => $pedido->id]) }}" onclick=""><i class="fas fa-box"></i>
-                                            </button>
-                                        @else
-                                            <button class="btn btn-sm btn-success text-white text-uppercase "
-                                                disabled>
-                                                <i class="fas fa-box"></i>
-                                            </button>
-                                        @endif
+                                            @if (!$pedido->en_preparacion)
+                                                <button title="Preparar"
+                                                    class="btn btn-sm btn-success text-white text-uppercase prepararNumSeguimiento"
+                                                    data-route="{{ route('prepararPedido', ['id' => $pedido->id]) }}"
+                                                    onclick=""><i class="fas fa-box"></i>
+                                                </button>
+                                            @else
+                                                <button class="btn btn-sm btn-success text-white text-uppercase " disabled>
+                                                    <i class="fas fa-box"></i>
+                                                </button>
+                                            @endif
                                         </div>
                                     </td>
                                 </tr>
@@ -169,6 +170,7 @@
                 var inputId = $(this).closest('tr').find('input[name="numero"]').attr('id');
                 Swal.fire({
                     title: "¿Quiere preparar este pedido?",
+                    type: 'question',
                     // text: "You won't be able to revert this!",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
@@ -185,5 +187,40 @@
             });
         });
     </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var form = document.querySelectorAll("form.d-flex");
 
+            form.forEach(function(currentForm) {
+                var input = currentForm.querySelector("input[name='numero']");
+
+                currentForm.addEventListener("submit", function(event) {
+                    if (input.value.trim() === "" || input.value.length > 15) {
+                        event.preventDefault();
+
+                        Swal.fire({
+                            type: 'warning',
+                            title: 'Error',
+                            text: 'El campo debe tener contenido y no puede exceder los 15 caracteres.',
+                        });
+                    }
+                });
+
+                input.addEventListener("keydown", function(event) {
+                    if (event.key === "Enter") {
+                        if (input.value.trim() === "" || input.value.length > 15) {
+                            event.preventDefault();
+                            event.stopPropagation(); // Evitar la propagación del evento submit
+
+                            Swal.fire({
+                                type: 'warning',
+                                title: 'Error',
+                                text: 'El campo debe tener contenido y no puede exceder los 15 caracteres.',
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 @stop

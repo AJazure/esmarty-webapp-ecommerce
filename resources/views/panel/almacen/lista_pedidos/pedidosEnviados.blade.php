@@ -135,19 +135,19 @@
     <script src="{{ asset('js/pedido/pedidosPreparar.js') }}"></script>
     <script src="{{ asset('js/pedido/num_seguimiento.js') }}"></script>
     <script>
-        
         $(document).ready(function() {
             $('.editarNumSeguimiento').click(function() {
                 console.log("Clic detectado"); 
                 var inputId = $(this).closest('tr').find('input[name="numero"]').attr('id');
                 var checkButton = $(this).closest('tr').find('.checkButton');
+                
                 Swal.fire({
-                    title: "¿Esta seguro de querer editar?",
-                    // text: "You won't be able to revert this!",
+                    title: "¿Estás seguro de querer editar?",
+                    type: 'question',
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
                     cancelButtonColor: "#d33",
-                    confirmButtonText: "Si",
+                    confirmButtonText: "Sí",
                     cancelButtonText: "No",
                     allowOutsideClick: false
                 }).then((result) => {
@@ -158,9 +158,36 @@
                         checkButton.prop('disabled', function(i, val) {
                             return !val;
                         });
+
+                        // Validamos antes de enviar el formulario
+                        $('#' + inputId).closest('form').submit(function(e) {
+                            if ($('#' + inputId).val().trim() === '' || $('#' + inputId).val().length > 15) {
+                                e.preventDefault();
+                                Swal.fire({
+                                    type: 'warning',
+                                    title: 'Error',
+                                    text: 'El campo debe tener contenido y no puede exceder los 15 caracteres.',
+                                });
+                            }
+                        });
+
+                        // Si no hay nada o es mayor a 15 los caracteres se cancela el envio
+                        $('#' + inputId).on('keydown', function(e) {
+                            if (e.key === 'Enter') {
+                                e.preventDefault();
+                                if ($('#' + inputId).val().trim() === '' || $('#' + inputId).val().length > 15) {
+                                    Swal.fire({
+                                        type: 'warning',
+                                        title: 'Error',
+                                        text: 'El campo debe tener contenido y no puede exceder los 15 caracteres.',
+                                    });
+                                } else {
+                                    $('#' + inputId).closest('form').submit();
+                                }
+                            }
+                        });
                     }
                 });
-
             });
         });
     </script>

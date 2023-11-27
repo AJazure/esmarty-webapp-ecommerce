@@ -197,7 +197,7 @@
                     img.classList.add('preview-image');
                     img.src = objectURL;
                     img.classList.add('preview-image');
-                    img.style.objectFit = 'cover';
+                    img.style.objectFit = 'contain';
                     img.style.objectPosition = 'center';
                     img.style.height = '250px';
                     img.style.width = '250px';

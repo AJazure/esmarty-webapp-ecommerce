@@ -90,9 +90,10 @@
                                         echo '<span class="badge badge-danger">SIN STOCK</span>';
                                     } else {
                                         $porcentaje = ($producto->stock_disponible / $producto->stock_deseado) * 100;
+                                        $porcentajeMinimo = ($producto->stock_minimo / $producto->stock_deseado) * 100;
                                         $colorBarra = 'bg-danger'; //para cuando es 0 el %
 
-                                        if ($porcentaje <= 20) {
+                                        if ($porcentaje <= $porcentajeMinimo) {
                                             $colorBarra = 'bg-danger';
                                         } elseif ($porcentaje <= 40) {
                                             $colorBarra = 'bg-warning';

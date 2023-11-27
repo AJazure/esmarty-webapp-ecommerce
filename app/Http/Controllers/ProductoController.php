@@ -278,7 +278,7 @@ class ProductoController extends Controller
             $totalPedidos = [];
             $totalPedidosAlmacen = [];
             $estados = ['Pagado', 'Cancelado', 'Esperando Pago'];
-            $estadosAlmacen = ['Enviados', 'En Preparacion'];
+            $estadosAlmacen = ['Enviados', 'En Preparacion', 'Pendientes'];
 
             // Cantidad de Stock de cada Categoria
             $categorias = Categoria::where('activo', 1)->get();
@@ -298,8 +298,10 @@ class ProductoController extends Controller
             // Total de Pedidos Enviados/En Preparacion
             $totalPedidosAlmacenEnviados = Pedido::where('enviado', 1)->count();
             $totalPedidosAlmacenEnPreparacion = Pedido::where('en_preparacion', 1)->count();
+            $totalPedidosAlmacenPendientes = Pedido::where('en_preparacion', 0)->where('enviado', 0)->where('cancelado', 0)->count();
             $totalPedidosAlmacen [] = $totalPedidosAlmacenEnviados;
             $totalPedidosAlmacen [] = $totalPedidosAlmacenEnPreparacion;
+            $totalPedidosAlmacen [] = $totalPedidosAlmacenPendientes;
 
 
             $response = [

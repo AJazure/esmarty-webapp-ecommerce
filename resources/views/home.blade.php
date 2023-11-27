@@ -110,7 +110,7 @@
                     <div class="card">
                         <div class="card-header bg-secondary text-white">
                             <div class="d-flex justify-content-between align-items-center">
-                                <strong>Pedidos Enviados/En Preparacion</strong>
+                                <strong>Pedidos Enviados/En Preparacion/Pendientes</strong>
                                 <form action="{{ route('exportar-graficos-pdf') }}" method="POST" target="_blank">
                                     @csrf
                                     @method('POST')
@@ -381,12 +381,15 @@
                             "data": ${JSON.stringify(totalPedidoAlmacen)},
                             "backgroundColor": [
                                 "rgba(0, 255, 0, 0.2)",
-                                "rgba(255, 0, 0, 0.2)"
+                                "rgba(255, 0, 0, 0.2)",
+                                "rgba(0, 0, 255, 0.2)"
                             
                             ],
                             "borderColor": [
                                 "rgba(0, 255, 0, 1)",
-                                "rgba(255, 0, 0, 1)"
+                                "rgba(255, 0, 0, 1)",
+                                "rgba(0, 0, 255, 1)"
+
                                 
                             ],
                             "borderWidth": 1

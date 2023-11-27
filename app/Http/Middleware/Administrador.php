@@ -22,7 +22,13 @@ class Administrador
     if ($user_rol[0] == 'admin') { //Si esta logueado y es admin, lo deja acceder
         return $next($request);
     } else { //Si no, lo manda al inicio del panel
-        return redirect()->away('/');
+        
+        if ($user_rol[0] == 'cliente') {
+            return redirect()->away('/');
+        } else {
+            return redirect()->route('Welcome');
+        }
+        
     }
     }
 }

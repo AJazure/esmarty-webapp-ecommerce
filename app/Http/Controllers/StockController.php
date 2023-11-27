@@ -75,7 +75,7 @@ class StockController extends Controller
         $producto->stock_minimo = $request->get('stock_minimo') ? $request->get('stock_minimo') : 1;
         $producto->url_imagen = asset('storage/producto/sin-imagen.jpg');
         $producto->activo = 0;
-        $producto->id_categoria = 1; //sin categoría
+        $producto->id_categoria = 7; //sin categoría
         $producto->precio = 0;
 
         $producto->save();

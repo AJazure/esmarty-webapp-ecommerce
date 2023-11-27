@@ -26,6 +26,10 @@ class CategoriaSeeder extends Seeder
             'descripcion' => 'Tvs y Monitores'
         ]);
         Categoria::create([
+            'descripcion' => 'Proyectores',
+            'activo' => 0
+        ]);
+        Categoria::create([
             'descripcion' => 'Audio'
         ]);
         Categoria::create([

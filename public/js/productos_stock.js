@@ -81,7 +81,7 @@ $(document).ready(function() {
     $('#filtroSelect').on('change', function() {
         var filtro = $(this).val();
 
-        table.column(7).search(filtro).draw();
+        table.column(6).search(filtro).draw();
     });
 });
 

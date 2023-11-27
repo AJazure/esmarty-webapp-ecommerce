@@ -117,7 +117,7 @@
                                     </button> --}}
                                     <div class="d-flex justify-content-center">
                                         <label class="switch">
-                                            <input type="checkbox" class="miInterruptor" value="{{ $producto->stock_disponible == 0 ? 0 : $producto->activo }}" data-change-id="{{ $producto->id }}">
+                                            <input type="checkbox" class="miInterruptor" value="{{ $producto->activo }}" data-change-id="{{ $producto->id }}">
                                             <span class="slider"> <p class="estadop" style="visibility: hidden">{{ $producto->activo }}</p></span>
                                         </label>
                                     </div>

@@ -33,7 +33,8 @@ class CategoriaSeeder extends Seeder
             'descripcion' => 'Audio'
         ]);
         Categoria::create([
-            'descripcion' => 'Sin Categoría'
+            'descripcion' => 'Sin Categoría',
+            'activo' => 0
         ]);
         Categoria::create([
             'descripcion' => 'Consolas'

@@ -85,14 +85,18 @@ class ProductoController extends Controller
                 //$imagen_name = md5(rand(100, 10000)); //cifrado del nombre
                 //$extension = strtolower($file->getClientOriginalExtension()); //obtengo extension
                 //$imagen_full_name = $imagen_name . '.' . $extension; //armado del nombre completo del file
-                $url_imagen[] = asset($file->store('public/producto')); //guardo en un array las direcciones de cada uno 
+
+                $url_imagen[] = asset($file->store( 'storage_public/producto', 'public_folder')); //guardo en un array las direcciones de cada uno 
                 //dd($url_imagen); //puedo ver que se envía la url completa
                 $imagenes = implode('|', $url_imagen); //contiene todas las url de las imagenes del array unidos con |
+                //dd($imagenes);
             }
         }
 
-        $producto->url_imagen = asset(str_replace('public', 'storage', $imagenes)); // Almacena la info del producto en la BD la url de tas las imagenes
-
+        $producto->url_imagen = asset(str_replace('public_folder', 'storage_public', $imagenes)); // Almacena la info del producto en la BD la url de tas las imagenes
+        //dd($producto->url_imagen);
+        
+        
         $producto->save();
 
         // Registro para el histórico
@@ -165,12 +169,12 @@ class ProductoController extends Controller
 
             foreach ($files as $file) {
 
-                $url_imagen[] = asset($file->store('public/producto')); //guardo en un array las direcciones de cada uno     
+                $url_imagen[] = asset($file->store( 'storage_public/producto', 'public_folder')); //guardo en un array las direcciones de cada uno     
                 $imagenes = implode('|', $url_imagen); //contiene todas las url de las imagenes del array unidos con |
 
             }
 
-            $url_imagen = $producto->url_imagen = asset(str_replace('public', 'storage', $imagenes)); // Almacena la info del producto en la BD la url de tas las imagenes
+            $url_imagen =  $producto->url_imagen = asset(str_replace('public_folder', 'storage_public', $imagenes)); // Almacena la info del producto en la BD la url de tas las imagenes
             //dd($url_imagen);
             $producto->url_imagen = $url_imagen;
 

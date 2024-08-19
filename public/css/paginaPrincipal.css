@@ -184,3 +184,11 @@ btn-disminuir {
     color: var(--enfasis) !important;
     border: 1px solid var(--enfasis) !important;
 }
+
+
+@media (min-width: 765px) {
+    .principal-image {
+        background-size: cover!important; 
+        background-position: left!important;
+    }
+  }

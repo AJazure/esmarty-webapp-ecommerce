@@ -45,35 +45,54 @@
 
     {{-- Slider Fin --}}
 
-    <section class="categorias mt-5 mb-5">
-        <div class="container">
-            <div class="row mb-3">
+<section class="categorias mt-5 mb-5">
+    <div class="container">
+        <div class="row mb-3">
 
-                <div class="col-md-12 justify-content-center">
-                    <div class="text-center">
-                        <h1 class="pb-4"> Elecciones Principales </h1>
-                    </div>
-                    <div class="row p-4 content-box content-box mx-auto add-shadow">
-
-                        <div class="col-md-12 col-sm-12 col-12 p-2" style="height: 19rem">
-                            <a href="/productos/categoria/2"><div class="container bg-cover img-fluid rounded-4 zoom-effect" style="height: 100%; background-image:url('{{ asset('imagenes/categoria-ancha-1.jpg') }}')"></div></a>
-                        </div>
-                        <div class="col-md-6 col-sm-12 p-2" style="height: 23 rem">
-                            <a href="/productos/categoria/9"><div class="container bg-cover img-fluid rounded-4 zoom-effect" style="height: 100%; background-image:url('{{ asset('imagenes/categoria-1.jpg') }}')"></div></a>
-                        </div>
-                        <div class="col-md-6 col-sm-12 p-2" style="height: 23rem">
-                            <a href="/productos/categoria/1"><div class="container bg-cover img-fluid rounded-4 zoom-effect" style="height: 100%; background-image:url('{{ asset('imagenes/categoria-2.jpg') }}')"></div></a>
-                        </div>
-                        <div class="col-md-12 col-sm-12 p-2" style="height: 19rem">
-                            <a href="/productos/categoria/6"><div class="container bg-cover img-fluid rounded-4 zoom-effect" style="height: 100%; background-image:url('{{ asset('imagenes/categoria-ancha-2.jpg') }}')"></div></a>
-                        </div>
-
-                    </div>
+            <div class="col-md-12 justify-content-center">
+                <div class="text-center">
+                    <h1 class="pb-4">Elecciones Principales</h1>
                 </div>
 
+                <div class="row p-4 content-box content-box mx-auto add-shadow">
+                    <!-- Primera imagen, ocupa 12 columnas en móvil y en desktop -->
+                    <div class="col-12 p-2" style="height: 19rem;">
+                        <a href="/productos/categoria/2">
+                            <div class="img-fluid rounded-4 zoom-effect principal-image" style="height: 100%; background-image:url('{{ asset('imagenes/categoria-ancha-1.jpg') }}'); background-repeat: no-repeat; background-size: 240%; background-position: left;">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Segunda imagen, ocupa 12 columnas en móvil, 6 columnas en desktop -->
+                    <div class="col-12 col-md-6 p-2" style="height: 23rem;">
+                        <a href="/productos/categoria/9">
+                            <div class="img-fluid rounded-4 zoom-effect principal-image" style="height: 100%; background-image:url('{{ asset('imagenes/categoria-1.jpg') }}'); background-repeat: no-repeat; background-size: 100%; background-position: center">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Tercera imagen, ocupa 12 columnas en móvil, 6 columnas en desktop -->
+                    <div class="col-12 col-md-6 p-2" style="height: 23rem;">
+                        <a href="/productos/categoria/1">
+                            <div class="img-fluid rounded-4 zoom-effect principal-image" style="height: 100%; background-image:url('{{ asset('imagenes/categoria-2.jpg') }}'); background-repeat: no-repeat; background-size: 100%; background-position: center;">
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Cuarta imagen, ocupa 12 columnas en móvil y en desktop -->
+                    <div class="col-12 p-2" style="height: 19rem;">
+                        <a href="/productos/categoria/6">
+                            <div class="img-fluid rounded-4 zoom-effect principal-image" style="height: 100%; background-image:url('{{ asset('imagenes/categoria-ancha-2.jpg') }}'); background-repeat: no-repeat; background-size: 240%; background-position: left;">
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
             </div>
+
         </div>
-    </section>
+    </div>
+</section>
 
     {{-- Todas las Categorías --}}
     <section class="todas-categorias">
